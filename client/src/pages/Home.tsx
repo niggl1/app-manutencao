@@ -234,16 +234,16 @@ export default function Home() {
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
                 <Sparkles className="w-4 h-4" />
-                Sistema universal de gestão de manutenção
+                Gestão de Manutenção para Todos os Setores
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground leading-tight mb-6">
-                Plataforma Digital
-                <span className="text-gradient block">para Manutenção</span>
+                Manutenção Inteligente
+                <span className="text-gradient block">para sua Organização</span>
               </h1>
 
               <p className="text-lg text-muted-foreground mb-8 max-w-lg">
-                Aplicativos, revistas digitais interativas e relatórios personalizados
+                Sistema completo para gestão de manutenções prediais, industriais, comerciais, hospitalares, escolares e de máquinas e equipamentos. Ordens de serviço, vistorias, checklists e relatórios em uma única plataforma.
               </p>
 
               <TooltipProvider>
@@ -328,53 +328,63 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative mx-auto max-w-md">
-                {/* Magazine mockup */}
-                <div className="magazine-page aspect-[3/4] p-6 bg-gradient-to-br from-white to-gray-50">
-                  <div className="h-full flex flex-col">
-                    {/* Magazine header */}
-                    <div className="text-center mb-4">
-                      <div className="text-xs uppercase tracking-widest text-muted-foreground mb-1">
-                        Edição Dezembro 2024
-                      </div>
-                      <h2 className="font-serif text-2xl font-bold text-foreground">
-                        Residencial Jardins
-                      </h2>
-                      <div className="section-divider mt-3" />
-                    </div>
+              <div className="relative mx-auto max-w-lg">
+                {/* Setores Atendidos */}
+                <div className="bg-white rounded-2xl shadow-2xl p-6 border border-border/50">
+                  <div className="text-center mb-6">
+                    <h3 className="font-serif text-xl font-bold text-foreground mb-2">
+                      Setores Atendidos
+                    </h3>
+                    <p className="text-sm text-muted-foreground">Soluções para todos os tipos de organização</p>
+                  </div>
 
-                    {/* Magazine content preview */}
-                    <div className="flex-1 grid grid-cols-2 gap-3">
-                      <div className="col-span-2 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 p-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-full bg-primary/30" />
-                          <div>
-                            <div className="text-sm font-semibold">Mensagem do Gestor</div>
-                            <div className="text-xs text-muted-foreground">João Silva</div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="rounded-lg bg-amber-50 p-3">
-                        <Megaphone className="w-5 h-5 text-amber-600 mb-2" />
-                        <div className="text-xs font-medium">Avisos</div>
-                      </div>
-                      <div className="rounded-lg bg-emerald-50 p-3">
-                        <Calendar className="w-5 h-5 text-emerald-600 mb-2" />
-                        <div className="text-xs font-medium">Eventos</div>
-                      </div>
-                      <div className="rounded-lg bg-blue-50 p-3">
-                        <Vote className="w-5 h-5 text-blue-600 mb-2" />
-                        <div className="text-xs font-medium">Votações</div>
-                      </div>
-                      <div className="rounded-lg bg-purple-50 p-3">
-                        <Package className="w-5 h-5 text-purple-600 mb-2" />
-                        <div className="text-xs font-medium">Classificados</div>
-                      </div>
+                  {/* Grid de Setores */}
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="flex flex-col items-center p-4 rounded-xl bg-orange-50 hover:bg-orange-100 transition-colors">
+                      <Building2 className="w-8 h-8 text-orange-600 mb-2" />
+                      <span className="text-xs font-medium text-center">Predial</span>
                     </div>
+                    <div className="flex flex-col items-center p-4 rounded-xl bg-blue-50 hover:bg-blue-100 transition-colors">
+                      <Wrench className="w-8 h-8 text-blue-600 mb-2" />
+                      <span className="text-xs font-medium text-center">Industrial</span>
+                    </div>
+                    <div className="flex flex-col items-center p-4 rounded-xl bg-emerald-50 hover:bg-emerald-100 transition-colors">
+                      <ShoppingBag className="w-8 h-8 text-emerald-600 mb-2" />
+                      <span className="text-xs font-medium text-center">Comercial</span>
+                    </div>
+                    <div className="flex flex-col items-center p-4 rounded-xl bg-red-50 hover:bg-red-100 transition-colors">
+                      <Heart className="w-8 h-8 text-red-600 mb-2" />
+                      <span className="text-xs font-medium text-center">Hospitalar</span>
+                    </div>
+                    <div className="flex flex-col items-center p-4 rounded-xl bg-purple-50 hover:bg-purple-100 transition-colors">
+                      <BookOpen className="w-8 h-8 text-purple-600 mb-2" />
+                      <span className="text-xs font-medium text-center">Escolar</span>
+                    </div>
+                    <div className="flex flex-col items-center p-4 rounded-xl bg-amber-50 hover:bg-amber-100 transition-colors">
+                      <Package className="w-8 h-8 text-amber-600 mb-2" />
+                      <span className="text-xs font-medium text-center">Máquinas</span>
+                    </div>
+                  </div>
 
-                    {/* Page number */}
-                    <div className="text-center mt-4 text-xs text-muted-foreground">
-                      — 1 —
+                  {/* Funcionalidades principais */}
+                  <div className="mt-6 pt-6 border-t border-border/50">
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="flex items-center gap-2 text-sm">
+                        <ClipboardCheck className="w-4 h-4 text-primary" />
+                        <span>Ordens de Serviço</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <Search className="w-4 h-4 text-primary" />
+                        <span>Vistorias</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <CheckSquare className="w-4 h-4 text-primary" />
+                        <span>Checklists</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <FileText className="w-4 h-4 text-primary" />
+                        <span>Relatórios</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -398,10 +408,10 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4">
-              Sistema com foco total para gestores de manutenção
+              Tudo que você precisa para gerir manutenções
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Faça tudo do seu jeito, precisa de ajustes, criar algo específico é só solicitar e fazemos sem nenhum custo adicional.
+              Plataforma completa para gestão de manutenções preventivas e corretivas, com controle total de equipamentos, equipes e custos.
             </p>
             <div className="section-divider mt-6" />
           </motion.div>

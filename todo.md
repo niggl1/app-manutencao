@@ -96,3 +96,12 @@
 - [x] Testar contraste e legibilidade
 - [x] Verificar consistência em todas as páginas
 - [x] Atualizar gradientes para tons de laranja
+
+## Fase 13: Redesign da Página Inicial - Manutenção Universal
+- [x] Redesenhar hero section com foco em manutenção universal
+- [x] Criar secção de setores atendidos (predial, industrial, comercial, hospitalar, escolar, máquinas)
+- [x] Adicionar ícones representativos para cada setor
+- [x] Atualizar textos e descrições para refletir versatilidade
+- [x] Criar secção de funcionalidades principais (OS, Vistorias, Checklists, Relatórios)
+- [x] Atualizar título da secção de features
+- [x] Testar visual no browser
