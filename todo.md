@@ -186,3 +186,10 @@
 ## Fase 24: Renomear Botão Criar Revista
 - [x] Alterar "Criar Revista" para "Criar Livro" no Dashboard.tsx (4 ocorrências)
 - [x] Testar alterações no navegador
+
+## Fase 25: Atualizar Modal de Criação de Livro
+- [x] Alterar "Criar Nova Revista" para "Criar Livro de Manutenções"
+- [x] Alterar "Título da Revista" para "Título do Livro"
+- [x] Alterar descrição do modal
+- [x] Alterar botão "Criar Livro" para "Criar Livro de Manutenções"
+- [x] Testar alterações no navegador

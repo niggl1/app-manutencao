@@ -568,7 +568,7 @@ export default function Dashboard() {
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => setLocation("/dashboard/revistas")} className="cursor-pointer">
                           <BookOpen className="h-4 w-4 mr-2" />
-                          Criar Livro
+                          Criar Livro de Manutenções
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => setLocation("/dashboard/relatorios/novo")} className="cursor-pointer">
                           <FileBarChart className="h-4 w-4 mr-2" />
@@ -1278,7 +1278,7 @@ function OverviewSection({ user }: { user: any }) {
               className="w-full py-2.5 px-4 rounded-xl font-medium text-white bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 shadow-md shadow-purple-500/25 hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300 flex items-center justify-center gap-2"
             >
               <Plus className="w-4 h-4" />
-              Criar Livro
+              Criar Livro de Manutenções
             </button>
           </CardContent>
         </Card>
@@ -1942,7 +1942,7 @@ function RevistasSection() {
                 onClick={() => setIsDialogOpen(true)}
               >
                 <Plus className="h-5 w-5 mr-2" />
-                Criar Livro
+                Criar Livro de Manutenções
               </Button>
             </div>
           </div>
@@ -1958,16 +1958,16 @@ function RevistasSection() {
                 <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
                   <BookOpen className="w-5 h-5 text-white" />
                 </div>
-                Criar Nova Revista
+                Criar Livro de Manutenções
               </DialogTitle>
               <DialogDescription className="text-purple-100">
-                Preencha os dados para criar sua revista digital
+                Preencha os dados para criar seu livro de manutenções
               </DialogDescription>
             </DialogHeader>
           </div>
           <form onSubmit={handleCreateRevista} className="p-6 overflow-y-auto max-h-[70vh] space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="titulo">Título da Revista *</Label>
+              <Label htmlFor="titulo">Título do Livro *</Label>
               <Input
                 id="titulo"
                 placeholder="Ex: Informativo Mensal"
@@ -2029,7 +2029,7 @@ function RevistasSection() {
                 ) : (
                   <Plus className="w-4 h-4 mr-2" />
                 )}
-                Criar Livro
+                Criar Livro de Manutenções
               </Button>
             </div>
           </form>
