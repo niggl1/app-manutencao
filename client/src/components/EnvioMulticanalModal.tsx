@@ -21,7 +21,7 @@ interface EnvioMulticanalModalProps {
     descricao?: string;
     linkPublico: string;
   };
-  // Dados do condomínio
+  // Dados da organização
   condominio: {
     nome: string;
   };

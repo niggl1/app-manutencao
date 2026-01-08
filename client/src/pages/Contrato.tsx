@@ -60,7 +60,7 @@ export default function Contrato() {
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
                 <FileText className="w-4 h-4 text-white" />
               </div>
-              <img src="/logo-appsindico-texto.png" alt="App Síndico" className="h-6 object-contain" />
+              <img src="/logo-manutencao.png" alt="App Manutenção" className="h-6 object-contain" />
             </div>
             <Button onClick={handlePrint} className="bg-primary hover:bg-primary/90 gap-2">
               <Download className="h-4 w-4" />
@@ -97,7 +97,7 @@ export default function Contrato() {
                   </div>
 
                   <div>
-                    <Label htmlFor="razaoSocial">Razão Social ou Nome do Condomínio ou Nome do Síndico</Label>
+                    <Label htmlFor="razaoSocial">Razão Social ou Nome do Condomínio ou Nome do Gestor</Label>
                     <Input
                       id="razaoSocial"
                       placeholder="Ex: Condomínio Residencial Jardins"
@@ -120,7 +120,7 @@ export default function Contrato() {
                     <Label htmlFor="nomeResponsavel">Nome Completo do Responsável</Label>
                     <Input
                       id="nomeResponsavel"
-                      placeholder="Nome do síndico ou responsável"
+                      placeholder="Nome do gestor ou responsável"
                       value={formData.nomeResponsavel}
                       onChange={(e) => handleChange("nomeResponsavel", e.target.value)}
                     />
@@ -194,7 +194,7 @@ export default function Contrato() {
                   CONTRATO DE LICENÇA DE USO DE SOFTWARE
                 </h1>
                 <p className="text-gray-600">
-                  APP SÍNDICO - Plataforma Digital para Condomínios
+                  APP MANUTENÇÃO - Plataforma Digital para Condomínios
                 </p>
               </div>
 
@@ -218,7 +218,7 @@ export default function Contrato() {
                     </div>
                   </div>
                   <div className="mt-3 pt-3 border-t border-gray-200 space-y-1 text-gray-700">
-                    <p><strong>Sistema:</strong> APP SÍNDICO</p>
+                    <p><strong>Sistema:</strong> APP MANUTENÇÃO</p>
                     <p><strong>Site:</strong> www.appsindico.com.br</p>
                     <p><strong>Contato:</strong> (81) 99961-8516 (atendimento exclusivo via WhatsApp) | contato@appsindico.com.br</p>
                   </div>
@@ -228,9 +228,9 @@ export default function Contrato() {
                   <h3 className="font-semibold text-gray-900 mb-3">CONTRATANTE (Cliente):</h3>
                   <div className="space-y-3">
                     <div>
-                      <p className="text-sm text-gray-500 mb-1">Razão Social ou Nome do Condomínio ou Nome do Síndico</p>
+                      <p className="text-sm text-gray-500 mb-1">Razão Social ou Nome do Condomínio ou Nome do Gestor</p>
                       <div className="border-b-2 border-gray-400 min-h-[28px] px-2 py-1 bg-yellow-50">
-                        {formData.razaoSocial || <span className="text-gray-400 italic">Digite a Razão Social, Nome do Condomínio ou Nome do Síndico</span>}
+                        {formData.razaoSocial || <span className="text-gray-400 italic">Digite a Razão Social, Nome do Condomínio ou Nome do Gestor</span>}
                       </div>
                     </div>
                     <div>
@@ -255,7 +255,7 @@ export default function Contrato() {
                   2. OBJETO
                 </h2>
                 <p className="text-gray-700 leading-relaxed">
-                  O presente contrato tem por objeto a licença de uso do software <strong>"APP SÍNDICO"</strong>, 
+                  O presente contrato tem por objeto a licença de uso do software <strong>"APP MANUTENÇÃO"</strong>, 
                   disponibilizado na modalidade SaaS (Software as a Service), para gestão de comunicação, 
                   apps, projetos digitais e relatórios em condomínios, destinado a síndicos, condomínios e administradoras.
                 </p>
@@ -291,7 +291,7 @@ export default function Contrato() {
                   </p>
                   <ul className="list-disc list-inside space-y-1 text-gray-700 ml-4">
                     <li>Após o 7º dia, será necessária a efetivação da contratação para continuidade do acesso.</li>
-                    <li>Caso a contratação não seja realizada após o período de teste, <strong>todas as informações do condomínio, 
+                    <li>Caso a contratação não seja realizada após o período de teste, <strong>todas as informações da organização, 
                     cadastros de moradores e registros de acesso serão excluídos automaticamente</strong>.</li>
                   </ul>
                 </div>
@@ -322,8 +322,8 @@ export default function Contrato() {
                 <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
                   <p className="text-gray-700">
                     <strong>Importante:</strong> A CONTRATADA NÃO é responsável pela veracidade ou correção dos cadastros de moradores, 
-                    apartamentos e demais informações do condomínio são de <strong>inteira e exclusiva responsabilidade</strong> dos 
-                    usuários do condomínio (síndico, administradores, porteiros e moradores).
+                    apartamentos e demais informações da organização são de <strong>inteira e exclusiva responsabilidade</strong> dos 
+                    usuários da organização (síndico, administradores, porteiros e moradores).
                   </p>
                 </div>
               </section>

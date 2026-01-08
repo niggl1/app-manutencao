@@ -51,7 +51,7 @@ export default function MagazineWithTemplate({
 
   const pages = [
     { id: "capa", title: "Capa" },
-    { id: "sindico", title: "Mensagem do Síndico" },
+    { id: "sindico", title: "Mensagem do Gestor" },
     { id: "avisos", title: "Avisos" },
     { id: "eventos", title: "Eventos" },
     { id: "funcionarios", title: "Funcionários" },
@@ -258,7 +258,7 @@ function CoverPage({ template, revista }: { template: TemplateConfig; revista: a
             className="text-sm"
             style={{ color: template.colors.mutedForeground }}
           >
-            App Síndico
+            App Manutenção
           </span>
         </div>
       </div>
@@ -266,7 +266,7 @@ function CoverPage({ template, revista }: { template: TemplateConfig; revista: a
   );
 }
 
-// Página do Síndico
+// Página do Gestor
 function SindicoPage({ template, conteudo }: { template: TemplateConfig; conteudo?: any }) {
   return (
     <div
@@ -288,7 +288,7 @@ function SindicoPage({ template, conteudo }: { template: TemplateConfig; conteud
             fontFamily: template.typography.headingFont,
           }}
         >
-          Mensagem do Síndico
+          Mensagem do Gestor
         </h2>
       </div>
       
@@ -329,7 +329,7 @@ function SindicoPage({ template, conteudo }: { template: TemplateConfig; conteud
           className="text-sm leading-relaxed"
           style={{ color: template.colors.foreground }}
         >
-          {conteudo?.mensagem || "Prezados moradores, é com grande satisfação que apresentamos mais uma edição da nossa revista digital. Nesta edição, trazemos informações importantes sobre as melhorias realizadas e os próximos eventos do nosso condomínio."}
+          {conteudo?.mensagem || "Prezada equipa, é com grande satisfação que apresentamos mais uma edição da nossa revista digital. Nesta edição, trazemos informações importantes sobre as melhorias realizadas e os próximos eventos do nossa organização."}
         </p>
       </div>
     </div>

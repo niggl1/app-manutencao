@@ -80,7 +80,7 @@ export default function AvisoForm({ revistaId, onSuccess, onCancel, initialData 
             {initialData?.id ? "Editar Aviso" : "Novo Aviso"}
           </CardTitle>
           <CardDescription>
-            Crie um aviso para os moradores do condomínio
+            Crie um aviso para a equipa da organização
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">

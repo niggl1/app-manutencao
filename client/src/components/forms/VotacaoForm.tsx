@@ -232,7 +232,7 @@ export default function VotacaoForm({ revistaId, onSuccess, onCancel }: VotacaoF
             Nova Votação
           </CardTitle>
           <CardDescription>
-            Crie uma votação ou enquete para os moradores
+            Crie uma votação ou enquete para a equipa
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6 max-h-[60vh] overflow-y-auto">

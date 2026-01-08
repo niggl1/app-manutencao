@@ -114,7 +114,7 @@ export default function LandingRelatorio() {
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                 Crie documentos extensos com rolagem contínua, perfeitos para vistorias, 
-                manutenções, checklists e relatórios de ocorrências do condomínio.
+                manutenções, checklists e relatórios de ocorrências da organização.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link href="/dashboard/revistas">
@@ -205,7 +205,7 @@ export default function LandingRelatorio() {
             <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">
               Tipos de Relatórios
             </h2>
-            <p className="text-gray-600">Modelos prontos para gestão operacional do condomínio</p>
+            <p className="text-gray-600">Modelos prontos para gestão operacional da organização</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {reportTypes.map((type, index) => (
@@ -278,7 +278,7 @@ export default function LandingRelatorio() {
                 <ClipboardCheck className="w-16 h-16 text-white mx-auto mb-4" />
                 <h3 className="text-2xl font-bold text-white mb-2">Gestão Documentada</h3>
                 <p className="text-purple-100">
-                  Documente todas as vistorias, manutenções e ocorrências do condomínio 
+                  Documente todas as vistorias, manutenções e ocorrências da organização 
                   com fotos, checklists e relatórios profissionais.
                 </p>
               </div>

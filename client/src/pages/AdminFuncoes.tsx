@@ -83,7 +83,7 @@ export default function AdminFuncoesPage() {
   // Buscar funções disponíveis
   const { data: funcoesDisponiveis } = trpc.funcoesCondominio.listarDisponiveis.useQuery();
   
-  // Buscar funções do condomínio selecionado
+  // Buscar funções da organização selecionado
   const { data: funcoesCondominio, isLoading: loadingFuncoes, refetch: refetchFuncoes } = 
     trpc.funcoesCondominio.listar.useQuery(
       { condominioId: selectedCondominio! },
@@ -117,7 +117,7 @@ export default function AdminFuncoesPage() {
     },
   });
 
-  // Quando seleciona um condomínio, carregar estado das funções
+  // Quando seleciona uma organização, carregar estado das funções
   const handleSelectCondominio = (value: string) => {
     const id = parseInt(value);
     setSelectedCondominio(id);
@@ -125,7 +125,7 @@ export default function AdminFuncoesPage() {
     setHasChanges(false);
   };
 
-  // Quando as funções do condomínio são carregadas, atualizar estado local
+  // Quando as funções da organização são carregadas, atualizar estado local
   const getFuncaoHabilitada = (funcaoId: string): boolean => {
     // Se há alteração local, usar ela
     if (localFuncoes[funcaoId] !== undefined) {
@@ -220,7 +220,7 @@ export default function AdminFuncoesPage() {
               Selecionar Condomínio
             </CardTitle>
             <CardDescription>
-              Escolha o condomínio para gerenciar as funções habilitadas
+              Escolha a organização para gerenciar as funções habilitadas
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -336,7 +336,7 @@ export default function AdminFuncoesPage() {
                           return nomeMatch || codigoMatch || cnpjMatch;
                         }).length === 0 && (
                           <div className="p-4 text-center text-muted-foreground text-sm">
-                            Nenhum condomínio encontrado para "{searchTerm}"
+                            Nenhuma organização encontrado para "{searchTerm}"
                           </div>
                         )}
                         {condominios && condominios.filter((cond) => {
@@ -496,7 +496,7 @@ export default function AdminFuncoesPage() {
                 Selecione um Condomínio
               </h3>
               <p className="text-muted-foreground">
-                Escolha um condomínio acima para gerenciar as funções habilitadas
+                Escolha uma organização acima para gerenciar as funções habilitadas
               </p>
             </CardContent>
           </Card>

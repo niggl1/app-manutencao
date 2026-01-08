@@ -32,7 +32,7 @@ export default function CadastroMorador() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // Buscar informações do condomínio pelo token
+  // Buscar informações da organização pelo token
   // @ts-ignore - Método existe no backend
   const { data: condominio, isLoading: condominioLoading, error: condominioError } = (trpc.condominio as any).getByToken.useQuery(
     { token: token || "" },
@@ -121,7 +121,7 @@ export default function CadastroMorador() {
             </div>
             <h2 className="text-xl font-bold text-foreground mb-2">Link Inválido</h2>
             <p className="text-muted-foreground">
-              Este link de cadastro não é válido ou expirou. Entre em contato com a administração do seu condomínio.
+              Este link de cadastro não é válido ou expirou. Entre em contato com a administração da sua organização.
             </p>
           </CardContent>
         </Card>
@@ -139,7 +139,7 @@ export default function CadastroMorador() {
             </div>
             <h2 className="text-2xl font-bold text-foreground mb-2">Cadastro Realizado!</h2>
             <p className="text-muted-foreground mb-6">
-              Seu cadastro foi enviado com sucesso. A administração do condomínio irá validar suas informações.
+              Seu cadastro foi enviado com sucesso. A administração da organização irá validar suas informações.
             </p>
             <div className="p-4 bg-secondary/50 rounded-lg">
               <p className="text-sm text-muted-foreground">
@@ -155,7 +155,7 @@ export default function CadastroMorador() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-emerald-50 py-8 px-4">
       <div className="max-w-2xl mx-auto">
-        {/* Header com logo do condomínio */}
+        {/* Header com logo da organização */}
         <div className="text-center mb-8">
           {condominio.logoUrl ? (
             <img 
@@ -403,7 +403,7 @@ export default function CadastroMorador() {
               </Button>
 
               <p className="text-xs text-center text-muted-foreground">
-                Ao enviar, você concorda com os termos de uso e política de privacidade do condomínio.
+                Ao enviar, você concorda com os termos de uso e política de privacidade da organização.
               </p>
             </form>
           </CardContent>
@@ -411,7 +411,7 @@ export default function CadastroMorador() {
 
         {/* Footer */}
         <div className="text-center mt-8 text-sm text-muted-foreground">
-          <p>Powered by <span className="font-semibold text-blue-600">App Síndico</span></p>
+          <p>Powered by <span className="font-semibold text-blue-600">App Manutenção</span></p>
         </div>
       </div>
     </div>

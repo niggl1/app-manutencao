@@ -144,10 +144,10 @@ const menuSections = [
   },
   {
     id: "gestao-condominio",
-    label: "Gestão do Condomínio",
+    label: "Gestão da Organização",
     icon: Building2,
     items: [
-      { id: "condominio", label: "Cadastro do Condomínio", icon: Building2 },
+      { id: "condominio", label: "Cadastro da Organização", icon: Building2 },
       { id: "moradores", label: "Moradores", icon: Users, funcaoId: "moradores" },
       { id: "funcionarios", label: "Funcionários", icon: UserCog, funcaoId: "funcionarios" },
       { id: "vagas", label: "Vagas de Estacionamento", icon: Car, funcaoId: "vagas" },
@@ -273,7 +273,7 @@ export default function Dashboard() {
   const currentSection = params.section || "overview";
   const { data: condominios } = trpc.condominio.list.useQuery();
   
-  // Buscar funções habilitadas para o condomínio do usuário
+  // Buscar funções habilitadas para a organização do usuário
   const condominioId = condominios?.[0]?.id;
   const { data: funcoesHabilitadas } = trpc.funcoesCondominio.listarHabilitadas.useQuery(
     { condominioId: condominioId! },
@@ -374,7 +374,7 @@ export default function Dashboard() {
     e.preventDefault();
     e.stopPropagation();
     if (!condominioId) {
-      toast.error("Selecione um condomínio primeiro");
+      toast.error("Selecione uma organização primeiro");
       return;
     }
     const isRapida = isFuncaoRapida(item.funcaoId || item.id);
@@ -510,8 +510,8 @@ export default function Dashboard() {
         {/* Logo */}
         <div className="p-6 border-b border-sidebar-border">
           <Link href="/" className="flex items-center gap-2">
-            <img src="/logo-appsindico.png" alt="App Síndico" className="w-10 h-10 object-contain" />
-            <img src="/logo-appsindico-texto.png" alt="App Síndico" className="h-8 object-contain" />
+            <img src="/logo-manutencao.png" alt="App Manutenção" className="w-10 h-10 object-contain" />
+            <img src="/logo-manutencao.png" alt="App Manutenção" className="h-8 object-contain" />
           </Link>
         </div>
 
@@ -770,8 +770,8 @@ export default function Dashboard() {
         <header className="lg:hidden sticky top-0 z-40 bg-card border-b border-border">
           <div className="flex items-center justify-between p-4">
             <Link href="/" className="flex items-center gap-2">
-              <img src="/logo-appsindico.png" alt="App Síndico" className="w-8 h-8 object-contain" />
-              <img src="/logo-appsindico-texto.png" alt="App Síndico" className="h-5 object-contain" />
+              <img src="/logo-manutencao.png" alt="App Manutenção" className="w-8 h-8 object-contain" />
+              <img src="/logo-manutencao.png" alt="App Manutenção" className="h-5 object-contain" />
             </Link>
             <div className="flex items-center gap-2">
               <NotificationAlert condominioId={condominios?.[0]?.id || null} />
@@ -925,7 +925,7 @@ export default function Dashboard() {
             {/* Header */}
             <div className="sticky top-0 bg-card border-b border-border p-4 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <img src="/logo-appsindico.png" alt="App Síndico" className="w-8 h-8 object-contain" />
+                <img src="/logo-manutencao.png" alt="App Manutenção" className="w-8 h-8 object-contain" />
                 <span className="font-bold text-lg">Menu</span>
               </div>
               <button
@@ -1101,7 +1101,7 @@ function OverviewSection({ user }: { user: any }) {
   const { data: condominios } = trpc.condominio.list.useQuery();
   const condominioId = condominios?.[0]?.id || 0;
   
-  // Query para apps do condomínio
+  // Query para apps da organização
   const { data: appsData } = trpc.apps.list.useQuery(
     { condominioId },
     { enabled: !!condominioId }
@@ -1167,7 +1167,7 @@ function OverviewSection({ user }: { user: any }) {
         <p className="text-muted-foreground">
           {user?.tipoConta === "administradora" 
             ? "Gerencie apps, projetos digitais e relatórios para seus condomínios."
-            : "Crie apps, projetos digitais e relatórios para seu condomínio."
+            : "Crie apps, projetos digitais e relatórios para sua organização."
           }
         </p>
       </div>
@@ -1271,7 +1271,7 @@ function OverviewSection({ user }: { user: any }) {
               <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">{appsData?.length || 0}</span>
             </div>
             <h3 className="text-lg font-semibold text-foreground mb-1">Apps Criados</h3>
-            <p className="text-sm text-muted-foreground mb-4">Crie apps personalizados para seu condomínio</p>
+            <p className="text-sm text-muted-foreground mb-4">Crie apps personalizados para sua organização</p>
             <button
               onClick={() => window.location.href = '/dashboard/apps/novo'}
               className="w-full py-2.5 px-4 rounded-xl font-medium text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-md shadow-blue-500/25 hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300 flex items-center justify-center gap-2"
@@ -1335,7 +1335,7 @@ function OverviewSection({ user }: { user: any }) {
                   <Smartphone className="w-5 h-5 text-blue-500" />
                   Meus Apps
                 </CardTitle>
-                <CardDescription>Apps criados para seu condomínio</CardDescription>
+                <CardDescription>Apps criados para sua organização</CardDescription>
               </div>
               <Link href="/dashboard/apps/novo">
                 <Button variant="outline" size="sm" className="gap-2">
@@ -1451,15 +1451,15 @@ function OverviewSection({ user }: { user: any }) {
       <Card>
         <CardHeader>
           <CardTitle className="font-serif">Primeiros Passos</CardTitle>
-          <CardDescription>Configure seu condomínio para começar</CardDescription>
+          <CardDescription>Configure sua organização para começar</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {[
-              { step: 1, title: "Cadastre seu Condomínio", description: "Adicione nome, endereço e logo", done: false, path: "/dashboard/condominio" },
-              { step: 2, title: "Adicione Funcionários", description: "Cadastre a equipe do condomínio", done: false, path: "/dashboard/funcionarios" },
+              { step: 1, title: "Cadastre sua Organização", description: "Adicione nome, endereço e logo", done: false, path: "/dashboard/condominio" },
+              { step: 2, title: "Adicione Funcionários", description: "Cadastre a equipe da organização", done: false, path: "/dashboard/funcionarios" },
               { step: 3, title: "Crie seu Primeiro Projeto", description: "App, revista ou relatório", done: false, path: "/dashboard/criar-projeto" },
-              { step: 4, title: "Compartilhe com Moradores", description: "Gere o link e divulgue", done: false, path: "/dashboard/moradores" },
+              { step: 4, title: "Compartilhe com a Equipa", description: "Gere o link e divulgue", done: false, path: "/dashboard/moradores" },
             ].map((item) => (
               <Link key={item.step} href={item.path}>
                 <div className="flex items-start gap-4 p-3 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer group">
@@ -1621,7 +1621,7 @@ function RevistasSection() {
       return;
     }
     if (!condominioId) {
-      toast.error("Cadastre um condomínio primeiro");
+      toast.error("Cadastre uma organização primeiro");
       return;
     }
     createRevistaMutation.mutate({ condominioId, ...formData });
@@ -1647,7 +1647,7 @@ function RevistasSection() {
               <span className="text-purple-200 text-sm font-medium uppercase tracking-wider">Central de Projetos</span>
             </div>
             <h1 className="text-3xl font-bold mb-2">Meus Projetos</h1>
-            <p className="text-purple-200 max-w-md">Crie e gerencie apps, revistas digitais e relatórios personalizados para seu condomínio</p>
+            <p className="text-purple-200 max-w-md">Crie e gerencie apps, revistas digitais e relatórios personalizados para sua organização</p>
           </div>
           <Button 
             className="bg-white text-purple-700 hover:bg-purple-50 shadow-lg shadow-purple-900/30 font-semibold px-6 py-3 h-auto"
@@ -1921,7 +1921,7 @@ function RevistasSection() {
                 </div>
               </div>
               <h3 className="text-xl font-bold text-slate-800 mb-2">Apps Personalizados</h3>
-              <p className="text-sm text-slate-500 mb-6 leading-relaxed">Crie aplicativos exclusivos com a identidade do seu condomínio</p>
+              <p className="text-sm text-slate-500 mb-6 leading-relaxed">Crie aplicativos exclusivos com a identidade da sua organização</p>
               <Link href="/dashboard/apps/novo">
                 <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-lg shadow-blue-500/25 font-semibold py-3 h-auto">
                   <Plus className="h-5 w-5 mr-2" />
@@ -1977,7 +1977,7 @@ function RevistasSection() {
                 </div>
               </div>
               <h3 className="text-xl font-bold text-slate-800 mb-2">Revistas Digitais</h3>
-              <p className="text-sm text-slate-500 mb-6 leading-relaxed">Crie revistas interativas e modernas para comunicar com os moradores</p>
+              <p className="text-sm text-slate-500 mb-6 leading-relaxed">Crie revistas interativas e modernas para comunicar com a equipa</p>
               <Button 
                 className="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-fuchsia-500 hover:from-purple-600 hover:via-pink-600 hover:to-fuchsia-600 text-white shadow-lg shadow-purple-500/25 font-semibold py-3 h-auto"
                 onClick={() => setIsDialogOpen(true)}
@@ -2166,7 +2166,7 @@ function CondominioSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.nome.trim()) {
-      toast.error("O nome do condomínio é obrigatório");
+      toast.error("O nome da organização é obrigatório");
       return;
     }
     createMutation.mutate(formData);
@@ -2179,7 +2179,7 @@ function CondominioSection() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-serif font-bold text-foreground">Meu Condomínio</h1>
-          <p className="text-muted-foreground">Configure as informações do seu condomínio</p>
+          <p className="text-muted-foreground">Configure as informações da sua organização</p>
         </div>
         {hasCondominios && (
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -2200,7 +2200,7 @@ function CondominioSection() {
                   <div>
                     <DialogTitle className="text-xl font-bold text-white">Cadastrar Condomínio</DialogTitle>
                     <DialogDescription className="text-blue-100 mt-1">
-                      Adicione as informações do seu condomínio
+                      Adicione as informações da sua organização
                     </DialogDescription>
                   </div>
                 </div>
@@ -2374,10 +2374,10 @@ function CondominioSection() {
           <CardContent className="p-12 text-center">
             <Building2 className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
             <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
-              Cadastre seu Condomínio
+              Cadastre sua Organização
             </h3>
             <p className="text-muted-foreground mb-4">
-              Adicione as informações do seu condomínio para começar
+              Adicione as informações da sua organização para começar
             </p>
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
@@ -2397,7 +2397,7 @@ function CondominioSection() {
                     <div>
                       <DialogTitle className="text-xl font-bold text-white">Cadastrar Condomínio</DialogTitle>
                       <DialogDescription className="text-blue-100 mt-1">
-                        Adicione as informações do seu condomínio
+                        Adicione as informações da sua organização
                       </DialogDescription>
                     </div>
                   </div>
@@ -2760,7 +2760,7 @@ function MoradoresSection() {
 
   const handleBatchSubmit = () => {
     if (!condominioId) {
-      toast.error("Você precisa cadastrar um condomínio primeiro");
+      toast.error("Você precisa cadastrar uma organização primeiro");
       return;
     }
     if (excelData.length === 0) {
@@ -2775,7 +2775,7 @@ function MoradoresSection() {
 
   const handleGenerateQRCode = async () => {
     if (!condominioId) {
-      toast.error("Você precisa cadastrar um condomínio primeiro");
+      toast.error("Você precisa cadastrar uma organização primeiro");
       return;
     }
     await generateToken.mutateAsync({ id: condominioId });
@@ -2812,7 +2812,7 @@ function MoradoresSection() {
       return;
     }
     if (!condominioId) {
-      toast.error("Você precisa cadastrar um condomínio primeiro");
+      toast.error("Você precisa cadastrar uma organização primeiro");
       return;
     }
 
@@ -2910,7 +2910,7 @@ function MoradoresSection() {
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
           <h1 className="text-2xl font-serif font-bold text-foreground">Moradores</h1>
-          <p className="text-muted-foreground">Gerencie os moradores do condomínio</p>
+          <p className="text-muted-foreground">Gerencie a equipa da organização</p>
         </div>
         <div className="flex gap-2 flex-wrap">
           {/* Botão QR Code em destaque */}
@@ -2960,7 +2960,7 @@ function MoradoresSection() {
                   {editingMorador ? "Editar Morador" : "Novo Morador"}
                 </DialogTitle>
                 <DialogDescription className="text-indigo-100">
-                  {editingMorador ? "Atualize as informações do morador" : "Cadastre um novo morador do condomínio"}
+                  {editingMorador ? "Atualize as informações do morador" : "Cadastre um novo morador da organização"}
                 </DialogDescription>
               </DialogHeader>
             </div>
@@ -3107,7 +3107,7 @@ function MoradoresSection() {
                 Importar Moradores via Excel
               </DialogTitle>
               <DialogDescription className="text-emerald-100">
-                Faça upload de um arquivo CSV ou Excel com os dados dos moradores
+                Faça upload de um arquivo CSV ou Excel com os dados da equipa
               </DialogDescription>
             </DialogHeader>
           </div>
@@ -3228,7 +3228,7 @@ function MoradoresSection() {
                 QR Code para Cadastro
               </DialogTitle>
               <DialogDescription className="text-purple-100">
-                Imprima este folder e distribua para os moradores se cadastrarem
+                Imprima este folder e distribua para a equipa se cadastrarem
               </DialogDescription>
             </DialogHeader>
           </div>
@@ -3381,7 +3381,7 @@ function MoradoresSection() {
                             <div class="url">${cadastroUrl}</div>
                             
                             <div class="footer">
-                              Powered by App Síndico
+                              Powered by App Manutenção
                             </div>
                           </div>
                         </body>
@@ -3480,10 +3480,10 @@ function MoradoresSection() {
           <CardContent className="p-12 text-center">
             <Building2 className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
             <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
-              Cadastre um condomínio primeiro
+              Cadastre uma organização primeiro
             </h3>
             <p className="text-muted-foreground mb-4">
-              Você precisa cadastrar um condomínio antes de adicionar moradores
+              Você precisa cadastrar uma organização antes de adicionar moradores
             </p>
             <Link href="/dashboard/condominio">
               <Button className="btn-magazine">
@@ -3634,7 +3634,7 @@ function MoradoresSection() {
               {searchQuery ? "Nenhum morador encontrado" : "Nenhum morador cadastrado"}
             </h3>
             <p className="text-muted-foreground mb-4">
-              {searchQuery ? "Tente uma busca diferente" : "Adicione os moradores do seu condomínio"}
+              {searchQuery ? "Tente uma busca diferente" : "Adicione a equipa da sua organização"}
             </p>
             {!searchQuery && (
               <Button className="btn-magazine" onClick={() => setShowMoradorDialog(true)}>
@@ -3838,16 +3838,16 @@ function FuncionariosSection() {
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-serif font-bold text-foreground">Funcionários</h1>
-          <p className="text-muted-foreground">Gerencie a equipe do condomínio</p>
+          <p className="text-muted-foreground">Gerencie a equipe da organização</p>
         </div>
         <Card>
           <CardContent className="p-12 text-center">
             <Building2 className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
             <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
-              Cadastre um condomínio primeiro
+              Cadastre uma organização primeiro
             </h3>
             <p className="text-muted-foreground mb-4">
-              Você precisa cadastrar um condomínio antes de adicionar funcionários
+              Você precisa cadastrar uma organização antes de adicionar funcionários
             </p>
             <Link href="/dashboard/condominio">
               <Button className="btn-magazine">
@@ -3866,7 +3866,7 @@ function FuncionariosSection() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-serif font-bold text-foreground">Funcionários</h1>
-          <p className="text-muted-foreground">Gerencie a equipe do condomínio</p>
+          <p className="text-muted-foreground">Gerencie a equipe da organização</p>
         </div>
         <Dialog open={showDialog} onOpenChange={(open) => {
           setShowDialog(open);
@@ -3972,7 +3972,7 @@ function FuncionariosSection() {
                 <p className="text-xs text-muted-foreground mt-1">
                   {formData.tipoFuncionario === "supervisor" && "Supervisor pode acessar múltiplos condomínios"}
                   {formData.tipoFuncionario === "gerente" && "Gerente tem acesso parcial definido pelo síndico"}
-                  {formData.tipoFuncionario === "sindico_externo" && "Síndico externo com acesso total ao condomínio"}
+                  {formData.tipoFuncionario === "sindico_externo" && "Síndico externo com acesso total aa organização"}
                 </p>
               </div>
               
@@ -4311,7 +4311,7 @@ function FuncionariosSection() {
               Nenhum funcionário cadastrado
             </h3>
             <p className="text-muted-foreground mb-4">
-              Adicione os funcionários do seu condomínio
+              Adicione os funcionários da sua organização
             </p>
             <Button className="btn-magazine" onClick={() => setShowDialog(true)}>
               <Plus className="w-4 h-4 mr-2" />
@@ -4336,7 +4336,7 @@ function AvisosSection() {
   const { data: condominios } = trpc.condominio.list.useQuery();
   const condominioId = condominios?.[0]?.id;
   
-  // Buscar revistas do condomínio para associar avisos
+  // Buscar revistas da organização para associar avisos
   const { data: revistas } = trpc.revista.list.useQuery(
     { condominioId: condominioId || 0 },
     { enabled: !!condominioId }
@@ -4357,7 +4357,7 @@ function AvisosSection() {
       resetForm();
       refetch();
       
-      // Enviar notificação para todos os moradores
+      // Enviar notificação para todos a equipa
       if (condominioId) {
         notifyAll.mutate({
           condominioId,
@@ -4464,7 +4464,7 @@ function AvisosSection() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-serif font-bold text-foreground">Avisos</h1>
-          <p className="text-muted-foreground">Gerencie os avisos do condomínio</p>
+          <p className="text-muted-foreground">Gerencie os avisos da organização</p>
         </div>
         <Dialog open={showAvisoDialog} onOpenChange={(open) => {
           setShowAvisoDialog(open);
@@ -4489,7 +4489,7 @@ function AvisosSection() {
                   {editingAviso ? "Editar Aviso" : "Novo Aviso"}
                 </DialogTitle>
                 <DialogDescription className="text-blue-100">
-                  {editingAviso ? "Atualize as informações do aviso" : "Crie um novo aviso para os moradores"}
+                  {editingAviso ? "Atualize as informações do aviso" : "Crie um novo aviso para a equipa"}
                 </DialogDescription>
               </DialogHeader>
             </div>
@@ -4561,10 +4561,10 @@ function AvisosSection() {
           <CardContent className="p-12 text-center">
             <Building2 className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
             <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
-              Cadastre um condomínio primeiro
+              Cadastre uma organização primeiro
             </h3>
             <p className="text-muted-foreground mb-4">
-              Você precisa cadastrar um condomínio antes de criar avisos
+              Você precisa cadastrar uma organização antes de criar avisos
             </p>
             <Link href="/dashboard/condominio">
               <Button className="btn-magazine">
@@ -4657,7 +4657,7 @@ function AvisosSection() {
               Nenhum aviso criado
             </h3>
             <p className="text-muted-foreground mb-4">
-              Crie avisos para informar os moradores
+              Crie avisos para informar a equipa
             </p>
             <Button className="btn-magazine" onClick={() => setShowAvisoDialog(true)}>
               <Plus className="w-4 h-4 mr-2" />
@@ -4709,7 +4709,7 @@ function EventosSection() {
       resetForm();
       refetch();
       
-      // Enviar notificação para todos os moradores
+      // Enviar notificação para todos a equipa
       if (condominioId) {
         notifyAll.mutate({
           condominioId,
@@ -5113,7 +5113,7 @@ function EventosSection() {
               Nenhum evento agendado
             </h3>
             <p className="text-muted-foreground mb-4">
-              Adicione eventos à agenda do condomínio
+              Adicione eventos à agenda da organização
             </p>
             <Button className="btn-magazine" onClick={() => setShowEventoDialog(true)}>
               <Plus className="w-4 h-4 mr-2" />
@@ -5249,7 +5249,7 @@ function VotacoesSection() {
         <Card>
           <CardContent className="pt-6 text-center">
             <Vote className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">Cadastre um condomínio primeiro</p>
+            <p className="text-muted-foreground">Cadastre uma organização primeiro</p>
           </CardContent>
         </Card>
       </div>
@@ -5261,7 +5261,7 @@ function VotacoesSection() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-serif font-bold text-foreground">Votações</h1>
-          <p className="text-muted-foreground">Crie enquetes e votações para os moradores</p>
+          <p className="text-muted-foreground">Crie enquetes e votações para a equipa</p>
         </div>
         <Dialog open={showDialog} onOpenChange={setShowDialog}>
           <DialogTrigger asChild>
@@ -5273,7 +5273,7 @@ function VotacoesSection() {
           <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Nova Votação</DialogTitle>
-              <DialogDescription>Crie uma votação ou enquete para os moradores</DialogDescription>
+              <DialogDescription>Crie uma votação ou enquete para a equipa</DialogDescription>
             </DialogHeader>
             <div className="space-y-4">
               <div>
@@ -5430,7 +5430,7 @@ function VotacoesSection() {
                         onClick={() => {
                           const url = `${window.location.origin}/votar/${votacao.id}`;
                           navigator.clipboard.writeText(url);
-                          toast.success("Link copiado! Partilhe com os moradores.");
+                          toast.success("Link copiado! Partilhe com a equipa.");
                         }}
                       >
                         <Share2 className="w-4 h-4 mr-1" />
@@ -5544,12 +5544,12 @@ function ClassificadosSection() {
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-serif font-bold text-foreground">Classificados</h1>
-          <p className="text-muted-foreground">Classificados dos moradores</p>
+          <p className="text-muted-foreground">Classificados da equipa</p>
         </div>
         <Card>
           <CardContent className="pt-6 text-center">
             <Package className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">Cadastre um condomínio primeiro</p>
+            <p className="text-muted-foreground">Cadastre uma organização primeiro</p>
           </CardContent>
         </Card>
       </div>
@@ -5561,7 +5561,7 @@ function ClassificadosSection() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-serif font-bold text-foreground">Classificados</h1>
-          <p className="text-muted-foreground">Produtos e serviços oferecidos pelos moradores</p>
+          <p className="text-muted-foreground">Produtos e serviços oferecidos pela equipa</p>
         </div>
         <Dialog open={showDialog} onOpenChange={setShowDialog}>
           <DialogTrigger asChild>
@@ -5745,7 +5745,7 @@ function CaronasSection() {
         <Card>
           <CardContent className="pt-6 text-center">
             <Car className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">Cadastre um condomínio primeiro</p>
+            <p className="text-muted-foreground">Cadastre uma organização primeiro</p>
           </CardContent>
         </Card>
       </div>
@@ -5963,7 +5963,7 @@ function AchadosSection() {
         <Card>
           <CardContent className="pt-6 text-center">
             <Heart className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">Cadastre um condomínio primeiro</p>
+            <p className="text-muted-foreground">Cadastre uma organização primeiro</p>
           </CardContent>
         </Card>
       </div>
@@ -6353,7 +6353,7 @@ function PublicidadeSection() {
         <Card>
           <CardContent className="pt-6 text-center">
             <Image className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">Cadastre um condomínio primeiro</p>
+            <p className="text-muted-foreground">Cadastre uma organização primeiro</p>
           </CardContent>
         </Card>
       </div>
@@ -6664,7 +6664,7 @@ function RelatoriosSection() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Relatórios de Moradores</h1>
-          <p className="text-gray-500">Gere relatórios detalhados dos moradores do condomínio</p>
+          <p className="text-gray-500">Gere relatórios detalhados da equipa da organização</p>
         </div>
         
         <div className="flex items-center gap-3">
@@ -6673,7 +6673,7 @@ function RelatoriosSection() {
             onValueChange={(value) => setSelectedCondominio(Number(value))}
           >
             <SelectTrigger className="w-[250px]">
-              <SelectValue placeholder="Selecione um condomínio" />
+              <SelectValue placeholder="Selecione uma organização" />
             </SelectTrigger>
             <SelectContent>
               {condominios?.map((cond) => (
@@ -6698,7 +6698,7 @@ function RelatoriosSection() {
           <CardContent className="flex flex-col items-center justify-center py-12">
             <Building2 className="w-12 h-12 text-gray-300 mb-4" />
             <p className="text-gray-500 text-center">
-              Selecione um condomínio para visualizar os relatórios
+              Selecione uma organização para visualizar os relatórios
             </p>
           </CardContent>
         </Card>
@@ -6781,7 +6781,7 @@ function RelatoriosSection() {
                       <CardContent className="py-12 text-center">
                         <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
                         <p className="text-gray-600 font-medium">Nenhum morador bloqueado</p>
-                        <p className="text-gray-400 text-sm">Todos os moradores estão liberados para votação</p>
+                        <p className="text-gray-400 text-sm">Todos a equipa estão liberados para votação</p>
                       </CardContent>
                     </Card>
                   ) : (
@@ -7308,12 +7308,12 @@ function RealizacoesSection() {
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-serif font-bold text-foreground">Realizações</h1>
-          <p className="text-muted-foreground">Registre as conquistas do condomínio</p>
+          <p className="text-muted-foreground">Registre as conquistas da organização</p>
         </div>
         <Card>
           <CardContent className="pt-6 text-center">
             <Sparkles className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">Cadastre um condomínio primeiro</p>
+            <p className="text-muted-foreground">Cadastre uma organização primeiro</p>
           </CardContent>
         </Card>
       </div>
@@ -7325,7 +7325,7 @@ function RealizacoesSection() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-serif font-bold text-foreground">Realizações</h1>
-          <p className="text-muted-foreground">Registre as conquistas e feitos do condomínio</p>
+          <p className="text-muted-foreground">Registre as conquistas e feitos da organização</p>
         </div>
         <Dialog open={showDialog} onOpenChange={setShowDialog}>
           <DialogTrigger asChild>
@@ -7344,7 +7344,7 @@ function RealizacoesSection() {
                   Nova Realização
                 </DialogTitle>
                 <DialogDescription className="text-yellow-100">
-                  Adicione uma conquista ou feito do condomínio
+                  Adicione uma conquista ou feito da organização
                 </DialogDescription>
               </DialogHeader>
             </div>
@@ -7616,7 +7616,7 @@ function AntesDepoisSection() {
         <Card>
           <CardContent className="pt-6 text-center">
             <Image className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">Cadastre um condomínio primeiro</p>
+            <p className="text-muted-foreground">Cadastre uma organização primeiro</p>
           </CardContent>
         </Card>
       </div>
@@ -7892,12 +7892,12 @@ function MelhoriasSection() {
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-serif font-bold text-foreground">Melhorias</h1>
-          <p className="text-muted-foreground">Gerencie as melhorias do condomínio</p>
+          <p className="text-muted-foreground">Gerencie as melhorias da organização</p>
         </div>
         <Card>
           <CardContent className="pt-6 text-center">
             <Settings className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">Cadastre um condomínio primeiro</p>
+            <p className="text-muted-foreground">Cadastre uma organização primeiro</p>
           </CardContent>
         </Card>
       </div>
@@ -7928,7 +7928,7 @@ function MelhoriasSection() {
                   Nova Melhoria
                 </DialogTitle>
                 <DialogDescription className="text-blue-100">
-                  Adicione uma melhoria ao condomínio
+                  Adicione uma melhoria aa organização
                 </DialogDescription>
               </DialogHeader>
             </div>
@@ -8153,12 +8153,12 @@ function AquisicoesSection() {
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-serif font-bold text-foreground">Aquisições</h1>
-          <p className="text-muted-foreground">Registre as aquisições do condomínio</p>
+          <p className="text-muted-foreground">Registre as aquisições da organização</p>
         </div>
         <Card>
           <CardContent className="pt-6 text-center">
             <Package className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">Cadastre um condomínio primeiro</p>
+            <p className="text-muted-foreground">Cadastre uma organização primeiro</p>
           </CardContent>
         </Card>
       </div>
@@ -8189,7 +8189,7 @@ function AquisicoesSection() {
                   Nova Aquisição
                 </DialogTitle>
                 <DialogDescription className="text-emerald-100">
-                  Adicione um item adquirido pelo condomínio
+                  Adicione um item adquirido pela organização
                 </DialogDescription>
               </DialogHeader>
             </div>
@@ -8398,7 +8398,7 @@ function VagasEstacionamentoSection() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-serif font-bold">Vagas de Estacionamento</h2>
-          <p className="text-muted-foreground">Gerencie as vagas de estacionamento do condomínio</p>
+          <p className="text-muted-foreground">Gerencie as vagas de estacionamento da organização</p>
         </div>
         <Dialog open={showDialog} onOpenChange={setShowDialog}>
           <DialogTrigger asChild>
@@ -8590,7 +8590,7 @@ function ModeracaoSection() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-serif font-bold">Moderação de Classificados</h2>
-        <p className="text-muted-foreground">Aprove ou rejeite os classificados enviados pelos moradores</p>
+        <p className="text-muted-foreground">Aprove ou rejeite os classificados enviados pela equipa</p>
       </div>
 
       {/* Estatísticas */}
@@ -8843,7 +8843,7 @@ function ComunicadosSection() {
         <Card>
           <CardContent className="pt-6 text-center">
             <FileText className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">Cadastre um condomínio primeiro</p>
+            <p className="text-muted-foreground">Cadastre uma organização primeiro</p>
           </CardContent>
         </Card>
       </div>
@@ -8874,7 +8874,7 @@ function ComunicadosSection() {
                   Novo Comunicado
                 </DialogTitle>
                 <DialogDescription className="text-violet-100">
-                  Crie um comunicado oficial para os moradores
+                  Crie um comunicado oficial para a equipa
                 </DialogDescription>
               </DialogHeader>
             </div>
@@ -9242,9 +9242,9 @@ function GaleriaSection() {
     return (
       <div className="text-center py-12">
         <Image className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-        <h3 className="text-lg font-medium mb-2">Nenhum condomínio cadastrado</h3>
+        <h3 className="text-lg font-medium mb-2">Nenhuma organização cadastrado</h3>
         <p className="text-muted-foreground mb-4">
-          Cadastre um condomínio primeiro para criar álbuns de fotos.
+          Cadastre uma organização primeiro para criar álbuns de fotos.
         </p>
       </div>
     );
@@ -9364,7 +9364,7 @@ function GaleriaSection() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold">Galeria de Fotos</h2>
-          <p className="text-muted-foreground">Gerencie os álbuns de fotos do condomínio</p>
+          <p className="text-muted-foreground">Gerencie os álbuns de fotos da organização</p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={(open) => {
           setIsDialogOpen(open);
@@ -9717,7 +9717,7 @@ function SegurancaSection() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-serif font-bold text-foreground">Dicas de Segurança</h1>
-          <p className="text-muted-foreground">Compartilhe dicas de segurança com os moradores</p>
+          <p className="text-muted-foreground">Compartilhe dicas de segurança com a equipa</p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={(open) => { setIsDialogOpen(open); if (!open) resetForm(); }}>
           <DialogTrigger asChild>
@@ -9999,7 +9999,7 @@ function RegrasSection() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-serif font-bold text-foreground">Regras e Normas</h1>
-          <p className="text-muted-foreground">Gerencie as regras do condomínio</p>
+          <p className="text-muted-foreground">Gerencie as regras da organização</p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={(open) => { setIsDialogOpen(open); if (!open) resetForm(); }}>
           <DialogTrigger asChild>
@@ -10018,7 +10018,7 @@ function RegrasSection() {
                   {editingItem ? "Editar Regra" : "Nova Regra"}
                 </DialogTitle>
                 <DialogDescription className="text-indigo-100">
-                  Adicione ou edite regras do condomínio
+                  Adicione ou edite regras da organização
                 </DialogDescription>
               </DialogHeader>
             </div>
@@ -10204,7 +10204,7 @@ function DestaquesPreviewSection() {
             <Star className="w-5 h-5 text-primary" />
             Destaques
           </CardTitle>
-          <CardDescription>Conteúdo em destaque para os moradores</CardDescription>
+          <CardDescription>Conteúdo em destaque para a equipa</CardDescription>
         </div>
         <Link href="/dashboard/destaques">
           <Button variant="outline" size="sm">
@@ -10809,7 +10809,7 @@ function CabecalhoRodapeConfig() {
 
   const handleSave = () => {
     if (!condominio) {
-      toast.error("Nenhum condomínio encontrado");
+      toast.error("Nenhuma organização encontrado");
       return;
     }
     
@@ -10834,7 +10834,7 @@ function CabecalhoRodapeConfig() {
   if (!condominio) {
     return (
       <div className="text-center py-8 text-muted-foreground">
-        <p>Crie um condomínio primeiro para configurar o cabeçalho e rodapé.</p>
+        <p>Crie uma organização primeiro para configurar o cabeçalho e rodapé.</p>
       </div>
     );
   }
@@ -10901,13 +10901,13 @@ function CabecalhoRodapeConfig() {
         </div>
 
         <div className="space-y-2">
-          <Label>Nome do Síndico</Label>
+          <Label>Nome do Gestor</Label>
           <Input
             value={cabecalhoNomeSindico}
             onChange={(e) => setCabecalhoNomeSindico(e.target.value)}
             placeholder="Ex: João da Silva"
           />
-          <p className="text-xs text-muted-foreground">Aparece abaixo do nome do condomínio</p>
+          <p className="text-xs text-muted-foreground">Aparece abaixo do nome da organização</p>
         </div>
       </div>
 

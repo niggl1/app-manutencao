@@ -48,10 +48,10 @@ export default function HistoricoAcessosPage() {
   // Buscar condomínios do usuário
   const { data: condominios } = trpc.condominio.list.useQuery();
   
-  // Selecionar primeiro condomínio automaticamente
+  // Selecionar primeira organização automaticamente
   const condominioSelecionado = condominioId || condominios?.[0]?.id;
 
-  // Buscar funcionários do condomínio
+  // Buscar funcionários da organização
   const { data: funcionariosData } = trpc.funcionario.list.useQuery(
     { condominioId: condominioSelecionado! },
     { enabled: !!condominioSelecionado }
@@ -393,7 +393,7 @@ export default function HistoricoAcessosPage() {
                 onValueChange={(v) => setCondominioId(parseInt(v))}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Selecione o condomínio" />
+                  <SelectValue placeholder="Selecione a organização" />
                 </SelectTrigger>
                 <SelectContent>
                   {condominios?.map((c) => (

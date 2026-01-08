@@ -23,17 +23,17 @@ const features = [
   {
     icon: LayoutGrid,
     title: "Layout em Grade",
-    description: "Interface organizada em cards que facilita a navegação e visualização rápida de todas as informações do condomínio."
+    description: "Interface organizada em cards que facilita a navegação e visualização rápida de todas as informações da organização."
   },
   {
     icon: Bell,
     title: "Notificações Push",
-    description: "Alertas instantâneos para moradores sobre avisos importantes, eventos e votações ativas."
+    description: "Alertas instantâneos para equipa sobre avisos importantes, eventos e votações ativas."
   },
   {
     icon: BarChart3,
     title: "Dashboard Intuitivo",
-    description: "Painel de controle com visão geral de manutenções, vistorias e ocorrências do condomínio."
+    description: "Painel de controle com visão geral de manutenções, vistorias e ocorrências da organização."
   },
   {
     icon: Users,
@@ -198,7 +198,7 @@ export default function LandingApp() {
                 Por que escolher o formato App?
               </h2>
               <p className="text-xl text-blue-100 mb-8">
-                O layout em grade oferece a melhor experiência para acesso rápido e gestão diária do condomínio.
+                O layout em grade oferece a melhor experiência para acesso rápido e gestão diária da organização.
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 {benefits.map((benefit, index) => (
@@ -232,7 +232,7 @@ export default function LandingApp() {
             Pronto para Modernizar seu Condomínio?
           </h2>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Crie seu app condominial em minutos e transforme a comunicação com os moradores.
+            Crie seu app condominial em minutos e transforme a comunicação com a equipa.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/dashboard/revistas">

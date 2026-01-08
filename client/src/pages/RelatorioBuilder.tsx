@@ -132,14 +132,14 @@ interface ReportSection {
 const availableSections: Omit<ReportSection, "enabled">[] = [
   // GESTÃO
   { id: "moradores", key: "moradores", title: "Moradores", description: "Lista e estatísticas de moradores", icon: Users, category: "gestao" },
-  { id: "funcionarios", key: "funcionarios", title: "Funcionários", description: "Equipe do condomínio", icon: UsersRound, category: "gestao" },
-  { id: "condominios", key: "condominios", title: "Condomínio", description: "Informações do condomínio", icon: Building2, category: "gestao" },
+  { id: "funcionarios", key: "funcionarios", title: "Funcionários", description: "Equipe da organização", icon: UsersRound, category: "gestao" },
+  { id: "condominios", key: "condominios", title: "Condomínio", description: "Informações da organização", icon: Building2, category: "gestao" },
   
   // COMUNICAÇÃO
   { id: "avisos", key: "avisos", title: "Avisos", description: "Avisos enviados", icon: Bell, category: "comunicacao" },
   { id: "comunicados", key: "comunicados", title: "Comunicados", description: "Comunicados oficiais com anexos", icon: Megaphone, category: "comunicacao" },
   { id: "notificacoes", key: "notificacoes", title: "Notificações", description: "Notificações enviadas", icon: Bell, category: "comunicacao" },
-  { id: "mensagens_sindico", key: "mensagens_sindico", title: "Mensagens do Síndico", description: "Mensagens do síndico", icon: MessageSquare, category: "comunicacao" },
+  { id: "mensagens_sindico", key: "mensagens_sindico", title: "Mensagens do Gestor", description: "Mensagens do gestor", icon: MessageSquare, category: "comunicacao" },
   
   // EVENTOS E AGENDA
   { id: "eventos", key: "eventos", title: "Eventos", description: "Eventos realizados", icon: Calendar, category: "eventos" },
@@ -157,7 +157,7 @@ const availableSections: Omit<ReportSection, "enabled">[] = [
   
   // SEGURANÇA E REGRAS
   { id: "dicas_seguranca", key: "dicas_seguranca", title: "Dicas de Segurança", description: "Dicas de segurança", icon: Shield, category: "seguranca" },
-  { id: "regras_normas", key: "regras_normas", title: "Regras e Normas", description: "Regras do condomínio", icon: Gavel, category: "seguranca" },
+  { id: "regras_normas", key: "regras_normas", title: "Regras e Normas", description: "Regras da organização", icon: Gavel, category: "seguranca" },
   { id: "notificacoes_infracao", key: "notificacoes_infracao", title: "Infrações", description: "Notificações de infração", icon: AlertTriangle, category: "seguranca" },
   
   // COMUNIDADE
@@ -170,11 +170,11 @@ const availableSections: Omit<ReportSection, "enabled">[] = [
   
   // GALERIA E MÍDIA
   { id: "albuns", key: "albuns", title: "Álbuns de Fotos", description: "Galeria de imagens", icon: Image, category: "galeria" },
-  { id: "realizacoes", key: "realizacoes", title: "Realizações", description: "Conquistas do condomínio", icon: Award, category: "galeria" },
+  { id: "realizacoes", key: "realizacoes", title: "Realizações", description: "Conquistas da organização", icon: Award, category: "galeria" },
   { id: "melhorias", key: "melhorias", title: "Melhorias", description: "Melhorias implementadas", icon: TrendingUp, category: "galeria" },
-  { id: "aquisicoes", key: "aquisicoes", title: "Aquisições", description: "Aquisições do condomínio", icon: Package, category: "galeria" },
+  { id: "aquisicoes", key: "aquisicoes", title: "Aquisições", description: "Aquisições da organização", icon: Package, category: "galeria" },
   
-  { id: "destaques", key: "destaques", title: "Destaques", description: "Destaques do condomínio", icon: Star, category: "galeria" },
+  { id: "destaques", key: "destaques", title: "Destaques", description: "Destaques da organização", icon: Star, category: "galeria" },
   
   // INFORMAÇÕES
   { id: "telefones_uteis", key: "telefones_uteis", title: "Telefones Úteis", description: "Contatos importantes", icon: Phone, category: "informacoes" },
@@ -253,7 +253,7 @@ export default function RelatorioBuilder() {
     },
   });
 
-  // Carregar dados do condomínio
+  // Carregar dados da organização
   useEffect(() => {
     if (selectedCondominio) {
       setCabecalhoLogoUrl((selectedCondominio as any).cabecalhoLogoUrl || "");
@@ -328,7 +328,7 @@ export default function RelatorioBuilder() {
     }
 
     if (!selectedCondominio) {
-      toast.error("Nenhum condomínio selecionado");
+      toast.error("Nenhuma organização selecionado");
       return;
     }
 
@@ -1478,7 +1478,7 @@ export default function RelatorioBuilder() {
                   <div className="space-y-2">
                     <Label htmlFor="nomeSindico" className="text-slate-300 text-sm font-medium flex items-center gap-2">
                       <Users className="h-3.5 w-3.5 text-slate-500" />
-                      Nome do Síndico
+                      Nome do Gestor
                     </Label>
                     <Input
                       id="nomeSindico"
@@ -1550,7 +1550,7 @@ export default function RelatorioBuilder() {
                   )}
                   <div className="border-l-2 border-emerald-500 pl-4">
                     <p className="font-bold text-slate-800">{cabecalhoNomeCondominio || "Nome do Condomínio"}</p>
-                    <p className="text-sm text-slate-500">{cabecalhoNomeSindico || "Nome do Síndico"}</p>
+                    <p className="text-sm text-slate-500">{cabecalhoNomeSindico || "Nome do Gestor"}</p>
                   </div>
                 </div>
               </div>

@@ -88,7 +88,7 @@ export default function FuncionarioForm({ condominioId, revistaId, onSuccess, on
             {initialData?.id ? "Editar Funcionário" : "Novo Funcionário"}
           </CardTitle>
           <CardDescription>
-            Cadastre um funcionário do condomínio
+            Cadastre um funcionário da organização
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6 px-0">

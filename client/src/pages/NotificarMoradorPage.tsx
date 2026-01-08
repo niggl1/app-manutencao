@@ -135,7 +135,7 @@ export default function NotificarMoradorPage() {
     },
   });
 
-  // Selecionar primeiro condomínio
+  // Selecionar primeira organização
   useEffect(() => {
     if (condominios && condominios.length > 0 && !condominioId) {
       setCondominioId(condominios[0].id);
@@ -255,7 +255,7 @@ export default function NotificarMoradorPage() {
               Notificar Morador
             </h1>
             <p className="text-gray-500 text-sm">
-              Registre e envie notificações de infrações para os moradores
+              Registre e envie notificações de infrações para a equipa
             </p>
           </div>
         </div>

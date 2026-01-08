@@ -222,7 +222,7 @@ export default function OrdensServico() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-full">
-          <p className="text-gray-500">Selecione um condomínio para continuar</p>
+          <p className="text-gray-500">Selecione uma organização para continuar</p>
         </div>
       </DashboardLayout>
     );
@@ -243,7 +243,7 @@ export default function OrdensServico() {
                   Ordens de Serviço
                 </h1>
                 <p className="text-white/80 text-sm">
-                  Gerencie todas as ordens de serviço do condomínio
+                  Gerencie todas as ordens de serviço da organização
                 </p>
               </div>
             </div>
@@ -841,7 +841,7 @@ export default function OrdensServico() {
               <div className="flex items-center justify-between">
                 <div>
                   <Label className="text-gray-700">Aprovação de Orçamento</Label>
-                  <p className="text-sm text-gray-500">Exigir aprovação do síndico</p>
+                  <p className="text-sm text-gray-500">Exigir aprovação do gestor</p>
                 </div>
                 <Switch
                   checked={configuracoes?.habilitarAprovacaoOrcamento || false}

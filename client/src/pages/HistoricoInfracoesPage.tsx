@@ -90,7 +90,7 @@ export default function HistoricoInfracoesPage() {
     { enabled: !!selectedNotificacao?.notificacao?.id }
   );
   
-  // Query para moradores do relatório
+  // Query para equipa do relatório
   const { data: moradoresRelatorio } = trpc.relatorioInfracoes.listarMoradores.useQuery(
     { condominioId: condominioId! },
     { enabled: !!condominioId }
@@ -151,7 +151,7 @@ export default function HistoricoInfracoesPage() {
     },
   });
 
-  // Selecionar primeiro condomínio
+  // Selecionar primeira organização
   useEffect(() => {
     if (condominios && condominios.length > 0 && !condominioId) {
       setCondominioId(condominios[0].id);
@@ -707,10 +707,10 @@ export default function HistoricoInfracoesPage() {
                 onValueChange={(v) => setRelatorioMoradorId(v === "all" ? null : parseInt(v))}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Todos os moradores" />
+                  <SelectValue placeholder="Todos a equipa" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">Todos os moradores</SelectItem>
+                  <SelectItem value="all">Todos a equipa</SelectItem>
                   {moradoresRelatorio?.map((m) => (
                     <SelectItem key={m.id} value={m.id.toString()}>
                       {m.nome} - {m.bloco ? `Bloco ${m.bloco}, ` : ""}Apto {m.apartamento}

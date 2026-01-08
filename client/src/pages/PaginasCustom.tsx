@@ -221,7 +221,7 @@ export default function PaginasCustomSection({ condominioId }: PaginasCustomSect
     return (
       <div className="text-center py-12">
         <Sparkles className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
-        <p className="text-muted-foreground">Selecione um condomínio para gerenciar páginas personalizadas</p>
+        <p className="text-muted-foreground">Selecione uma organização para gerenciar páginas personalizadas</p>
       </div>
     );
   }

@@ -78,7 +78,7 @@ export function GaleriaSection({ revistaId, condominioId, hiddenSections, toggle
             </div>
             <div>
               <h3 className="text-lg font-bold text-slate-800">Galeria de Fotos</h3>
-              <p className="text-sm text-slate-500">Álbuns de fotos do condomínio</p>
+              <p className="text-sm text-slate-500">Álbuns de fotos da organização</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -357,7 +357,7 @@ export function RegrasSection({ revistaId, condominioId, hiddenSections, toggleS
             </div>
             <div>
               <h3 className="text-lg font-bold text-slate-800">Regras e Normas</h3>
-              <p className="text-sm text-slate-500">Regulamento interno do condomínio</p>
+              <p className="text-sm text-slate-500">Regulamento interno da organização</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -447,7 +447,7 @@ export function RegrasSection({ revistaId, condominioId, hiddenSections, toggleS
               <BookOpen className="w-6 h-6 text-slate-500" />
             </div>
             <p className="font-medium text-slate-700">Nenhuma regra cadastrada</p>
-            <p className="text-sm text-slate-500 mt-1">Adicione as regras do condomínio</p>
+            <p className="text-sm text-slate-500 mt-1">Adicione as regras da organização</p>
           </div>
         )}
       </div>
@@ -497,7 +497,7 @@ export function DicasSegurancaSection({ revistaId, condominioId, hiddenSections,
             </div>
             <div>
               <h3 className="text-lg font-bold text-slate-800">Dicas de Segurança</h3>
-              <p className="text-sm text-slate-500">Orientações para os moradores</p>
+              <p className="text-sm text-slate-500">Orientações para a equipa</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -1111,7 +1111,7 @@ export function PublicidadeSection({ revistaId, condominioId, hiddenSections, to
                   </div>
                   <div>
                     <Label>Título do Anúncio *</Label>
-                    <Input value={titulo} onChange={(e) => setTitulo(e.target.value)} placeholder="Ex: 10% de desconto para moradores" />
+                    <Input value={titulo} onChange={(e) => setTitulo(e.target.value)} placeholder="Ex: 10% de desconto para equipa" />
                   </div>
                   <div>
                     <Label>Telefone</Label>

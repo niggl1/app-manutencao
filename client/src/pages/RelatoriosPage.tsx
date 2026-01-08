@@ -448,7 +448,7 @@ export default function RelatoriosPage({ condominioId }: RelatoriosPageProps) {
           <CardContent className="flex flex-col items-center justify-center py-12">
             <BarChart3 className="w-12 h-12 text-muted-foreground mb-4" />
             <p className="text-muted-foreground text-center">
-              Cadastre um condomínio primeiro para visualizar os relatórios
+              Cadastre uma organização primeiro para visualizar os relatórios
             </p>
           </CardContent>
         </Card>
@@ -636,7 +636,7 @@ export default function RelatoriosPage({ condominioId }: RelatoriosPageProps) {
                       try {
                         await exportRelatorioConsolidadoComGraficos(
                           "Relatório Executivo Consolidado",
-                          "Visão geral de todas as áreas do condomínio",
+                          "Visão geral de todas as áreas da organização",
                           [
                             { label: "Moradores", valor: moradoresStats.total },
                             { label: "Manutenções", valor: operacionalStats.manutencoes.total },
@@ -1399,7 +1399,7 @@ export default function RelatoriosPage({ condominioId }: RelatoriosPageProps) {
                       try {
                         await exportRelatorioComEstatisticas(
                           "Relatório de Moradores",
-                          filterStatus === "todos" ? "Todos os moradores" : 
+                          filterStatus === "todos" ? "Todos a equipa" : 
                            filterStatus === "ativos" ? "Moradores ativos" : "Moradores inativos",
                           [
                             { label: "Total", valor: moradoresStats.total },
@@ -1442,7 +1442,7 @@ export default function RelatoriosPage({ condominioId }: RelatoriosPageProps) {
               <CardHeader>
                 <CardTitle className="text-base">Lista de Moradores</CardTitle>
                 <CardDescription>
-                  {filterStatus === "todos" ? "Todos os moradores" : 
+                  {filterStatus === "todos" ? "Todos a equipa" : 
                    filterStatus === "ativos" ? "Moradores ativos" : "Moradores inativos"}
                 </CardDescription>
               </CardHeader>
@@ -1972,7 +1972,7 @@ export default function RelatoriosPage({ condominioId }: RelatoriosPageProps) {
                       try {
                         await exportRelatorioComEstatisticas(
                           "Relatório de Manutenções",
-                          "Histórico de manutenções do condomínio",
+                          "Histórico de manutenções da organização",
                           [
                             { label: "Total", valor: operacionalStats.manutencoes.total },
                             { label: "Pendentes", valor: operacionalStats.manutencoes.pendentes },
@@ -2099,7 +2099,7 @@ export default function RelatoriosPage({ condominioId }: RelatoriosPageProps) {
                       try {
                         await exportRelatorioComEstatisticas(
                           "Relatório de Ocorrências",
-                          "Histórico de ocorrências do condomínio",
+                          "Histórico de ocorrências da organização",
                           [
                             { label: "Total", valor: operacionalStats.ocorrencias.total },
                             { label: "Pendentes", valor: operacionalStats.ocorrencias.pendentes },
@@ -2218,7 +2218,7 @@ export default function RelatoriosPage({ condominioId }: RelatoriosPageProps) {
                       try {
                         await exportRelatorioComEstatisticas(
                           "Relatório de Vistorias",
-                          "Histórico de vistorias do condomínio",
+                          "Histórico de vistorias da organização",
                           [
                             { label: "Total", valor: operacionalStats.vistorias.total },
                             { label: "Pendentes", valor: operacionalStats.vistorias.pendentes },
@@ -2864,7 +2864,7 @@ export default function RelatoriosPage({ condominioId }: RelatoriosPageProps) {
                       try {
                         await exportRelatorioComEstatisticas(
                           "Relatório de Eventos",
-                          "Calendário de eventos do condomínio",
+                          "Calendário de eventos da organização",
                           [
                             { label: "Total", valor: agendaStats.eventos.total },
                             { label: "Próximos", valor: agendaStats.eventos.proximos },
@@ -3005,7 +3005,7 @@ export default function RelatoriosPage({ condominioId }: RelatoriosPageProps) {
                       try {
                         await exportRelatorioComEstatisticas(
                           "Relatório de Galeria",
-                          "Álbuns de fotos do condomínio",
+                          "Álbuns de fotos da organização",
                           [
                             { label: "Total Álbuns", valor: midiaStats.albuns },
                           ],

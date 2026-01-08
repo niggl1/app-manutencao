@@ -79,7 +79,7 @@ import {
 import { SortableSectionItem } from "@/components/revista/SortableSectionItem";
 
 const sectionTypes = [
-  { id: "mensagem_sindico", name: "Mensagem do Síndico", icon: MessageSquare, color: "text-blue-500" },
+  { id: "mensagem_sindico", name: "Mensagem do Gestor", icon: MessageSquare, color: "text-blue-500" },
   { id: "avisos", name: "Avisos", icon: Megaphone, color: "text-amber-500" },
   { id: "eventos", name: "Eventos", icon: Calendar, color: "text-emerald-500" },
   { id: "funcionarios", name: "Funcionários", icon: Users, color: "text-purple-500" },
@@ -192,9 +192,9 @@ export default function RevistaEditor() {
     });
   };
   
-  // Mensagem do síndico state
+  // Mensagem do gestor state
   const [mensagemSindico, setMensagemSindico] = useState({
-    titulo: "Mensagem do Síndico",
+    titulo: "Mensagem do Gestor",
     nomeSindico: "",
     fotoSindicoUrl: "",
     mensagem: "",
@@ -430,7 +430,7 @@ export default function RevistaEditor() {
                 <div className="flex flex-wrap gap-2">
                   {Array.from(hiddenSections).map((sectionId) => {
                     const sectionNames: Record<string, string> = {
-                      mensagem_sindico: "Mensagem do Síndico",
+                      mensagem_sindico: "Mensagem do Gestor",
                       avisos: "Avisos",
                       votacoes: "Votações",
                     };
@@ -460,7 +460,7 @@ export default function RevistaEditor() {
               <SortableContext items={sectionOrder} strategy={verticalListSortingStrategy}>
                 <div className="space-y-6 pl-10">
             
-            {/* Mensagem do Síndico - Premium */}
+            {/* Mensagem do Gestor - Premium */}
             <SortableSectionItem id="mensagem_sindico" isHidden={hiddenSections.has("mensagem_sindico")}>
             <div id="mensagem-sindico-section" className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 rounded-2xl border border-blue-100 shadow-sm hover:shadow-lg transition-all duration-300">
               {/* Barra decorativa superior */}
@@ -478,8 +478,8 @@ export default function RevistaEditor() {
                       <MessageSquare className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-slate-800">Mensagem do Síndico</h3>
-                      <p className="text-sm text-slate-500">Escreva uma mensagem personalizada para os moradores</p>
+                      <h3 className="text-lg font-bold text-slate-800">Mensagem do Gestor</h3>
+                      <p className="text-sm text-slate-500">Escreva uma mensagem personalizada para a equipa</p>
                     </div>
                   </div>
                   <Button
@@ -495,11 +495,11 @@ export default function RevistaEditor() {
                 </div>
                 
                 <div className="space-y-5">
-                  {/* Foto e Nome do Síndico */}
+                  {/* Foto e Nome do Gestor */}
                   <div className="flex gap-6 items-start">
                     <div className="space-y-3 min-w-[180px]">
                       <div className="flex items-center justify-between">
-                        <Label className="text-slate-700 font-medium">Foto do Síndico</Label>
+                        <Label className="text-slate-700 font-medium">Foto do Gestor</Label>
                         {mensagemSindico.fotoSindicoUrl && (
                           <Button
                             type="button"
@@ -533,7 +533,7 @@ export default function RevistaEditor() {
                     </div>
                     <div className="flex-1 space-y-4">
                       <div className="space-y-2">
-                        <Label className="text-slate-700 font-medium">Nome do Síndico</Label>
+                        <Label className="text-slate-700 font-medium">Nome do Gestor</Label>
                         <Input
                           value={mensagemSindico.nomeSindico}
                           onChange={(e) => setMensagemSindico({ ...mensagemSindico, nomeSindico: e.target.value })}
@@ -546,7 +546,7 @@ export default function RevistaEditor() {
                         <Input
                           value={mensagemSindico.titulo}
                           onChange={(e) => setMensagemSindico({ ...mensagemSindico, titulo: e.target.value })}
-                          placeholder="Mensagem do Síndico"
+                          placeholder="Mensagem do Gestor"
                           className="bg-white/70 border-slate-200 focus:border-blue-400 focus:ring-blue-400/20 rounded-xl h-11"
                         />
                       </div>
@@ -559,7 +559,7 @@ export default function RevistaEditor() {
                     <Textarea
                       value={mensagemSindico.mensagem}
                       onChange={(e) => setMensagemSindico({ ...mensagemSindico, mensagem: e.target.value })}
-                      placeholder="Prezados moradores, é com grande satisfação que apresento mais uma edição da nossa revista digital..."
+                      placeholder="Prezada equipa, é com grande satisfação que apresento mais uma edição da nossa revista digital..."
                       rows={6}
                       className="bg-white/70 border-slate-200 focus:border-blue-400 focus:ring-blue-400/20 rounded-xl resize-none"
                     />
@@ -799,7 +799,7 @@ export default function RevistaEditor() {
                       <Vote className="w-6 h-6 text-pink-500" />
                     </div>
                     <p className="font-medium text-slate-700">Nenhuma votação criada</p>
-                    <p className="text-sm text-slate-500 mt-1">Crie enquetes para engajar os moradores</p>
+                    <p className="text-sm text-slate-500 mt-1">Crie enquetes para engajar a equipa</p>
                   </div>
                 )}
               </div>
@@ -825,7 +825,7 @@ export default function RevistaEditor() {
                     </div>
                     <div>
                       <h3 className="text-lg font-bold text-slate-800">Eventos</h3>
-                      <p className="text-sm text-slate-500">Agende eventos e atividades do condomínio</p>
+                      <p className="text-sm text-slate-500">Agende eventos e atividades da organização</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -988,7 +988,7 @@ export default function RevistaEditor() {
                     </div>
                     <div>
                       <h3 className="text-lg font-bold text-slate-800">Funcionários</h3>
-                      <p className="text-sm text-slate-500">Apresente a equipe do condomínio</p>
+                      <p className="text-sm text-slate-500">Apresente a equipe da organização</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -1080,7 +1080,7 @@ export default function RevistaEditor() {
                       <Users className="w-6 h-6 text-purple-500" />
                     </div>
                     <p className="font-medium text-slate-700">Nenhum funcionário cadastrado</p>
-                    <p className="text-sm text-slate-500 mt-1">Apresente a equipe do condomínio</p>
+                    <p className="text-sm text-slate-500 mt-1">Apresente a equipe da organização</p>
                   </div>
                 )}
               </div>
@@ -1106,7 +1106,7 @@ export default function RevistaEditor() {
                     </div>
                     <div>
                       <h3 className="text-lg font-bold text-slate-800">Classificados</h3>
-                      <p className="text-sm text-slate-500">Produtos e serviços dos moradores</p>
+                      <p className="text-sm text-slate-500">Produtos e serviços da equipa</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -1138,7 +1138,7 @@ export default function RevistaEditor() {
                         </div>
                         <div className="p-6 overflow-y-auto max-h-[70vh]">
                           <p className="text-center text-muted-foreground py-8">
-                            Os classificados são geridos pelos moradores através do app.
+                            Os classificados são geridos pela equipa através do app.
                             <br />
                             Você pode visualizar e moderar os classificados existentes.
                           </p>
@@ -1212,7 +1212,7 @@ export default function RevistaEditor() {
                         </div>
                         <div className="p-6 overflow-y-auto max-h-[70vh]">
                           <p className="text-center text-muted-foreground py-8">
-                            As caronas são geridas pelos moradores através do app.
+                            As caronas são geridas pela equipa através do app.
                             <br />
                             Você pode visualizar as caronas disponíveis.
                           </p>

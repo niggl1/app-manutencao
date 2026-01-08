@@ -67,7 +67,7 @@ export default function CondominioForm({ onSuccess, initialData }: CondominioFor
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.nome.trim()) {
-      toast.error("O nome do condomínio é obrigatório");
+      toast.error("O nome da organização é obrigatório");
       return;
     }
 
@@ -89,7 +89,7 @@ export default function CondominioForm({ onSuccess, initialData }: CondominioFor
             {initialData?.id ? "Editar Condomínio" : "Cadastrar Condomínio"}
           </CardTitle>
           <CardDescription>
-            Preencha as informações do seu condomínio
+            Preencha as informações da sua organização
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">

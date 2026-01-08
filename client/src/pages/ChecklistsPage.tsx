@@ -116,7 +116,7 @@ export default function ChecklistsPage({ condominioId }: ChecklistsPageProps) {
 
   const utils = trpc.useUtils();
 
-  // Buscar dados do condomínio para obter o logo
+  // Buscar dados da organização para obter o logo
   const { data: condominio } = trpc.condominio.get.useQuery(
     { id: condominioId },
     { enabled: !!condominioId }
@@ -606,7 +606,7 @@ export default function ChecklistsPage({ condominioId }: ChecklistsPageProps) {
               iconColor="text-emerald-600"
               iconBgColor="bg-gradient-to-br from-emerald-100 to-teal-100"
               title="Novo Checklist"
-              subtitle="Crie uma lista de verificações para o condomínio"
+              subtitle="Crie uma lista de verificações para a organização"
             />
           </div>
 

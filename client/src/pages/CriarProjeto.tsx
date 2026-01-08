@@ -14,7 +14,7 @@ export default function CriarProjeto() {
     {
       id: "app",
       titulo: "Apps Criados",
-      descricao: "Crie apps personalizados para seu condomínio",
+      descricao: "Crie apps personalizados para sua organização",
       icone: Smartphone,
       cor: "bg-blue-500",
       corBorda: "border-blue-200",
@@ -55,14 +55,14 @@ export default function CriarProjeto() {
   const primeirosPassos = [
     {
       numero: 1,
-      titulo: "Cadastre seu Condomínio",
+      titulo: "Cadastre sua Organização",
       descricao: "Adicione nome, endereço e logo",
       rota: "/dashboard/condominio"
     },
     {
       numero: 2,
       titulo: "Adicione Funcionários",
-      descricao: "Cadastre a equipe do condomínio",
+      descricao: "Cadastre a equipe da organização",
       rota: "/dashboard/funcionarios"
     },
     {
@@ -73,7 +73,7 @@ export default function CriarProjeto() {
     },
     {
       numero: 4,
-      titulo: "Compartilhe com Moradores",
+      titulo: "Compartilhe com a Equipa",
       descricao: "Gere o link e divulgue",
       rota: "/dashboard/moradores"
     }
@@ -92,7 +92,7 @@ export default function CriarProjeto() {
             Escolha o tipo de projeto
           </h1>
           <p className="text-slate-600">
-            Crie apps, projetos digitais e relatórios para seu condomínio.
+            Crie apps, projetos digitais e relatórios para sua organização.
           </p>
         </div>
 
@@ -185,7 +185,7 @@ export default function CriarProjeto() {
                 Primeiros Passos
               </h2>
               <p className="text-sm text-slate-500">
-                Configure seu condomínio para começar
+                Configure sua organização para começar
               </p>
             </div>
             

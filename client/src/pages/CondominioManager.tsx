@@ -136,7 +136,7 @@ export default function CondominioManager() {
                   <p className="text-sm text-muted-foreground">
                     {condominio.cidade && condominio.estado
                       ? `${condominio.cidade}, ${condominio.estado}`
-                      : "Gestão do Condomínio"}
+                      : "Gestão da Organização"}
                   </p>
                 </div>
               </div>
@@ -294,7 +294,7 @@ export default function CondominioManager() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-serif text-2xl font-bold">Funcionários</h2>
-                <p className="text-muted-foreground">Gerencie a equipe do condomínio</p>
+                <p className="text-muted-foreground">Gerencie a equipe da organização</p>
               </div>
               <Dialog open={showFuncionarioForm} onOpenChange={setShowFuncionarioForm}>
                 <DialogTrigger asChild>
@@ -313,7 +313,7 @@ export default function CondominioManager() {
                         Novo Funcionário
                       </DialogTitle>
                       <DialogDescription className="text-teal-100">
-                        Adicione um novo funcionário ao condomínio
+                        Adicione um novo funcionário aa organização
                       </DialogDescription>
                     </DialogHeader>
                   </div>
@@ -368,7 +368,7 @@ export default function CondominioManager() {
                   <Users className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
                   <h3 className="font-serif text-lg font-semibold mb-2">Nenhum funcionário cadastrado</h3>
                   <p className="text-muted-foreground mb-4">
-                    Cadastre os funcionários do condomínio
+                    Cadastre os funcionários da organização
                   </p>
                   <Button className="btn-magazine" onClick={() => setShowFuncionarioForm(true)}>
                     <Plus className="w-4 h-4 mr-2" />

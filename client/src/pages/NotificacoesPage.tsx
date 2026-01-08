@@ -568,7 +568,7 @@ export function NotificacoesPage({ condominioId }: NotificacoesPageProps) {
                     <div>
                       <DialogTitle className="text-white text-xl">Enviar Push em Massa</DialogTitle>
                       <DialogDescription className="text-purple-100">
-                        Envie uma notificação para todos os moradores com push ativo
+                        Envie uma notificação para todos a equipa com push ativo
                       </DialogDescription>
                     </div>
                   </div>
@@ -983,7 +983,7 @@ export function NotificacoesPage({ condominioId }: NotificacoesPageProps) {
                     <div>
                       <DialogTitle className="text-white text-xl">Enviar Notificação</DialogTitle>
                       <DialogDescription className="text-purple-100">
-                        Envie uma notificação para os moradores do condomínio
+                        Envie uma notificação para a equipa da organização
                       </DialogDescription>
                     </div>
                   </div>
@@ -1128,7 +1128,7 @@ export function NotificacoesPage({ condominioId }: NotificacoesPageProps) {
                   <p className="flex items-center gap-2">
                     <Users className="h-4 w-4" />
                     {notifChannel === "push" && `${subscriptions?.length || 0} dispositivos receberão esta notificação`}
-                    {notifChannel === "email" && "Será enviado para todos os moradores com email cadastrado"}
+                    {notifChannel === "email" && "Será enviado para todos a equipa com email cadastrado"}
                     {notifChannel === "whatsapp" && "Abrirá o WhatsApp para envio manual"}
                   </p>
                 </div>

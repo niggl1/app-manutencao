@@ -87,7 +87,7 @@ const tiposProjeto = [
   {
     id: "app",
     nome: "App",
-    descricao: "Crie um aplicativo personalizado para seu condomínio",
+    descricao: "Crie um aplicativo personalizado para sua organização",
     icon: Smartphone,
     cor: "from-blue-500 to-blue-600",
     corBorda: "border-blue-500",
@@ -119,10 +119,10 @@ const modulosDisponiveis = {
     nome: "Comunicação",
     icon: Megaphone,
     modulos: [
-      { id: "avisos", nome: "Avisos", icon: Megaphone, descricao: "Avisos importantes do condomínio" },
+      { id: "avisos", nome: "Avisos", icon: Megaphone, descricao: "Avisos importantes da organização" },
       { id: "comunicados", nome: "Comunicados", icon: FileText, descricao: "Comunicados oficiais" },
       { id: "notificacoes", nome: "Notificações", icon: Bell, descricao: "Sistema de notificações" },
-      { id: "mensagem-sindico", nome: "Mensagem do Síndico", icon: MessageSquare, descricao: "Mensagem personalizada do síndico" },
+      { id: "mensagem-sindico", nome: "Mensagem do Gestor", icon: MessageSquare, descricao: "Mensagem personalizada do gestor" },
     ]
   },
   eventos: {
@@ -152,17 +152,17 @@ const modulosDisponiveis = {
       { id: "ocorrencias", nome: "Ocorrências", icon: AlertTriangle, descricao: "Registro de ocorrências" },
       { id: "checklists", nome: "Checklists", icon: ListChecks, descricao: "Listas de verificação" },
       { id: "melhorias", nome: "Melhorias", icon: TrendingUp, descricao: "Melhorias realizadas" },
-      { id: "aquisicoes", nome: "Aquisições", icon: Package, descricao: "Compras do condomínio" },
+      { id: "aquisicoes", nome: "Aquisições", icon: Package, descricao: "Compras da organização" },
     ]
   },
   comunidade: {
     nome: "Comunidade",
     icon: Users,
     modulos: [
-      { id: "classificados", nome: "Classificados", icon: ShoppingBag, descricao: "Anúncios dos moradores" },
+      { id: "classificados", nome: "Classificados", icon: ShoppingBag, descricao: "Anúncios da equipa" },
       { id: "achados-perdidos", nome: "Achados e Perdidos", icon: MapPin, descricao: "Itens encontrados" },
       { id: "caronas", nome: "Caronas", icon: Car, descricao: "Compartilhamento de caronas" },
-      { id: "pets", nome: "Pets", icon: Dog, descricao: "Animais do condomínio" },
+      { id: "pets", nome: "Pets", icon: Dog, descricao: "Animais da organização" },
     ]
   },
   moradores: {
@@ -170,7 +170,7 @@ const modulosDisponiveis = {
     icon: Users,
     modulos: [
       { id: "moradores", nome: "Moradores", icon: Users, descricao: "Cadastro de moradores" },
-      { id: "funcionarios", nome: "Funcionários", icon: Briefcase, descricao: "Equipe do condomínio" },
+      { id: "funcionarios", nome: "Funcionários", icon: Briefcase, descricao: "Equipe da organização" },
       { id: "equipe-gestao", nome: "Equipe de Gestão", icon: Star, descricao: "Síndico e conselho" },
     ]
   },
@@ -204,7 +204,7 @@ const modulosDisponiveis = {
     modulos: [
       { id: "galeria", nome: "Galeria de Fotos", icon: Image, descricao: "Álbuns de fotos" },
       { id: "antes-depois", nome: "Antes e Depois", icon: Camera, descricao: "Comparativos visuais" },
-      { id: "videos", nome: "Vídeos", icon: Video, descricao: "Vídeos do condomínio" },
+      { id: "videos", nome: "Vídeos", icon: Video, descricao: "Vídeos da organização" },
     ]
   },
   informacoes: {
@@ -287,7 +287,7 @@ export default function AssistenteCriacao({ onClose, onComplete }: AssistenteCri
     setPeriodo(`${meses[agora.getMonth()]} ${agora.getFullYear()}`);
   }, []);
   
-  // Selecionar primeiro condomínio automaticamente
+  // Selecionar primeira organização automaticamente
   useEffect(() => {
     if (condominios && condominios.length > 0 && !condominioId) {
       setCondominioId(condominios[0].id);
@@ -343,7 +343,7 @@ export default function AssistenteCriacao({ onClose, onComplete }: AssistenteCri
   
   const criarProjeto = async () => {
     if (!condominioId) {
-      toast.error("Selecione um condomínio");
+      toast.error("Selecione uma organização");
       return;
     }
     
@@ -404,7 +404,7 @@ export default function AssistenteCriacao({ onClose, onComplete }: AssistenteCri
     <div className="space-y-6">
       <div className="text-center mb-8">
         <h2 className="text-2xl font-bold text-foreground mb-2">Escolha o tipo de projeto</h2>
-        <p className="text-muted-foreground">Selecione o que você deseja criar para seu condomínio</p>
+        <p className="text-muted-foreground">Selecione o que você deseja criar para sua organização</p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -478,7 +478,7 @@ export default function AssistenteCriacao({ onClose, onComplete }: AssistenteCri
             onValueChange={(value) => setCondominioId(parseInt(value))}
           >
             <SelectTrigger>
-              <SelectValue placeholder="Selecione o condomínio" />
+              <SelectValue placeholder="Selecione a organização" />
             </SelectTrigger>
             <SelectContent>
               {condominios?.map((cond) => (

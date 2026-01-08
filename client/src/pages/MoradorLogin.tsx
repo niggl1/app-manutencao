@@ -345,7 +345,7 @@ export default function MoradorLogin() {
                 Primeiro acesso? Use o <strong>Link Mágico</strong> para criar sua senha.
               </p>
               <p className="text-xs text-muted-foreground mt-2">
-                Seu email deve estar cadastrado pelo síndico do condomínio.
+                Seu email deve estar cadastrado pelo síndico da organização.
               </p>
             </div>
           </CardContent>

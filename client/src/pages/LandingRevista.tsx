@@ -32,7 +32,7 @@ const features = [
   {
     icon: Image,
     title: "Galeria de Fotos",
-    description: "Adicione fotos de eventos, obras e melhorias do condomínio com legendas e descrições."
+    description: "Adicione fotos de eventos, obras e melhorias da organização com legendas e descrições."
   },
   {
     icon: Share2,
@@ -47,12 +47,12 @@ const features = [
   {
     icon: Eye,
     title: "Visualização Elegante",
-    description: "Interface sofisticada que valoriza o conteúdo e impressiona os moradores."
+    description: "Interface sofisticada que valoriza o conteúdo e impressiona a equipa."
   }
 ];
 
 const sections = [
-  { icon: Megaphone, name: "Editorial", description: "Mensagem do síndico" },
+  { icon: Megaphone, name: "Editorial", description: "Mensagem do gestor" },
   { icon: FileText, name: "Avisos", description: "Comunicados importantes" },
   { icon: Star, name: "Destaques", description: "Realizações do mês" },
   { icon: Heart, name: "Comunidade", description: "Eventos e confraternizações" },
@@ -112,7 +112,7 @@ export default function LandingRevista() {
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                 Crie revistas digitais interativas com navegação elegante página a página, 
-                perfeitas para comunicar realizações, eventos e novidades do condomínio.
+                perfeitas para comunicar realizações, eventos e novidades da organização.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link href="/dashboard/revistas">
@@ -227,7 +227,7 @@ export default function LandingRevista() {
                 <BookOpen className="w-16 h-16 text-white mx-auto mb-4" />
                 <h3 className="text-2xl font-bold text-white mb-2">Edições Memoráveis</h3>
                 <p className="text-emerald-100">
-                  Crie um arquivo histórico do seu condomínio com edições mensais 
+                  Crie um arquivo histórico da sua organização com edições mensais 
                   que documentam eventos, melhorias e a vida em comunidade.
                 </p>
               </div>
@@ -243,7 +243,7 @@ export default function LandingRevista() {
             Comece sua Primeira Edição Hoje
           </h2>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Crie uma revista digital profissional em minutos e surpreenda os moradores.
+            Crie uma revista digital profissional em minutos e surpreenda a equipa.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/dashboard/revistas">

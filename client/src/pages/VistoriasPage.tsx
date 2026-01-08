@@ -100,7 +100,7 @@ export default function VistoriasPage({ condominioId }: VistoriasPageProps) {
 
   const utils = trpc.useUtils();
   
-  // Buscar dados do condomínio para obter o logo
+  // Buscar dados da organização para obter o logo
   const { data: condominio } = trpc.condominio.get.useQuery(
     { id: condominioId },
     { enabled: !!condominioId }
@@ -365,7 +365,7 @@ export default function VistoriasPage({ condominioId }: VistoriasPageProps) {
             Vistorias
           </h2>
           <p className="text-muted-foreground">
-            Gerencie as vistorias do condomínio
+            Gerencie as vistorias da organização
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -512,7 +512,7 @@ export default function VistoriasPage({ condominioId }: VistoriasPageProps) {
               iconColor="text-blue-600"
               iconBgColor="bg-gradient-to-br from-blue-100 to-indigo-100"
               title="Nova Vistoria"
-              subtitle="Registre uma nova vistoria no condomínio"
+              subtitle="Registre uma nova vistoria na organização"
             />
           </div>
 

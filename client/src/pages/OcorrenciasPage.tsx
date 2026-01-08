@@ -103,7 +103,7 @@ export default function OcorrenciasPage({ condominioId }: OcorrenciasPageProps) 
 
   const utils = trpc.useUtils();
   
-  // Buscar dados do condomínio para obter o logo
+  // Buscar dados da organização para obter o logo
   const { data: condominio } = trpc.condominio.get.useQuery(
     { id: condominioId },
     { enabled: !!condominioId }
@@ -336,7 +336,7 @@ export default function OcorrenciasPage({ condominioId }: OcorrenciasPageProps) 
             Ocorrências
           </h2>
           <p className="text-muted-foreground">
-            Registre e acompanhe ocorrências do condomínio
+            Registre e acompanhe ocorrências da organização
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -478,7 +478,7 @@ export default function OcorrenciasPage({ condominioId }: OcorrenciasPageProps) 
               iconColor="text-red-600"
               iconBgColor="bg-gradient-to-br from-red-100 to-rose-100"
               title="Nova Ocorrência"
-              subtitle="Registre uma nova ocorrência no condomínio"
+              subtitle="Registre uma nova ocorrência na organização"
             />
           </div>
 

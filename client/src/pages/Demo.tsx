@@ -42,7 +42,7 @@ const tourSteps = [
     id: 1,
     title: "Bem-vindo à Demonstração!",
     description:
-      "Esta é uma demonstração interativa da App Síndico. Navegue pelas páginas para ver todos os recursos disponíveis.",
+      "Esta é uma demonstração interativa da App Manutenção. Navegue pelas páginas para ver todos os recursos disponíveis.",
     position: "center",
     highlight: null,
   },
@@ -58,7 +58,7 @@ const tourSteps = [
     id: 3,
     title: "Pronto para Começar?",
     description:
-      "Explore todas as páginas e veja como seu projeto pode ficar! Crie sua conta gratuita e comece a criar projetos incríveis para seu condomínio!",
+      "Explore todas as páginas e veja como seu projeto pode ficar! Crie sua conta gratuita e comece a criar projetos incríveis para sua organização!",
     position: "center",
     highlight: null,
   },
@@ -81,9 +81,9 @@ const demoPages = [
     content: {
       nome: "João Silva",
       cargo: "Síndico",
-      titulo: "Mensagem do Síndico",
+      titulo: "Mensagem do Gestor",
       mensagem:
-        "Prezados moradores, é com grande satisfação que apresentamos mais uma edição da nossa revista digital. Neste mês, temos muitas novidades e melhorias para compartilhar com vocês! Agradeço a todos pela colaboração e participação ativa na vida do nosso condomínio.",
+        "Prezada equipa, é com grande satisfação que apresentamos mais uma edição da nossa revista digital. Neste mês, temos muitas novidades e melhorias para compartilhar com vocês! Agradeço a todos pela colaboração e participação ativa na vida do nossa organização.",
       imagem: "/demo-images/sindico.jpg",
     },
   },
@@ -197,7 +197,7 @@ const demoPages = [
       titulo: "Antes e Depois",
       subtitulo: "Reforma do Hall de Entrada",
       imagem: "/demo-images/antes-depois.jpg",
-      descricao: "Confira a transformação do hall de entrada do nosso condomínio após a reforma completa realizada em novembro.",
+      descricao: "Confira a transformação do hall de entrada do nossa organização após a reforma completa realizada em novembro.",
     },
   },
   {
@@ -273,7 +273,7 @@ const demoPages = [
       anuncios: [
         {
           empresa: "Pizzaria Bella Napoli",
-          descricao: "10% de desconto para moradores",
+          descricao: "10% de desconto para equipa",
           contato: "(11) 3333-4444",
         },
         {
@@ -381,8 +381,8 @@ export default function Demo() {
       <header className="bg-black/30 backdrop-blur-lg border-b border-white/10 py-3 px-4">
         <div className="container flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 text-white">
-            <img src="/logo-appsindico.png" alt="App Síndico" className="w-8 h-8 object-contain" />
-            <img src="/logo-appsindico-texto.png" alt="App Síndico" className="h-5 object-contain" />
+            <img src="/logo-manutencao.png" alt="App Manutenção" className="w-8 h-8 object-contain" />
+            <img src="/logo-manutencao.png" alt="App Manutenção" className="h-5 object-contain" />
           </Link>
 
           <div className="flex items-center gap-2">
@@ -568,7 +568,7 @@ export default function Demo() {
 function getPageTitle(type: string): string {
   const titles: Record<string, string> = {
     cover: "Capa",
-    mensagem_sindico: "Mensagem do Síndico",
+    mensagem_sindico: "Mensagem do Gestor",
     avisos: "Avisos",
     eventos: "Eventos",
     manutencoes: "Manutenções",
@@ -677,7 +677,7 @@ function MensagemSindicoPage({ content }: { content: any }) {
         
         <div className="mt-4 pt-4 border-t border-slate-200">
           <p className="text-slate-400 text-xs text-center">
-            "Juntos construímos um condomínio melhor!"
+            "Juntos construímos uma organização melhor!"
           </p>
         </div>
       </div>

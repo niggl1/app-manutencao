@@ -29,7 +29,7 @@ const demoContent = [
   { 
     id: 1, 
     title: "Avisos Importantes", 
-    description: "Comunicados da administração para todos os moradores",
+    description: "Comunicados da administração para todos a equipa",
     icon: Megaphone,
     color: "from-amber-500 to-orange-600",
     content: "A reunião de condomínio será realizada no dia 15 de janeiro às 19h no salão de festas. Pauta: aprovação de orçamento anual e eleição de síndico."
@@ -37,7 +37,7 @@ const demoContent = [
   { 
     id: 2, 
     title: "Eventos do Mês", 
-    description: "Confira a agenda de atividades do condomínio",
+    description: "Confira a agenda de atividades da organização",
     icon: Calendar,
     color: "from-blue-500 to-indigo-600",
     content: "Festa de Ano Novo - 31/12 às 22h | Aula de Yoga - Sábados às 9h | Reunião de Pais - 10/01 às 18h"
@@ -45,7 +45,7 @@ const demoContent = [
   { 
     id: 3, 
     title: "Votações Ativas", 
-    description: "Participe das decisões do condomínio",
+    description: "Participe das decisões da organização",
     icon: Vote,
     color: "from-emerald-500 to-teal-600",
     content: "Votação aberta: Instalação de câmeras no estacionamento. Vote até 20/01. Participação atual: 45%"
@@ -53,7 +53,7 @@ const demoContent = [
   { 
     id: 4, 
     title: "Funcionários", 
-    description: "Conheça a equipe que cuida do seu condomínio",
+    description: "Conheça a equipe que cuida da sua organização",
     icon: Users,
     color: "from-purple-500 to-pink-600",
     content: "João Silva - Porteiro | Maria Santos - Zeladora | Carlos Oliveira - Jardineiro | Ana Costa - Faxineira"
@@ -61,7 +61,7 @@ const demoContent = [
   { 
     id: 5, 
     title: "Classificados", 
-    description: "Anúncios dos moradores",
+    description: "Anúncios da equipa",
     icon: Package,
     color: "from-cyan-500 to-blue-600",
     content: "Vendo sofá 3 lugares - R$ 800 | Aulas de inglês - Apto 302 | Bicicleta infantil - R$ 150"
@@ -385,7 +385,7 @@ export default function DemoLayouts() {
             Pronto para criar o seu?
           </h3>
           <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-            Escolha o layout que melhor se adapta às necessidades do seu condomínio e comece a criar agora mesmo.
+            Escolha o layout que melhor se adapta às necessidades da sua organização e comece a criar agora mesmo.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/dashboard/revistas">

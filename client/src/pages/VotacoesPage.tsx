@@ -109,7 +109,7 @@ export default function VotacoesPage() {
         <Card>
           <CardContent className="pt-6 text-center">
             <Vote className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">Cadastre um condomínio primeiro</p>
+            <p className="text-muted-foreground">Cadastre uma organização primeiro</p>
           </CardContent>
         </Card>
       </div>
@@ -122,7 +122,7 @@ export default function VotacoesPage() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-serif font-bold text-foreground">Votações</h1>
-          <p className="text-muted-foreground">Crie enquetes e votações para os moradores</p>
+          <p className="text-muted-foreground">Crie enquetes e votações para a equipa</p>
         </div>
         <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
           <DialogTrigger asChild>
@@ -134,7 +134,7 @@ export default function VotacoesPage() {
           <DialogContent className="max-w-2xl max-h-[90vh] overflow-hidden p-0">
             <DialogHeader className="sr-only">
               <DialogTitle>Nova Votação</DialogTitle>
-              <DialogDescription>Crie uma nova votação ou enquete para os moradores</DialogDescription>
+              <DialogDescription>Crie uma nova votação ou enquete para a equipa</DialogDescription>
             </DialogHeader>
             <VotacaoForm 
               revistaId={revistaId} 

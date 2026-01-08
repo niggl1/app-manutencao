@@ -70,3 +70,20 @@
 - Layout premium consistente em todos os módulos
 - Sistema universal para qualquer tipo de organização
 - Capacitor será configurado após validação do sistema base
+
+## Fase 9: Personalização da Logo
+- [x] Copiar nova logo para pasta public
+- [x] Atualizar logo no header
+- [x] Atualizar favicon
+- [x] Atualizar referências no sidebar/dashboard
+## Fase 10: Universalização Completa
+
+- [x] Substituir "condomínio" por "organização" em todos os ficheiros
+- [x] Substituir "síndico" por "gestor" em todos os ficheiros
+- [x] Substituir "morador" por "equipa" onde aplicável
+- [x] Atualizar nome da aplicação de "App Síndico" para "App Manutenção"
+
+## Fase 11: Capacitor
+- [ ] Instalar Capacitor
+- [ ] Configurar capacitor.config.ts
+- [ ] Adicionar plataformas iOS e Android

@@ -179,7 +179,7 @@ export default function AssembleiaPublica() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="w-5 h-5 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center text-xs font-bold flex-shrink-0">4</span>
-                <span>Aguarde a aprovação do síndico para entrar na sala</span>
+                <span>Aguarde a aprovação do gestor para entrar na sala</span>
               </li>
             </ul>
           </div>
@@ -188,7 +188,7 @@ export default function AssembleiaPublica() {
         {/* Footer */}
         <div className="bg-gray-50 px-8 py-4 border-t text-center">
           <p className="text-xs text-gray-500">
-            Powered by <span className="font-semibold text-purple-600">App Síndico</span>
+            Powered by <span className="font-semibold text-purple-600">App Manutenção</span>
           </p>
         </div>
       </Card>

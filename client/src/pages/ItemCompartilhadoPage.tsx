@@ -344,7 +344,7 @@ export function ItemCompartilhadoPage() {
 
       {/* Footer */}
       <div className="text-center py-8 text-sm text-muted-foreground">
-        <p>Compartilhado via App Síndico</p>
+        <p>Compartilhado via App Manutenção</p>
       </div>
     </div>
   );

@@ -42,7 +42,7 @@ export default function FuncionarioLogin() {
             <Building2 className="w-8 h-8" />
           </div>
           <h1 className="text-2xl font-bold text-slate-800">Portal do Funcionário</h1>
-          <p className="text-slate-500 mt-1">Acesse o sistema de gestão do condomínio</p>
+          <p className="text-slate-500 mt-1">Acesse o sistema de gestão da organização</p>
         </div>
 
         {/* Card de Login */}
@@ -114,13 +114,13 @@ export default function FuncionarioLogin() {
 
             <div className="mt-6 pt-4 border-t border-slate-100">
               <p className="text-xs text-center text-slate-500">
-                Problemas para acessar? Entre em contacto com o síndico ou administrador do condomínio.
+                Problemas para acessar? Entre em contacto com o síndico ou administrador da organização.
               </p>
             </div>
           </CardContent>
         </Card>
 
-        {/* Link para login do síndico */}
+        {/* Link para login do gestor */}
         <div className="mt-6 text-center">
           <p className="text-sm text-slate-500">
             É síndico ou administrador?{" "}

@@ -269,7 +269,7 @@ export function TemplatePreview({ template, className }: TemplatePreviewProps) {
             className="h-3/5 p-4 space-y-3"
             style={{ background: template.colors.card }}
           >
-            {/* Mensagem do Síndico */}
+            {/* Mensagem do Gestor */}
             <div
               className="flex items-center gap-3 p-3 rounded-lg"
               style={{
@@ -294,7 +294,7 @@ export function TemplatePreview({ template, className }: TemplatePreviewProps) {
                     fontFamily: template.typography.headingFont,
                   }}
                 >
-                  Mensagem do Síndico
+                  Mensagem do Gestor
                 </p>
                 <p
                   className="text-xs"

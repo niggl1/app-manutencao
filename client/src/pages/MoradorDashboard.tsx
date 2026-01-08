@@ -392,7 +392,7 @@ export default function MoradorDashboard() {
                         Criar Classificado
                       </DialogTitle>
                       <DialogDescription className="text-emerald-100">
-                        Publique um anúncio para os moradores do condomínio
+                        Publique um anúncio para a equipa da organização
                       </DialogDescription>
                     </DialogHeader>
                   </div>
@@ -559,7 +559,7 @@ export default function MoradorDashboard() {
                         Publicar Carona
                       </DialogTitle>
                       <DialogDescription className="text-blue-100">
-                        Ofereça ou procure uma carona com outros moradores
+                        Ofereça ou procure uma carona com outra equipa
                       </DialogDescription>
                     </DialogHeader>
                   </div>

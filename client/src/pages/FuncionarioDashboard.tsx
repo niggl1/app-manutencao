@@ -77,7 +77,7 @@ const FUNCOES_CONFIG: Record<string, {
   moradores: {
     icon: Home,
     label: "Moradores",
-    description: "Informações dos moradores",
+    description: "Informações da equipa",
     route: "/funcionario/moradores",
     color: "from-amber-500 to-yellow-600",
   },
@@ -223,12 +223,12 @@ export default function FuncionarioDashboard() {
     ([key]) => funcoesHabilitadas.includes(key)
   );
 
-  // Filtrar apps do condomínio selecionado
+  // Filtrar apps da organização selecionado
   const appsDoCondominio = funcionario.appsVinculados?.filter(
     app => !selectedCondominio || app.condominioId === selectedCondominio
   ) || [];
 
-  // Obter nome do condomínio selecionado
+  // Obter nome da organização selecionado
   const condominioSelecionado = funcionario.condominiosVinculados?.find(c => c.id === selectedCondominio);
 
   const tipoLabel = funcionario.tipoFuncionario ? TIPOS_FUNCIONARIO[funcionario.tipoFuncionario] || funcionario.tipoFuncionario : funcionario.cargo;
@@ -304,7 +304,7 @@ export default function FuncionarioDashboard() {
             Olá, {funcionario.nome.split(" ")[0]}!
           </h2>
           <p className="text-slate-600 mt-1">
-            {viewMode === "condominios" && "Selecione o condomínio que deseja acessar"}
+            {viewMode === "condominios" && "Selecione a organização que deseja acessar"}
             {viewMode === "apps" && "Selecione o app que deseja utilizar"}
             {viewMode === "funcoes" && "Selecione uma das funções abaixo para começar"}
           </p>
@@ -452,7 +452,7 @@ export default function FuncionarioDashboard() {
                   </h3>
                   <p className="text-slate-500 max-w-md mx-auto">
                     O administrador ainda não habilitou funções para o seu acesso. 
-                    Entre em contacto com o síndico ou administrador do condomínio.
+                    Entre em contacto com o síndico ou administrador da organização.
                   </p>
                 </CardContent>
               </Card>
@@ -468,10 +468,10 @@ export default function FuncionarioDashboard() {
                 <Building2 className="w-8 h-8 text-slate-400" />
               </div>
               <h3 className="text-lg font-semibold text-slate-700 mb-2">
-                Nenhum condomínio vinculado
+                Nenhuma organização vinculado
               </h3>
               <p className="text-slate-500 max-w-md mx-auto">
-                Você ainda não foi vinculado a nenhum condomínio. 
+                Você ainda não foi vinculado a nenhuma organização. 
                 Entre em contacto com o administrador.
               </p>
             </CardContent>

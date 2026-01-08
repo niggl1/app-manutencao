@@ -104,7 +104,7 @@ export default function ManutencoesPage({ condominioId }: ManutencoesPageProps) 
 
   const utils = trpc.useUtils();
   
-  // Buscar dados do condomínio para obter o logo
+  // Buscar dados da organização para obter o logo
   const { data: condominio } = trpc.condominio.get.useQuery(
     { id: condominioId },
     { enabled: !!condominioId }
@@ -385,7 +385,7 @@ export default function ManutencoesPage({ condominioId }: ManutencoesPageProps) 
             Manutenções
           </h2>
           <p className="text-muted-foreground">
-            Gerencie as manutenções do condomínio
+            Gerencie as manutenções da organização
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -543,7 +543,7 @@ export default function ManutencoesPage({ condominioId }: ManutencoesPageProps) 
               iconColor="text-orange-600"
               iconBgColor="bg-gradient-to-br from-orange-100 to-amber-100"
               title="Nova Manutenção"
-              subtitle="Registre uma nova manutenção no condomínio"
+              subtitle="Registre uma nova manutenção na organização"
             />
           </div>
 

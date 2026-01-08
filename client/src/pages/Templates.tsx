@@ -66,7 +66,7 @@ export default function Templates() {
               </h2>
               <p className="text-muted-foreground">
                 Cada template oferece um visual único para sua revista digital.
-                Selecione o que melhor representa o estilo do seu condomínio.
+                Selecione o que melhor representa o estilo da sua organização.
               </p>
             </div>
 
@@ -277,7 +277,7 @@ export default function Templates() {
       <footer className="border-t border-border py-8 mt-12">
         <div className="container text-center">
           <p className="text-muted-foreground">
-            Escolha o template perfeito para comunicar com os moradores do seu condomínio
+            Escolha o template perfeito para comunicar com a equipa da sua organização
           </p>
           <div className="flex items-center justify-center gap-4 mt-4">
             <Link href="/">

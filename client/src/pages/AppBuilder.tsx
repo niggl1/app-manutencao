@@ -126,7 +126,7 @@ const availableModules: Omit<AppModule, "enabled" | "order">[] = [
   { id: "localizacao", key: "localizacao", title: "Localização", icon: MapPin, color: "text-white", bgColor: "bg-sky-500" },
   { id: "manutencoes", key: "manutencoes", title: "Manutenções", icon: Wrench, color: "text-white", bgColor: "bg-slate-600" },
   { id: "melhorias", key: "melhorias", title: "Melhorias", icon: Hammer, color: "text-white", bgColor: "bg-amber-500" },
-  { id: "mensagem_sindico", key: "mensagem_sindico", title: "Mensagem do Síndico", icon: MessageSquare, color: "text-white", bgColor: "bg-blue-700" },
+  { id: "mensagem_sindico", key: "mensagem_sindico", title: "Mensagem do Gestor", icon: MessageSquare, color: "text-white", bgColor: "bg-blue-700" },
   { id: "moradores", key: "moradores", title: "Moradores", icon: Users, color: "text-white", bgColor: "bg-indigo-600" },
   { id: "notificacoes", key: "notificacoes", title: "Notificações", icon: Bell, color: "text-white", bgColor: "bg-red-500" },
   { id: "notificar_morador", key: "notificar_morador", title: "Notificar Morador", icon: Bell, color: "text-white", bgColor: "bg-rose-600" },
@@ -342,7 +342,7 @@ export default function AppBuilder() {
 
   const handleSave = async () => {
     if (!condominioId) {
-      toast.error("Você precisa cadastrar um condomínio primeiro");
+      toast.error("Você precisa cadastrar uma organização primeiro");
       setLocation("/dashboard/condominio");
       return;
     }

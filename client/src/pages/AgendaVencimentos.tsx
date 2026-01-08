@@ -1172,7 +1172,7 @@ export default function AgendaVencimentos() {
   const [relatorioDataInicio, setRelatorioDataInicio] = useState('');
   const [relatorioDataFim, setRelatorioDataFim] = useState('');
   
-  // Obter condominioId do primeiro condomínio do usuário
+  // Obter condominioId do primeira organização do usuário
   const { data: condominios, isLoading: condominiosLoading } = trpc.condominio.list.useQuery();
   const condominioId = condominios?.[0]?.id || 0;
 
@@ -1237,8 +1237,8 @@ export default function AgendaVencimentos() {
       <DashboardLayout>
         <div className="text-center py-20">
           <Calendar className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-          <h2 className="text-xl font-semibold mb-2">Nenhum condomínio encontrado</h2>
-          <p className="text-muted-foreground">Crie um condomínio primeiro para usar a Agenda de Vencimentos.</p>
+          <h2 className="text-xl font-semibold mb-2">Nenhuma organização encontrado</h2>
+          <p className="text-muted-foreground">Crie uma organização primeiro para usar a Agenda de Vencimentos.</p>
         </div>
       </DashboardLayout>
     );
@@ -1255,7 +1255,7 @@ export default function AgendaVencimentos() {
               Agenda de Vencimentos
             </h1>
             <p className="text-muted-foreground">
-              Acompanhe contratos, serviços e manutenções do condomínio.
+              Acompanhe contratos, serviços e manutenções da organização.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">

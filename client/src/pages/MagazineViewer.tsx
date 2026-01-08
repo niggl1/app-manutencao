@@ -139,13 +139,13 @@ export default function MagazineViewer() {
       },
     });
 
-    // Mensagem do Síndico
+    // Mensagem do Gestor
     if (mensagemSindico && !seccoesOcultas.includes('mensagem_sindico')) {
       pages.push({
         id: pageId++,
         type: "mensagem_sindico",
         content: {
-          titulo: mensagemSindico.titulo || "Mensagem do Síndico",
+          titulo: mensagemSindico.titulo || "Mensagem do Gestor",
           nome: mensagemSindico.nomeSindico || "Síndico",
           cargo: mensagemSindico.assinatura || "Síndico",
           foto: mensagemSindico.fotoSindicoUrl,
@@ -748,8 +748,8 @@ export default function MagazineViewer() {
       <header className="bg-black/30 backdrop-blur-lg border-b border-white/10 py-3 px-4">
         <div className="container flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <img src="/logo-appsindico.png" alt="App Síndico" className="w-8 h-8 object-contain" />
-            <img src="/logo-appsindico-texto.png" alt="App Síndico" className="h-5 object-contain hidden sm:inline" />
+            <img src="/logo-manutencao.png" alt="App Manutenção" className="w-8 h-8 object-contain" />
+            <img src="/logo-manutencao.png" alt="App Manutenção" className="h-5 object-contain hidden sm:inline" />
           </Link>
 
           <div className="flex items-center gap-2">
@@ -1204,7 +1204,7 @@ function getPageTitle(page: any): string {
     case "cover":
       return "Capa";
     case "mensagem_sindico":
-      return "Mensagem do Síndico";
+      return "Mensagem do Gestor";
     case "avisos":
       return "Avisos";
     case "eventos":
@@ -1321,7 +1321,7 @@ function CoverPage({ content }: { content: any }) {
       )}
       
       <div className="relative z-10">
-        {/* Logo do condomínio ou ícone padrão */}
+        {/* Logo da organização ou ícone padrão */}
         {content.logoUrl ? (
           <div className="w-24 h-24 rounded-2xl overflow-hidden mb-6 mx-auto shadow-lg border-2 border-white/20">
             <img 
@@ -1375,7 +1375,7 @@ function CoverPage({ content }: { content: any }) {
           "text-xs mt-2",
           hasBackgroundImage ? "text-white/60" : "text-muted-foreground"
         )}>
-          App Síndico
+          App Manutenção
         </p>
       </div>
     </div>
@@ -1387,13 +1387,13 @@ function MensagemSindicoPage({ content }: { content: any }) {
     <div className="h-full flex flex-col p-8">
       <div className="text-center mb-6">
         <h2 className="font-serif text-2xl font-bold text-foreground">
-          {content.titulo || "Mensagem do Síndico"}
+          {content.titulo || "Mensagem do Gestor"}
         </h2>
         <div className="section-divider mt-3" />
       </div>
 
       <div className="flex-1 flex flex-col items-center justify-center">
-        {/* Foto do Síndico */}
+        {/* Foto do Gestor */}
         {content.foto ? (
           <div className="w-28 h-28 rounded-full overflow-hidden mb-4 ring-4 ring-primary/20 shadow-lg">
             <img
@@ -2252,7 +2252,7 @@ function BackCoverPage({ content }: { content: any }) {
       <div className="section-divider" />
       
       <p className="text-sm text-muted-foreground mt-8">
-        Desenvolvido com ❤️ pelo App Síndico
+        Desenvolvido com ❤️ pelo App Manutenção
       </p>
     </div>
   );
@@ -2370,12 +2370,12 @@ function CadastroPage({ content }: { content: any }) {
           Cadastro Enviado!
         </h2>
         <p className="text-slate-600 max-w-md mb-6">
-          Seu cadastro foi enviado com sucesso. Você receberá as próximas edições da revista após a ativação por parte da administração do condomínio.
+          Seu cadastro foi enviado com sucesso. Você receberá as próximas edições da revista após a ativação por parte da administração da organização.
         </p>
         <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl">
           <p className="text-sm text-amber-700">
             <AlertCircle className="w-4 h-4 inline mr-1" />
-            Seu cadastro só será efetuado após a ativação por parte da administração do condomínio.
+            Seu cadastro só será efetuado após a ativação por parte da administração da organização.
           </p>
         </div>
       </div>
@@ -2401,7 +2401,7 @@ function CadastroPage({ content }: { content: any }) {
       <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl mb-6">
         <p className="text-sm text-amber-700">
           <AlertCircle className="w-4 h-4 inline mr-1" />
-          Seu cadastro só será efetuado após a ativação por parte da administração do condomínio.
+          Seu cadastro só será efetuado após a ativação por parte da administração da organização.
         </p>
       </div>
 

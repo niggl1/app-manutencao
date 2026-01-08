@@ -54,7 +54,7 @@ const features = [
   {
     icon: BookOpen,
     title: "Revistas Digitais",
-    description: "Mostre tudo que você faz na sua organização, mantenha os colaboradores informados sobre a gestão.",
+    description: "Mostre tudo que você faz na sua organização, mantenha sua equipa informada.",
     color: "from-emerald-500 to-teal-600",
   },
   {
@@ -72,7 +72,7 @@ const features = [
   {
     icon: Vote,
     title: "Votações e Enquetes",
-    description: "Link para os colaboradores votarem, com controle de acesso, resultado em tempo real e muito mais.",
+    description: "Sistema de votações com resultado em tempo real e muito mais.",
     color: "from-cyan-500 to-blue-600",
   },
   {
@@ -102,7 +102,7 @@ const features = [
   {
     icon: DollarSign,
     title: "Rentabilidade",
-    description: "Coloque seus parceiros para oferecerem serviços e publicidade aos moradores e cobre por isso. Cubra o custo e ainda rentabilize com folga em cima das parcerias.",
+    description: "Coloque seus parceiros para oferecerem serviços e publicidade aa equipa e cobre por isso. Cubra o custo e ainda rentabilize com folga em cima das parcerias.",
     color: "from-teal-500 to-cyan-600",
   },
 ];
@@ -113,27 +113,27 @@ const sections = [
   { icon: Heart, label: "Achados e Perdidos", description: "Objetos encontrados", link: "/dashboard/achados" },
   { icon: CalendarClock, label: "Agenda de Vencimentos", description: "Contratos e manutenções", link: "/dashboard/vencimentos" },
   { icon: ImageIcon, label: "Antes e Depois", description: "Transformações realizadas", link: "/dashboard/antes-depois" },
-  { icon: ShoppingBag, label: "Aquisições", description: "Compras do condomínio", link: "/dashboard/aquisicoes" },
+  { icon: ShoppingBag, label: "Aquisições", description: "Compras da organização", link: "/dashboard/aquisicoes" },
   { icon: Video, label: "Assembleia Online", description: "Assembleias virtuais", link: "/dashboard/assembleia" },
   { icon: Megaphone, label: "Avisos", description: "Comunicados importantes", link: "/dashboard/avisos" },
   { icon: Car, label: "Caronas", description: "Compartilhe viagens", link: "/dashboard/caronas" },
   { icon: CheckSquare, label: "Checklists", description: "Listas de verificação", link: "/dashboard/checklists" },
-  { icon: Package, label: "Classificados", description: "Anúncios dos moradores", link: "/dashboard/classificados" },
+  { icon: Package, label: "Classificados", description: "Anúncios da equipa", link: "/dashboard/classificados" },
   { icon: FileText, label: "Comunicados", description: "Documentos oficiais", link: "/dashboard/comunicados" },
-  { icon: Calendar, label: "Eventos", description: "Agenda do condomínio", link: "/dashboard/eventos" },
-  { icon: Users, label: "Funcionários", description: "Equipe do condomínio", link: "/dashboard/funcionarios" },
+  { icon: Calendar, label: "Eventos", description: "Agenda da organização", link: "/dashboard/eventos" },
+  { icon: Users, label: "Funcionários", description: "Equipe da organização", link: "/dashboard/funcionarios" },
   { icon: Image, label: "Galeria de Fotos", description: "Álbuns e eventos", link: "/dashboard/galeria" },
-  { icon: LinkIcon, label: "Links Úteis", description: "Links do condomínio", link: "/dashboard/links" },
+  { icon: LinkIcon, label: "Links Úteis", description: "Links da organização", link: "/dashboard/links" },
   { icon: Wrench, label: "Manutenções", description: "Reparos e serviços", link: "/dashboard/manutencoes" },
   { icon: TrendingUp, label: "Melhorias", description: "Projetos em andamento", link: "/dashboard/melhorias" },
-  { icon: MessageSquare, label: "Mensagem do Síndico", description: "Comunicação direta", link: "/dashboard/revista" },
+  { icon: MessageSquare, label: "Mensagem do Gestor", description: "Comunicação direta", link: "/dashboard/revista" },
   { icon: Building2, label: "Moradores", description: "Gestão de unidades", link: "/dashboard/moradores" },
   { icon: Bell, label: "Notificar Morador", description: "Notificações de infrações", link: "/dashboard/notificar-morador" },
   { icon: AlertTriangle, label: "Ocorrências", description: "Registos de incidentes", link: "/dashboard/ocorrencias" },
   { icon: ClipboardList, label: "Ordens de Serviço", description: "Gestão de OS", link: "/dashboard/ordens-servico" },
   { icon: Award, label: "Publicidade", description: "Espaço para anúncios", link: "/dashboard/publicidade" },
   { icon: Trophy, label: "Realizações", description: "Conquistas da gestão", link: "/dashboard/realizacoes" },
-  { icon: FileText, label: "Regras", description: "Normas do condomínio", link: "/dashboard/regras" },
+  { icon: FileText, label: "Regras", description: "Normas da organização", link: "/dashboard/regras" },
   { icon: Shield, label: "Segurança", description: "Dicas de proteção", link: "/dashboard/seguranca" },
   { icon: Phone, label: "Telefones Úteis", description: "Contactos importantes", link: "/dashboard/telefones" },
   { icon: ParkingCircle, label: "Vagas", description: "Gestão de estacionamento", link: "/dashboard/vagas" },
@@ -173,8 +173,8 @@ export default function Home() {
       <header className="fixed top-0 left-0 right-0 z-50 glass-effect">
         <div className="container flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2">
-            <img src="/logo-appsindico.png" alt="App Síndico" className="w-10 h-10 object-contain" />
-            <img src="/logo-appsindico-texto.png" alt="App Síndico" className="h-8 object-contain" />
+            <img src="/logo-manutencao.png" alt="App Manutenção" className="w-10 h-10 object-contain" />
+            <span className="font-bold text-xl text-primary">App Manutenção</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
@@ -349,7 +349,7 @@ export default function Home() {
                         <div className="flex items-center gap-3">
                           <div className="w-12 h-12 rounded-full bg-primary/30" />
                           <div>
-                            <div className="text-sm font-semibold">Mensagem do Síndico</div>
+                            <div className="text-sm font-semibold">Mensagem do Gestor</div>
                             <div className="text-xs text-muted-foreground">João Silva</div>
                           </div>
                         </div>
@@ -606,8 +606,8 @@ export default function Home() {
             {[
               {
                 step: "01",
-                title: "Cadastre seu Condomínio",
-                description: "Adicione as informações básicas do seu condomínio e personalize as cores e logo.",
+                title: "Cadastre sua Organização",
+                description: "Adicione as informações básicas da sua organização e personalize as cores e logo.",
               },
               {
                 step: "02",
@@ -616,7 +616,7 @@ export default function Home() {
               },
               {
                 step: "03",
-                title: "Compartilhe com Moradores",
+                title: "Compartilhe com a Equipa",
                 description: "Gere um link e compartilhe. Moradores acessam pelo navegador ou app.",
               },
             ].map((item, index) => (
@@ -658,7 +658,7 @@ export default function Home() {
               Secções Disponíveis
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Seu projeto pode incluir diversas secções para atender todas as necessidades do condomínio.
+              Seu projeto pode incluir diversas secções para atender todas as necessidades da organização.
             </p>
             <div className="section-divider mt-6" />
           </motion.div>
@@ -822,7 +822,7 @@ export default function Home() {
                   <span className="text-amber-500">⚠️</span> Como é feito hoje
                 </div>
                 <div className="p-4 font-semibold text-center">
-                  <span className="text-green-500">✅</span> Com o App Síndico
+                  <span className="text-green-500">✅</span> Com o App Manutenção
                 </div>
               </div>
               
@@ -859,7 +859,7 @@ export default function Home() {
                   solucao: "Tudo centralizado e organizado por categoria"
                 },
                 {
-                  dor: "Engajamento dos moradores",
+                  dor: "Engajamento da equipa",
                   hoje: "Moradores desinteressados",
                   solucao: "Conteúdo interativo que engaja e informa"
                 },
@@ -924,7 +924,7 @@ export default function Home() {
                       <span className="text-muted-foreground">/mês</span>
                     </div>
                     <p className="text-sm text-muted-foreground mt-2">
-                      Ideal para síndicos que gerem o próprio condomínio
+                      Ideal para síndicos que gerem o própria organização
                     </p>
                   </div>
                   <ul className="space-y-3 mb-6">
@@ -983,7 +983,7 @@ export default function Home() {
                       <span className="text-muted-foreground">/mês</span>
                     </div>
                     <p className="text-sm text-muted-foreground mt-2">
-                      Completo para moradores, equipe de gestão e manutenção
+                      Completo para equipa, equipe de gestão e manutenção
                     </p>
                   </div>
                   <ul className="space-y-3 mb-6">
@@ -1149,7 +1149,7 @@ export default function Home() {
                   Conheça Nossa Solução
                 </h2>
                 <p className="text-gray-600 text-lg leading-relaxed max-w-xl">
-                  Baixe nossa apresentação completa e descubra todas as funcionalidades do App Síndico. Ideal para compartilhar com sua administradora ou conselho.
+                  Baixe nossa apresentação completa e descubra todas as funcionalidades do App Manutenção. Ideal para compartilhar com sua administradora ou conselho.
                 </p>
               </div>
               <div className="shrink-0">
@@ -1208,11 +1208,11 @@ export default function Home() {
         <div className="container">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <img src="/logo-appsindico.png" alt="App Síndico" className="w-10 h-10 object-contain" />
-            <img src="/logo-appsindico-texto.png" alt="App Síndico" className="h-8 object-contain" />
+              <img src="/logo-manutencao.png" alt="App Manutenção" className="w-10 h-10 object-contain" />
+            <span className="font-bold text-xl text-primary">App Manutenção</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              © 2024 App Síndico. Todos os direitos reservados.
+              © 2024 App Manutenção. Todos os direitos reservados.
             </p>
           </div>
         </div>

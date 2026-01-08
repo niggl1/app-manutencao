@@ -134,11 +134,11 @@ const menuSections = [
   },
   {
     id: "gestao-condominio",
-    label: "Gestão do Condomínio",
+    label: "Gestão da Organização",
     icon: Building2,
     iconName: "Building2",
     items: [
-      { icon: Building2, iconName: "Building2", label: "Cadastro do Condomínio", path: "/dashboard/condominio", funcaoId: "cadastro-condominio" },
+      { icon: Building2, iconName: "Building2", label: "Cadastro da Organização", path: "/dashboard/condominio", funcaoId: "cadastro-condominio" },
       { icon: Users, iconName: "Users", label: "Moradores", path: "/dashboard/moradores", funcaoId: "moradores" },
       { icon: UserCog, iconName: "UserCog", label: "Funcionários", path: "/dashboard/funcionarios", funcaoId: "funcionarios" },
       { icon: Car, iconName: "Car", label: "Vagas de Estacionamento", path: "/dashboard/vagas", funcaoId: "vagas" },
@@ -424,7 +424,7 @@ function DashboardLayoutContent({
   const handleZapClick = (e: React.MouseEvent, item: any) => {
     e.stopPropagation();
     if (!condominioAtivo?.id) {
-      toast.error("Selecione um condomínio primeiro");
+      toast.error("Selecione uma organização primeiro");
       return;
     }
     const isRapida = isFuncaoRapida(item.funcaoId);
@@ -596,7 +596,7 @@ function DashboardLayoutContent({
               {!isCollapsed ? (
                 <div className="flex items-center gap-2 min-w-0">
                   <span className="font-semibold tracking-tight truncate text-primary">
-                    App Síndico
+                    App Manutenção
                   </span>
                 </div>
               ) : null}

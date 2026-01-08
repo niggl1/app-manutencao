@@ -45,7 +45,7 @@ export default function RecuperarSenha() {
             <Link href="/" className="inline-block">
               <img 
                 src="/logo-appsindico-horizontal.png" 
-                alt="App Síndico" 
+                alt="App Manutenção" 
                 className="h-16 mx-auto"
               />
             </Link>
@@ -103,7 +103,7 @@ export default function RecuperarSenha() {
           <Link href="/" className="inline-block">
             <img 
               src="/logo-appsindico-horizontal.png" 
-              alt="App Síndico" 
+              alt="App Manutenção" 
               className="h-16 mx-auto"
             />
           </Link>

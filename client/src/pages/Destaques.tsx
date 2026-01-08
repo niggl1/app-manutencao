@@ -179,7 +179,7 @@ export default function Destaques() {
     }
 
     if (!condominioAtivo?.id) {
-      toast.error("Selecione um condomínio");
+      toast.error("Selecione uma organização");
       return;
     }
 
@@ -303,7 +303,7 @@ export default function Destaques() {
   if (!condominioAtivo) {
     return (
       <div className="flex items-center justify-center h-64">
-        <p className="text-muted-foreground">Selecione um condomínio para gerenciar os destaques.</p>
+        <p className="text-muted-foreground">Selecione uma organização para gerenciar os destaques.</p>
       </div>
     );
   }

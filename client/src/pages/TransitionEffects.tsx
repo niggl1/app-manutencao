@@ -41,7 +41,7 @@ export default function TransitionEffects() {
     {
       title: "Mensagem",
       color: "from-blue-500 to-indigo-600",
-      content: "Mensagem do Síndico",
+      content: "Mensagem do Gestor",
     },
     {
       title: "Avisos",
@@ -105,7 +105,7 @@ export default function TransitionEffects() {
               </h2>
               <p className="text-muted-foreground">
                 Defina como as páginas da sua revista irão transicionar.
-                Cada efeito oferece uma experiência visual única para os moradores.
+                Cada efeito oferece uma experiência visual única para a equipa.
               </p>
             </div>
 
