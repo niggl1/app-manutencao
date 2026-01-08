@@ -173,3 +173,7 @@
 - [x] Copiar nova logo para pasta public
 - [x] Logo já referenciada como /logo-manutencao.png (atualizada)
 - [x] Testar alterações no navegador
+
+## Fase 22: Remover Logo Duplicada
+- [x] Remover segunda tag img da logo no Dashboard.tsx (desktop e mobile)
+- [x] Testar alterações no navegador
