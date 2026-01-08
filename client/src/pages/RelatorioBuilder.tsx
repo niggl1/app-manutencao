@@ -128,25 +128,19 @@ interface ReportSection {
   category: string;
 }
 
-// Seções disponíveis para relatórios - APENAS FUNÇÕES EXISTENTES NO SISTEMA
+// Seções disponíveis para relatórios - APENAS FUNÇÕES EXISTENTES NO MENU DO SISTEMA
 const availableSections: Omit<ReportSection, "enabled">[] = [
   // GESTÃO
   { id: "moradores", key: "moradores", title: "Moradores", description: "Lista e estatísticas de moradores", icon: Users, category: "gestao" },
   { id: "funcionarios", key: "funcionarios", title: "Funcionários", description: "Equipe da organização", icon: UsersRound, category: "gestao" },
-  { id: "condominios", key: "condominios", title: "Condomínio", description: "Informações da organização", icon: Building2, category: "gestao" },
+  { id: "condominios", key: "condominios", title: "Organização", description: "Informações da organização", icon: Building2, category: "gestao" },
   
   // COMUNICAÇÃO
-  { id: "avisos", key: "avisos", title: "Avisos", description: "Avisos enviados", icon: Bell, category: "comunicacao" },
   { id: "comunicados", key: "comunicados", title: "Comunicados", description: "Comunicados oficiais com anexos", icon: Megaphone, category: "comunicacao" },
-  { id: "notificacoes", key: "notificacoes", title: "Notificações", description: "Notificações enviadas", icon: Bell, category: "comunicacao" },
   { id: "mensagens_sindico", key: "mensagens_sindico", title: "Mensagens do Gestor", description: "Mensagens do gestor", icon: MessageSquare, category: "comunicacao" },
   
-  // EVENTOS E AGENDA
-  { id: "eventos", key: "eventos", title: "Eventos", description: "Eventos realizados", icon: Calendar, category: "eventos" },
-  { id: "vencimentos", key: "vencimentos", title: "Vencimentos", description: "Agenda de vencimentos", icon: CalendarClock, category: "eventos" },
-  
-  // VOTAÇÕES
-  { id: "votacoes", key: "votacoes", title: "Votações", description: "Resultados de votações", icon: Vote, category: "votacoes" },
+  // OPERACIONAL E MANUTENÇÃO
+  { id: "vencimentos", key: "vencimentos", title: "Agenda de Vencimentos", description: "Agenda de vencimentos", icon: CalendarClock, category: "operacional" },
   
   // OPERACIONAL E MANUTENÇÃO
   { id: "manutencoes", key: "manutencoes", title: "Manutenções", description: "Histórico de manutenções", icon: Wrench, category: "operacional" },
@@ -155,19 +149,6 @@ const availableSections: Omit<ReportSection, "enabled">[] = [
   { id: "checklists", key: "checklists", title: "Checklists", description: "Checklists completados", icon: ClipboardList, category: "operacional" },
   { id: "antes_depois", key: "antes_depois", title: "Antes e Depois", description: "Comparativos visuais", icon: Image, category: "operacional" },
   
-  // SEGURANÇA E REGRAS
-  { id: "dicas_seguranca", key: "dicas_seguranca", title: "Dicas de Segurança", description: "Dicas de segurança", icon: Shield, category: "seguranca" },
-  { id: "regras_normas", key: "regras_normas", title: "Regras e Normas", description: "Regras da organização", icon: Gavel, category: "seguranca" },
-  { id: "notificacoes_infracao", key: "notificacoes_infracao", title: "Infrações", description: "Notificações de infração", icon: AlertTriangle, category: "seguranca" },
-  
-  // COMUNIDADE
-  { id: "classificados", key: "classificados", title: "Classificados", description: "Anúncios da comunidade", icon: ShoppingBag, category: "comunidade" },
-  { id: "achados_perdidos", key: "achados_perdidos", title: "Achados e Perdidos", description: "Itens encontrados/perdidos", icon: Search, category: "comunidade" },
-  { id: "caronas", key: "caronas", title: "Caronas", description: "Ofertas de carona", icon: Car, category: "comunidade" },
-  
-  // ÁREAS E ESPAÇOS
-  { id: "vagas_estacionamento", key: "vagas_estacionamento", title: "Estacionamento", description: "Vagas de estacionamento", icon: ParkingCircle, category: "areas" },
-  
   // GALERIA E MÍDIA
   { id: "albuns", key: "albuns", title: "Álbuns de Fotos", description: "Galeria de imagens", icon: Image, category: "galeria" },
   { id: "realizacoes", key: "realizacoes", title: "Realizações", description: "Conquistas da organização", icon: Award, category: "galeria" },
@@ -175,29 +156,14 @@ const availableSections: Omit<ReportSection, "enabled">[] = [
   { id: "aquisicoes", key: "aquisicoes", title: "Aquisições", description: "Aquisições da organização", icon: Package, category: "galeria" },
   
   { id: "destaques", key: "destaques", title: "Destaques", description: "Destaques da organização", icon: Star, category: "galeria" },
-  
-  // INFORMAÇÕES
-  { id: "telefones_uteis", key: "telefones_uteis", title: "Telefones Úteis", description: "Contatos importantes", icon: Phone, category: "informacoes" },
-  { id: "links_uteis", key: "links_uteis", title: "Links Úteis", description: "Links importantes", icon: Link, category: "informacoes" },
-  
-  // PUBLICIDADE
-  { id: "publicidades", key: "publicidades", title: "Publicidades", description: "Anúncios e publicidades", icon: Megaphone, category: "publicidade" },
-  { id: "anunciantes", key: "anunciantes", title: "Anunciantes", description: "Anunciantes cadastrados", icon: HeartHandshake, category: "publicidade" },
 ];
 
-// Categorias (apenas as que têm funções existentes)
+// Categorias (apenas as que têm funções existentes no menu)
 const categories = [
-  { id: "gestao", title: "Gestão", icon: Building2 },
+  { id: "gestao", title: "Gestão da Organização", icon: Building2 },
   { id: "comunicacao", title: "Comunicação", icon: MessageSquare },
-  { id: "eventos", title: "Eventos e Agenda", icon: Calendar },
-  { id: "votacoes", title: "Votações", icon: Vote },
-  { id: "operacional", title: "Operacional", icon: Wrench },
-  { id: "seguranca", title: "Segurança", icon: Shield },
-  { id: "comunidade", title: "Comunidade", icon: Users },
-  { id: "areas", title: "Áreas e Espaços", icon: Home },
+  { id: "operacional", title: "Operacional / Manutenção", icon: Wrench },
   { id: "galeria", title: "Galeria e Mídia", icon: Image },
-  { id: "informacoes", title: "Informações", icon: HelpCircle },
-  { id: "publicidade", title: "Publicidade", icon: Megaphone },
 ];
 
 export default function RelatorioBuilder() {
@@ -209,7 +175,7 @@ export default function RelatorioBuilder() {
   const [includeCharts, setIncludeCharts] = useState(true);
   const [includeStats, setIncludeStats] = useState(true);
   const [selectedSections, setSelectedSections] = useState<string[]>([
-    "moradores", "manutencoes", "ocorrencias", "votacoes", "avisos"
+    "moradores", "manutencoes", "ocorrencias", "vistorias", "checklists"
   ]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [tipoRelatorio, setTipoRelatorio] = useState<"completo" | "simplificado">("completo");

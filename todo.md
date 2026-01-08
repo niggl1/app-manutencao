@@ -193,3 +193,9 @@
 - [x] Alterar descrição do modal
 - [x] Alterar botão "Criar Livro" para "Criar Livro de Manutenções"
 - [x] Testar alterações no navegador
+
+## Fase 26: Limpar Funções do Relatório
+- [x] Identificar funções disponíveis no menu do sistema
+- [x] Identificar funções listadas no relatório
+- [x] Remover funções do relatório que não existem no menu (Avisos, Notificações, Eventos, Votações, Segurança, Comunidade, Áreas, Informações, Publicidade)
+- [x] Testar alterações no navegador
