@@ -1,3 +1,4 @@
+// Menu atualizado em 2026-01-08 - Seções removidas: Interativo/Comunidade, Documentação, Publicidade, Configurações, Eventos e Agenda
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -122,7 +123,7 @@ export const CORES_FUNCOES_RAPIDAS = [
   "#64748B", // Slate
 ];
 
-// Estrutura do menu com 12 seções (inclui Ordens de Serviço como seção separada)
+// Estrutura do menu com seções otimizadas para gestão de manutenção
 const menuSections = [
   {
     id: "visao-geral",
@@ -139,9 +140,8 @@ const menuSections = [
     iconName: "Building2",
     items: [
       { icon: Building2, iconName: "Building2", label: "Cadastro da Organização", path: "/dashboard/condominio", funcaoId: "cadastro-condominio" },
-      { icon: Users, iconName: "Users", label: "Moradores", path: "/dashboard/moradores", funcaoId: "moradores" },
+      { icon: Users, iconName: "Users", label: "Moradores (Exclusivo p/ condomínios)", path: "/dashboard/moradores", funcaoId: "moradores" },
       { icon: UserCog, iconName: "UserCog", label: "Funcionários", path: "/dashboard/funcionarios", funcaoId: "funcionarios" },
-      { icon: Car, iconName: "Car", label: "Vagas de Estacionamento", path: "/dashboard/vagas", funcaoId: "vagas" },
       { icon: UsersRound, iconName: "UsersRound", label: "Equipe de Gestão", path: "/dashboard/equipe", funcaoId: "equipe" },
     ]
   },
@@ -159,17 +159,6 @@ const menuSections = [
     ]
   },
   {
-    id: "eventos-agenda",
-    label: "Eventos e Agenda",
-    icon: Calendar,
-    iconName: "Calendar",
-    items: [
-      { icon: Calendar, iconName: "Calendar", label: "Eventos", path: "/dashboard/eventos", funcaoId: "eventos" },
-      { icon: CalendarClock, iconName: "CalendarClock", label: "Agenda de Vencimentos", path: "/dashboard/agenda-vencimentos", funcaoId: "agenda-vencimentos" },
-      { icon: CalendarCheck, iconName: "CalendarCheck", label: "Reservas", path: "/dashboard/reservas", funcaoId: "reservas" },
-    ]
-  },
-  {
     id: "operacional",
     label: "Operacional / Manutenção",
     icon: Wrench,
@@ -180,6 +169,7 @@ const menuSections = [
       { icon: AlertTriangle, iconName: "AlertTriangle", label: "Ocorrências", path: "/dashboard/ocorrencias", funcaoId: "ocorrencias" },
       { icon: CheckSquare, iconName: "CheckSquare", label: "Checklists", path: "/dashboard/checklists", funcaoId: "checklists" },
       { icon: ArrowLeftRight, iconName: "ArrowLeftRight", label: "Antes e Depois", path: "/dashboard/antes-depois", funcaoId: "antes-depois" },
+      { icon: CalendarClock, iconName: "CalendarClock", label: "Agenda de Vencimentos", path: "/dashboard/agenda-vencimentos", funcaoId: "agenda-vencimentos" },
     ]
   },
   {
@@ -194,30 +184,6 @@ const menuSections = [
     ]
   },
   {
-    id: "comunidade",
-    label: "Interativo / Comunidade",
-    icon: Users,
-    iconName: "Users",
-    items: [
-      { icon: Vote, iconName: "Vote", label: "Votações e Enquetes", path: "/dashboard/votacoes", funcaoId: "votacoes" },
-      { icon: ShoppingBag, iconName: "ShoppingBag", label: "Classificados", path: "/dashboard/classificados", funcaoId: "classificados" },
-      { icon: Search, iconName: "Search", label: "Achados e Perdidos", path: "/dashboard/achados-perdidos", funcaoId: "achados-perdidos" },
-      { icon: CarFront, iconName: "CarFront", label: "Caronas", path: "/dashboard/caronas", funcaoId: "caronas" },
-    ]
-  },
-  {
-    id: "documentacao",
-    label: "Documentação e Regras",
-    icon: BookOpen,
-    iconName: "BookOpen",
-    items: [
-      { icon: BookOpen, iconName: "BookOpen", label: "Regras e Normas", path: "/dashboard/regras", funcaoId: "regras" },
-      { icon: Shield, iconName: "Shield", label: "Dicas de Segurança", path: "/dashboard/seguranca", funcaoId: "seguranca" },
-      { icon: Link, iconName: "Link", label: "Links Úteis", path: "/dashboard/links", funcaoId: "links" },
-      { icon: Phone, iconName: "Phone", label: "Telefones Úteis", path: "/dashboard/telefones", funcaoId: "telefones" },
-    ]
-  },
-  {
     id: "galeria",
     label: "Galeria e Mídia",
     icon: Image,
@@ -227,16 +193,6 @@ const menuSections = [
       { icon: Award, iconName: "Award", label: "Realizações", path: "/dashboard/realizacoes", funcaoId: "realizacoes" },
       { icon: TrendingUp, iconName: "TrendingUp", label: "Melhorias", path: "/dashboard/melhorias", funcaoId: "melhorias" },
       { icon: Package, iconName: "Package", label: "Aquisições", path: "/dashboard/aquisicoes", funcaoId: "aquisicoes" },
-    ]
-  },
-  {
-    id: "publicidade",
-    label: "Publicidade",
-    icon: Newspaper,
-    iconName: "Newspaper",
-    items: [
-      { icon: Building, iconName: "Building", label: "Anunciantes", path: "/dashboard/publicidade", funcaoId: "publicidade" },
-      { icon: Newspaper, iconName: "Newspaper", label: "Campanhas", path: "/dashboard/campanhas", funcaoId: "campanhas" },
     ]
   },
   {
@@ -261,17 +217,6 @@ const menuSections = [
       { icon: PieChart, iconName: "PieChart", label: "Estatísticas Gerais", path: "/dashboard/estatisticas", funcaoId: "estatisticas" },
       { icon: History, iconName: "History", label: "Histórico de Atividades", path: "/dashboard/historico", funcaoId: "historico" },
       { icon: Download, iconName: "Download", label: "Exportar Relatórios", path: "/dashboard/exportar-relatorios", funcaoId: "exportar-relatorios" },
-    ]
-  },
-  {
-    id: "configuracoes",
-    label: "Configurações",
-    icon: Settings,
-    iconName: "Settings",
-    items: [
-      { icon: User, iconName: "User", label: "Perfil do Usuário", path: "/perfil", funcaoId: "perfil" },
-      { icon: BellRing, iconName: "BellRing", label: "Config. Notificações", path: "/dashboard/config-notificacoes", funcaoId: "config-notificacoes" },
-      { icon: Sliders, iconName: "Sliders", label: "Preferências", path: "/dashboard/preferencias", funcaoId: "preferencias" },
     ]
   },
 ];

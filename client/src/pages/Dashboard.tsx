@@ -123,7 +123,7 @@ import FuncoesRapidasGrid from "@/components/FuncoesRapidasGrid";
 import QuickFunctionsEditor, { getSelectedQuickFunctions, allQuickFunctions, CORES_FUNCOES_RAPIDAS } from "@/components/QuickFunctionsEditor";
 import AssistenteCriacao from "@/components/AssistenteCriacao";
 
-// Estrutura do menu com 11 seções
+// Estrutura do menu otimizada para gestão de manutenção
 // Cada item tem um funcaoId que mapeia para as funções do admin
 const menuSections = [
   {
@@ -148,9 +148,8 @@ const menuSections = [
     icon: Building2,
     items: [
       { id: "condominio", label: "Cadastro da Organização", icon: Building2 },
-      { id: "moradores", label: "Moradores", icon: Users, funcaoId: "moradores" },
+      { id: "moradores", label: "Moradores (Exclusivo p/ condomínios)", icon: Users, funcaoId: "moradores" },
       { id: "funcionarios", label: "Funcionários", icon: UserCog, funcaoId: "funcionarios" },
-      { id: "vagas", label: "Vagas de Estacionamento", icon: Car, funcaoId: "vagas" },
       { id: "equipe", label: "Equipe de Gestão", icon: UsersRound, funcaoId: "equipe" },
     ]
   },
@@ -166,16 +165,6 @@ const menuSections = [
     ]
   },
   {
-    id: "eventos-agenda",
-    label: "Eventos e Agenda",
-    icon: Calendar,
-    items: [
-      { id: "eventos", label: "Eventos", icon: Calendar, funcaoId: "eventos" },
-      { id: "vencimentos", label: "Agenda de Vencimentos", icon: CalendarClock, funcaoId: "agenda-vencimentos" },
-      { id: "assembleia", label: "Assembleia Online", icon: Video },
-    ]
-  },
-  {
     id: "operacional",
     label: "Operacional / Manutenção",
     icon: Wrench,
@@ -185,6 +174,7 @@ const menuSections = [
       { id: "ocorrencias", label: "Ocorrências", icon: AlertTriangle, funcaoId: "ocorrencias" },
       { id: "checklists", label: "Checklists", icon: ListChecks, funcaoId: "checklists" },
       { id: "antes-depois", label: "Antes e Depois", icon: ArrowLeftRight, funcaoId: "antes-depois" },
+      { id: "vencimentos", label: "Agenda de Vencimentos", icon: CalendarClock, funcaoId: "agenda-vencimentos" },
     ]
   },
   {
@@ -195,26 +185,6 @@ const menuSections = [
       { id: "ordens-servico", label: "Todas as OS", icon: ClipboardList, funcaoId: "ordens-servico" },
       { id: "ordens-servico/nova", label: "Nova OS", icon: Plus, funcaoId: "ordens-servico" },
       { id: "ordens-servico/configuracoes", label: "Configurações", icon: Settings, funcaoId: "ordens-servico" },
-    ]
-  },
-  {
-    id: "comunidade",
-    label: "Interativo / Comunidade",
-    icon: Users,
-    items: [
-      { id: "votacoes", label: "Votações e Enquetes", icon: Vote, funcaoId: "votacoes" },
-      { id: "classificados", label: "Classificados", icon: ShoppingBag, funcaoId: "classificados" },
-      { id: "achados", label: "Achados e Perdidos", icon: Search, funcaoId: "achados-perdidos" },
-      { id: "caronas", label: "Caronas", icon: CarFront, funcaoId: "caronas" },
-    ]
-  },
-  {
-    id: "documentacao",
-    label: "Documentação e Regras",
-    icon: BookOpen,
-    items: [
-      { id: "regras", label: "Regras e Normas", icon: BookOpen, funcaoId: "regras" },
-      { id: "seguranca", label: "Dicas de Segurança", icon: Shield, funcaoId: "dicas-seguranca" },
     ]
   },
   {
@@ -229,11 +199,11 @@ const menuSections = [
     ]
   },
   {
-    id: "publicidade",
-    label: "Publicidade",
-    icon: Newspaper,
+    id: "revista",
+    label: "Revista Digital",
+    icon: BookMarked,
     items: [
-      { id: "publicidade", label: "Anunciantes", icon: Building2, funcaoId: "publicidade" },
+      { id: "revistas", label: "Minhas Revistas", icon: BookMarked, funcaoId: "revistas" },
     ]
   },
   {
@@ -243,15 +213,6 @@ const menuSections = [
     items: [
       { id: "painel-controlo", label: "Painel de Controlo", icon: BarChart3, funcaoId: "painel-controlo" },
       { id: "relatorios", label: "Relatórios", icon: PieChart, funcaoId: "relatorios" },
-    ]
-  },
-  {
-    id: "configuracoes",
-    label: "Configurações",
-    icon: Settings,
-    items: [
-      { id: "configuracoes", label: "Preferências", icon: Sliders },
-      { id: "moderacao", label: "Moderação", icon: Shield },
     ]
   },
 ];

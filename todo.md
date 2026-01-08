@@ -134,3 +134,15 @@
 - [x] Criar novo Footer simples e profissional
 - [x] Header fixo com navegação por âncoras
 - [x] Design 100% focado em gestão de manutenção universal
+
+
+## Fase 17: Limpeza do Menu Lateral do Dashboard
+- [x] Remover seção "Interativo / Comunidade" (Votações, Classificados, Achados e Perdidos, Caronas)
+- [x] Remover seção "Documentação e Regras" (Regras e Normas, Dicas de Segurança, Links Úteis, Telefones Úteis)
+- [x] Remover seção "Publicidade" (Anunciantes, Campanhas)
+- [x] Remover seção "Configurações" (Perfil do Usuário, Config. Notificações, Preferências)
+- [x] Remover seção "Eventos e Agenda" (Eventos, Reservas)
+- [x] Remover "Vagas de Estacionamento" da seção Gestão da Organização
+- [x] Mover "Agenda de Vencimentos" para seção Operacional / Manutenção
+- [x] Alterar "Moradores" para "Moradores (Exclusivo p/ condomínios)"
+- [x] Testar menu lateral no navegador
