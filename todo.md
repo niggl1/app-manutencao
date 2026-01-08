@@ -199,3 +199,7 @@
 - [x] Identificar funções listadas no relatório
 - [x] Remover funções do relatório que não existem no menu (Avisos, Notificações, Eventos, Votações, Segurança, Comunidade, Áreas, Informações, Publicidade)
 - [x] Testar alterações no navegador
+
+## Fase 27: Adicionar Ordens de Serviço ao Relatório
+- [x] Adicionar "Ordens de Serviço" ao availableSections
+- [x] Testar alterações no navegador

@@ -148,6 +148,7 @@ const availableSections: Omit<ReportSection, "enabled">[] = [
   { id: "vistorias", key: "vistorias", title: "Vistorias", description: "Vistorias realizadas", icon: ClipboardCheck, category: "operacional" },
   { id: "checklists", key: "checklists", title: "Checklists", description: "Checklists completados", icon: ClipboardList, category: "operacional" },
   { id: "antes_depois", key: "antes_depois", title: "Antes e Depois", description: "Comparativos visuais", icon: Image, category: "operacional" },
+  { id: "ordens_servico", key: "ordens_servico", title: "Ordens de Serviço", description: "Ordens de serviço emitidas", icon: FileCheck, category: "operacional" },
   
   // GALERIA E MÍDIA
   { id: "albuns", key: "albuns", title: "Álbuns de Fotos", description: "Galeria de imagens", icon: Image, category: "galeria" },
