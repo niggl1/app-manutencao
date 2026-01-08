@@ -76,8 +76,8 @@
 - [x] Atualizar logo no header
 - [x] Atualizar favicon
 - [x] Atualizar referências no sidebar/dashboard
-## Fase 10: Universalização Completa
 
+## Fase 10: Universalização Completa
 - [x] Substituir "condomínio" por "organização" em todos os ficheiros
 - [x] Substituir "síndico" por "gestor" em todos os ficheiros
 - [x] Substituir "morador" por "equipa" onde aplicável
@@ -135,7 +135,6 @@
 - [x] Header fixo com navegação por âncoras
 - [x] Design 100% focado em gestão de manutenção universal
 
-
 ## Fase 17: Limpeza do Menu Lateral do Dashboard
 - [x] Remover seção "Interativo / Comunidade" (Votações, Classificados, Achados e Perdidos, Caronas)
 - [x] Remover seção "Documentação e Regras" (Regras e Normas, Dicas de Segurança, Links Úteis, Telefones Úteis)
@@ -147,6 +146,12 @@
 - [x] Alterar "Moradores" para "Moradores (Exclusivo p/ condomínios)"
 - [x] Testar menu lateral no navegador
 
-
 ## Bugs Corrigidos - Fase 17
 - [x] Corrigir erro de chave duplicada "revista" no menuSections do Dashboard.tsx
+
+## Fase 18: Limpeza das Funções Rápidas
+- [x] Remover "Eventos" das funções rápidas disponíveis
+- [x] Remover "Votações" das funções rápidas disponíveis
+- [x] Remover "Avisos" das funções rápidas disponíveis
+- [x] Remover "Notificações" das funções rápidas disponíveis
+- [x] Testar funções rápidas no navegador

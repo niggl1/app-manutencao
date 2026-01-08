@@ -54,10 +54,7 @@ export const allQuickFunctions = [
   { id: "manutencoes", label: "Manutenções", icon: Wrench, gradient: "from-blue-400 to-blue-600", path: "/dashboard/manutencoes" },
   { id: "ocorrencias", label: "Ocorrências", icon: AlertTriangle, gradient: "from-red-400 to-rose-600", path: "/dashboard/ocorrencias" },
   { id: "vistorias", label: "Vistorias", icon: ClipboardCheck, gradient: "from-green-400 to-emerald-600", path: "/dashboard/vistorias" },
-  { id: "avisos", label: "Avisos", icon: Megaphone, gradient: "from-purple-400 to-purple-600", path: "/dashboard/avisos" },
-  { id: "votacoes", label: "Votações", icon: Vote, gradient: "from-indigo-400 to-indigo-600", path: "/dashboard/votacoes" },
-  { id: "gestao-notificacoes", label: "Notificações", icon: Bell, gradient: "from-cyan-400 to-cyan-600", path: "/dashboard/gestao-notificacoes" },
-  { id: "eventos", label: "Eventos", icon: CalendarDays, gradient: "from-pink-400 to-pink-600", path: "/dashboard/eventos" },
+
   { id: "moradores", label: "Moradores", icon: Users, gradient: "from-teal-400 to-teal-600", path: "/dashboard/moradores" },
   { id: "funcionarios", label: "Funcionários", icon: Users, gradient: "from-slate-400 to-slate-600", path: "/dashboard/funcionarios" },
   { id: "vagas", label: "Vagas", icon: Car, gradient: "from-yellow-400 to-yellow-600", path: "/dashboard/vagas" },
@@ -84,7 +81,7 @@ export const iconMap: Record<string, any> = {
 };
 
 const QUICK_FUNCTIONS_KEY = "dashboard-quick-functions";
-const DEFAULT_FUNCTIONS = ["checklists", "manutencoes", "ocorrencias", "vistorias", "avisos", "votacoes", "gestao-notificacoes", "eventos", "ordens-servico"];
+const DEFAULT_FUNCTIONS = ["checklists", "manutencoes", "ocorrencias", "vistorias", "ordens-servico"];
 
 // Funções para compatibilidade com localStorage (fallback)
 export function getSelectedQuickFunctions(): string[] {
