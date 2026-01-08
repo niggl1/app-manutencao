@@ -95,7 +95,7 @@ const tiposProjeto = [
   },
   {
     id: "revista",
-    nome: "Revista Digital",
+    nome: "Livro de Manutenções",
     descricao: "Crie uma revista digital interativa com efeito de virar páginas",
     icon: BookOpen,
     cor: "from-purple-500 to-purple-600",

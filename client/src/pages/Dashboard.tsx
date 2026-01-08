@@ -200,7 +200,7 @@ const menuSections = [
   },
   {
     id: "revista-digital",
-    label: "Revista Digital",
+    label: "Livro de Manutenções",
     icon: BookMarked,
     items: [
       { id: "revistas", label: "Minhas Revistas", icon: BookMarked, funcaoId: "revistas" },

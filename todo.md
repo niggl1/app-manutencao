@@ -208,3 +208,8 @@
 - [x] Identificar arquivos com referências a "Condomínio" (163 referências em 20 arquivos)
 - [x] Substituir referências nos arquivos do frontend (DashboardLayout, Dashboard, CondominioForm, AssistenteCriacao)
 - [x] Testar alterações no navegador
+
+## Fase 29: Renomear Revista Digital para Livro de Manutenções
+- [x] Alterar "Revista Digital" para "Livro de Manutenções" no DashboardLayout.tsx
+- [x] Alterar "Revista Digital" para "Livro de Manutenções" no Dashboard.tsx e AssistenteCriacao.tsx
+- [x] Testar alterações no navegador
