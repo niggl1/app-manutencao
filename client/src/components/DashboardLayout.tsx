@@ -140,7 +140,7 @@ const menuSections = [
     iconName: "Building2",
     items: [
       { icon: Building2, iconName: "Building2", label: "Cadastro da Organização", path: "/dashboard/condominio", funcaoId: "cadastro-condominio" },
-      { icon: Users, iconName: "Users", label: "Moradores (Exclusivo p/ condomínios)", path: "/dashboard/moradores", funcaoId: "moradores" },
+      { icon: Users, iconName: "Users", label: "Moradores (Exclusivo p/ organizações residenciais)", path: "/dashboard/moradores", funcaoId: "moradores" },
       { icon: UserCog, iconName: "UserCog", label: "Funcionários", path: "/dashboard/funcionarios", funcaoId: "funcionarios" },
       { icon: UsersRound, iconName: "UsersRound", label: "Equipe de Gestão", path: "/dashboard/equipe", funcaoId: "equipe" },
     ]

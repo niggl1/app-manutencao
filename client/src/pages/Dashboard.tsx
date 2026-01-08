@@ -148,7 +148,7 @@ const menuSections = [
     icon: Building2,
     items: [
       { id: "condominio", label: "Cadastro da Organização", icon: Building2 },
-      { id: "moradores", label: "Moradores (Exclusivo p/ condomínios)", icon: Users, funcaoId: "moradores" },
+      { id: "moradores", label: "Moradores (Exclusivo p/ organizações residenciais)", icon: Users, funcaoId: "moradores" },
       { id: "funcionarios", label: "Funcionários", icon: UserCog, funcaoId: "funcionarios" },
       { id: "equipe", label: "Equipe de Gestão", icon: UsersRound, funcaoId: "equipe" },
     ]
@@ -1125,7 +1125,7 @@ function OverviewSection({ user }: { user: any }) {
         </h1>
         <p className="text-muted-foreground">
           {user?.tipoConta === "administradora" 
-            ? "Gerencie apps, projetos digitais e relatórios para seus condomínios."
+            ? "Gerencie apps, projetos digitais e relatórios para suas organizações."
             : "Crie apps, projetos digitais e relatórios para sua organização."
           }
         </p>
@@ -2112,7 +2112,7 @@ function CondominioSection() {
 
   const createMutation = trpc.condominio.create.useMutation({
     onSuccess: () => {
-      toast.success("Condomínio cadastrado com sucesso!");
+      toast.success("Organização cadastrada com sucesso!");
       utils.condominio.list.invalidate();
       setIsDialogOpen(false);
       setFormData({ nome: "", endereco: "", cidade: "", estado: "", logoUrl: "", bannerUrl: "", capaUrl: "" });
@@ -2157,7 +2157,7 @@ function CondominioSection() {
                     <Building2 className="w-6 h-6" />
                   </div>
                   <div>
-                    <DialogTitle className="text-xl font-bold text-white">Cadastrar Condomínio</DialogTitle>
+                    <DialogTitle className="text-xl font-bold text-white">Cadastrar Organização</DialogTitle>
                     <DialogDescription className="text-blue-100 mt-1">
                       Adicione as informações da sua organização
                     </DialogDescription>
@@ -2172,10 +2172,10 @@ function CondominioSection() {
                     <div className="p-1.5 bg-blue-100 rounded-lg">
                       <Building2 className="w-4 h-4 text-blue-600" />
                     </div>
-                    <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Dados do Condomínio</h3>
+                    <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Dados da Organização</h3>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="nome" className="text-sm font-medium text-slate-700">Nome do Condomínio <span className="text-red-500">*</span></Label>
+                    <Label htmlFor="nome" className="text-sm font-medium text-slate-700">Nome da Organização <span className="text-red-500">*</span></Label>
                     <Input
                       id="nome"
                       placeholder="Ex: Residencial Jardins"
@@ -2291,7 +2291,7 @@ function CondominioSection() {
                     {createMutation.isPending ? (
                       <Loader2 className="w-4 h-4 animate-spin" />
                     ) : (
-                      <><Building2 className="w-4 h-4 mr-2" />Cadastrar Condomínio</>
+                      <><Building2 className="w-4 h-4 mr-2" />Cadastrar Organização</>
                     )}
                   </Button>
                 </div>
@@ -2342,7 +2342,7 @@ function CondominioSection() {
               <DialogTrigger asChild>
                 <Button className="btn-magazine">
                   <Plus className="w-4 h-4 mr-2" />
-                  Cadastrar Condomínio
+                  Cadastrar Organização
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-0">
@@ -2354,7 +2354,7 @@ function CondominioSection() {
                       <Building2 className="w-6 h-6" />
                     </div>
                     <div>
-                      <DialogTitle className="text-xl font-bold text-white">Cadastrar Condomínio</DialogTitle>
+                      <DialogTitle className="text-xl font-bold text-white">Cadastrar Organização</DialogTitle>
                       <DialogDescription className="text-blue-100 mt-1">
                         Adicione as informações da sua organização
                       </DialogDescription>
@@ -2369,10 +2369,10 @@ function CondominioSection() {
                       <div className="p-1.5 bg-blue-100 rounded-lg">
                         <Building2 className="w-4 h-4 text-blue-600" />
                       </div>
-                      <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Dados do Condomínio</h3>
+                      <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Dados da Organização</h3>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="nome2" className="text-sm font-medium text-slate-700">Nome do Condomínio <span className="text-red-500">*</span></Label>
+                      <Label htmlFor="nome2" className="text-sm font-medium text-slate-700">Nome da Organização <span className="text-red-500">*</span></Label>
                       <Input
                         id="nome2"
                         placeholder="Ex: Residencial Jardins"
@@ -2488,7 +2488,7 @@ function CondominioSection() {
                       {createMutation.isPending ? (
                         <Loader2 className="w-4 h-4 animate-spin" />
                       ) : (
-                        <><Building2 className="w-4 h-4 mr-2" />Cadastrar Condomínio</>
+                        <><Building2 className="w-4 h-4 mr-2" />Cadastrar Organização</>
                       )}
                     </Button>
                   </div>
@@ -3447,7 +3447,7 @@ function MoradoresSection() {
             <Link href="/dashboard/condominio">
               <Button className="btn-magazine">
                 <Building2 className="w-4 h-4 mr-2" />
-                Ir para Condomínio
+                Ir para Organização
               </Button>
             </Link>
           </CardContent>
@@ -3811,7 +3811,7 @@ function FuncionariosSection() {
             <Link href="/dashboard/condominio">
               <Button className="btn-magazine">
                 <Building2 className="w-4 h-4 mr-2" />
-                Ir para Condomínio
+                Ir para Organização
               </Button>
             </Link>
           </CardContent>
@@ -3925,11 +3925,11 @@ function FuncionariosSection() {
                   <option value="porteiro">Porteiro</option>
                   <option value="zelador">Zelador</option>
                   <option value="supervisor">Supervisor de Rota</option>
-                  <option value="gerente">Gerente de Condomínio</option>
+                  <option value="gerente">Gerente de Organização</option>
                   <option value="sindico_externo">Síndico Externo</option>
                 </select>
                 <p className="text-xs text-muted-foreground mt-1">
-                  {formData.tipoFuncionario === "supervisor" && "Supervisor pode acessar múltiplos condomínios"}
+                  {formData.tipoFuncionario === "supervisor" && "Supervisor pode acessar múltiplas organizações"}
                   {formData.tipoFuncionario === "gerente" && "Gerente tem acesso parcial definido pelo síndico"}
                   {formData.tipoFuncionario === "sindico_externo" && "Síndico externo com acesso total aa organização"}
                 </p>
@@ -3938,7 +3938,7 @@ function FuncionariosSection() {
               {/* Seleção de Condomínios (para supervisores) */}
               {formData.tipoFuncionario === "supervisor" && condominios && condominios.length > 1 && (
                 <div>
-                  <Label>Condomínios que pode acessar</Label>
+                  <Label>Organizações que pode acessar</Label>
                   <div className="mt-2 space-y-2 max-h-32 overflow-y-auto border rounded-md p-2">
                     {condominios.map((cond) => (
                       <label key={cond.id} className="flex items-center gap-2 cursor-pointer">
@@ -4528,7 +4528,7 @@ function AvisosSection() {
             <Link href="/dashboard/condominio">
               <Button className="btn-magazine">
                 <Building2 className="w-4 h-4 mr-2" />
-                Ir para Condomínio
+                Ir para Organização
               </Button>
             </Link>
           </CardContent>
@@ -5755,7 +5755,7 @@ function CaronasSection() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label>Origem *</Label>
-                  <Input value={origem} onChange={(e) => setOrigem(e.target.value)} placeholder="Ex: Condomínio" />
+                  <Input value={origem} onChange={(e) => setOrigem(e.target.value)} placeholder="Ex: Organização" />
                 </div>
                 <div>
                   <Label>Destino *</Label>
@@ -6723,7 +6723,7 @@ function RelatoriosSection() {
                           <p className="text-3xl font-bold text-red-600">{relatorioBloqueados.totalBloqueados}</p>
                         </div>
                         <div className="bg-white rounded-lg p-4 border">
-                          <p className="text-sm text-gray-500">Condomínio</p>
+                          <p className="text-sm text-gray-500">Organização</p>
                           <p className="text-lg font-semibold">{relatorioBloqueados.condominio?.nome}</p>
                         </div>
                         <div className="bg-white rounded-lg p-4 border">
@@ -10824,7 +10824,7 @@ function CabecalhoRodapeConfig() {
       {/* Campos do Cabeçalho */}
       <div className="grid md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label>Logo do Condomínio</Label>
+          <Label>Logo da Organização</Label>
           <div className="flex gap-2">
             <Input
               value={cabecalhoLogoUrl}
@@ -10850,11 +10850,11 @@ function CabecalhoRodapeConfig() {
         </div>
 
         <div className="space-y-2">
-          <Label>Nome do Condomínio</Label>
+          <Label>Nome da Organização</Label>
           <Input
             value={cabecalhoNomeCondominio}
             onChange={(e) => setCabecalhoNomeCondominio(e.target.value)}
-            placeholder="Ex: Condomínio Residencial Jardins"
+            placeholder="Ex: Organização Residencial Jardins"
           />
           <p className="text-xs text-muted-foreground">Aparece no cabeçalho dos relatórios</p>
         </div>

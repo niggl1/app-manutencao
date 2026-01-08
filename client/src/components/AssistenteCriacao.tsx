@@ -213,7 +213,7 @@ const modulosDisponiveis = {
     modulos: [
       { id: "telefones-uteis", nome: "Telefones Úteis", icon: Phone, descricao: "Contatos importantes" },
       { id: "links-uteis", nome: "Links Úteis", icon: Link, descricao: "Links relevantes" },
-      { id: "sobre-condominio", nome: "Sobre o Condomínio", icon: Building2, descricao: "Informações gerais" },
+      { id: "sobre-condominio", nome: "Sobre a Organização", icon: Building2, descricao: "Informações gerais" },
     ]
   },
   publicidade: {
@@ -455,7 +455,7 @@ export default function AssistenteCriacao({ onClose, onComplete }: AssistenteCri
           <Label htmlFor="nome">Nome do Projeto</Label>
           <Input
             id="nome"
-            placeholder={`Ex: ${tipoProjeto === "revista" ? "Revista Mensal" : tipoProjeto === "app" ? "App do Condomínio" : "Relatório Anual"}`}
+            placeholder={`Ex: ${tipoProjeto === "revista" ? "Revista Mensal" : tipoProjeto === "app" ? "App da Organização" : "Relatório Anual"}`}
             value={nomeProjeto}
             onChange={(e) => setNomeProjeto(e.target.value)}
           />
@@ -472,7 +472,7 @@ export default function AssistenteCriacao({ onClose, onComplete }: AssistenteCri
         </div>
         
         <div className="space-y-2">
-          <Label htmlFor="condominio">Condomínio</Label>
+          <Label htmlFor="condominio">Organização</Label>
           <Select
             value={condominioId?.toString() || ""}
             onValueChange={(value) => setCondominioId(parseInt(value))}
@@ -657,7 +657,7 @@ export default function AssistenteCriacao({ onClose, onComplete }: AssistenteCri
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex justify-between py-2 border-b">
-                <span className="text-muted-foreground">Condomínio</span>
+                <span className="text-muted-foreground">Organização</span>
                 <span className="font-medium">{condominios?.find(c => c.id === condominioId)?.nome || "-"}</span>
               </div>
               <div className="flex justify-between py-2 border-b">

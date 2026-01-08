@@ -203,3 +203,8 @@
 ## Fase 27: Adicionar Ordens de Serviço ao Relatório
 - [x] Adicionar "Ordens de Serviço" ao availableSections
 - [x] Testar alterações no navegador
+
+## Fase 28: Universalizar Terminologia - Condomínio para Organização
+- [x] Identificar arquivos com referências a "Condomínio" (163 referências em 20 arquivos)
+- [x] Substituir referências nos arquivos do frontend (DashboardLayout, Dashboard, CondominioForm, AssistenteCriacao)
+- [x] Testar alterações no navegador

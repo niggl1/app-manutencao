@@ -42,25 +42,25 @@ export default function CondominioForm({ onSuccess, initialData }: CondominioFor
 
   const createMutation = trpc.condominio.create.useMutation({
     onSuccess: (data) => {
-      toast.success("Condomínio cadastrado com sucesso!");
+      toast.success("Organização cadastrada com sucesso!");
       utils.condominio.list.invalidate();
       onSuccess?.(data.id);
     },
     onError: (error) => {
-      toast.error("Erro ao cadastrar condomínio: " + error.message);
+      toast.error("Erro ao cadastrar organização: " + error.message);
     },
   });
 
   const updateMutation = trpc.condominio.update.useMutation({
     onSuccess: () => {
-      toast.success("Condomínio atualizado com sucesso!");
+      toast.success("Organização atualizada com sucesso!");
       utils.condominio.list.invalidate();
       if (initialData?.id) {
         utils.condominio.get.invalidate({ id: initialData.id });
       }
     },
     onError: (error) => {
-      toast.error("Erro ao atualizar condomínio: " + error.message);
+      toast.error("Erro ao atualizar organização: " + error.message);
     },
   });
 
@@ -86,7 +86,7 @@ export default function CondominioForm({ onSuccess, initialData }: CondominioFor
         <CardHeader>
           <CardTitle className="font-serif flex items-center gap-2">
             <Building2 className="w-5 h-5" />
-            {initialData?.id ? "Editar Condomínio" : "Cadastrar Condomínio"}
+            {initialData?.id ? "Editar Organização" : "Cadastrar Organização"}
           </CardTitle>
           <CardDescription>
             Preencha as informações da sua organização
@@ -96,7 +96,7 @@ export default function CondominioForm({ onSuccess, initialData }: CondominioFor
           {/* Logotipo e Banner */}
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label>Logotipo do Condomínio</Label>
+              <Label>Logotipo da Organização</Label>
               <ImageUpload
                 value={formData.logoUrl || undefined}
                 onChange={(url) => setFormData({ ...formData, logoUrl: url || "" })}
@@ -125,7 +125,7 @@ export default function CondominioForm({ onSuccess, initialData }: CondominioFor
 
           {/* Nome */}
           <div className="space-y-2">
-            <Label htmlFor="nome">Nome do Condomínio *</Label>
+            <Label htmlFor="nome">Nome da Organização *</Label>
             <Input
               id="nome"
               placeholder="Ex: Residencial Jardins"
@@ -238,7 +238,7 @@ export default function CondominioForm({ onSuccess, initialData }: CondominioFor
             ) : (
               <>
                 <Save className="w-4 h-4 mr-2" />
-                {initialData?.id ? "Guardar Alterações" : "Cadastrar Condomínio"}
+                {initialData?.id ? "Guardar Alterações" : "Cadastrar Organização"}
               </>
             )}
           </Button>
