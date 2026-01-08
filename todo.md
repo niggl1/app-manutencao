@@ -146,3 +146,7 @@
 - [x] Mover "Agenda de Vencimentos" para seção Operacional / Manutenção
 - [x] Alterar "Moradores" para "Moradores (Exclusivo p/ condomínios)"
 - [x] Testar menu lateral no navegador
+
+
+## Bugs Corrigidos - Fase 17
+- [x] Corrigir erro de chave duplicada "revista" no menuSections do Dashboard.tsx

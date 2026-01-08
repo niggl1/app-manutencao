@@ -135,7 +135,7 @@ const menuSections = [
     isSpecial: true // Marcação especial para renderização diferenciada
   },
   {
-    id: "revista",
+    id: "meus-projetos",
     label: "MEUS PROJETOS",
     icon: FolderOpen,
     path: "revistas",
@@ -199,7 +199,7 @@ const menuSections = [
     ]
   },
   {
-    id: "revista",
+    id: "revista-digital",
     label: "Revista Digital",
     icon: BookMarked,
     items: [
