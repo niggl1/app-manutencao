@@ -87,3 +87,12 @@
 - [ ] Instalar Capacitor
 - [ ] Configurar capacitor.config.ts
 - [ ] Adicionar plataformas iOS e Android
+
+## Fase 12: Personalização de Cores (Laranja, Branco, Preto)
+- [x] Atualizar variáveis CSS no index.css
+- [x] Ajustar cor primária para laranja (oklch 0.65 0.2 45)
+- [x] Ajustar backgrounds para branco/preto
+- [x] Atualizar botões e elementos de destaque
+- [x] Testar contraste e legibilidade
+- [x] Verificar consistência em todas as páginas
+- [x] Atualizar gradientes para tons de laranja
