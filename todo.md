@@ -1,0 +1,72 @@
+# App Manutenção - TODO
+
+## Fase 1: Setup Inicial
+- [x] Inicializar projeto com scaffold web-db-user
+- [x] Copiar componentes UI do AppSindico
+- [x] Configurar tema premium (cores, fontes, sombras)
+- [x] Configurar DashboardLayout
+
+## Fase 2: Schema da Base de Dados
+- [x] Criar tabela organizacoes (universal, substitui condominios)
+- [x] Criar tabelas de Ordens de Serviço (OS)
+- [x] Criar tabelas de Vistorias
+- [x] Criar tabelas de Manutenções
+- [x] Criar tabelas de Ocorrências
+- [x] Criar tabelas de Checklists
+- [x] Criar tabelas de Vencimentos
+- [x] Criar tabelas de Realizações/Melhorias/Aquisições
+- [x] Criar tabelas de Revistas
+- [x] Criar tabelas de Relatórios
+
+## Fase 3: Módulos Core
+- [x] Dashboard principal com estatísticas
+- [x] Gestão de Organizações (universal)
+- [x] Sistema de Ordens de Serviço completo
+- [x] Configurações de OS (categorias, status, prioridades)
+
+## Fase 4: Módulos Operacionais
+- [x] Vistorias
+- [x] Manutenções preventivas/corretivas
+- [x] Ocorrências
+- [x] Checklists
+- [x] Agenda de Vencimentos
+
+## Fase 5: Módulos de Documentação
+- [x] Antes e Depois
+- [x] Realizações
+- [x] Melhorias
+- [x] Aquisições
+
+## Fase 6: Relatórios e Revistas
+- [x] Sistema de Relatórios
+- [x] Construtor de Relatórios
+- [x] Editor de Revistas Digitais
+- [x] Visualizador de Revistas
+- [x] Exportação PDF
+
+## Fase 7: Personalização
+- [x] Configurações do sistema
+- [x] Personalização de cores/logo
+- [x] Páginas customizadas
+
+## Fase 8: Compatibilidade
+- [ ] Configurar para Vercel
+- [ ] Integrar Capacitor
+- [ ] Testes em mobile
+
+## Bugs Reportados
+(nenhum até agora)
+
+## Testes Realizados
+- [x] Cadastro de organização (Empresa Teste Manutenção)
+- [x] Criação de Ordem de Serviço (#891947)
+- [x] Visualização de Checklists
+- [x] Sistema de Relatórios com gráficos
+- [x] Navegação pelo menu lateral
+- [x] Funções rápidas no dashboard
+
+## Notas
+- Todas as referências a "condomínio" devem ser substituídas por "organização" (tarefa futura)
+- Layout premium consistente em todos os módulos
+- Sistema universal para qualquer tipo de organização
+- Capacitor será configurado após validação do sistema base
