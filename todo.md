@@ -177,3 +177,8 @@
 ## Fase 22: Remover Logo Duplicada
 - [x] Remover segunda tag img da logo no Dashboard.tsx (desktop e mobile)
 - [x] Testar alterações no navegador
+
+## Fase 23: Atualização do Favicon
+- [x] Criar favicon a partir da logo de engrenagem
+- [x] Configurar favicon no index.html
+- [x] Testar alterações no navegador
