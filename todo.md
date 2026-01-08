@@ -213,3 +213,7 @@
 - [x] Alterar "Revista Digital" para "Livro de Manutenções" no DashboardLayout.tsx
 - [x] Alterar "Revista Digital" para "Livro de Manutenções" no Dashboard.tsx e AssistenteCriacao.tsx
 - [x] Testar alterações no navegador
+
+## Fase 30: Atualizar Passo 3 dos Primeiros Passos
+- [x] Alterar "App, revista ou relatório" para "App, livro ou relatório"
+- [x] Testar alterações no navegador

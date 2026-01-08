@@ -1417,7 +1417,7 @@ function OverviewSection({ user }: { user: any }) {
             {[
               { step: 1, title: "Cadastre sua Organização", description: "Adicione nome, endereço e logo", done: false, path: "/dashboard/condominio" },
               { step: 2, title: "Adicione Funcionários", description: "Cadastre a equipe da organização", done: false, path: "/dashboard/funcionarios" },
-              { step: 3, title: "Crie seu Primeiro Projeto", description: "App, revista ou relatório", done: false, path: "/dashboard/criar-projeto" },
+              { step: 3, title: "Crie seu Primeiro Projeto", description: "App, livro ou relatório", done: false, path: "/dashboard/criar-projeto" },
               { step: 4, title: "Compartilhe com a Equipa", description: "Gere o link e divulgue", done: false, path: "/dashboard/moradores" },
             ].map((item) => (
               <Link key={item.step} href={item.path}>
