@@ -105,3 +105,21 @@
 - [x] Criar secção de funcionalidades principais (OS, Vistorias, Checklists, Relatórios)
 - [x] Atualizar título da secção de features
 - [x] Testar visual no browser
+
+## Fase 14: Filtro por Setores na Página Inicial
+- [ ] Tornar os cards de setores clicáveis/selecionáveis
+- [ ] Adicionar estado de seleção visual (borda, cor de fundo)
+- [ ] Criar mapeamento de módulos por setor
+- [ ] Filtrar lista de funcionalidades baseado no setor selecionado
+- [ ] Adicionar opção "Todos os Setores" para mostrar tudo
+- [ ] Testar interatividade e responsividade
+
+## Fase 15: Redesign Completo da Página Inicial - Premium
+- [x] Criar novo layout premium do zero
+- [x] Aplicar cores branco, laranja e preto
+- [x] Incluir preço R$99,00 em destaque
+- [x] Design moderno e profissional
+- [x] Destacar setores atendidos (predial, industrial, comercial, hospitalar, escolar, máquinas)
+- [x] Cards de setores com design premium interativo
+- [x] Botões "Acessar Plataforma" e "Ver Demonstração" estilizados
+- [x] Testar visual no browser

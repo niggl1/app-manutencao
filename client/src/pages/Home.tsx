@@ -217,12 +217,13 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      {/* Hero Section - Premium Design */}
+      <section className="relative pt-32 pb-20 overflow-hidden bg-gradient-to-br from-white via-orange-50/30 to-white">
         {/* Background decoration */}
         <div className="absolute inset-0 -z-10">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-400/10 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-orange-100/20 to-transparent rounded-full" />
         </div>
 
         <div className="container">
@@ -232,96 +233,56 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-                <Sparkles className="w-4 h-4" />
-                Gestão de Manutenção para Todos os Setores
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 text-white text-sm font-semibold mb-6 shadow-lg shadow-orange-500/25">
+                <Wrench className="w-4 h-4" />
+                Sistema Universal de Manutenção
               </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground leading-tight mb-6">
-                Manutenção Inteligente
-                <span className="text-gradient block">para sua Organização</span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                Gestão de
+                <span className="block text-orange-500">Manutenção</span>
+                <span className="block text-gray-900">Inteligente</span>
               </h1>
 
-              <p className="text-lg text-muted-foreground mb-8 max-w-lg">
-                Sistema completo para gestão de manutenções prediais, industriais, comerciais, hospitalares, escolares e de máquinas e equipamentos. Ordens de serviço, vistorias, checklists e relatórios em uma única plataforma.
+              <p className="text-lg text-gray-600 mb-6 max-w-lg leading-relaxed">
+                Plataforma completa para <strong className="text-gray-900">manutenções prediais, industriais, comerciais, hospitalares, escolares</strong> e de <strong className="text-gray-900">máquinas e equipamentos</strong>.
               </p>
 
-              <TooltipProvider>
-                <div className="flex flex-col gap-3">
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    {/* Botão Criar Meu App - Azul */}
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Link href="/app">
-                          <Button size="lg" className="text-base w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white">
-                            <LayoutGrid className="w-5 h-5 mr-2" />
-                            Criar Meu App
-                          </Button>
-                        </Link>
-                      </TooltipTrigger>
-                      <TooltipContent side="bottom" className="max-w-xs">
-                        <p className="font-medium">Layout em Grade</p>
-                        <p className="text-xs text-muted-foreground">Ideal para dashboards, painéis e aplicativos com cards organizados</p>
-                      </TooltipContent>
-                    </Tooltip>
-
-                    {/* Botão Criar Minha Revista - Verde */}
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Link href="/revista">
-                          <Button size="lg" className="text-base w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white">
-                            <BookOpenIcon className="w-5 h-5 mr-2" />
-                            Criar Minha Revista
-                          </Button>
-                        </Link>
-                      </TooltipTrigger>
-                      <TooltipContent side="bottom" className="max-w-xs">
-                        <p className="font-medium">Formato de Páginas</p>
-                        <p className="text-xs text-muted-foreground">Navegação como uma revista real, com efeito de virar páginas</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    {/* Botão Criar Relatórios - Roxo */}
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Link href="/relatorio">
-                          <Button size="lg" className="text-base w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white">
-                            <ScrollText className="w-5 h-5 mr-2" />
-                            Criar Relatórios Detalhados
-                          </Button>
-                        </Link>
-                      </TooltipTrigger>
-                      <TooltipContent side="bottom" className="max-w-xs">
-                        <p className="font-medium">Documento Contínuo</p>
-                        <p className="text-xs text-muted-foreground">Rolagem vertical para relatórios longos e documentos detalhados</p>
-                      </TooltipContent>
-                    </Tooltip>
-
-                    {/* Botão Ver Demonstração - Laranja */}
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Link href="/demo-layouts">
-                          <Button size="lg" className="text-base w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white">
-                            <Play className="w-5 h-5 mr-2" />
-                            Ver Demonstração
-                          </Button>
-                        </Link>
-                      </TooltipTrigger>
-                      <TooltipContent side="bottom" className="max-w-xs">
-                        <p className="font-medium">Veja na Prática</p>
-                        <p className="text-xs text-muted-foreground">Explore um exemplo completo da plataforma em ação</p>
-                      </TooltipContent>
-                    </Tooltip>
+              {/* Preço em destaque */}
+              <div className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-gray-900 to-gray-800 text-white mb-8 shadow-xl">
+                <div className="text-center">
+                  <span className="text-sm font-medium text-gray-400">A partir de</span>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl font-bold text-orange-400">R$99</span>
+                    <span className="text-gray-400">/mês</span>
                   </div>
                 </div>
-              </TooltipProvider>
+                <div className="w-px h-12 bg-gray-700" />
+                <div className="text-left">
+                  <span className="text-sm text-gray-300">Acesso completo</span>
+                  <p className="text-xs text-gray-500">Sem taxa de adesão</p>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-4">
+                <Link href="/dashboard">
+                  <Button size="lg" className="text-base bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/25 transition-all hover:shadow-xl hover:shadow-orange-500/30">
+                    <LayoutGrid className="w-5 h-5 mr-2" />
+                    Acessar Plataforma
+                  </Button>
+                </Link>
+                <Link href="/demo-layouts">
+                  <Button size="lg" variant="outline" className="text-base border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all">
+                    <Play className="w-5 h-5 mr-2" />
+                    Ver Demonstração
+                  </Button>
+                </Link>
+              </div>
 
 
             </motion.div>
 
-            {/* Magazine Preview */}
+            {/* Card Premium de Setores */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -329,45 +290,64 @@ export default function Home() {
               className="relative"
             >
               <div className="relative mx-auto max-w-lg">
-                {/* Setores Atendidos */}
-                <div className="bg-white rounded-2xl shadow-2xl p-6 border border-border/50">
-                  <div className="text-center mb-6">
-                    <h3 className="font-serif text-xl font-bold text-foreground mb-2">
+                {/* Setores Atendidos - Premium Card */}
+                <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100 relative overflow-hidden">
+                  {/* Decorative element */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-orange-500/10 to-transparent rounded-bl-full" />
+                  
+                  <div className="text-center mb-8 relative">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 mb-4 shadow-lg shadow-orange-500/30">
+                      <Wrench className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
                       Setores Atendidos
                     </h3>
-                    <p className="text-sm text-muted-foreground">Soluções para todos os tipos de organização</p>
+                    <p className="text-gray-500">Soluções para todos os tipos de organização</p>
                   </div>
 
-                  {/* Grid de Setores */}
-                  <div className="grid grid-cols-3 gap-3">
-                    <div className="flex flex-col items-center p-4 rounded-xl bg-orange-50 hover:bg-orange-100 transition-colors">
-                      <Building2 className="w-8 h-8 text-orange-600 mb-2" />
-                      <span className="text-xs font-medium text-center">Predial</span>
+                  {/* Grid de Setores - Premium */}
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="group flex flex-col items-center p-5 rounded-2xl bg-gradient-to-br from-orange-50 to-orange-100/50 hover:from-orange-100 hover:to-orange-200/50 transition-all cursor-pointer border border-orange-200/50 hover:border-orange-300 hover:shadow-lg">
+                      <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <Building2 className="w-6 h-6 text-orange-600" />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-800 text-center">Predial</span>
                     </div>
-                    <div className="flex flex-col items-center p-4 rounded-xl bg-blue-50 hover:bg-blue-100 transition-colors">
-                      <Wrench className="w-8 h-8 text-blue-600 mb-2" />
-                      <span className="text-xs font-medium text-center">Industrial</span>
+                    <div className="group flex flex-col items-center p-5 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100/50 hover:from-gray-100 hover:to-gray-200/50 transition-all cursor-pointer border border-gray-200/50 hover:border-gray-300 hover:shadow-lg">
+                      <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <Wrench className="w-6 h-6 text-gray-700" />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-800 text-center">Industrial</span>
                     </div>
-                    <div className="flex flex-col items-center p-4 rounded-xl bg-emerald-50 hover:bg-emerald-100 transition-colors">
-                      <ShoppingBag className="w-8 h-8 text-emerald-600 mb-2" />
-                      <span className="text-xs font-medium text-center">Comercial</span>
+                    <div className="group flex flex-col items-center p-5 rounded-2xl bg-gradient-to-br from-orange-50 to-orange-100/50 hover:from-orange-100 hover:to-orange-200/50 transition-all cursor-pointer border border-orange-200/50 hover:border-orange-300 hover:shadow-lg">
+                      <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <ShoppingBag className="w-6 h-6 text-orange-600" />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-800 text-center">Comercial</span>
                     </div>
-                    <div className="flex flex-col items-center p-4 rounded-xl bg-red-50 hover:bg-red-100 transition-colors">
-                      <Heart className="w-8 h-8 text-red-600 mb-2" />
-                      <span className="text-xs font-medium text-center">Hospitalar</span>
+                    <div className="group flex flex-col items-center p-5 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100/50 hover:from-gray-100 hover:to-gray-200/50 transition-all cursor-pointer border border-gray-200/50 hover:border-gray-300 hover:shadow-lg">
+                      <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <Heart className="w-6 h-6 text-gray-700" />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-800 text-center">Hospitalar</span>
                     </div>
-                    <div className="flex flex-col items-center p-4 rounded-xl bg-purple-50 hover:bg-purple-100 transition-colors">
-                      <BookOpen className="w-8 h-8 text-purple-600 mb-2" />
-                      <span className="text-xs font-medium text-center">Escolar</span>
+                    <div className="group flex flex-col items-center p-5 rounded-2xl bg-gradient-to-br from-orange-50 to-orange-100/50 hover:from-orange-100 hover:to-orange-200/50 transition-all cursor-pointer border border-orange-200/50 hover:border-orange-300 hover:shadow-lg">
+                      <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <BookOpen className="w-6 h-6 text-orange-600" />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-800 text-center">Escolar</span>
                     </div>
-                    <div className="flex flex-col items-center p-4 rounded-xl bg-amber-50 hover:bg-amber-100 transition-colors">
-                      <Package className="w-8 h-8 text-amber-600 mb-2" />
-                      <span className="text-xs font-medium text-center">Máquinas</span>
+                    <div className="group flex flex-col items-center p-5 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100/50 hover:from-gray-100 hover:to-gray-200/50 transition-all cursor-pointer border border-gray-200/50 hover:border-gray-300 hover:shadow-lg">
+                      <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <Package className="w-6 h-6 text-gray-700" />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-800 text-center">Máquinas</span>
                     </div>
                   </div>
 
                   {/* Funcionalidades principais */}
-                  <div className="mt-6 pt-6 border-t border-border/50">
+                  <div className="mt-8 pt-6 border-t border-gray-100">
+                    <p className="text-xs text-gray-400 text-center mb-4 uppercase tracking-wider font-medium">Funcionalidades Principais</p>
                     <div className="grid grid-cols-2 gap-3">
                       <div className="flex items-center gap-2 text-sm">
                         <ClipboardCheck className="w-4 h-4 text-primary" />
