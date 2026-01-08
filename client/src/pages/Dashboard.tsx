@@ -2139,15 +2139,15 @@ function CondominioSection() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-serif font-bold text-foreground">Meu Condomínio</h1>
-          <p className="text-muted-foreground">Configure as informações da sua organização</p>
+          <h1 className="text-2xl font-serif font-bold text-foreground">Cadastro de Locais e Itens</h1>
+          <p className="text-muted-foreground">Gerencie locais e itens para manutenção</p>
         </div>
         {hasCondominios && (
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
               <Button className="btn-magazine">
                 <Plus className="w-4 h-4 mr-2" />
-                Novo Condomínio
+                Novo Local
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-0">

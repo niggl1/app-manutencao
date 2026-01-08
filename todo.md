@@ -155,3 +155,8 @@
 - [x] Remover "Avisos" das funções rápidas disponíveis
 - [x] Remover "Notificações" das funções rápidas disponíveis
 - [x] Testar funções rápidas no navegador
+
+## Fase 19: Atualização de Textos - Cadastro de Organização
+- [x] Alterar "Meu Condomínio" para "Cadastro de locais e itens para manutenção"
+- [x] Alterar botão "Novo Condomínio" para "Novo Local"
+- [x] Testar alterações no navegador
