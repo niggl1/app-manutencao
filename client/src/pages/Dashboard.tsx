@@ -568,7 +568,7 @@ export default function Dashboard() {
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => setLocation("/dashboard/revistas")} className="cursor-pointer">
                           <BookOpen className="h-4 w-4 mr-2" />
-                          Criar Revista
+                          Criar Livro
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => setLocation("/dashboard/relatorios/novo")} className="cursor-pointer">
                           <FileBarChart className="h-4 w-4 mr-2" />
@@ -1278,7 +1278,7 @@ function OverviewSection({ user }: { user: any }) {
               className="w-full py-2.5 px-4 rounded-xl font-medium text-white bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 shadow-md shadow-purple-500/25 hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300 flex items-center justify-center gap-2"
             >
               <Plus className="w-4 h-4" />
-              Criar Revista
+              Criar Livro
             </button>
           </CardContent>
         </Card>
@@ -1942,7 +1942,7 @@ function RevistasSection() {
                 onClick={() => setIsDialogOpen(true)}
               >
                 <Plus className="h-5 w-5 mr-2" />
-                Criar Revista
+                Criar Livro
               </Button>
             </div>
           </div>
@@ -2029,7 +2029,7 @@ function RevistasSection() {
                 ) : (
                   <Plus className="w-4 h-4 mr-2" />
                 )}
-                Criar Revista
+                Criar Livro
               </Button>
             </div>
           </form>

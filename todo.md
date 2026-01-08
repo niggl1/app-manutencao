@@ -182,3 +182,7 @@
 - [x] Criar favicon a partir da logo de engrenagem
 - [x] Configurar favicon no index.html
 - [x] Testar alterações no navegador
+
+## Fase 24: Renomear Botão Criar Revista
+- [x] Alterar "Criar Revista" para "Criar Livro" no Dashboard.tsx (4 ocorrências)
+- [x] Testar alterações no navegador
