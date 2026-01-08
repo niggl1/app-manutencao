@@ -167,3 +167,9 @@
 - [x] Alterar "Revistas Criadas" para "Livro de Manutenções"
 - [x] Alterar descrição de revistas para "Registre todas as manutenções para apresentar aos seus clientes e gestores"
 - [x] Testar alterações no navegador
+
+
+## Fase 21: Atualização da Logo do Dashboard
+- [x] Copiar nova logo para pasta public
+- [x] Logo já referenciada como /logo-manutencao.png (atualizada)
+- [x] Testar alterações no navegador
