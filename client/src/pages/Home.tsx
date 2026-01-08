@@ -40,8 +40,9 @@ export default function Home() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
         <div className="container flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2">
-            <img src="/logo-manutencao.png" alt="App Manutenção" className="h-12 object-contain" />
+          <Link href="/" className="flex items-center gap-3">
+            <img src="/logo-manutencao.png" alt="App Manutenção" className="h-10 object-contain" />
+            <span className="font-bold text-lg text-gray-800">App Manutenção</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
