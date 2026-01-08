@@ -1231,8 +1231,8 @@ function OverviewSection({ user }: { user: any }) {
               </div>
               <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">{appsData?.length || 0}</span>
             </div>
-            <h3 className="text-lg font-semibold text-foreground mb-1">Apps Criados</h3>
-            <p className="text-sm text-muted-foreground mb-4">Crie apps personalizados para sua organização</p>
+            <h3 className="text-lg font-semibold text-foreground mb-1">App de Manutenção</h3>
+            <p className="text-sm text-muted-foreground mb-4">Crie seu app de manutenção personalizado</p>
             <button
               onClick={() => window.location.href = '/dashboard/apps/novo'}
               className="w-full py-2.5 px-4 rounded-xl font-medium text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-md shadow-blue-500/25 hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300 flex items-center justify-center gap-2"
@@ -1273,8 +1273,8 @@ function OverviewSection({ user }: { user: any }) {
               </div>
               <span className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent">0</span>
             </div>
-            <h3 className="text-lg font-semibold text-foreground mb-1">Revistas Criadas</h3>
-            <p className="text-sm text-muted-foreground mb-4">Crie revistas digitais interativas</p>
+            <h3 className="text-lg font-semibold text-foreground mb-1">Livro de Manutenções</h3>
+            <p className="text-sm text-muted-foreground mb-4">Registre todas as manutenções para apresentar aos seus clientes e gestores</p>
             <button
               onClick={() => window.location.href = '/dashboard/revistas'}
               className="w-full py-2.5 px-4 rounded-xl font-medium text-white bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 shadow-md shadow-purple-500/25 hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300 flex items-center justify-center gap-2"
@@ -1881,8 +1881,8 @@ function RevistasSection() {
                   <p className="text-xs text-blue-400 font-medium">apps</p>
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-2">Apps Personalizados</h3>
-              <p className="text-sm text-slate-500 mb-6 leading-relaxed">Crie aplicativos exclusivos com a identidade da sua organização</p>
+              <h3 className="text-xl font-bold text-slate-800 mb-2">App de Manutenção</h3>
+              <p className="text-sm text-slate-500 mb-6 leading-relaxed">Crie seu app de manutenção personalizado</p>
               <Link href="/dashboard/apps/novo">
                 <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-lg shadow-blue-500/25 font-semibold py-3 h-auto">
                   <Plus className="h-5 w-5 mr-2" />
@@ -1937,8 +1937,8 @@ function RevistasSection() {
                   <p className="text-xs text-purple-400 font-medium">revistas</p>
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-2">Revistas Digitais</h3>
-              <p className="text-sm text-slate-500 mb-6 leading-relaxed">Crie revistas interativas e modernas para comunicar com a equipa</p>
+              <h3 className="text-xl font-bold text-slate-800 mb-2">Livro de Manutenções</h3>
+              <p className="text-sm text-slate-500 mb-6 leading-relaxed">Registre todas as manutenções para apresentar aos seus clientes e gestores</p>
               <Button 
                 className="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-fuchsia-500 hover:from-purple-600 hover:via-pink-600 hover:to-fuchsia-600 text-white shadow-lg shadow-purple-500/25 font-semibold py-3 h-auto"
                 onClick={() => setIsDialogOpen(true)}

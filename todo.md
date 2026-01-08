@@ -160,3 +160,10 @@
 - [x] Alterar "Meu Condomínio" para "Cadastro de locais e itens para manutenção"
 - [x] Alterar botão "Novo Condomínio" para "Novo Local"
 - [x] Testar alterações no navegador
+
+
+## Fase 20: Atualização de Textos dos Cards do Dashboard
+- [x] Alterar "Apps Criados" para "App de Manutenção" e "Crie seu app de manutenção personalizado"
+- [x] Alterar "Revistas Criadas" para "Livro de Manutenções"
+- [x] Alterar descrição de revistas para "Registre todas as manutenções para apresentar aos seus clientes e gestores"
+- [x] Testar alterações no navegador
