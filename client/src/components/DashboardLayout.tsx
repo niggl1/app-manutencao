@@ -165,25 +165,16 @@ const menuSections = [
     iconName: "Wrench",
     items: [
       { icon: ClipboardCheck, iconName: "ClipboardCheck", label: "Vistorias", path: "/dashboard/vistorias", funcaoId: "vistorias" },
+      { icon: Zap, iconName: "Zap", label: "⚡ Vistoria Simples", path: "/dashboard/funcoes-simples?tipo=vistoria", funcaoId: "vistoria-simples" },
       { icon: Wrench, iconName: "Wrench", label: "Manutenções", path: "/dashboard/manutencoes", funcaoId: "manutencoes" },
+      { icon: Zap, iconName: "Zap", label: "⚡ Manutenção Simples", path: "/dashboard/funcoes-simples?tipo=manutencao", funcaoId: "manutencao-simples" },
       { icon: AlertTriangle, iconName: "AlertTriangle", label: "Ocorrências", path: "/dashboard/ocorrencias", funcaoId: "ocorrencias" },
+      { icon: Zap, iconName: "Zap", label: "⚡ Ocorrência Simples", path: "/dashboard/funcoes-simples?tipo=ocorrencia", funcaoId: "ocorrencia-simples" },
       { icon: CheckSquare, iconName: "CheckSquare", label: "Checklists", path: "/dashboard/checklists", funcaoId: "checklists" },
       { icon: ArrowLeftRight, iconName: "ArrowLeftRight", label: "Antes e Depois", path: "/dashboard/antes-depois", funcaoId: "antes-depois" },
+      { icon: Zap, iconName: "Zap", label: "⚡ Antes/Depois Simples", path: "/dashboard/funcoes-simples?tipo=antes_depois", funcaoId: "antes-depois-simples" },
       { icon: CalendarClock, iconName: "CalendarClock", label: "Agenda de Vencimentos", path: "/dashboard/agenda-vencimentos", funcaoId: "agenda-vencimentos" },
-    ]
-  },
-  // Seção separada para Funções Simples
-  {
-    id: "funcoes-simples",
-    label: "⚡ Funções Simples",
-    icon: Zap,
-    iconName: "Zap",
-    items: [
-      { icon: ClipboardCheck, iconName: "ClipboardCheck", label: "Vistoria Simples", path: "/dashboard/funcoes-simples?tipo=vistoria", funcaoId: "vistoria-simples" },
-      { icon: Wrench, iconName: "Wrench", label: "Manutenção Simples", path: "/dashboard/funcoes-simples?tipo=manutencao", funcaoId: "manutencao-simples" },
-      { icon: AlertTriangle, iconName: "AlertTriangle", label: "Ocorrência Simples", path: "/dashboard/funcoes-simples?tipo=ocorrencia", funcaoId: "ocorrencia-simples" },
-      { icon: ArrowLeftRight, iconName: "ArrowLeftRight", label: "Antes/Depois Simples", path: "/dashboard/funcoes-simples?tipo=antes_depois", funcaoId: "antes-depois-simples" },
-      { icon: FileText, iconName: "FileText", label: "Histórico", path: "/dashboard/funcoes-simples", funcaoId: "funcoes-simples-historico" },
+      { icon: FileText, iconName: "FileText", label: "⚡ Histórico Funções Simples", path: "/dashboard/funcoes-simples", funcaoId: "funcoes-simples-historico" },
     ]
   },
   {
