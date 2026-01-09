@@ -158,6 +158,7 @@ const menuSections = [
       { icon: Send, iconName: "Send", label: "Notificar Morador", path: "/dashboard/notificacoes?tab=enviar", funcaoId: "notificar-morador" },
     ]
   },
+  // Funções Simples adicionadas ao menu - v2
   {
     id: "operacional",
     label: "Operacional / Manutenção",
