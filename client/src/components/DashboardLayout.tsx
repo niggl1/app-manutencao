@@ -175,7 +175,7 @@ const menuSections = [
   // Seção separada para Funções Simples
   {
     id: "funcoes-simples",
-    label: "Funções Simples",
+    label: "⚡ Funções Simples",
     icon: Zap,
     iconName: "Zap",
     items: [
