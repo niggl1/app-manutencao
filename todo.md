@@ -252,3 +252,7 @@
 ### Exportação
 - [x] Criar pasta com arquivos para exportar ao outro sistema
 - [x] Documentar instruções de implementação
+
+## Ajustes
+
+- [x] Mover Funções Simples para dentro do menu Operacional/Manutenção existente
