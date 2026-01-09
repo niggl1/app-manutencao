@@ -256,3 +256,5 @@
 ## Ajustes
 
 - [x] Mover Funções Simples para dentro do menu Operacional/Manutenção existente
+
+- [x] Criar seção separada "Funções Simples" no menu lateral (Opção 2)
