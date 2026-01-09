@@ -184,6 +184,19 @@ const menuSections = [
     ]
   },
   {
+    id: "funcoes-simples",
+    label: "Funções Simples",
+    icon: Zap,
+    iconName: "Zap",
+    items: [
+      { icon: Zap, iconName: "Zap", label: "Histórico de Registros", path: "/dashboard/funcoes-simples", funcaoId: "funcoes-simples" },
+      { icon: ClipboardCheck, iconName: "ClipboardCheck", label: "Vistoria Simples", path: "/dashboard/funcoes-simples?tipo=vistoria", funcaoId: "vistoria-simples" },
+      { icon: Wrench, iconName: "Wrench", label: "Manutenção Simples", path: "/dashboard/funcoes-simples?tipo=manutencao", funcaoId: "manutencao-simples" },
+      { icon: AlertTriangle, iconName: "AlertTriangle", label: "Ocorrência Simples", path: "/dashboard/funcoes-simples?tipo=ocorrencia", funcaoId: "ocorrencia-simples" },
+      { icon: ArrowLeftRight, iconName: "ArrowLeftRight", label: "Antes/Depois Simples", path: "/dashboard/funcoes-simples?tipo=antes_depois", funcaoId: "antes-depois-simples" },
+    ]
+  },
+  {
     id: "galeria",
     label: "Galeria e Mídia",
     icon: Image,

@@ -114,6 +114,8 @@ import {
   X,
   Sun,
   Moon,
+  Zap,
+  ArrowLeftRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -150,6 +152,13 @@ const availableSections: Omit<ReportSection, "enabled">[] = [
   { id: "antes_depois", key: "antes_depois", title: "Antes e Depois", description: "Comparativos visuais", icon: Image, category: "operacional" },
   { id: "ordens_servico", key: "ordens_servico", title: "Ordens de Serviço", description: "Ordens de serviço emitidas", icon: FileCheck, category: "operacional" },
   
+  // FUNÇÕES SIMPLES
+  { id: "funcoes_simples", key: "funcoes_simples", title: "Funções Simples", description: "Registros rápidos de vistorias, manutenções, ocorrências e antes/depois", icon: Zap, category: "funcoes_simples" },
+  { id: "vistorias_simples", key: "vistorias_simples", title: "Vistorias Simples", description: "Vistorias rápidas registradas", icon: ClipboardCheck, category: "funcoes_simples" },
+  { id: "manutencoes_simples", key: "manutencoes_simples", title: "Manutenções Simples", description: "Manutenções rápidas registradas", icon: Wrench, category: "funcoes_simples" },
+  { id: "ocorrencias_simples", key: "ocorrencias_simples", title: "Ocorrências Simples", description: "Ocorrências rápidas registradas", icon: AlertTriangle, category: "funcoes_simples" },
+  { id: "antes_depois_simples", key: "antes_depois_simples", title: "Antes/Depois Simples", description: "Comparações rápidas registradas", icon: ArrowLeftRight, category: "funcoes_simples" },
+  
   // GALERIA E MÍDIA
   { id: "albuns", key: "albuns", title: "Álbuns de Fotos", description: "Galeria de imagens", icon: Image, category: "galeria" },
   { id: "realizacoes", key: "realizacoes", title: "Realizações", description: "Conquistas da organização", icon: Award, category: "galeria" },
@@ -164,6 +173,7 @@ const categories = [
   { id: "gestao", title: "Gestão da Organização", icon: Building2 },
   { id: "comunicacao", title: "Comunicação", icon: MessageSquare },
   { id: "operacional", title: "Operacional / Manutenção", icon: Wrench },
+  { id: "funcoes_simples", title: "Funções Simples", icon: Zap },
   { id: "galeria", title: "Galeria e Mídia", icon: Image },
 ];
 

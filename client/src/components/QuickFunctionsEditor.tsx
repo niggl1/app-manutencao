@@ -29,6 +29,8 @@ import {
   BellRing,
   ClipboardList,
   Loader2,
+  Zap,
+  ArrowLeftRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -71,6 +73,12 @@ export const allQuickFunctions = [
   { id: "notificar-morador", label: "Notificar", icon: BellRing, gradient: "from-orange-500 to-red-500", path: "/dashboard/notificar-morador" },
   { id: "ordens-servico", label: "Ordens de Serviço", icon: ClipboardList, gradient: "from-yellow-500 to-amber-600", path: "/dashboard/ordens-servico" },
   { id: "antes-depois", label: "Antes e Depois", icon: Camera, gradient: "from-emerald-500 to-teal-600", path: "/dashboard/antes-depois" },
+  // Funções Simples
+  { id: "funcoes-simples", label: "Funções Simples", icon: Zap, gradient: "from-orange-500 to-amber-600", path: "/dashboard/funcoes-simples" },
+  { id: "vistoria-simples", label: "Vistoria Simples", icon: ClipboardCheck, gradient: "from-blue-500 to-cyan-600", path: "/dashboard/funcoes-simples?tipo=vistoria" },
+  { id: "manutencao-simples", label: "Manutenção Simples", icon: Wrench, gradient: "from-orange-500 to-red-600", path: "/dashboard/funcoes-simples?tipo=manutencao" },
+  { id: "ocorrencia-simples", label: "Ocorrência Simples", icon: AlertTriangle, gradient: "from-red-500 to-rose-600", path: "/dashboard/funcoes-simples?tipo=ocorrencia" },
+  { id: "antes-depois-simples", label: "Antes/Depois Simples", icon: ArrowLeftRight, gradient: "from-green-500 to-emerald-600", path: "/dashboard/funcoes-simples?tipo=antes_depois" },
 ];
 
 // Mapa de ícones para uso externo
@@ -78,6 +86,7 @@ export const iconMap: Record<string, any> = {
   ListChecks, Wrench, AlertTriangle, ClipboardCheck, Megaphone, Vote, Bell,
   CalendarDays, Users, Car, ShoppingBag, Search, Camera, FileText, Shield,
   BookOpen, TrendingUp, Package, Video, CalendarClock, BellRing, ClipboardList,
+  Zap, ArrowLeftRight,
 };
 
 const QUICK_FUNCTIONS_KEY = "dashboard-quick-functions";

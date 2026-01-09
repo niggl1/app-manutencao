@@ -15,6 +15,13 @@
       "when": 1767879487997,
       "tag": "0001_glorious_living_lightning",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1767917540983,
+      "tag": "0002_thick_natasha_romanoff",
+      "breakpoints": true
     }
   ]
 }

@@ -1929,3 +1929,64 @@ export const inscricoesRevista = mysqlTable("inscricoes_revista", {
 
 export type InscricaoRevista = typeof inscricoesRevista.$inferSelect;
 export type InsertInscricaoRevista = typeof inscricoesRevista.$inferInsert;
+
+
+// ==================== TAREFAS SIMPLES ====================
+// Sistema de registro rápido para vistorias, manutenções, ocorrências e antes/depois
+export const tarefasSimples = mysqlTable("tarefas_simples", {
+  id: int("id").autoincrement().primaryKey(),
+  condominioId: int("condominioId").references(() => condominios.id).notNull(),
+  userId: int("userId").references(() => users.id),
+  funcionarioId: int("funcionarioId").references(() => funcionarios.id),
+  
+  // Tipo da tarefa
+  tipo: mysqlEnum("tipo", ["vistoria", "manutencao", "ocorrencia", "antes_depois"]).notNull(),
+  
+  // Dados principais
+  protocolo: varchar("protocolo", { length: 50 }).notNull().unique(),
+  titulo: varchar("titulo", { length: 255 }),
+  descricao: text("descricao"),
+  
+  // Imagens (JSON array de URLs)
+  imagens: json("imagens").$type<string[]>(),
+  
+  // Localização automática
+  latitude: varchar("latitude", { length: 20 }),
+  longitude: varchar("longitude", { length: 20 }),
+  endereco: text("endereco"),
+  
+  // Status personalizado pelo usuário
+  statusPersonalizado: varchar("statusPersonalizado", { length: 100 }),
+  
+  // Controle de envio
+  status: mysqlEnum("status", ["rascunho", "enviado", "concluido"]).default("rascunho").notNull(),
+  enviadoEm: timestamp("enviadoEm"),
+  concluidoEm: timestamp("concluidoEm"),
+  
+  // Metadados
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type TarefaSimples = typeof tarefasSimples.$inferSelect;
+export type InsertTarefaSimples = typeof tarefasSimples.$inferInsert;
+
+// ==================== STATUS PERSONALIZADOS ====================
+// Permite ao usuário criar seus próprios status para as tarefas
+export const statusPersonalizados = mysqlTable("status_personalizados", {
+  id: int("id").autoincrement().primaryKey(),
+  condominioId: int("condominioId").references(() => condominios.id).notNull(),
+  userId: int("userId").references(() => users.id),
+  
+  nome: varchar("nome", { length: 100 }).notNull(),
+  cor: varchar("cor", { length: 20 }).default("#F97316"), // Laranja premium padrão
+  icone: varchar("icone", { length: 50 }),
+  ordem: int("ordem").default(0),
+  ativo: boolean("ativo").default(true),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type StatusPersonalizado = typeof statusPersonalizados.$inferSelect;
+export type InsertStatusPersonalizado = typeof statusPersonalizados.$inferInsert;

@@ -217,3 +217,38 @@
 ## Fase 30: Atualizar Passo 3 dos Primeiros Passos
 - [x] Alterar "App, revista ou relatório" para "App, livro ou relatório"
 - [x] Testar alterações no navegador
+
+## Fase 31: Funções Simples - Sistema de Registro Rápido
+### Schema e Backend
+- [x] Criar tabela tarefas_simples no schema.ts
+- [x] Criar tabela status_personalizados para status customizáveis
+- [x] Criar rotas tRPC para CRUD de tarefas simples
+- [x] Implementar geração automática de protocolo
+
+### Frontend - Modal de Registro
+- [x] Criar componente TarefasSimplesModal.tsx
+- [x] Implementar design premium laranja clean
+- [x] Campo título com botão "+" para salvar e adicionar
+- [x] Upload de imagens (opcional)
+- [x] Captura de localização automática GPS
+- [x] Geração de protocolo automático
+- [x] Campo descrição (opcional)
+- [x] Status personalizável pelo usuário
+- [x] Botão "Registrar e Adicionar Outra"
+- [x] Botão "Enviar" para enviar todos os rascunhos
+- [x] Salvamento automático como rascunho
+
+### Frontend - Histórico
+- [x] Criar página HistoricoTarefasSimples.tsx
+- [x] Listar todas as tarefas simples
+- [x] Filtro por tipo (Vistoria, Manutenção, Ocorrência, Antes/Depois)
+- [x] Filtro por status
+- [x] Visualização de detalhes
+### Integração
+- [x] Adicionar funções simples ao menu lateral
+- [x] Adicionar às funções rápidas disponíveis
+- [x] Integrar ao construtor de relatórios
+
+### Exportação
+- [x] Criar pasta com arquivos para exportar ao outro sistema
+- [x] Documentar instruções de implementação
