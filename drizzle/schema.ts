@@ -1619,7 +1619,11 @@ export const valoresSalvos = mysqlTable("valores_salvos", {
     "tipo_checklist",
     "tipo_ocorrencia",
     "fornecedor",
-    "localizacao"
+    "localizacao",
+    "titulo_vistoria",
+    "subtitulo_vistoria",
+    "descricao_vistoria",
+    "observacoes_vistoria"
   ]).notNull(),
   valor: varchar("valor", { length: 255 }).notNull(),
   ativo: boolean("ativo").default(true),

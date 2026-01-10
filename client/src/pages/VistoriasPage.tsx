@@ -530,24 +530,22 @@ export default function VistoriasPage({ condominioId }: VistoriasPageProps) {
             {/* Seção: Informações Básicas */}
             <FormSection title="Informações Básicas" icon={FileText} iconColor="text-blue-500">
               <FormFieldGroup columns={1}>
-                <div>
-                  <StyledLabel required icon={Clipboard}>Título</StyledLabel>
-                  <Input
-                    value={formData.titulo}
-                    onChange={(e) => setFormData({ ...formData, titulo: e.target.value })}
-                    placeholder="Ex: Vistoria de Elevadores"
-                    className="h-11 border-gray-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
-                  />
-                </div>
-                <div>
-                  <StyledLabel>Subtítulo</StyledLabel>
-                  <Input
-                    value={formData.subtitulo}
-                    onChange={(e) => setFormData({ ...formData, subtitulo: e.target.value })}
-                    placeholder="Ex: Manutenção preventiva mensal"
-                    className="h-11 border-gray-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
-                  />
-                </div>
+                <InputWithSave
+                  label="Título *"
+                  value={formData.titulo}
+                  onChange={(v) => setFormData({ ...formData, titulo: v })}
+                  condominioId={condominioId}
+                  tipo="titulo_vistoria"
+                  placeholder="Ex: Vistoria de Elevadores"
+                />
+                <InputWithSave
+                  label="Subtítulo"
+                  value={formData.subtitulo}
+                  onChange={(v) => setFormData({ ...formData, subtitulo: v })}
+                  condominioId={condominioId}
+                  tipo="subtitulo_vistoria"
+                  placeholder="Ex: Manutenção preventiva mensal"
+                />
               </FormFieldGroup>
             </FormSection>
 
@@ -650,26 +648,26 @@ export default function VistoriasPage({ condominioId }: VistoriasPageProps) {
             {/* Seção: Detalhes */}
             <FormSection title="Detalhes" icon={AlignLeft} iconColor="text-gray-500">
               <div className="space-y-4">
-                <div>
-                  <StyledLabel icon={AlignLeft}>Descrição</StyledLabel>
-                  <Textarea
-                    value={formData.descricao}
-                    onChange={(e) => setFormData({ ...formData, descricao: e.target.value })}
-                    placeholder="Descreva os detalhes da vistoria..."
-                    rows={3}
-                    className="border-gray-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all resize-none"
-                  />
-                </div>
-                <div>
-                  <StyledLabel>Observações</StyledLabel>
-                  <Textarea
-                    value={formData.observacoes}
-                    onChange={(e) => setFormData({ ...formData, observacoes: e.target.value })}
-                    placeholder="Observações adicionais..."
-                    rows={2}
-                    className="border-gray-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all resize-none"
-                  />
-                </div>
+                <InputWithSave
+                  label="Descrição"
+                  value={formData.descricao}
+                  onChange={(v) => setFormData({ ...formData, descricao: v })}
+                  condominioId={condominioId}
+                  tipo="descricao_vistoria"
+                  placeholder="Descreva os detalhes da vistoria..."
+                  multiline
+                  rows={3}
+                />
+                <InputWithSave
+                  label="Observações"
+                  value={formData.observacoes}
+                  onChange={(v) => setFormData({ ...formData, observacoes: v })}
+                  condominioId={condominioId}
+                  tipo="observacoes_vistoria"
+                  placeholder="Observações adicionais..."
+                  multiline
+                  rows={2}
+                />
               </div>
             </FormSection>
 

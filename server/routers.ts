@@ -11353,7 +11353,11 @@ Para gerenciar suas notificações, acesse a Agenda de Vencimentos no painel.
           "tipo_checklist",
           "tipo_ocorrencia",
           "fornecedor",
-          "localizacao"
+          "localizacao",
+          "titulo_vistoria",
+          "subtitulo_vistoria",
+          "descricao_vistoria",
+          "observacoes_vistoria"
         ])
       }))
       .query(async ({ input }) => {
@@ -11382,7 +11386,11 @@ Para gerenciar suas notificações, acesse a Agenda de Vencimentos no painel.
           "tipo_checklist",
           "tipo_ocorrencia",
           "fornecedor",
-          "localizacao"
+          "localizacao",
+          "titulo_vistoria",
+          "subtitulo_vistoria",
+          "descricao_vistoria",
+          "observacoes_vistoria"
         ]),
         valor: z.string().min(1)
       }))

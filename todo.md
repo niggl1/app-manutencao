@@ -286,3 +286,5 @@
 
 ## Bugs Reportados - Fase 33
 - [x] Página de Vistorias não carrega conteúdo (área principal em branco) - Corrigido: adicionado fallback SemOrganizacaoMessage
+
+- [x] Adicionar botões "+" para personalizar campos na página VistoriasPage (formulário de Nova Vistoria) - Todos os 8 campos agora têm botão "+"
