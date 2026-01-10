@@ -1960,6 +1960,7 @@ export const tarefasSimples = mysqlTable("tarefas_simples", {
   protocolo: varchar("protocolo", { length: 50 }).notNull().unique(),
   titulo: varchar("titulo", { length: 255 }),
   descricao: text("descricao"),
+  local: varchar("local", { length: 255 }),
   
   // Imagens (JSON array de URLs)
   imagens: json("imagens").$type<string[]>(),

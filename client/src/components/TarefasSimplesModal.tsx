@@ -239,6 +239,7 @@ export function TarefasSimplesModal({
   const [tipo, setTipo] = useState<TipoTarefa>(tipoInicial);
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
+  const [local, setLocal] = useState("");
   const [imagens, setImagens] = useState<string[]>([]);
   const [statusPersonalizado, setStatusPersonalizado] = useState("");
   const [novoStatus, setNovoStatus] = useState("");
@@ -377,6 +378,7 @@ export function TarefasSimplesModal({
         protocolo,
         titulo: titulo || undefined,
         descricao: descricao || undefined,
+        local: local || undefined,
         imagens: imagens.length > 0 ? imagens : undefined,
         latitude: localizacao?.lat,
         longitude: localizacao?.lng,
@@ -391,6 +393,7 @@ export function TarefasSimplesModal({
       // Limpar campos para novo registro
       setTitulo("");
       setDescricao("");
+      setLocal("");
       setImagens([]);
       setStatusPersonalizado("");
       await gerarNovoProtocolo();
@@ -518,6 +521,29 @@ export function TarefasSimplesModal({
                 tipoTarefa={tipo}
                 valorAtual={titulo}
                 onSelect={setTitulo}
+              />
+            </div>
+          </div>
+
+          {/* Local com botão + */}
+          <div className="space-y-2">
+            <Label className="text-gray-700 font-medium flex items-center gap-2">
+              <MapPin className="h-4 w-4 text-orange-500" />
+              Local (opcional)
+            </Label>
+            <div className="flex gap-2">
+              <Input
+                placeholder="Ex: Bloco A, Apartamento 101, Garagem..."
+                value={local}
+                onChange={(e) => setLocal(e.target.value)}
+                className="flex-1 border-gray-200 focus:border-orange-400 focus:ring-orange-400"
+              />
+              <TemplateSelector
+                condominioId={condominioId}
+                tipoCampo="local"
+                tipoTarefa={tipo}
+                valorAtual={local}
+                onSelect={setLocal}
               />
             </div>
           </div>

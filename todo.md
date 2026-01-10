@@ -303,3 +303,8 @@
 ### Antes e Depois
 - [x] Adicionar botão ⚡ Antes/Depois Rápido
 - [x] Adicionar novos tipos ao schema (titulo_antesdepois, descricao_antesdepois)
+
+## Fase 35: Campo Local no Modal de Funções Rápidas
+- [x] Adicionar campo "Local" ao TarefasSimplesModal
+- [x] Integrar com TemplateSelector para salvar locais frequentes
+- [x] Salvar localização no banco de dados

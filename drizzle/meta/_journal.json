@@ -43,6 +43,13 @@
       "when": 1768056051245,
       "tag": "0005_careless_talisman",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1768056773463,
+      "tag": "0006_sparkling_bedlam",
+      "breakpoints": true
     }
   ]
 }
