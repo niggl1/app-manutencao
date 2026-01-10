@@ -549,6 +549,13 @@ function DashboardLayoutContent({
           </SidebarHeader>
 
           <SidebarContent className="gap-0 overflow-y-auto">
+            {/* BOTÃO DE TESTE - REMOVER DEPOIS */}
+            <div className="px-4 py-4 bg-red-500">
+              <button className="w-full py-3 bg-yellow-400 text-black font-bold text-lg rounded-lg">
+                🚨 BOTÃO TESTE 🚨
+              </button>
+            </div>
+
             {/* Seção de Manutenção Rápida */}
             <div className="px-4 py-3 border-b border-border/50">
               <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Manutenção Rápida</p>
