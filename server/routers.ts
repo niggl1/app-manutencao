@@ -110,7 +110,8 @@ import {
   funcoesRapidas,
   inscricoesRevista,
   tarefasSimples,
-  statusPersonalizados
+  statusPersonalizados,
+  camposRapidosTemplates
 } from "../drizzle/schema";
 import { eq, and, desc, like, or, sql, gte, lte, inArray, asc } from "drizzle-orm";
 import { nanoid } from "nanoid";
@@ -13812,6 +13813,140 @@ Para gerenciar suas notificações, acesse a Agenda de Vencimentos no painel.
         await db.update(statusPersonalizados)
           .set({ ativo: false })
           .where(eq(statusPersonalizados.id, input.id));
+        return { success: true };
+      }),
+  }),
+
+  // ==================== CAMPOS RÁPIDOS TEMPLATES ====================
+  // Permite salvar valores frequentes para reutilização nos formulários
+  camposRapidosTemplates: router({
+    // Listar templates por tipo de campo
+    listar: protectedProcedure
+      .input(z.object({
+        condominioId: z.number(),
+        tipoCampo: z.enum(["titulo", "descricao", "local", "observacao"]).optional(),
+        tipoTarefa: z.enum(["vistoria", "manutencao", "ocorrencia", "antes_depois"]).optional(),
+      }))
+      .query(async ({ input }) => {
+        const db = await getDb();
+        if (!db) throw new Error("Database not available");
+        
+        const conditions = [
+          eq(camposRapidosTemplates.condominioId, input.condominioId),
+          eq(camposRapidosTemplates.ativo, true)
+        ];
+        
+        if (input.tipoCampo) {
+          conditions.push(eq(camposRapidosTemplates.tipoCampo, input.tipoCampo));
+        }
+        if (input.tipoTarefa) {
+          conditions.push(eq(camposRapidosTemplates.tipoTarefa, input.tipoTarefa));
+        }
+        
+        return db.select()
+          .from(camposRapidosTemplates)
+          .where(and(...conditions))
+          .orderBy(desc(camposRapidosTemplates.vezesUsado), desc(camposRapidosTemplates.favorito));
+      }),
+
+    // Criar novo template
+    criar: protectedProcedure
+      .input(z.object({
+        condominioId: z.number(),
+        tipoCampo: z.enum(["titulo", "descricao", "local", "observacao"]),
+        tipoTarefa: z.enum(["vistoria", "manutencao", "ocorrencia", "antes_depois"]).optional(),
+        valor: z.string().min(1),
+        nome: z.string().optional(),
+      }))
+      .mutation(async ({ input, ctx }) => {
+        const db = await getDb();
+        if (!db) throw new Error("Database not available");
+        
+        // Verificar se já existe um template com o mesmo valor
+        const existente = await db.select()
+          .from(camposRapidosTemplates)
+          .where(and(
+            eq(camposRapidosTemplates.condominioId, input.condominioId),
+            eq(camposRapidosTemplates.tipoCampo, input.tipoCampo),
+            eq(camposRapidosTemplates.valor, input.valor),
+            eq(camposRapidosTemplates.ativo, true)
+          ))
+          .limit(1);
+        
+        if (existente.length > 0) {
+          // Incrementar uso se já existe
+          await db.update(camposRapidosTemplates)
+            .set({ 
+              vezesUsado: sql`${camposRapidosTemplates.vezesUsado} + 1`,
+              ultimoUso: new Date()
+            })
+            .where(eq(camposRapidosTemplates.id, existente[0].id));
+          return existente[0];
+        }
+        
+        const [result] = await db.insert(camposRapidosTemplates).values({
+          condominioId: input.condominioId,
+          userId: ctx.user?.id,
+          tipoCampo: input.tipoCampo,
+          tipoTarefa: input.tipoTarefa,
+          valor: input.valor,
+          nome: input.nome || input.valor.substring(0, 50),
+          vezesUsado: 1,
+          ultimoUso: new Date(),
+        });
+        
+        return { id: result.insertId, ...input };
+      }),
+
+    // Usar template (incrementar contador)
+    usar: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        const db = await getDb();
+        if (!db) throw new Error("Database not available");
+        
+        await db.update(camposRapidosTemplates)
+          .set({ 
+            vezesUsado: sql`${camposRapidosTemplates.vezesUsado} + 1`,
+            ultimoUso: new Date()
+          })
+          .where(eq(camposRapidosTemplates.id, input.id));
+        
+        return { success: true };
+      }),
+
+    // Marcar como favorito
+    toggleFavorito: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        const db = await getDb();
+        if (!db) throw new Error("Database not available");
+        
+        const [template] = await db.select()
+          .from(camposRapidosTemplates)
+          .where(eq(camposRapidosTemplates.id, input.id))
+          .limit(1);
+        
+        if (!template) throw new Error("Template não encontrado");
+        
+        await db.update(camposRapidosTemplates)
+          .set({ favorito: !template.favorito })
+          .where(eq(camposRapidosTemplates.id, input.id));
+        
+        return { success: true, favorito: !template.favorito };
+      }),
+
+    // Deletar template (soft delete)
+    deletar: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        const db = await getDb();
+        if (!db) throw new Error("Database not available");
+        
+        await db.update(camposRapidosTemplates)
+          .set({ ativo: false })
+          .where(eq(camposRapidosTemplates.id, input.id));
+        
         return { success: true };
       }),
   }),

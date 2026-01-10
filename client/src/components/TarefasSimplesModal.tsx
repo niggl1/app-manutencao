@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { trpc } from "@/lib/trpc";
 import { 
   Plus, 
@@ -21,11 +22,15 @@ import {
   AlertTriangle,
   ArrowLeftRight,
   Image as ImageIcon,
-  Tag
+  Tag,
+  Star,
+  History,
+  Trash2
 } from "lucide-react";
 import { toast } from "sonner";
 
 type TipoTarefa = "vistoria" | "manutencao" | "ocorrencia" | "antes_depois";
+type TipoCampo = "titulo" | "descricao" | "local" | "observacao";
 
 interface TarefasSimplesModalProps {
   open: boolean;
@@ -61,6 +66,168 @@ const tipoConfig = {
     corClara: "#FFF7ED",
   },
 };
+
+// Componente para botão de salvar/selecionar template
+interface TemplateSelectorProps {
+  condominioId: number;
+  tipoCampo: TipoCampo;
+  tipoTarefa: TipoTarefa;
+  valorAtual: string;
+  onSelect: (valor: string) => void;
+}
+
+function TemplateSelector({ condominioId, tipoCampo, tipoTarefa, valorAtual, onSelect }: TemplateSelectorProps) {
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  const utils = trpc.useUtils();
+
+  // Buscar templates salvos
+  const { data: templates, isLoading } = trpc.camposRapidosTemplates.listar.useQuery(
+    { condominioId, tipoCampo, tipoTarefa },
+    { enabled: popoverOpen && condominioId > 0 }
+  );
+
+  // Mutations
+  const criarTemplateMutation = trpc.camposRapidosTemplates.criar.useMutation({
+    onSuccess: () => {
+      utils.camposRapidosTemplates.listar.invalidate({ condominioId, tipoCampo });
+      toast.success("Valor salvo para reutilização!");
+    },
+    onError: () => {
+      toast.error("Erro ao salvar valor");
+    }
+  });
+
+  const usarTemplateMutation = trpc.camposRapidosTemplates.usar.useMutation();
+  
+  const toggleFavoritoMutation = trpc.camposRapidosTemplates.toggleFavorito.useMutation({
+    onSuccess: () => {
+      utils.camposRapidosTemplates.listar.invalidate({ condominioId, tipoCampo });
+    }
+  });
+
+  const deletarTemplateMutation = trpc.camposRapidosTemplates.deletar.useMutation({
+    onSuccess: () => {
+      utils.camposRapidosTemplates.listar.invalidate({ condominioId, tipoCampo });
+      toast.success("Template removido");
+    }
+  });
+
+  const handleSalvarAtual = () => {
+    if (!valorAtual.trim()) {
+      toast.error("Digite um valor antes de salvar");
+      return;
+    }
+    criarTemplateMutation.mutate({
+      condominioId,
+      tipoCampo,
+      tipoTarefa,
+      valor: valorAtual.trim(),
+    });
+  };
+
+  const handleSelectTemplate = (template: { id: number; valor: string }) => {
+    onSelect(template.valor);
+    usarTemplateMutation.mutate({ id: template.id });
+    setPopoverOpen(false);
+  };
+
+  return (
+    <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          type="button"
+          size="sm"
+          variant="outline"
+          className="h-9 w-9 p-0 border-orange-300 text-orange-600 hover:bg-orange-50 hover:border-orange-400"
+          title="Salvar ou selecionar valor frequente"
+        >
+          <Plus className="h-4 w-4" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-80 p-0" align="end">
+        <div className="p-3 border-b bg-orange-50">
+          <h4 className="font-semibold text-sm text-orange-800 flex items-center gap-2">
+            <History className="h-4 w-4" />
+            Valores Salvos
+          </h4>
+          <p className="text-xs text-orange-600 mt-1">
+            Selecione um valor salvo ou salve o atual
+          </p>
+        </div>
+
+        {/* Botão para salvar valor atual */}
+        {valorAtual.trim() && (
+          <div className="p-2 border-b">
+            <Button
+              onClick={handleSalvarAtual}
+              disabled={criarTemplateMutation.isPending}
+              className="w-full h-8 text-xs bg-orange-500 hover:bg-orange-600"
+            >
+              {criarTemplateMutation.isPending ? (
+                <Loader2 className="h-3 w-3 animate-spin mr-1" />
+              ) : (
+                <Plus className="h-3 w-3 mr-1" />
+              )}
+              Salvar "{valorAtual.substring(0, 30)}{valorAtual.length > 30 ? '...' : ''}"
+            </Button>
+          </div>
+        )}
+
+        {/* Lista de templates */}
+        <div className="max-h-48 overflow-y-auto">
+          {isLoading ? (
+            <div className="p-4 text-center text-gray-500">
+              <Loader2 className="h-4 w-4 animate-spin mx-auto" />
+            </div>
+          ) : templates && templates.length > 0 ? (
+            <div className="p-1">
+              {templates.map((template) => (
+                <div
+                  key={template.id}
+                  className="flex items-center gap-1 p-2 hover:bg-gray-50 rounded group"
+                >
+                  <button
+                    onClick={() => handleSelectTemplate(template)}
+                    className="flex-1 text-left text-sm text-gray-700 truncate hover:text-orange-600"
+                  >
+                    {template.valor}
+                  </button>
+                  <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button
+                      onClick={() => toggleFavoritoMutation.mutate({ id: template.id })}
+                      className={`p-1 rounded ${template.favorito ? 'text-yellow-500' : 'text-gray-400 hover:text-yellow-500'}`}
+                      title={template.favorito ? "Remover dos favoritos" : "Marcar como favorito"}
+                    >
+                      <Star className="h-3 w-3" fill={template.favorito ? "currentColor" : "none"} />
+                    </button>
+                    <button
+                      onClick={() => deletarTemplateMutation.mutate({ id: template.id })}
+                      className="p-1 rounded text-gray-400 hover:text-red-500"
+                      title="Remover"
+                    >
+                      <Trash2 className="h-3 w-3" />
+                    </button>
+                  </div>
+                  {template.vezesUsado && template.vezesUsado > 1 && (
+                    <span className="text-xs text-gray-400 ml-1">
+                      {template.vezesUsado}x
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="p-4 text-center text-gray-500 text-sm">
+              Nenhum valor salvo ainda.
+              <br />
+              <span className="text-xs">Digite um valor e clique em "Salvar"</span>
+            </div>
+          )}
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+}
 
 export function TarefasSimplesModal({
   open,
@@ -116,6 +283,17 @@ export function TarefasSimplesModal({
       setProtocolo(result.protocolo);
     } catch (error) {
       console.error("Erro ao gerar protocolo:", error);
+      // Gerar protocolo localmente como fallback
+      const prefixos: Record<TipoTarefa, string> = {
+        vistoria: "VIS",
+        manutencao: "MAN",
+        ocorrencia: "OCO",
+        antes_depois: "A/D",
+      };
+      const now = new Date();
+      const timestamp = now.toISOString().replace(/[-:T]/g, '').substring(2, 14);
+      const random = Math.random().toString(36).substring(2, 5).toUpperCase();
+      setProtocolo(`${prefixos[tipo]}-${timestamp}-${random}`);
     }
   };
 
@@ -317,7 +495,7 @@ export function TarefasSimplesModal({
           <div className="flex items-center gap-2 p-3 bg-orange-50 rounded-xl border border-orange-100">
             <FileText className="h-4 w-4 text-orange-500" />
             <span className="text-sm text-orange-700 font-medium">
-              Protocolo: <span className="font-mono">{protocolo || "Gerando..."}</span>
+              Protocolo: {protocolo || "Gerando..."}
             </span>
           </div>
 
@@ -333,6 +511,13 @@ export function TarefasSimplesModal({
                 value={titulo}
                 onChange={(e) => setTitulo(e.target.value)}
                 className="flex-1 border-gray-200 focus:border-orange-400 focus:ring-orange-400"
+              />
+              <TemplateSelector
+                condominioId={condominioId}
+                tipoCampo="titulo"
+                tipoTarefa={tipo}
+                valorAtual={titulo}
+                onSelect={setTitulo}
               />
             </div>
           </div>
@@ -448,9 +633,18 @@ export function TarefasSimplesModal({
             </div>
           </div>
 
-          {/* Descrição */}
+          {/* Descrição com botão + */}
           <div className="space-y-2">
-            <Label className="text-gray-700 font-medium">Descrição (opcional)</Label>
+            <div className="flex items-center justify-between">
+              <Label className="text-gray-700 font-medium">Descrição (opcional)</Label>
+              <TemplateSelector
+                condominioId={condominioId}
+                tipoCampo="descricao"
+                tipoTarefa={tipo}
+                valorAtual={descricao}
+                onSelect={setDescricao}
+              />
+            </div>
             <Textarea
               placeholder="Adicione observações ou detalhes..."
               value={descricao}

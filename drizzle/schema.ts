@@ -1990,3 +1990,35 @@ export const statusPersonalizados = mysqlTable("status_personalizados", {
 
 export type StatusPersonalizado = typeof statusPersonalizados.$inferSelect;
 export type InsertStatusPersonalizado = typeof statusPersonalizados.$inferInsert;
+
+// ==================== TEMPLATES DE CAMPOS RÁPIDOS ====================
+// Permite ao usuário salvar valores frequentes para reutilização
+export const camposRapidosTemplates = mysqlTable("campos_rapidos_templates", {
+  id: int("id").autoincrement().primaryKey(),
+  condominioId: int("condominioId").references(() => condominios.id).notNull(),
+  userId: int("userId").references(() => users.id),
+  
+  // Tipo do campo: titulo, descricao, local, etc.
+  tipoCampo: mysqlEnum("tipoCampo", ["titulo", "descricao", "local", "observacao"]).notNull(),
+  
+  // Tipo da tarefa (opcional - para filtrar por contexto)
+  tipoTarefa: mysqlEnum("tipoTarefa", ["vistoria", "manutencao", "ocorrencia", "antes_depois"]),
+  
+  // Valor salvo
+  valor: text("valor").notNull(),
+  
+  // Nome amigável para identificação
+  nome: varchar("nome", { length: 100 }),
+  
+  // Controle de uso
+  vezesUsado: int("vezesUsado").default(0),
+  ultimoUso: timestamp("ultimoUso"),
+  favorito: boolean("favorito").default(false),
+  ativo: boolean("ativo").default(true),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type CampoRapidoTemplate = typeof camposRapidosTemplates.$inferSelect;
+export type InsertCampoRapidoTemplate = typeof camposRapidosTemplates.$inferInsert;

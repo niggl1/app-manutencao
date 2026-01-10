@@ -267,3 +267,18 @@
 - [ ] Analisar estrutura dos componentes
 - [ ] Integrar ao menu do sistema acima da opção MENU
 - [ ] Testar funcionamento
+
+
+## Fase 33: Botões "+" para Salvar Templates nos Campos
+- [x] Criar tabela campos_rapidos_templates no banco de dados
+- [x] Criar rotas tRPC para CRUD de templates (listar, criar, usar, toggleFavorito, deletar)
+- [x] Atualizar TarefasSimplesModal com componente TemplateSelector
+- [x] Adicionar botão "+" ao lado do campo Título
+- [x] Adicionar botão "+" ao lado do campo Descrição
+- [x] Implementar popover com lista de valores salvos
+- [x] Implementar funcionalidade de salvar valor atual
+- [x] Implementar contador de uso e ordenação por frequência
+- [x] Implementar favoritos com estrela
+- [x] Implementar soft delete de templates
+- [x] Criar testes Vitest para camposRapidosTemplates (14 testes passando)
+- [x] Todos os 30 testes passando (tarefasSimples + camposRapidosTemplates + auth)
