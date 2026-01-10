@@ -439,7 +439,7 @@ export function TarefasSimplesModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto p-0 gap-0 border-0 shadow-2xl">
+      <DialogContent className="max-w-md sm:max-w-lg max-h-[90vh] overflow-y-auto p-0 gap-0 border-0 shadow-2xl overflow-x-hidden">
         {/* Header Premium Laranja */}
         <div 
           className="p-6 rounded-t-lg"
@@ -504,17 +504,11 @@ export function TarefasSimplesModal({
 
           {/* Título com botão + */}
           <div className="space-y-2">
-            <Label className="text-gray-700 font-medium flex items-center gap-2">
-              <Tag className="h-4 w-4 text-orange-500" />
-              Título (opcional)
-            </Label>
-            <div className="flex gap-2">
-              <Input
-                placeholder="Digite um título ou deixe em branco..."
-                value={titulo}
-                onChange={(e) => setTitulo(e.target.value)}
-                className="flex-1 border-gray-200 focus:border-orange-400 focus:ring-orange-400"
-              />
+            <div className="flex items-center justify-between">
+              <Label className="text-gray-700 font-medium flex items-center gap-2">
+                <Tag className="h-4 w-4 text-orange-500" />
+                Título (opcional)
+              </Label>
               <TemplateSelector
                 condominioId={condominioId}
                 tipoCampo="titulo"
@@ -523,21 +517,21 @@ export function TarefasSimplesModal({
                 onSelect={setTitulo}
               />
             </div>
+            <Input
+              placeholder="Digite um título ou deixe em branco..."
+              value={titulo}
+              onChange={(e) => setTitulo(e.target.value)}
+              className="border-gray-200 focus:border-orange-400 focus:ring-orange-400"
+            />
           </div>
 
           {/* Local com botão + */}
           <div className="space-y-2">
-            <Label className="text-gray-700 font-medium flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-orange-500" />
-              Local (opcional)
-            </Label>
-            <div className="flex gap-2">
-              <Input
-                placeholder="Ex: Bloco A, Apartamento 101, Garagem..."
-                value={local}
-                onChange={(e) => setLocal(e.target.value)}
-                className="flex-1 border-gray-200 focus:border-orange-400 focus:ring-orange-400"
-              />
+            <div className="flex items-center justify-between">
+              <Label className="text-gray-700 font-medium flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-orange-500" />
+                Local (opcional)
+              </Label>
               <TemplateSelector
                 condominioId={condominioId}
                 tipoCampo="local"
@@ -546,6 +540,12 @@ export function TarefasSimplesModal({
                 onSelect={setLocal}
               />
             </div>
+            <Input
+              placeholder="Ex: Bloco A, Apartamento 101, Garagem..."
+              value={local}
+              onChange={(e) => setLocal(e.target.value)}
+              className="border-gray-200 focus:border-orange-400 focus:ring-orange-400"
+            />
           </div>
 
           {/* Imagens */}

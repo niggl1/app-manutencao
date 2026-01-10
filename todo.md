@@ -308,3 +308,12 @@
 - [x] Adicionar campo "Local" ao TarefasSimplesModal
 - [x] Integrar com TemplateSelector para salvar locais frequentes
 - [x] Salvar localização no banco de dados
+
+## Bug: Botões "+" faltando nos modais de Funções Rápidas
+- [ ] Verificar modal de Manutenção Rápida
+- [ ] Verificar modal de Ocorrência Rápida
+- [ ] Verificar modal de Antes/Depois Rápido
+- [ ] Corrigir botões "+" que estão faltando
+
+## Bug: Botões "+" ocultos no modal de Funções Rápidas
+- [x] Ajustar layout do modal para que os botões "+" fiquem visíveis ao lado dos campos - Corrigido: botões movidos para a linha do label
