@@ -1,5 +1,6 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
+import { TarefasSimplesModal } from "@/components/TarefasSimplesModal";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -7473,6 +7474,7 @@ function AntesDepoisSection() {
   });
 
   const [showDialog, setShowDialog] = useState(false);
+  const [showAntesDepoisRapido, setShowAntesDepoisRapido] = useState(false);
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
   const [fotoAntesUrl, setFotoAntesUrl] = useState("");
@@ -7589,13 +7591,21 @@ function AntesDepoisSection() {
           <h1 className="text-2xl font-serif font-bold text-foreground">Antes e Depois</h1>
           <p className="text-muted-foreground">Mostre a transformação de melhorias realizadas</p>
         </div>
-        <Dialog open={showDialog} onOpenChange={setShowDialog}>
-          <DialogTrigger asChild>
-            <Button className="gap-2">
-              <Plus className="w-4 h-4" />
-              Novo Registro
-            </Button>
-          </DialogTrigger>
+        <div className="flex items-center gap-2">
+          <Button
+            size="sm"
+            className="bg-orange-500 text-white hover:bg-orange-600 border-orange-500"
+            onClick={() => setShowAntesDepoisRapido(true)}
+          >
+            ⚡ Antes/Depois Rápido
+          </Button>
+          <Dialog open={showDialog} onOpenChange={setShowDialog}>
+            <DialogTrigger asChild>
+              <Button className="gap-2">
+                <Plus className="w-4 h-4" />
+                Novo Registro
+              </Button>
+            </DialogTrigger>
           <DialogContent className="max-w-2xl max-h-[90vh] overflow-hidden p-0">
             <div className="bg-gradient-to-r from-teal-500 to-cyan-500 px-6 py-4">
               <DialogHeader className="space-y-1">
@@ -7685,8 +7695,20 @@ function AntesDepoisSection() {
               </Button>
             </div>
           </DialogContent>
-        </Dialog>
+          </Dialog>
+        </div>
       </div>
+
+      {/* Modal de Antes/Depois Rápido */}
+      <TarefasSimplesModal
+        open={showAntesDepoisRapido}
+        onOpenChange={setShowAntesDepoisRapido}
+        condominioId={condominios?.[0]?.id || 0}
+        tipoInicial="antes_depois"
+        onSuccess={() => {
+          refetch();
+        }}
+      />
 
       {obras?.length === 0 ? (
         <Card>

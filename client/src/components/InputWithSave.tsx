@@ -27,7 +27,17 @@ type TipoValor =
   | "titulo_vistoria"
   | "subtitulo_vistoria"
   | "descricao_vistoria"
-  | "observacoes_vistoria";
+  | "observacoes_vistoria"
+  | "titulo_manutencao"
+  | "subtitulo_manutencao"
+  | "descricao_manutencao"
+  | "observacoes_manutencao"
+  | "titulo_ocorrencia"
+  | "subtitulo_ocorrencia"
+  | "descricao_ocorrencia"
+  | "observacoes_ocorrencia"
+  | "titulo_antesdepois"
+  | "descricao_antesdepois";
 
 interface InputWithSaveProps {
   label: string;

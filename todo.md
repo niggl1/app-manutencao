@@ -288,3 +288,18 @@
 - [x] Página de Vistorias não carrega conteúdo (área principal em branco) - Corrigido: adicionado fallback SemOrganizacaoMessage
 
 - [x] Adicionar botões "+" para personalizar campos na página VistoriasPage (formulário de Nova Vistoria) - Todos os 8 campos agora têm botão "+"
+
+## Fase 34: Botões Função Rápida e Botões "+" nas Páginas
+### Manutenções
+- [x] Adicionar botão ⚡ Manutenção Rápida
+- [x] Adicionar botões "+" em todos os campos do formulário
+- [x] Adicionar novos tipos ao schema (titulo_manutencao, subtitulo_manutencao, descricao_manutencao, observacoes_manutencao)
+
+### Ocorrências
+- [x] Adicionar botão ⚡ Ocorrência Rápida
+- [x] Adicionar botões "+" em todos os campos do formulário
+- [x] Adicionar novos tipos ao schema (titulo_ocorrencia, subtitulo_ocorrencia, descricao_ocorrencia, observacoes_ocorrencia)
+
+### Antes e Depois
+- [x] Adicionar botão ⚡ Antes/Depois Rápido
+- [x] Adicionar novos tipos ao schema (titulo_antesdepois, descricao_antesdepois)

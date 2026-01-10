@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
+import { TarefasSimplesModal } from "@/components/TarefasSimplesModal";
 import { ShareModal } from "@/components/ShareModal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -71,6 +72,7 @@ interface ManutencoesPageProps {
 export default function ManutencoesPage({ condominioId }: ManutencoesPageProps) {
   const [showDialog, setShowDialog] = useState(false);
   const [showDetailDialog, setShowDetailDialog] = useState(false);
+  const [showManutencaoRapida, setShowManutencaoRapida] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const [selectedManutencao, setSelectedManutencao] = useState<any>(null);
   const [searchProtocolo, setSearchProtocolo] = useState("");
@@ -389,6 +391,13 @@ export default function ManutencoesPage({ condominioId }: ManutencoesPageProps) 
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <Button
+            size="sm"
+            className="bg-orange-500 text-white hover:bg-orange-600 border-orange-500"
+            onClick={() => setShowManutencaoRapida(true)}
+          >
+            ⚡ Manutenção Rápida
+          </Button>
           <Button variant="outline" size="sm" onClick={handleGeneratePDF}>
             <Download className="h-4 w-4 mr-1" />
             PDF
@@ -551,24 +560,22 @@ export default function ManutencoesPage({ condominioId }: ManutencoesPageProps) 
             {/* Seção: Informações Básicas */}
             <FormSection title="Informações Básicas" icon={FileText} iconColor="text-blue-500">
               <FormFieldGroup columns={1}>
-                <div>
-                  <StyledLabel required icon={Wrench}>Título</StyledLabel>
-                  <Input
-                    value={formData.titulo}
-                    onChange={(e) => setFormData({ ...formData, titulo: e.target.value })}
-                    placeholder="Ex: Reparo no Portão Principal"
-                    className="h-11 border-gray-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
-                  />
-                </div>
-                <div>
-                  <StyledLabel>Subtítulo</StyledLabel>
-                  <Input
-                    value={formData.subtitulo}
-                    onChange={(e) => setFormData({ ...formData, subtitulo: e.target.value })}
-                    placeholder="Descrição breve da manutenção"
-                    className="h-11 border-gray-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
-                  />
-                </div>
+                <InputWithSave
+                  label="Título *"
+                  value={formData.titulo}
+                  onChange={(v) => setFormData({ ...formData, titulo: v })}
+                  condominioId={condominioId}
+                  tipo="titulo_manutencao"
+                  placeholder="Ex: Reparo no Portão Principal"
+                />
+                <InputWithSave
+                  label="Subtítulo"
+                  value={formData.subtitulo}
+                  onChange={(v) => setFormData({ ...formData, subtitulo: v })}
+                  condominioId={condominioId}
+                  tipo="subtitulo_manutencao"
+                  placeholder="Descrição breve da manutenção"
+                />
               </FormFieldGroup>
             </FormSection>
 
@@ -755,26 +762,26 @@ export default function ManutencoesPage({ condominioId }: ManutencoesPageProps) 
             {/* Seção: Detalhes */}
             <FormSection title="Detalhes" icon={AlignLeft} iconColor="text-gray-500">
               <div className="space-y-4">
-                <div>
-                  <StyledLabel icon={AlignLeft}>Descrição</StyledLabel>
-                  <Textarea
-                    value={formData.descricao}
-                    onChange={(e) => setFormData({ ...formData, descricao: e.target.value })}
-                    placeholder="Descreva os detalhes da manutenção..."
-                    rows={3}
-                    className="border-gray-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all resize-none"
-                  />
-                </div>
-                <div>
-                  <StyledLabel>Observações</StyledLabel>
-                  <Textarea
-                    value={formData.observacoes}
-                    onChange={(e) => setFormData({ ...formData, observacoes: e.target.value })}
-                    placeholder="Observações adicionais..."
-                    rows={2}
-                    className="border-gray-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all resize-none"
-                  />
-                </div>
+                <InputWithSave
+                  label="Descrição"
+                  value={formData.descricao}
+                  onChange={(v) => setFormData({ ...formData, descricao: v })}
+                  condominioId={condominioId}
+                  tipo="descricao_manutencao"
+                  placeholder="Descreva os detalhes da manutenção..."
+                  multiline
+                  rows={3}
+                />
+                <InputWithSave
+                  label="Observações"
+                  value={formData.observacoes}
+                  onChange={(v) => setFormData({ ...formData, observacoes: v })}
+                  condominioId={condominioId}
+                  tipo="observacoes_manutencao"
+                  placeholder="Observações adicionais..."
+                  multiline
+                  rows={2}
+                />
               </div>
             </FormSection>
 
@@ -1050,6 +1057,17 @@ export default function ManutencoesPage({ condominioId }: ManutencoesPageProps) 
         itemTitulo={selectedManutencao?.titulo || ""}
         itemProtocolo={selectedManutencao?.protocolo || ""}
         condominioId={condominioId}
+      />
+
+      {/* Modal de Manutenção Rápida */}
+      <TarefasSimplesModal
+        open={showManutencaoRapida}
+        onOpenChange={setShowManutencaoRapida}
+        condominioId={condominioId}
+        tipoInicial="manutencao"
+        onSuccess={() => {
+          utils.manutencao.list.invalidate();
+        }}
       />
     </div>
   );
