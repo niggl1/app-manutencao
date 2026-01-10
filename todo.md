@@ -282,3 +282,7 @@
 - [x] Implementar soft delete de templates
 - [x] Criar testes Vitest para camposRapidosTemplates (14 testes passando)
 - [x] Todos os 30 testes passando (tarefasSimples + camposRapidosTemplates + auth)
+
+
+## Bugs Reportados - Fase 33
+- [x] Página de Vistorias não carrega conteúdo (área principal em branco) - Corrigido: adicionado fallback SemOrganizacaoMessage

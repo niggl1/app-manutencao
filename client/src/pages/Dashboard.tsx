@@ -814,11 +814,11 @@ export default function Dashboard() {
           {currentSection === "publicidade" && <PublicidadeSection />}
           {currentSection === "seguranca" && <SegurancaSection />}
           {currentSection === "regras" && <RegrasSection />}
-          {currentSection === "vistorias" && condominios?.[0] && <VistoriasPage condominioId={condominios[0].id} />}
-          {currentSection === "manutencoes" && condominios?.[0] && <ManutencoesPage condominioId={condominios[0].id} />}
-          {currentSection === "ocorrencias" && condominios?.[0] && <OcorrenciasPage condominioId={condominios[0].id} />}
+          {currentSection === "vistorias" && (condominios?.[0] ? <VistoriasPage condominioId={condominios[0].id} /> : <SemOrganizacaoMessage />)}
+          {currentSection === "manutencoes" && (condominios?.[0] ? <ManutencoesPage condominioId={condominios[0].id} /> : <SemOrganizacaoMessage />)}
+          {currentSection === "ocorrencias" && (condominios?.[0] ? <OcorrenciasPage condominioId={condominios[0].id} /> : <SemOrganizacaoMessage />)}
           {currentSection === "notificar-morador" && <NotificarMoradorPage />}
-          {currentSection === "checklists" && condominios?.[0] && <ChecklistsPage condominioId={condominios[0].id} />}
+          {currentSection === "checklists" && (condominios?.[0] ? <ChecklistsPage condominioId={condominios[0].id} /> : <SemOrganizacaoMessage />)}
           {currentSection === "vencimentos" && condominios?.[0] && <VencimentosSection condominioId={condominios[0].id} />}
           {currentSection === "assembleia" && <AssembleiaOnlineSection />}
           {currentSection === "gestao-notificacoes" && condominios?.[0] && <NotificacoesPage condominioId={condominios[0].id} />}
@@ -10919,6 +10919,35 @@ function CabecalhoRodapeConfig() {
         <Button variant="outline" onClick={handleClear}>
           <X className="w-4 h-4 mr-2" />
           Limpar Campos
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+
+// Componente para exibir quando não há organização cadastrada
+function SemOrganizacaoMessage() {
+  const [, navigate] = useLocation();
+  
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[400px] p-8">
+      <div className="text-center max-w-md">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-orange-100 flex items-center justify-center">
+          <Building2 className="w-8 h-8 text-orange-500" />
+        </div>
+        <h2 className="text-xl font-semibold text-gray-900 mb-2">
+          Nenhuma organização cadastrada
+        </h2>
+        <p className="text-gray-500 mb-6">
+          Para utilizar esta funcionalidade, você precisa primeiro cadastrar uma organização ou local de manutenção.
+        </p>
+        <Button 
+          onClick={() => navigate("/dashboard/condominio")}
+          className="bg-orange-500 hover:bg-orange-600"
+        >
+          <Plus className="w-4 h-4 mr-2" />
+          Cadastrar Organização
         </Button>
       </div>
     </div>
