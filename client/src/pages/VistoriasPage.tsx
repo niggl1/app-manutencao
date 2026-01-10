@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
+import { TarefasSimplesModal } from "@/components/TarefasSimplesModal";
 import { LocationMiniMap } from "@/components/LocationMiniMap";
 import { ShareModal } from "@/components/ShareModal";
 import { Button } from "@/components/ui/button";
@@ -70,6 +71,7 @@ interface VistoriasPageProps {
 export default function VistoriasPage({ condominioId }: VistoriasPageProps) {
   const [showDialog, setShowDialog] = useState(false);
   const [showDetailDialog, setShowDetailDialog] = useState(false);
+  const [showVistoriaRapida, setShowVistoriaRapida] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const [selectedVistoria, setSelectedVistoria] = useState<any>(null);
   const [searchProtocolo, setSearchProtocolo] = useState("");
@@ -369,8 +371,13 @@ export default function VistoriasPage({ condominioId }: VistoriasPageProps) {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="bg-red-500 text-white hover:bg-red-600">
-            🚨 TESTE
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="bg-orange-500 text-white hover:bg-orange-600 border-orange-500"
+            onClick={() => setShowVistoriaRapida(true)}
+          >
+            ⚡ Vistoria Rápida
           </Button>
           <Button variant="outline" size="sm" onClick={generatePDF}>
             <Download className="h-4 w-4 mr-1" />
@@ -981,6 +988,18 @@ export default function VistoriasPage({ condominioId }: VistoriasPageProps) {
         itemTitulo={selectedVistoria?.titulo || ""}
         itemProtocolo={selectedVistoria?.protocolo || ""}
         condominioId={condominioId}
+      />
+
+      {/* Modal de Vistoria Rápida */}
+      <TarefasSimplesModal
+        open={showVistoriaRapida}
+        onOpenChange={setShowVistoriaRapida}
+        condominioId={condominioId}
+        tipoInicial="vistoria"
+        onSuccess={() => {
+          utils.vistoria.list.invalidate();
+          utils.vistoria.getStats.invalidate();
+        }}
       />
     </div>
   );
