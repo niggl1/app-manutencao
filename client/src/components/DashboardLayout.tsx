@@ -165,16 +165,11 @@ const menuSections = [
     iconName: "Wrench",
     items: [
       { icon: ClipboardCheck, iconName: "ClipboardCheck", label: "Vistorias", path: "/dashboard/vistorias", funcaoId: "vistorias" },
-      { icon: Zap, iconName: "Zap", label: "Teste 1", path: "/dashboard/funcoes-simples?tipo=vistoria", funcaoId: "vistoria-simples" },
       { icon: Wrench, iconName: "Wrench", label: "Manutenções", path: "/dashboard/manutencoes", funcaoId: "manutencoes" },
-      { icon: Zap, iconName: "Zap", label: "Teste 2", path: "/dashboard/funcoes-simples?tipo=manutencao", funcaoId: "manutencao-simples" },
       { icon: AlertTriangle, iconName: "AlertTriangle", label: "Ocorrências", path: "/dashboard/ocorrencias", funcaoId: "ocorrencias" },
-      { icon: Zap, iconName: "Zap", label: "Teste 3", path: "/dashboard/funcoes-simples?tipo=ocorrencia", funcaoId: "ocorrencia-simples" },
       { icon: CheckSquare, iconName: "CheckSquare", label: "Checklists", path: "/dashboard/checklists", funcaoId: "checklists" },
       { icon: ArrowLeftRight, iconName: "ArrowLeftRight", label: "Antes e Depois", path: "/dashboard/antes-depois", funcaoId: "antes-depois" },
-      { icon: Zap, iconName: "Zap", label: "Teste 4", path: "/dashboard/funcoes-simples?tipo=antes_depois", funcaoId: "antes-depois-simples" },
       { icon: CalendarClock, iconName: "CalendarClock", label: "Agenda de Vencimentos", path: "/dashboard/agenda-vencimentos", funcaoId: "agenda-vencimentos" },
-      { icon: FileText, iconName: "FileText", label: "Teste 5", path: "/dashboard/funcoes-simples", funcaoId: "funcoes-simples-historico" },
     ]
   },
   {
@@ -554,6 +549,43 @@ function DashboardLayoutContent({
           </SidebarHeader>
 
           <SidebarContent className="gap-0 overflow-y-auto">
+            {/* Seção de Manutenção Rápida */}
+            <div className="px-4 py-3 border-b border-border/50">
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Manutenção Rápida</p>
+              <div className="space-y-1">
+                <Link href="/dashboard/funcoes-simples?tipo=vistoria">
+                  <button className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-primary/10 transition-colors text-left">
+                    <Zap className="h-4 w-4 text-primary" />
+                    <span>Teste 1</span>
+                  </button>
+                </Link>
+                <Link href="/dashboard/funcoes-simples?tipo=manutencao">
+                  <button className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-primary/10 transition-colors text-left">
+                    <Zap className="h-4 w-4 text-primary" />
+                    <span>Teste 2</span>
+                  </button>
+                </Link>
+                <Link href="/dashboard/funcoes-simples?tipo=ocorrencia">
+                  <button className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-primary/10 transition-colors text-left">
+                    <Zap className="h-4 w-4 text-primary" />
+                    <span>Teste 3</span>
+                  </button>
+                </Link>
+                <Link href="/dashboard/funcoes-simples?tipo=antes_depois">
+                  <button className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-primary/10 transition-colors text-left">
+                    <Zap className="h-4 w-4 text-primary" />
+                    <span>Teste 4</span>
+                  </button>
+                </Link>
+                <Link href="/dashboard/funcoes-simples">
+                  <button className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-primary/10 transition-colors text-left">
+                    <Zap className="h-4 w-4 text-primary" />
+                    <span>Teste 5</span>
+                  </button>
+                </Link>
+              </div>
+            </div>
+
             <SidebarMenu className="px-2 py-2">
               {menuSections.map((section) => {
                 const isSectionActive = activeSection?.id === section.id;

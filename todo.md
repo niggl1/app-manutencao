@@ -260,3 +260,10 @@
 - [x] Criar seção separada "Funções Simples" no menu lateral (Opção 2)
 
 - [x] Bug: Seção Funções Simples não aparece no menu publicado - resolvido (problema de cache)
+
+
+## Fase 32: Integrar Revista Digital de Condomínios
+- [ ] Extrair arquivos do ZIP
+- [ ] Analisar estrutura dos componentes
+- [ ] Integrar ao menu do sistema acima da opção MENU
+- [ ] Testar funcionamento

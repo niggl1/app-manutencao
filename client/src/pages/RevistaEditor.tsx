@@ -11,24 +11,6 @@ import { cn } from "@/lib/utils";
 import { trpc } from "@/lib/trpc";
 import { motion } from "framer-motion";
 import {
-  DndContext,
-  closestCenter,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-  DragEndEvent,
-} from "@dnd-kit/core";
-import {
-  arrayMove,
-  SortableContext,
-  sortableKeyboardCoordinates,
-  useSortable,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import {
-  AlertTriangle,
   ArrowLeft,
   BookOpen,
   Calendar,
@@ -55,7 +37,6 @@ import {
   Image,
   Building2,
   Send,
-  GripVertical,
 } from "lucide-react";
 import { useState } from "react";
 import { Link, useParams, useLocation } from "wouter";
@@ -64,22 +45,9 @@ import AvisoForm from "@/components/forms/AvisoForm";
 import FuncionarioForm from "@/components/forms/FuncionarioForm";
 import VotacaoForm from "@/components/forms/VotacaoForm";
 import ImageUpload from "@/components/ImageUpload";
-import { AchadoPerdidoForm } from "@/components/forms/AchadoPerdidoForm";
-import {
-  GaleriaSection,
-  ComunicadosSection,
-  RegrasSection,
-  DicasSegurancaSection,
-  RealizacoesSection,
-  MelhoriasSection,
-  AquisicoesSection,
-  PublicidadeSection,
-  CadastroSection,
-} from "@/components/revista/NovasSecoesPremium";
-import { SortableSectionItem } from "@/components/revista/SortableSectionItem";
 
 const sectionTypes = [
-  { id: "mensagem_sindico", name: "Mensagem do Gestor", icon: MessageSquare, color: "text-blue-500" },
+  { id: "mensagem_sindico", name: "Mensagem do Síndico", icon: MessageSquare, color: "text-blue-500" },
   { id: "avisos", name: "Avisos", icon: Megaphone, color: "text-amber-500" },
   { id: "eventos", name: "Eventos", icon: Calendar, color: "text-emerald-500" },
   { id: "funcionarios", name: "Funcionários", icon: Users, color: "text-purple-500" },
@@ -89,15 +57,6 @@ const sectionTypes = [
   { id: "classificados", name: "Classificados", icon: Package, color: "text-orange-500" },
   { id: "caronas", name: "Caronas", icon: Car, color: "text-teal-500" },
   { id: "achados", name: "Achados e Perdidos", icon: Heart, color: "text-red-500" },
-  { id: "galeria", name: "Galeria de Fotos", icon: Image, color: "text-violet-500" },
-  { id: "comunicados", name: "Comunicados", icon: FileText, color: "text-sky-500" },
-  { id: "regras", name: "Regras e Normas", icon: BookOpen, color: "text-slate-500" },
-  { id: "dicas_seguranca", name: "Dicas de Segurança", icon: AlertTriangle, color: "text-yellow-500" },
-  { id: "realizacoes", name: "Realizações", icon: Star, color: "text-amber-600" },
-  { id: "melhorias", name: "Melhorias", icon: Building2, color: "text-lime-500" },
-  { id: "aquisicoes", name: "Aquisições", icon: Package, color: "text-fuchsia-500" },
-  { id: "publicidade", name: "Publicidade", icon: Megaphone, color: "text-rose-500" },
-  { id: "cadastro", name: "Cadastre-se para Receber", icon: Send, color: "text-green-500" },
 ];
 
 export default function RevistaEditor() {
@@ -110,72 +69,10 @@ export default function RevistaEditor() {
   const [showAvisoForm, setShowAvisoForm] = useState(false);
   const [showFuncionarioForm, setShowFuncionarioForm] = useState(false);
   const [showVotacaoForm, setShowVotacaoForm] = useState(false);
-  const [showEventoForm, setShowEventoForm] = useState(false);
-  const [showClassificadoForm, setShowClassificadoForm] = useState(false);
-  const [showCaronaForm, setShowCaronaForm] = useState(false);
-  const [showAchadoForm, setShowAchadoForm] = useState(false);
-  const [showGaleriaForm, setShowGaleriaForm] = useState(false);
-  const [showComunicadoForm, setShowComunicadoForm] = useState(false);
-  const [showRegrasForm, setShowRegrasForm] = useState(false);
-  const [showDicasForm, setShowDicasForm] = useState(false);
-  const [showRealizacoesForm, setShowRealizacoesForm] = useState(false);
-  const [showMelhoriasForm, setShowMelhoriasForm] = useState(false);
-  const [showAquisicoesForm, setShowAquisicoesForm] = useState(false);
-  const [showPublicidadeForm, setShowPublicidadeForm] = useState(false);
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
   
   // Estado para secções ocultas
   const [hiddenSections, setHiddenSections] = useState<Set<string>>(new Set());
-  
-  // Estado para ordem das secções (drag and drop)
-  const [sectionOrder, setSectionOrder] = useState<string[]>([
-    "mensagem_sindico",
-    "avisos",
-    "votacoes",
-    "eventos",
-    "funcionarios",
-    "classificados",
-    "caronas",
-    "achados",
-    "galeria",
-    "comunicados",
-    "regras",
-    "dicas_seguranca",
-    "realizacoes",
-    "melhorias",
-    "aquisicoes",
-    "publicidade",
-    "telefones",
-    "links",
-    "cadastro",
-  ]);
-  
-  // Sensores para drag and drop
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 8,
-      },
-    }),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
-  
-  // Handler para reordenar secções
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
-    
-    if (over && active.id !== over.id) {
-      setSectionOrder((items) => {
-        const oldIndex = items.indexOf(active.id as string);
-        const newIndex = items.indexOf(over.id as string);
-        const newOrder = arrayMove(items, oldIndex, newIndex);
-        toast.success("Ordem das secções atualizada");
-        return newOrder;
-      });
-    }
-  };
   
   // Função para alternar visibilidade de uma secção
   const toggleSectionVisibility = (sectionId: string) => {
@@ -192,9 +89,9 @@ export default function RevistaEditor() {
     });
   };
   
-  // Mensagem do gestor state
+  // Mensagem do síndico state
   const [mensagemSindico, setMensagemSindico] = useState({
-    titulo: "Mensagem do Gestor",
+    titulo: "Mensagem do Síndico",
     nomeSindico: "",
     fotoSindicoUrl: "",
     mensagem: "",
@@ -226,16 +123,6 @@ export default function RevistaEditor() {
     { enabled: revistaId > 0 }
   );
 
-  const { data: eventosData, isLoading: eventosLoading } = trpc.evento.list.useQuery(
-    { revistaId },
-    { enabled: revistaId > 0 }
-  );
-
-  const { data: funcionariosData, isLoading: funcionariosLoading } = trpc.funcionario.list.useQuery(
-    { revistaId },
-    { enabled: revistaId > 0 }
-  );
-
   const utils = trpc.useUtils();
 
   const publishMutation = trpc.revista.update.useMutation({
@@ -245,16 +132,6 @@ export default function RevistaEditor() {
     },
     onError: (error) => {
       toast.error("Erro ao publicar: " + error.message);
-    },
-  });
-
-  const updateCapaMutation = trpc.revista.update.useMutation({
-    onSuccess: () => {
-      toast.success("Capa atualizada com sucesso!");
-      utils.revista.get.invalidate({ id: revistaId });
-    },
-    onError: (error) => {
-      toast.error("Erro ao atualizar capa: " + error.message);
     },
   });
 
@@ -276,31 +153,6 @@ export default function RevistaEditor() {
     onSuccess: () => {
       toast.success("Link adicionado!");
       utils.link.list.invalidate({ revistaId });
-    },
-  });
-
-  const createEventoMutation = trpc.evento.create.useMutation({
-    onSuccess: () => {
-      toast.success("Evento adicionado!");
-      utils.evento.list.invalidate({ revistaId });
-      setShowEventoForm(false);
-    },
-    onError: (error) => {
-      toast.error("Erro ao criar evento: " + error.message);
-    },
-  });
-
-  const deleteEventoMutation = trpc.evento.delete.useMutation({
-    onSuccess: () => {
-      toast.success("Evento removido!");
-      utils.evento.list.invalidate({ revistaId });
-    },
-  });
-
-  const deleteFuncionarioMutation = trpc.funcionario.delete.useMutation({
-    onSuccess: () => {
-      toast.success("Funcionário removido!");
-      utils.funcionario.list.invalidate({ revistaId });
     },
   });
 
@@ -409,17 +261,6 @@ export default function RevistaEditor() {
 
           {/* Conteúdo Tab */}
           <TabsContent value="conteudo" className="space-y-6">
-            {/* Instrução de arrastar */}
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 border border-blue-100 flex items-center gap-3">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <GripVertical className="w-5 h-5 text-blue-600" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-blue-800">Arraste para reordenar</p>
-                <p className="text-xs text-blue-600">Passe o rato sobre uma secção e arraste o ícone à esquerda para mudar a ordem</p>
-              </div>
-            </div>
-            
             {/* Secções Ocultas - Painel para reativar */}
             {hiddenSections.size > 0 && (
               <div className="bg-slate-100 rounded-xl p-4 border border-slate-200">
@@ -430,7 +271,7 @@ export default function RevistaEditor() {
                 <div className="flex flex-wrap gap-2">
                   {Array.from(hiddenSections).map((sectionId) => {
                     const sectionNames: Record<string, string> = {
-                      mensagem_sindico: "Mensagem do Gestor",
+                      mensagem_sindico: "Mensagem do Síndico",
                       avisos: "Avisos",
                       votacoes: "Votações",
                     };
@@ -451,17 +292,8 @@ export default function RevistaEditor() {
               </div>
             )}
             
-            {/* Container com Drag and Drop */}
-            <DndContext
-              sensors={sensors}
-              collisionDetection={closestCenter}
-              onDragEnd={handleDragEnd}
-            >
-              <SortableContext items={sectionOrder} strategy={verticalListSortingStrategy}>
-                <div className="space-y-6 pl-10">
-            
-            {/* Mensagem do Gestor - Premium */}
-            <SortableSectionItem id="mensagem_sindico" isHidden={hiddenSections.has("mensagem_sindico")}>
+            {/* Mensagem do Síndico - Premium */}
+            {!hiddenSections.has("mensagem_sindico") && (
             <div id="mensagem-sindico-section" className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 rounded-2xl border border-blue-100 shadow-sm hover:shadow-lg transition-all duration-300">
               {/* Barra decorativa superior */}
               <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-400 via-indigo-500 to-violet-500" />
@@ -478,8 +310,8 @@ export default function RevistaEditor() {
                       <MessageSquare className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-slate-800">Mensagem do Gestor</h3>
-                      <p className="text-sm text-slate-500">Escreva uma mensagem personalizada para a equipa</p>
+                      <h3 className="text-lg font-bold text-slate-800">Mensagem do Síndico</h3>
+                      <p className="text-sm text-slate-500">Escreva uma mensagem personalizada para os moradores</p>
                     </div>
                   </div>
                   <Button
@@ -495,11 +327,11 @@ export default function RevistaEditor() {
                 </div>
                 
                 <div className="space-y-5">
-                  {/* Foto e Nome do Gestor */}
+                  {/* Foto e Nome do Síndico */}
                   <div className="flex gap-6 items-start">
                     <div className="space-y-3 min-w-[180px]">
                       <div className="flex items-center justify-between">
-                        <Label className="text-slate-700 font-medium">Foto do Gestor</Label>
+                        <Label className="text-slate-700 font-medium">Foto do Síndico</Label>
                         {mensagemSindico.fotoSindicoUrl && (
                           <Button
                             type="button"
@@ -533,7 +365,7 @@ export default function RevistaEditor() {
                     </div>
                     <div className="flex-1 space-y-4">
                       <div className="space-y-2">
-                        <Label className="text-slate-700 font-medium">Nome do Gestor</Label>
+                        <Label className="text-slate-700 font-medium">Nome do Síndico</Label>
                         <Input
                           value={mensagemSindico.nomeSindico}
                           onChange={(e) => setMensagemSindico({ ...mensagemSindico, nomeSindico: e.target.value })}
@@ -546,7 +378,7 @@ export default function RevistaEditor() {
                         <Input
                           value={mensagemSindico.titulo}
                           onChange={(e) => setMensagemSindico({ ...mensagemSindico, titulo: e.target.value })}
-                          placeholder="Mensagem do Gestor"
+                          placeholder="Mensagem do Síndico"
                           className="bg-white/70 border-slate-200 focus:border-blue-400 focus:ring-blue-400/20 rounded-xl h-11"
                         />
                       </div>
@@ -559,7 +391,7 @@ export default function RevistaEditor() {
                     <Textarea
                       value={mensagemSindico.mensagem}
                       onChange={(e) => setMensagemSindico({ ...mensagemSindico, mensagem: e.target.value })}
-                      placeholder="Prezada equipa, é com grande satisfação que apresento mais uma edição da nossa revista digital..."
+                      placeholder="Prezados moradores, é com grande satisfação que apresento mais uma edição da nossa revista digital..."
                       rows={6}
                       className="bg-white/70 border-slate-200 focus:border-blue-400 focus:ring-blue-400/20 rounded-xl resize-none"
                     />
@@ -578,10 +410,10 @@ export default function RevistaEditor() {
                 </div>
               </div>
             </div>
-            </SortableSectionItem>
+            )}
 
             {/* Avisos - Premium */}
-            <SortableSectionItem id="avisos" isHidden={hiddenSections.has("avisos")}>
+            {!hiddenSections.has("avisos") && (
             <div id="avisos-section" className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 rounded-2xl border border-amber-100 shadow-sm hover:shadow-lg transition-all duration-300">
               {/* Barra decorativa superior */}
               <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-500" />
@@ -620,22 +452,12 @@ export default function RevistaEditor() {
                           Novo Aviso
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden p-0">
-                        <div className="bg-gradient-to-r from-amber-500 to-yellow-500 px-6 py-4">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
-                              <AlertTriangle className="w-5 h-5 text-white" />
-                            </div>
-                            <h3 className="text-lg font-semibold text-white">Novo Aviso</h3>
-                          </div>
-                        </div>
-                        <div className="p-6 overflow-y-auto max-h-[70vh]">
-                          <AvisoForm
-                            revistaId={revistaId}
-                            onSuccess={() => setShowAvisoForm(false)}
-                            onCancel={() => setShowAvisoForm(false)}
-                          />
-                        </div>
+                      <DialogContent className="max-w-lg">
+                        <AvisoForm
+                          revistaId={revistaId}
+                          onSuccess={() => setShowAvisoForm(false)}
+                          onCancel={() => setShowAvisoForm(false)}
+                        />
                       </DialogContent>
                     </Dialog>
                   </div>
@@ -703,10 +525,10 @@ export default function RevistaEditor() {
                 )}
               </div>
             </div>
-            </SortableSectionItem>
+            )}
 
             {/* Votações - Premium */}
-            <SortableSectionItem id="votacoes" isHidden={hiddenSections.has("votacoes")}>
+            {!hiddenSections.has("votacoes") && (
             <div id="votacoes-section" className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-50 rounded-2xl border border-pink-100 shadow-sm hover:shadow-lg transition-all duration-300">
               {/* Barra decorativa superior */}
               <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-pink-400 via-rose-500 to-fuchsia-500" />
@@ -745,22 +567,12 @@ export default function RevistaEditor() {
                           Nova Votação
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden p-0">
-                        <div className="bg-gradient-to-r from-violet-500 to-purple-500 px-6 py-4">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
-                              <Vote className="w-5 h-5 text-white" />
-                            </div>
-                            <h3 className="text-lg font-semibold text-white">Nova Votação</h3>
-                          </div>
-                        </div>
-                        <div className="p-6 overflow-y-auto max-h-[70vh]">
-                          <VotacaoForm
-                            revistaId={revistaId}
-                            onSuccess={() => setShowVotacaoForm(false)}
-                            onCancel={() => setShowVotacaoForm(false)}
-                          />
-                        </div>
+                      <DialogContent className="max-w-lg">
+                        <VotacaoForm
+                          revistaId={revistaId}
+                          onSuccess={() => setShowVotacaoForm(false)}
+                          onCancel={() => setShowVotacaoForm(false)}
+                        />
                       </DialogContent>
                     </Dialog>
                   </div>
@@ -799,624 +611,12 @@ export default function RevistaEditor() {
                       <Vote className="w-6 h-6 text-pink-500" />
                     </div>
                     <p className="font-medium text-slate-700">Nenhuma votação criada</p>
-                    <p className="text-sm text-slate-500 mt-1">Crie enquetes para engajar a equipa</p>
+                    <p className="text-sm text-slate-500 mt-1">Crie enquetes para engajar os moradores</p>
                   </div>
                 )}
               </div>
             </div>
-            </SortableSectionItem>
-
-            {/* Eventos - Premium */}
-            <SortableSectionItem id="eventos" isHidden={hiddenSections.has("eventos")}>
-            <div id="eventos-section" className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 rounded-2xl border border-emerald-100 shadow-sm hover:shadow-lg transition-all duration-300">
-              {/* Barra decorativa superior */}
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-400 via-green-500 to-teal-500" />
-              
-              {/* Elementos decorativos */}
-              <div className="absolute -right-12 -top-12 w-40 h-40 bg-emerald-200/20 rounded-full blur-3xl" />
-              <div className="absolute -left-8 -bottom-8 w-32 h-32 bg-green-200/20 rounded-full blur-2xl" />
-              
-              <div className="relative p-6">
-                {/* Header da secção */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 bg-gradient-to-br from-emerald-500 to-green-500 rounded-xl shadow-lg shadow-emerald-500/30">
-                      <Calendar className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-slate-800">Eventos</h3>
-                      <p className="text-sm text-slate-500">Agende eventos e atividades da organização</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => toggleSectionVisibility("eventos")}
-                      className="text-slate-500 hover:text-red-500 hover:bg-red-50"
-                      title="Ocultar esta secção da revista"
-                    >
-                      <EyeOff className="w-4 h-4 mr-1" />
-                      Ocultar
-                    </Button>
-                    <Dialog open={showEventoForm} onOpenChange={setShowEventoForm}>
-                      <DialogTrigger asChild>
-                        <Button size="sm" className="bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-white shadow-md shadow-emerald-500/25">
-                          <Plus className="w-4 h-4 mr-2" />
-                          Novo Evento
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden p-0">
-                        <div className="bg-gradient-to-r from-emerald-500 to-green-500 px-6 py-4">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
-                              <Calendar className="w-5 h-5 text-white" />
-                            </div>
-                            <h3 className="text-lg font-semibold text-white">Novo Evento</h3>
-                          </div>
-                        </div>
-                        <div className="p-6 overflow-y-auto max-h-[70vh] space-y-4">
-                          <div className="space-y-2">
-                            <Label>Título do Evento *</Label>
-                            <Input id="evento-titulo" placeholder="Ex: Assembleia Geral" />
-                          </div>
-                          <div className="space-y-2">
-                            <Label>Descrição</Label>
-                            <Textarea id="evento-descricao" placeholder="Descreva o evento..." rows={3} />
-                          </div>
-                          <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                              <Label>Data</Label>
-                              <Input id="evento-data" type="date" />
-                            </div>
-                            <div className="space-y-2">
-                              <Label>Horário</Label>
-                              <Input id="evento-hora" type="time" />
-                            </div>
-                          </div>
-                          <div className="space-y-2">
-                            <Label>Local</Label>
-                            <Input id="evento-local" placeholder="Ex: Salão de Festas" />
-                          </div>
-                          <div className="flex gap-2 pt-4">
-                            <Button variant="outline" className="flex-1" onClick={() => setShowEventoForm(false)}>Cancelar</Button>
-                            <Button 
-                              className="flex-1 bg-gradient-to-r from-emerald-500 to-green-500"
-                              onClick={() => {
-                                const titulo = (document.getElementById("evento-titulo") as HTMLInputElement).value;
-                                const descricao = (document.getElementById("evento-descricao") as HTMLTextAreaElement).value;
-                                const data = (document.getElementById("evento-data") as HTMLInputElement).value;
-                                const hora = (document.getElementById("evento-hora") as HTMLInputElement).value;
-                                const local = (document.getElementById("evento-local") as HTMLInputElement).value;
-                                if (titulo) {
-                                  createEventoMutation.mutate({
-                                    revistaId,
-                                    titulo,
-                                    descricao: descricao || undefined,
-                                    dataEvento: data ? new Date(data) : undefined,
-                                    horaInicio: hora || undefined,
-                                    local: local || undefined,
-                                  });
-                                } else {
-                                  toast.error("Preencha o título do evento");
-                                }
-                              }}
-                              disabled={createEventoMutation.isPending}
-                            >
-                              {createEventoMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : "Criar Evento"}
-                            </Button>
-                          </div>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                </div>
-                
-                {/* Conteúdo */}
-                {eventosLoading ? (
-                  <div className="flex items-center justify-center py-12">
-                    <div className="text-center">
-                      <Loader2 className="w-8 h-8 animate-spin text-emerald-500 mx-auto mb-2" />
-                      <p className="text-sm text-slate-500">Carregando eventos...</p>
-                    </div>
-                  </div>
-                ) : eventosData && eventosData.length > 0 ? (
-                  <div className="space-y-3">
-                    {eventosData.map((evento) => (
-                      <div
-                        key={evento.id}
-                        className="group relative p-4 rounded-xl bg-white/60 backdrop-blur-sm border border-emerald-100 hover:bg-white/80 hover:shadow-md transition-all duration-200"
-                      >
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <h4 className="font-semibold text-slate-800">{evento.titulo}</h4>
-                              {evento.dataEvento && (
-                                <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-emerald-100 text-emerald-700">
-                                  {new Date(evento.dataEvento).toLocaleDateString('pt-BR')}
-                                </span>
-                              )}
-                            </div>
-                            {evento.descricao && (
-                              <p className="text-sm text-slate-600 line-clamp-2">{evento.descricao}</p>
-                            )}
-                            {evento.local && (
-                              <p className="text-xs text-slate-500 mt-1">Local: {evento.local}</p>
-                            )}
-                          </div>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="opacity-0 group-hover:opacity-100 transition-opacity text-red-500 hover:text-red-600 hover:bg-red-50"
-                            onClick={() => deleteEventoMutation.mutate({ id: evento.id })}
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-12 bg-white/40 rounded-xl border border-dashed border-emerald-200">
-                    <div className="p-3 bg-emerald-100 rounded-full w-fit mx-auto mb-3">
-                      <Calendar className="w-6 h-6 text-emerald-500" />
-                    </div>
-                    <p className="font-medium text-slate-700">Nenhum evento agendado</p>
-                    <p className="text-sm text-slate-500 mt-1">Clique em "Novo Evento" para começar</p>
-                  </div>
-                )}
-              </div>
-            </div>
-            </SortableSectionItem>
-
-            {/* Funcionários - Premium */}
-            <SortableSectionItem id="funcionarios" isHidden={hiddenSections.has("funcionarios")}>
-            <div id="funcionarios-section" className="relative overflow-hidden bg-gradient-to-br from-purple-50 via-violet-50 to-indigo-50 rounded-2xl border border-purple-100 shadow-sm hover:shadow-lg transition-all duration-300">
-              {/* Barra decorativa superior */}
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-400 via-violet-500 to-indigo-500" />
-              
-              {/* Elementos decorativos */}
-              <div className="absolute -right-12 -top-12 w-40 h-40 bg-purple-200/20 rounded-full blur-3xl" />
-              <div className="absolute -left-8 -bottom-8 w-32 h-32 bg-violet-200/20 rounded-full blur-2xl" />
-              
-              <div className="relative p-6">
-                {/* Header da secção */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 bg-gradient-to-br from-purple-500 to-violet-500 rounded-xl shadow-lg shadow-purple-500/30">
-                      <Users className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-slate-800">Funcionários</h3>
-                      <p className="text-sm text-slate-500">Apresente a equipe da organização</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => toggleSectionVisibility("funcionarios")}
-                      className="text-slate-500 hover:text-red-500 hover:bg-red-50"
-                      title="Ocultar esta secção da revista"
-                    >
-                      <EyeOff className="w-4 h-4 mr-1" />
-                      Ocultar
-                    </Button>
-                    <Dialog open={showFuncionarioForm} onOpenChange={setShowFuncionarioForm}>
-                      <DialogTrigger asChild>
-                        <Button size="sm" className="bg-gradient-to-r from-purple-500 to-violet-500 hover:from-purple-600 hover:to-violet-600 text-white shadow-md shadow-purple-500/25">
-                          <Plus className="w-4 h-4 mr-2" />
-                          Novo Funcionário
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden p-0">
-                        <div className="bg-gradient-to-r from-purple-500 to-violet-500 px-6 py-4">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
-                              <Users className="w-5 h-5 text-white" />
-                            </div>
-                            <h3 className="text-lg font-semibold text-white">Novo Funcionário</h3>
-                          </div>
-                        </div>
-                        <div className="p-6 overflow-y-auto max-h-[70vh]">
-                          <FuncionarioForm
-                            revistaId={revistaId}
-                            onSuccess={() => {
-                              setShowFuncionarioForm(false);
-                              utils.funcionario.list.invalidate({ revistaId });
-                            }}
-                            onCancel={() => setShowFuncionarioForm(false)}
-                          />
-                        </div>
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                </div>
-                
-                {/* Conteúdo */}
-                {funcionariosLoading ? (
-                  <div className="flex items-center justify-center py-12">
-                    <div className="text-center">
-                      <Loader2 className="w-8 h-8 animate-spin text-purple-500 mx-auto mb-2" />
-                      <p className="text-sm text-slate-500">Carregando funcionários...</p>
-                    </div>
-                  </div>
-                ) : funcionariosData && funcionariosData.length > 0 ? (
-                  <div className="grid md:grid-cols-2 gap-3">
-                    {funcionariosData.map((funcionario) => (
-                      <div
-                        key={funcionario.id}
-                        className="group relative p-4 rounded-xl bg-white/60 backdrop-blur-sm border border-purple-100 hover:bg-white/80 hover:shadow-md transition-all duration-200"
-                      >
-                        <div className="flex items-center gap-3">
-                          {funcionario.fotoUrl ? (
-                            <img src={funcionario.fotoUrl} alt={funcionario.nome} className="w-12 h-12 rounded-full object-cover" />
-                          ) : (
-                            <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
-                              <Users className="w-6 h-6 text-purple-500" />
-                            </div>
-                          )}
-                          <div className="flex-1">
-                            <h4 className="font-semibold text-slate-800">{funcionario.nome}</h4>
-                            {funcionario.cargo && (
-                              <p className="text-sm text-slate-600">{funcionario.cargo}</p>
-                            )}
-                          </div>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="opacity-0 group-hover:opacity-100 transition-opacity text-red-500 hover:text-red-600 hover:bg-red-50"
-                            onClick={() => deleteFuncionarioMutation.mutate({ id: funcionario.id })}
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-12 bg-white/40 rounded-xl border border-dashed border-purple-200">
-                    <div className="p-3 bg-purple-100 rounded-full w-fit mx-auto mb-3">
-                      <Users className="w-6 h-6 text-purple-500" />
-                    </div>
-                    <p className="font-medium text-slate-700">Nenhum funcionário cadastrado</p>
-                    <p className="text-sm text-slate-500 mt-1">Apresente a equipe da organização</p>
-                  </div>
-                )}
-              </div>
-            </div>
-            </SortableSectionItem>
-
-            {/* Classificados - Premium */}
-            <SortableSectionItem id="classificados" isHidden={hiddenSections.has("classificados")}>
-            <div id="classificados-section" className="relative overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 rounded-2xl border border-orange-100 shadow-sm hover:shadow-lg transition-all duration-300">
-              {/* Barra decorativa superior */}
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-orange-400 via-amber-500 to-yellow-500" />
-              
-              {/* Elementos decorativos */}
-              <div className="absolute -right-12 -top-12 w-40 h-40 bg-orange-200/20 rounded-full blur-3xl" />
-              <div className="absolute -left-8 -bottom-8 w-32 h-32 bg-amber-200/20 rounded-full blur-2xl" />
-              
-              <div className="relative p-6">
-                {/* Header da secção */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl shadow-lg shadow-orange-500/30">
-                      <Package className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-slate-800">Classificados</h3>
-                      <p className="text-sm text-slate-500">Produtos e serviços da equipa</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => toggleSectionVisibility("classificados")}
-                      className="text-slate-500 hover:text-red-500 hover:bg-red-50"
-                      title="Ocultar esta secção da revista"
-                    >
-                      <EyeOff className="w-4 h-4 mr-1" />
-                      Ocultar
-                    </Button>
-                    <Dialog open={showClassificadoForm} onOpenChange={setShowClassificadoForm}>
-                      <DialogTrigger asChild>
-                        <Button size="sm" className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-md shadow-orange-500/25">
-                          <Plus className="w-4 h-4 mr-2" />
-                          Novo Classificado
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden p-0">
-                        <div className="bg-gradient-to-r from-orange-500 to-amber-500 px-6 py-4">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
-                              <Package className="w-5 h-5 text-white" />
-                            </div>
-                            <h3 className="text-lg font-semibold text-white">Novo Classificado</h3>
-                          </div>
-                        </div>
-                        <div className="p-6 overflow-y-auto max-h-[70vh]">
-                          <p className="text-center text-muted-foreground py-8">
-                            Os classificados são geridos pela equipa através do app.
-                            <br />
-                            Você pode visualizar e moderar os classificados existentes.
-                          </p>
-                          <Button variant="outline" className="w-full" onClick={() => setShowClassificadoForm(false)}>Fechar</Button>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                </div>
-                
-                {/* Conteúdo */}
-                <div className="text-center py-12 bg-white/40 rounded-xl border border-dashed border-orange-200">
-                  <div className="p-3 bg-orange-100 rounded-full w-fit mx-auto mb-3">
-                    <Package className="w-6 h-6 text-orange-500" />
-                  </div>
-                  <p className="font-medium text-slate-700">Secção de Classificados</p>
-                  <p className="text-sm text-slate-500 mt-1">Os moradores podem anunciar produtos e serviços</p>
-                </div>
-              </div>
-            </div>
-            </SortableSectionItem>
-
-            {/* Caronas - Premium */}
-            <SortableSectionItem id="caronas" isHidden={hiddenSections.has("caronas")}>
-            <div id="caronas-section" className="relative overflow-hidden bg-gradient-to-br from-teal-50 via-cyan-50 to-sky-50 rounded-2xl border border-teal-100 shadow-sm hover:shadow-lg transition-all duration-300">
-              {/* Barra decorativa superior */}
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-teal-400 via-cyan-500 to-sky-500" />
-              
-              {/* Elementos decorativos */}
-              <div className="absolute -right-12 -top-12 w-40 h-40 bg-teal-200/20 rounded-full blur-3xl" />
-              <div className="absolute -left-8 -bottom-8 w-32 h-32 bg-cyan-200/20 rounded-full blur-2xl" />
-              
-              <div className="relative p-6">
-                {/* Header da secção */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-xl shadow-lg shadow-teal-500/30">
-                      <Car className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-slate-800">Caronas</h3>
-                      <p className="text-sm text-slate-500">Compartilhe viagens com vizinhos</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => toggleSectionVisibility("caronas")}
-                      className="text-slate-500 hover:text-red-500 hover:bg-red-50"
-                      title="Ocultar esta secção da revista"
-                    >
-                      <EyeOff className="w-4 h-4 mr-1" />
-                      Ocultar
-                    </Button>
-                    <Dialog open={showCaronaForm} onOpenChange={setShowCaronaForm}>
-                      <DialogTrigger asChild>
-                        <Button size="sm" className="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white shadow-md shadow-teal-500/25">
-                          <Plus className="w-4 h-4 mr-2" />
-                          Nova Carona
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden p-0">
-                        <div className="bg-gradient-to-r from-teal-500 to-cyan-500 px-6 py-4">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
-                              <Car className="w-5 h-5 text-white" />
-                            </div>
-                            <h3 className="text-lg font-semibold text-white">Nova Carona</h3>
-                          </div>
-                        </div>
-                        <div className="p-6 overflow-y-auto max-h-[70vh]">
-                          <p className="text-center text-muted-foreground py-8">
-                            As caronas são geridas pela equipa através do app.
-                            <br />
-                            Você pode visualizar as caronas disponíveis.
-                          </p>
-                          <Button variant="outline" className="w-full" onClick={() => setShowCaronaForm(false)}>Fechar</Button>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                </div>
-                
-                {/* Conteúdo */}
-                <div className="text-center py-12 bg-white/40 rounded-xl border border-dashed border-teal-200">
-                  <div className="p-3 bg-teal-100 rounded-full w-fit mx-auto mb-3">
-                    <Car className="w-6 h-6 text-teal-500" />
-                  </div>
-                  <p className="font-medium text-slate-700">Secção de Caronas</p>
-                  <p className="text-sm text-slate-500 mt-1">Os moradores podem oferecer e procurar caronas</p>
-                </div>
-              </div>
-            </div>
-            </SortableSectionItem>
-
-            {/* Achados e Perdidos - Premium */}
-            <SortableSectionItem id="achados" isHidden={hiddenSections.has("achados")}>
-            <div id="achados-section" className="relative overflow-hidden bg-gradient-to-br from-red-50 via-rose-50 to-pink-50 rounded-2xl border border-red-100 shadow-sm hover:shadow-lg transition-all duration-300">
-              {/* Barra decorativa superior */}
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-400 via-rose-500 to-pink-500" />
-              
-              {/* Elementos decorativos */}
-              <div className="absolute -right-12 -top-12 w-40 h-40 bg-red-200/20 rounded-full blur-3xl" />
-              <div className="absolute -left-8 -bottom-8 w-32 h-32 bg-rose-200/20 rounded-full blur-2xl" />
-              
-              <div className="relative p-6">
-                {/* Header da secção */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 bg-gradient-to-br from-red-500 to-rose-500 rounded-xl shadow-lg shadow-red-500/30">
-                      <Heart className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-slate-800">Achados e Perdidos</h3>
-                      <p className="text-sm text-slate-500">Encontre ou reporte objetos perdidos</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => toggleSectionVisibility("achados")}
-                      className="text-slate-500 hover:text-red-500 hover:bg-red-50"
-                      title="Ocultar esta secção da revista"
-                    >
-                      <EyeOff className="w-4 h-4 mr-1" />
-                      Ocultar
-                    </Button>
-                    <Dialog open={showAchadoForm} onOpenChange={setShowAchadoForm}>
-                      <DialogTrigger asChild>
-                        <Button size="sm" className="bg-gradient-to-r from-red-500 to-rose-500 hover:from-red-600 hover:to-rose-600 text-white shadow-md shadow-red-500/25">
-                          <Plus className="w-4 h-4 mr-2" />
-                          Novo Item
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden p-0">
-                        <div className="bg-gradient-to-r from-red-500 to-rose-500 px-6 py-4">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
-                              <Heart className="w-5 h-5 text-white" />
-                            </div>
-                            <h3 className="text-lg font-semibold text-white">Registar Item Achado</h3>
-                          </div>
-                        </div>
-                        <AchadoPerdidoForm 
-                          condominioId={revista?.condominioId || 0} 
-                          onSuccess={() => setShowAchadoForm(false)} 
-                        />
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                </div>
-                
-                {/* Conteúdo */}
-                <div className="text-center py-12 bg-white/40 rounded-xl border border-dashed border-red-200">
-                  <div className="p-3 bg-red-100 rounded-full w-fit mx-auto mb-3">
-                    <Heart className="w-6 h-6 text-red-500" />
-                  </div>
-                  <p className="font-medium text-slate-700">Secção de Achados e Perdidos</p>
-                  <p className="text-sm text-slate-500 mt-1">Os moradores podem reportar itens achados ou perdidos</p>
-                </div>
-              </div>
-            </div>
-            </SortableSectionItem>
-
-            {/* ==================== NOVAS SECÇÕES PREMIUM ==================== */}
-            
-            {/* Galeria de Fotos */}
-            <SortableSectionItem id="galeria" isHidden={hiddenSections.has("galeria")}>
-            <GaleriaSection
-              revistaId={revistaId}
-              condominioId={revista?.condominioId || 0}
-              hiddenSections={hiddenSections}
-              toggleSectionVisibility={toggleSectionVisibility}
-              showForm={showGaleriaForm}
-              setShowForm={setShowGaleriaForm}
-            />
-            </SortableSectionItem>
-
-            {/* Comunicados */}
-            <SortableSectionItem id="comunicados" isHidden={hiddenSections.has("comunicados")}>
-            <ComunicadosSection
-              revistaId={revistaId}
-              condominioId={revista?.condominioId || 0}
-              hiddenSections={hiddenSections}
-              toggleSectionVisibility={toggleSectionVisibility}
-              showForm={showComunicadoForm}
-              setShowForm={setShowComunicadoForm}
-            />
-            </SortableSectionItem>
-
-            {/* Regras e Normas */}
-            <SortableSectionItem id="regras" isHidden={hiddenSections.has("regras")}>
-            <RegrasSection
-              revistaId={revistaId}
-              condominioId={revista?.condominioId || 0}
-              hiddenSections={hiddenSections}
-              toggleSectionVisibility={toggleSectionVisibility}
-              showForm={showRegrasForm}
-              setShowForm={setShowRegrasForm}
-            />
-            </SortableSectionItem>
-
-            {/* Dicas de Segurança */}
-            <SortableSectionItem id="dicas_seguranca" isHidden={hiddenSections.has("dicas_seguranca")}>
-            <DicasSegurancaSection
-              revistaId={revistaId}
-              condominioId={revista?.condominioId || 0}
-              hiddenSections={hiddenSections}
-              toggleSectionVisibility={toggleSectionVisibility}
-              showForm={showDicasForm}
-              setShowForm={setShowDicasForm}
-            />
-            </SortableSectionItem>
-
-            {/* Realizações */}
-            <SortableSectionItem id="realizacoes" isHidden={hiddenSections.has("realizacoes")}>
-            <RealizacoesSection
-              revistaId={revistaId}
-              condominioId={revista?.condominioId || 0}
-              hiddenSections={hiddenSections}
-              toggleSectionVisibility={toggleSectionVisibility}
-              showForm={showRealizacoesForm}
-              setShowForm={setShowRealizacoesForm}
-            />
-            </SortableSectionItem>
-
-            {/* Melhorias */}
-            <SortableSectionItem id="melhorias" isHidden={hiddenSections.has("melhorias")}>
-            <MelhoriasSection
-              revistaId={revistaId}
-              condominioId={revista?.condominioId || 0}
-              hiddenSections={hiddenSections}
-              toggleSectionVisibility={toggleSectionVisibility}
-              showForm={showMelhoriasForm}
-              setShowForm={setShowMelhoriasForm}
-            />
-            </SortableSectionItem>
-
-            {/* Aquisições */}
-            <SortableSectionItem id="aquisicoes" isHidden={hiddenSections.has("aquisicoes")}>
-            <AquisicoesSection
-              revistaId={revistaId}
-              condominioId={revista?.condominioId || 0}
-              hiddenSections={hiddenSections}
-              toggleSectionVisibility={toggleSectionVisibility}
-              showForm={showAquisicoesForm}
-              setShowForm={setShowAquisicoesForm}
-            />
-            </SortableSectionItem>
-
-            {/* Publicidade */}
-            <SortableSectionItem id="publicidade" isHidden={hiddenSections.has("publicidade")}>
-            <PublicidadeSection
-              revistaId={revistaId}
-              condominioId={revista?.condominioId || 0}
-              hiddenSections={hiddenSections}
-              toggleSectionVisibility={toggleSectionVisibility}
-              showForm={showPublicidadeForm}
-              setShowForm={setShowPublicidadeForm}
-            />
-            </SortableSectionItem>
-
-            {/* Cadastre-se para Receber */}
-            <SortableSectionItem id="cadastro" isHidden={hiddenSections.has("cadastro")}>
-            <CadastroSection
-              revistaId={revistaId}
-              condominioId={revista?.condominioId || 0}
-              hiddenSections={hiddenSections}
-              toggleSectionVisibility={toggleSectionVisibility}
-            />
-            </SortableSectionItem>
-
-                </div>
-              </SortableContext>
-            </DndContext>
-
+            )}
           </TabsContent>
 
           {/* Secções Tab */}
@@ -1439,30 +639,6 @@ export default function RevistaEditor() {
                         setShowFuncionarioForm(true);
                       } else if (section.id === "votacao") {
                         setShowVotacaoForm(true);
-                      } else if (section.id === "eventos") {
-                        setShowEventoForm(true);
-                      } else if (section.id === "classificados") {
-                        setShowClassificadoForm(true);
-                      } else if (section.id === "caronas") {
-                        setShowCaronaForm(true);
-                      } else if (section.id === "achados") {
-                        setShowAchadoForm(true);
-                      } else if (section.id === "galeria") {
-                        setShowGaleriaForm(true);
-                      } else if (section.id === "comunicados") {
-                        setShowComunicadoForm(true);
-                      } else if (section.id === "regras") {
-                        setShowRegrasForm(true);
-                      } else if (section.id === "dicas_seguranca") {
-                        setShowDicasForm(true);
-                      } else if (section.id === "realizacoes") {
-                        setShowRealizacoesForm(true);
-                      } else if (section.id === "melhorias") {
-                        setShowMelhoriasForm(true);
-                      } else if (section.id === "aquisicoes") {
-                        setShowAquisicoesForm(true);
-                      } else if (section.id === "publicidade") {
-                        setShowPublicidadeForm(true);
                       }
                       // Scroll para a secção correspondente
                       setTimeout(() => {
@@ -1477,15 +653,6 @@ export default function RevistaEditor() {
                           classificados: "classificados-section",
                           caronas: "caronas-section",
                           achados: "achados-section",
-                          galeria: "galeria-section",
-                          comunicados: "comunicados-section",
-                          regras: "regras-section",
-                          dicas_seguranca: "dicas-section",
-                          realizacoes: "realizacoes-section",
-                          melhorias: "melhorias-section",
-                          aquisicoes: "aquisicoes-section",
-                          publicidade: "publicidade-section",
-                          cadastro: "cadastro-section",
                         };
                         const elementId = sectionMap[section.id];
                         if (elementId) {
@@ -1606,84 +773,6 @@ export default function RevistaEditor() {
 
           {/* Configurações Tab */}
           <TabsContent value="config" className="space-y-6">
-            {/* Card de Imagem de Capa */}
-            <Card className="overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50 border-b">
-                <CardTitle className="font-serif flex items-center gap-2">
-                  <Image className="w-5 h-5 text-purple-600" />
-                  Imagem de Capa
-                </CardTitle>
-                <CardDescription>
-                  Personalize a capa da sua revista com uma imagem de fundo
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="p-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  {/* Upload de Imagem */}
-                  <div className="space-y-3">
-                    <Label className="text-sm font-medium text-slate-700">Imagem de Fundo da Capa</Label>
-                    <ImageUpload
-                      value={revista.capaUrl || undefined}
-                      onChange={(url) => {
-                        updateCapaMutation.mutate({ id: revistaId, capaUrl: url || "" });
-                      }}
-                      folder="revistas/capas"
-                      aspectRatio="portrait"
-                      placeholder="Clique para adicionar imagem de capa"
-                      className="w-full"
-                      compressionPreset="cover"
-                      enableEditor={true}
-                    />
-                    <p className="text-xs text-muted-foreground">
-                      Recomendado: imagem vertical (3:4) com pelo menos 800x1066 pixels
-                    </p>
-                  </div>
-                  
-                  {/* Preview da Capa */}
-                  <div className="space-y-3">
-                    <Label className="text-sm font-medium text-slate-700">Pré-visualização</Label>
-                    <div 
-                      className="relative aspect-[3/4] rounded-xl overflow-hidden border-2 border-dashed border-slate-200 bg-gradient-to-br from-purple-100 via-white to-pink-100"
-                      style={{
-                        backgroundImage: revista.capaUrl 
-                          ? `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url(${revista.capaUrl})`
-                          : undefined,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                      }}
-                    >
-                      <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-                        {!revista.capaUrl && (
-                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-3">
-                            <Building2 className="w-6 h-6 text-white" />
-                          </div>
-                        )}
-                        <p className={cn(
-                          "text-xs uppercase tracking-widest mb-1",
-                          revista.capaUrl ? "text-white/80" : "text-slate-500"
-                        )}>
-                          Edição {revista.edicao}
-                        </p>
-                        <h3 className={cn(
-                          "font-serif text-lg font-bold mb-1",
-                          revista.capaUrl ? "text-white drop-shadow-lg" : "text-slate-800"
-                        )}>
-                          {revista.titulo}
-                        </h3>
-                        <p className={cn(
-                          "text-sm",
-                          revista.capaUrl ? "text-white/90" : "text-slate-600"
-                        )}>
-                          {revista.subtitulo || "Informativo Mensal"}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Card de Informações */}
             <Card>
               <CardHeader>
                 <CardTitle className="font-serif">Informações da Revista</CardTitle>
