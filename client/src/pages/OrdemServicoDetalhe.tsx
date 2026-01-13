@@ -1692,7 +1692,7 @@ export default function OrdemServicoDetalhe() {
 
         {/* Modal Adicionar Categoria */}
         <Dialog open={showGerenciarCategorias} onOpenChange={setShowGerenciarCategorias}>
-          <DialogContent className="max-h-[90vh] overflow-hidden p-0">
+          <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
             <div className="bg-gradient-to-r from-amber-500 to-yellow-500 px-6 py-4">
               <DialogHeader className="space-y-1">
                 <DialogTitle className="flex items-center gap-2 text-white text-lg">
@@ -1764,7 +1764,7 @@ export default function OrdemServicoDetalhe() {
 
         {/* Modal Adicionar Prioridade */}
         <Dialog open={showGerenciarPrioridades} onOpenChange={setShowGerenciarPrioridades}>
-          <DialogContent className="max-h-[90vh] overflow-hidden p-0">
+          <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
             <div className="bg-gradient-to-r from-red-500 to-rose-500 px-6 py-4">
               <DialogHeader className="space-y-1">
                 <DialogTitle className="flex items-center gap-2 text-white text-lg">
@@ -1847,7 +1847,7 @@ export default function OrdemServicoDetalhe() {
 
         {/* Modal Adicionar Status */}
         <Dialog open={showGerenciarStatus} onOpenChange={setShowGerenciarStatus}>
-          <DialogContent className="max-h-[90vh] overflow-hidden p-0">
+          <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
             <div className="bg-gradient-to-r from-blue-500 to-indigo-500 px-6 py-4">
               <DialogHeader className="space-y-1">
                 <DialogTitle className="flex items-center gap-2 text-white text-lg">
@@ -1930,7 +1930,7 @@ export default function OrdemServicoDetalhe() {
 
         {/* Modal Adicionar Setor */}
         <Dialog open={showGerenciarSetores} onOpenChange={setShowGerenciarSetores}>
-          <DialogContent className="max-h-[90vh] overflow-hidden p-0">
+          <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
             <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-4">
               <DialogHeader className="space-y-1">
                 <DialogTitle className="flex items-center gap-2 text-white text-lg">
@@ -1970,7 +1970,7 @@ export default function OrdemServicoDetalhe() {
 
         {/* Modal Adicionar Material */}
         <Dialog open={showAddMaterial} onOpenChange={setShowAddMaterial}>
-          <DialogContent className="max-h-[90vh] overflow-hidden p-0">
+          <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
             <div className="bg-gradient-to-r from-orange-500 to-amber-500 px-6 py-4">
               <DialogHeader className="space-y-1">
                 <DialogTitle className="flex items-center gap-2 text-white text-lg">
@@ -2070,7 +2070,7 @@ export default function OrdemServicoDetalhe() {
 
         {/* Modal Adicionar Orçamento */}
         <Dialog open={showAddOrcamento} onOpenChange={setShowAddOrcamento}>
-          <DialogContent className="max-h-[90vh] overflow-hidden p-0">
+          <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
             <div className="bg-gradient-to-r from-green-500 to-emerald-500 px-6 py-4">
               <DialogHeader className="space-y-1">
                 <DialogTitle className="flex items-center gap-2 text-white text-lg">
@@ -2129,7 +2129,7 @@ export default function OrdemServicoDetalhe() {
 
         {/* Modal Adicionar Responsável */}
         <Dialog open={showAddResponsavel} onOpenChange={setShowAddResponsavel}>
-          <DialogContent className="max-h-[90vh] overflow-hidden p-0">
+          <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
             <div className="bg-gradient-to-r from-violet-500 to-purple-500 px-6 py-4">
               <DialogHeader className="space-y-1">
                 <DialogTitle className="flex items-center gap-2 text-white text-lg">

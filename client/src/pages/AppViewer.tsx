@@ -332,7 +332,7 @@ export default function AppViewer() {
                   Compartilhar
                 </Button>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-md p-0 overflow-hidden">
+              <DialogContent className="w-[95vw] sm:max-w-md p-0 overflow-hidden">
                 <div className="bg-gradient-to-r from-blue-500 to-indigo-500 px-6 py-4">
                   <DialogHeader className="space-y-1">
                     <DialogTitle className="flex items-center gap-2 text-white text-lg">

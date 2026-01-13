@@ -966,7 +966,7 @@ export default function FuncoesRapidas({ condominioId }: FuncoesRapidasProps) {
 
       {/* Modal de Criação Rápida */}
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden">
+        <DialogContent className="w-[95vw] max-w-[500px] p-0 overflow-hidden">
           <div className="bg-gradient-to-r from-blue-500 to-indigo-500 px-6 py-4">
             <DialogHeader className="space-y-1">
               <DialogTitle className="flex items-center gap-2 text-white text-lg">

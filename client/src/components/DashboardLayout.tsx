@@ -458,7 +458,7 @@ function DashboardLayoutContent({
     <>
       {/* Diálogo de confirmação */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="sm:max-w-md p-0 overflow-hidden">
+        <DialogContent className="w-[95vw] max-w-md p-0 overflow-hidden">
           <div className="bg-gradient-to-r from-amber-500 to-orange-500 px-6 py-4">
             <DialogHeader className="space-y-1">
               <DialogTitle className="flex items-center gap-2 text-white text-lg">

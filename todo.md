@@ -347,3 +347,11 @@
 - Funções Rápidas
 - Galeria e Mídia (Realizações, Melhorias, Aquisições)
 - Gestão da Organização (Cadastro, Equipe)
+
+
+## Fase 39: Ajustar Modais - Botões e Textos Cortados
+- [x] Identificar todos os modais com problemas de layout (81 modais encontrados)
+- [x] Ajustar TarefasSimplesModal (Funções Rápidas)
+- [x] Ajustar modais de Nova Vistoria, Nova Manutenção, Nova Ocorrência
+- [x] Ajustar outros modais do sistema (adicionado w-[95vw] a todos)
+- [x] Testar todos os modais no navegador

@@ -240,7 +240,7 @@ export default function QuickFunctionsEditor({ onSave, triggerClassName, condomi
           <Settings className="w-3.5 h-3.5 text-sidebar-foreground/50" />
         </button>
       </DialogTrigger>
-      <DialogContent className="max-w-lg max-h-[80vh] overflow-hidden p-0">
+      <DialogContent className="w-[95vw] max-w-lg max-h-[80vh] overflow-hidden p-0">
         <div className="bg-gradient-to-r from-violet-500 to-purple-500 px-6 py-4">
           <DialogHeader className="space-y-1">
             <DialogTitle className="flex items-center gap-2 text-white text-lg">

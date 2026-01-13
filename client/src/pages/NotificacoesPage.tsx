@@ -558,7 +558,7 @@ export function NotificacoesPage({ condominioId }: NotificacoesPageProps) {
                 Enviar Push em Massa
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-md p-0 overflow-hidden">
+            <DialogContent className="w-[95vw] max-w-md p-0 overflow-hidden">
               <div className="bg-gradient-to-r from-purple-500 to-purple-600 p-6 text-white">
                 <DialogHeader>
                   <div className="flex items-center gap-3">
@@ -871,7 +871,7 @@ export function NotificacoesPage({ condominioId }: NotificacoesPageProps) {
                 Novo Lembrete
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-md p-0 overflow-hidden">
+            <DialogContent className="w-[95vw] max-w-md p-0 overflow-hidden">
               <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white">
                 <DialogHeader>
                   <div className="flex items-center gap-3">
@@ -973,7 +973,7 @@ export function NotificacoesPage({ condominioId }: NotificacoesPageProps) {
                 Enviar Notificação
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-md p-0 overflow-hidden">
+            <DialogContent className="w-[95vw] max-w-md p-0 overflow-hidden">
               <div className="bg-gradient-to-r from-purple-500 to-purple-600 p-6 text-white">
                 <DialogHeader>
                   <div className="flex items-center gap-3">
@@ -1781,7 +1781,7 @@ export function NotificacoesPage({ condominioId }: NotificacoesPageProps) {
                         Novo Template
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="max-w-md">
+                    <DialogContent className="w-[95vw] max-w-md">
                       <DialogHeader>
                         <DialogTitle>
                           {editingTemplate ? "Editar Template" : "Novo Template"}

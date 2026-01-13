@@ -230,7 +230,7 @@ export default function CriarProjeto() {
 
       {/* Modal do Assistente de Criação */}
       <Dialog open={mostrarAssistente} onOpenChange={setMostrarAssistente}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="w-[95vw] max-w-4xl max-h-[90vh] overflow-y-auto">
           <AssistenteCriacao 
             onClose={() => setMostrarAssistente(false)}
             onComplete={() => setMostrarAssistente(false)}

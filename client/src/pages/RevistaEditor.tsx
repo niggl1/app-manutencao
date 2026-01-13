@@ -452,7 +452,7 @@ export default function RevistaEditor() {
                           Novo Aviso
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="max-w-lg">
+                      <DialogContent className="w-[95vw] max-w-lg">
                         <AvisoForm
                           revistaId={revistaId}
                           onSuccess={() => setShowAvisoForm(false)}
@@ -567,7 +567,7 @@ export default function RevistaEditor() {
                           Nova Votação
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="max-w-lg">
+                      <DialogContent className="w-[95vw] max-w-lg">
                         <VotacaoForm
                           revistaId={revistaId}
                           onSuccess={() => setShowVotacaoForm(false)}

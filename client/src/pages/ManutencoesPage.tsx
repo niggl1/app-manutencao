@@ -541,7 +541,7 @@ export default function ManutencoesPage({ condominioId }: ManutencoesPageProps) 
 
       {/* Dialog Nova Manutenção */}
       <Dialog open={showDialog} onOpenChange={setShowDialog}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-0 gap-0">
+        <DialogContent className="w-[95vw] max-w-2xl max-h-[90vh] overflow-y-auto p-0 gap-0">
           <DialogHeader className="sr-only">
             <DialogTitle>Nova Manutenção</DialogTitle>
           </DialogHeader>
@@ -916,7 +916,7 @@ export default function ManutencoesPage({ condominioId }: ManutencoesPageProps) 
 
       {/* Dialog Detalhes */}
       <Dialog open={showDetailDialog} onOpenChange={setShowDetailDialog}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0">
+        <DialogContent className="w-[95vw] max-w-4xl max-h-[90vh] overflow-hidden p-0">
           <div className="bg-gradient-to-r from-orange-500 to-amber-500 px-6 py-4">
             <DialogHeader className="space-y-1">
               <DialogTitle className="flex items-center gap-2 text-white text-lg">

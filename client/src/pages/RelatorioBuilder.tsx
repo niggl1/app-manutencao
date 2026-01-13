@@ -1374,7 +1374,7 @@ export default function RelatorioBuilder() {
 
       {/* Dialog de Configuração de Cabeçalho/Rodapé - Premium */}
       <Dialog open={showHeaderConfig} onOpenChange={setShowHeaderConfig}>
-        <DialogContent className="max-w-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border-white/10 shadow-2xl shadow-black/50">
+        <DialogContent className="w-[95vw] max-w-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border-white/10 shadow-2xl shadow-black/50">
           <DialogHeader className="pb-4 border-b border-white/10">
             <div className="flex items-center gap-3">
               <div className="p-2.5 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-500/30">

@@ -109,7 +109,7 @@ export function ShareModal({ isOpen, onClose, tipo, itemId, itemTitulo, itemProt
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md max-h-[90vh] overflow-hidden p-0">
+      <DialogContent className="w-[95vw] max-w-md max-h-[90vh] overflow-hidden p-0">
         <div className={`bg-gradient-to-r ${getTipoColor(tipo)} px-6 py-4`}>
           <DialogHeader className="space-y-1">
             <DialogTitle className="flex items-center gap-2 text-white text-lg">

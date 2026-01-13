@@ -93,7 +93,7 @@ export function GaleriaSection({ revistaId, condominioId, hiddenSections, toggle
                   Novo Álbum
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden p-0">
+              <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
                 <div className="bg-gradient-to-r from-violet-500 to-purple-500 px-6 py-4">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
@@ -234,7 +234,7 @@ export function ComunicadosSection({ revistaId, condominioId, hiddenSections, to
                   Novo Comunicado
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden p-0">
+              <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
                 <div className="bg-gradient-to-r from-sky-500 to-blue-500 px-6 py-4">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
@@ -372,7 +372,7 @@ export function RegrasSection({ revistaId, condominioId, hiddenSections, toggleS
                   Nova Regra
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden p-0">
+              <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
                 <div className="bg-gradient-to-r from-slate-500 to-gray-600 px-6 py-4">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
@@ -512,7 +512,7 @@ export function DicasSegurancaSection({ revistaId, condominioId, hiddenSections,
                   Nova Dica
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden p-0">
+              <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
                 <div className="bg-gradient-to-r from-yellow-500 to-amber-500 px-6 py-4">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
@@ -652,7 +652,7 @@ export function RealizacoesSection({ revistaId, condominioId, hiddenSections, to
                   Nova Realização
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden p-0">
+              <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
                 <div className="bg-gradient-to-r from-amber-500 to-yellow-500 px-6 py-4">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
@@ -793,7 +793,7 @@ export function MelhoriasSection({ revistaId, condominioId, hiddenSections, togg
                   Nova Melhoria
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden p-0">
+              <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
                 <div className="bg-gradient-to-r from-lime-500 to-green-500 px-6 py-4">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
@@ -951,7 +951,7 @@ export function AquisicoesSection({ revistaId, condominioId, hiddenSections, tog
                   Nova Aquisição
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden p-0">
+              <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
                 <div className="bg-gradient-to-r from-fuchsia-500 to-pink-500 px-6 py-4">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
@@ -1095,7 +1095,7 @@ export function PublicidadeSection({ revistaId, condominioId, hiddenSections, to
                   Novo Anúncio
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden p-0">
+              <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
                 <div className="bg-gradient-to-r from-rose-500 to-red-500 px-6 py-4">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">

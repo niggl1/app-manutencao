@@ -131,7 +131,7 @@ export default function VotacoesPage() {
               Nova Votação
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-hidden p-0">
+          <DialogContent className="w-[95vw] max-w-2xl max-h-[90vh] overflow-hidden p-0">
             <DialogHeader className="sr-only">
               <DialogTitle>Nova Votação</DialogTitle>
               <DialogDescription>Crie uma nova votação ou enquete para a equipa</DialogDescription>
@@ -284,7 +284,7 @@ export default function VotacoesPage() {
 
       {/* Dialog de Detalhes */}
       <Dialog open={showDetailDialog} onOpenChange={setShowDetailDialog}>
-        <DialogContent className="max-w-3xl max-h-[90vh] overflow-hidden p-0">
+        <DialogContent className="w-[95vw] max-w-3xl max-h-[90vh] overflow-hidden p-0">
           <DialogHeader className="sr-only">
             <DialogTitle>Detalhes da Votação</DialogTitle>
             <DialogDescription>Visualize os resultados e detalhes da votação</DialogDescription>

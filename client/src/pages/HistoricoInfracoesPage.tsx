@@ -441,7 +441,7 @@ export default function HistoricoInfracoesPage() {
 
       {/* Modal de Detalhes */}
       <Dialog open={showDetailsModal} onOpenChange={setShowDetailsModal}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-hidden p-0">
+        <DialogContent className="w-[95vw] max-w-2xl max-h-[90vh] overflow-hidden p-0">
           <div className="bg-gradient-to-r from-amber-500 to-orange-500 px-6 py-4">
             <DialogHeader className="space-y-1">
               <DialogTitle className="flex items-center gap-2 text-white text-lg">
@@ -596,7 +596,7 @@ export default function HistoricoInfracoesPage() {
 
       {/* Modal de Resposta */}
       <Dialog open={showRespostaModal} onOpenChange={setShowRespostaModal}>
-        <DialogContent className="max-h-[90vh] overflow-hidden p-0">
+        <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
           <div className="bg-gradient-to-r from-blue-500 to-indigo-500 px-6 py-4">
             <DialogHeader className="space-y-1">
               <DialogTitle className="flex items-center gap-2 text-white text-lg">
@@ -664,7 +664,7 @@ export default function HistoricoInfracoesPage() {
       
       {/* Modal de Gerar Relatório */}
       <Dialog open={showRelatorioModal} onOpenChange={setShowRelatorioModal}>
-        <DialogContent className="max-w-md max-h-[90vh] overflow-hidden p-0">
+        <DialogContent className="w-[95vw] max-w-md max-h-[90vh] overflow-hidden p-0">
           <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-4">
             <DialogHeader className="space-y-1">
               <DialogTitle className="flex items-center gap-2 text-white text-lg">

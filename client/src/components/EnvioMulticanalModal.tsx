@@ -137,7 +137,7 @@ Administração do Condomínio`);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md p-0 overflow-hidden">
+      <DialogContent className="w-[95vw] max-w-md p-0 overflow-hidden">
         <div className="bg-gradient-to-r from-green-500 to-emerald-500 px-6 py-4">
           <DialogHeader className="space-y-1">
             <DialogTitle className="flex items-center gap-2 text-white text-lg">

@@ -443,7 +443,7 @@ export default function FabricImageEditor({ isOpen, onClose, imageUrl, onSave }:
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-[95vw] w-[950px] max-h-[95vh] p-0 overflow-hidden">
+      <DialogContent className="w-[95vw] max-w-[95vw] w-[950px] max-h-[95vh] p-0 overflow-hidden">
         <DialogHeader className="px-4 py-3 border-b bg-gradient-to-r from-red-500 to-red-600">
           <DialogTitle className="text-white flex items-center gap-2">
             <Pencil className="w-5 h-5" />

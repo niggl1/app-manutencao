@@ -632,7 +632,7 @@ export default function OrdensServico() {
 
         {/* Modal Nova OS */}
         <Dialog open={showNovaOS} onOpenChange={setShowNovaOS}>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-hidden p-0">
+          <DialogContent className="w-[95vw] max-w-2xl max-h-[90vh] overflow-hidden p-0">
             <div className="bg-gradient-to-r from-amber-500 to-yellow-500 px-6 py-4">
               <DialogHeader className="space-y-1">
                 <DialogTitle className="flex items-center gap-2 text-white text-lg">
@@ -808,7 +808,7 @@ export default function OrdensServico() {
 
         {/* Modal Configurações */}
         <Dialog open={showConfiguracoes} onOpenChange={setShowConfiguracoes}>
-          <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden p-0">
+          <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
             <div className="bg-gradient-to-r from-slate-600 to-slate-700 px-6 py-4">
               <DialogHeader className="space-y-1">
                 <DialogTitle className="flex items-center gap-2 text-white text-lg">

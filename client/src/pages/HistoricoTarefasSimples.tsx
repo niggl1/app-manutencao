@@ -560,7 +560,7 @@ export default function HistoricoTarefasSimples() {
 
         {/* Modal Detalhes */}
         <Dialog open={modalDetalhesAberto} onOpenChange={setModalDetalhesAberto}>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="w-[95vw] max-w-2xl max-h-[90vh] overflow-y-auto">
             {tarefaSelecionada && (
               <>
                 <DialogHeader>

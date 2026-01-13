@@ -140,7 +140,7 @@ export default function ImageGallery({
 
       {/* Lightbox */}
       <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
-        <DialogContent className="max-w-[95vw] max-h-[95vh] p-0 bg-black/95 border-none">
+        <DialogContent className="w-[95vw] max-w-[95vw] max-h-[95vh] p-0 bg-black/95 border-none">
           <div className="relative w-full h-[90vh] flex items-center justify-center">
             {/* Botão fechar */}
             <Button

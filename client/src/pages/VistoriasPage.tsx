@@ -511,7 +511,7 @@ export default function VistoriasPage({ condominioId }: VistoriasPageProps) {
 
       {/* Dialog Nova Vistoria */}
       <Dialog open={showDialog} onOpenChange={setShowDialog}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-0 gap-0">
+        <DialogContent className="w-[95vw] max-w-2xl max-h-[90vh] overflow-y-auto p-0 gap-0">
           <DialogHeader className="sr-only">
             <DialogTitle>Nova Vistoria</DialogTitle>
           </DialogHeader>
@@ -802,7 +802,7 @@ export default function VistoriasPage({ condominioId }: VistoriasPageProps) {
 
       {/* Dialog Detalhes */}
       <Dialog open={showDetailDialog} onOpenChange={setShowDetailDialog}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0">
+        <DialogContent className="w-[95vw] max-w-4xl max-h-[90vh] overflow-hidden p-0">
           <div className="bg-gradient-to-r from-cyan-500 to-blue-500 px-6 py-4">
             <DialogHeader className="space-y-1">
               <DialogTitle className="flex items-center gap-2 text-white text-lg">

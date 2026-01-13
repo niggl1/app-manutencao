@@ -439,7 +439,7 @@ export function TarefasSimplesModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md sm:max-w-lg max-h-[90vh] overflow-y-auto p-0 gap-0 border-0 shadow-2xl overflow-x-hidden">
+      <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-y-auto p-0 gap-0 border-0 shadow-2xl">
         {/* Header Premium Laranja */}
         <div 
           className="p-6 rounded-t-lg"

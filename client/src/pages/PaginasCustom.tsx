@@ -248,7 +248,7 @@ export default function PaginasCustomSection({ condominioId }: PaginasCustomSect
               Nova Página
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-hidden p-0">
+          <DialogContent className="w-[95vw] max-w-2xl max-h-[90vh] overflow-hidden p-0">
             <div className="bg-gradient-to-r from-violet-500 to-purple-500 px-6 py-4">
               <DialogHeader className="space-y-1">
                 <DialogTitle className="flex items-center gap-2 text-white text-lg">

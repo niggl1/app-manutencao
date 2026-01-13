@@ -693,7 +693,7 @@ export default function OrdensServicoConfig() {
 
         {/* Modal Nova Categoria */}
         <Dialog open={showAddCategoria} onOpenChange={setShowAddCategoria}>
-          <DialogContent className="max-h-[90vh] overflow-hidden p-0">
+          <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
             <div className="bg-gradient-to-r from-amber-500 to-yellow-500 px-6 py-4">
               <DialogHeader className="space-y-1">
                 <DialogTitle className="flex items-center gap-2 text-white text-lg">
@@ -785,7 +785,7 @@ export default function OrdensServicoConfig() {
 
         {/* Modal Nova Prioridade */}
         <Dialog open={showAddPrioridade} onOpenChange={setShowAddPrioridade}>
-          <DialogContent className="max-h-[90vh] overflow-hidden p-0">
+          <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
             <div className="bg-gradient-to-r from-red-500 to-rose-500 px-6 py-4">
               <DialogHeader className="space-y-1">
                 <DialogTitle className="flex items-center gap-2 text-white text-lg">
@@ -888,7 +888,7 @@ export default function OrdensServicoConfig() {
 
         {/* Modal Novo Status */}
         <Dialog open={showAddStatus} onOpenChange={setShowAddStatus}>
-          <DialogContent className="max-h-[90vh] overflow-hidden p-0">
+          <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
             <div className="bg-gradient-to-r from-blue-500 to-indigo-500 px-6 py-4">
               <DialogHeader className="space-y-1">
                 <DialogTitle className="flex items-center gap-2 text-white text-lg">
@@ -989,7 +989,7 @@ export default function OrdensServicoConfig() {
 
         {/* Modal Novo Setor */}
         <Dialog open={showAddSetor} onOpenChange={setShowAddSetor}>
-          <DialogContent className="max-h-[90vh] overflow-hidden p-0">
+          <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
             <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-4">
               <DialogHeader className="space-y-1">
                 <DialogTitle className="flex items-center gap-2 text-white text-lg">
@@ -1047,7 +1047,7 @@ export default function OrdensServicoConfig() {
 
         {/* Modal Editar Item */}
         <Dialog open={!!editingItem} onOpenChange={() => setEditingItem(null)}>
-          <DialogContent className="max-h-[90vh] overflow-hidden p-0">
+          <DialogContent className="w-[95vw] max-w-lg max-h-[90vh] overflow-hidden p-0">
             <div className="bg-gradient-to-r from-violet-500 to-purple-500 px-6 py-4">
               <DialogHeader className="space-y-1">
                 <DialogTitle className="flex items-center gap-2 text-white text-lg">
