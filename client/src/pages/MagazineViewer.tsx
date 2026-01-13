@@ -3,46 +3,49 @@ import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import {
+  AlertTriangle,
+  ArrowLeftRight,
   BookOpen,
+  Building2,
   Calendar,
   Car,
+  CheckCircle,
   ChevronLeft,
   ChevronRight,
+  ClipboardCheck,
   Download,
+  ExternalLink,
+  FileDown,
+  FileText,
+  Grid3X3,
+  Hand,
   Heart,
   Home,
+  Image,
+  Layers,
+  Link as LinkIcon,
   Loader2,
+  Maximize,
   Megaphone,
   MessageSquare,
+  Minimize,
   Package,
   Phone,
+  Play,
+  ScrollText,
+  Search,
   Share2,
   Shield,
+  ShoppingBag,
+  Sparkles,
   Star,
+  Trophy,
   Users,
   Vote,
+  Wrench,
   X,
   ZoomIn,
   ZoomOut,
-  Link as LinkIcon,
-  Building2,
-  Image,
-  FileText,
-  Trophy,
-  ArrowLeftRight,
-  Wrench,
-  ShoppingBag,
-  Sparkles,
-  CheckCircle,
-  ExternalLink,
-  Play,
-  FileDown,
-  Maximize,
-  Minimize,
-  Grid3X3,
-  Hand,
-  Layers,
-  ScrollText,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "wouter";
@@ -50,123 +53,183 @@ import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import ImageGallery from "@/components/ImageGallery";
 
-// Demo magazine data
+// Demo magazine data - Focado em Manutenção
 const demoMagazine = {
-  titulo: "Residencial Jardins",
-  subtitulo: "Informativo Mensal",
-  edicao: "Dezembro 2024",
+  titulo: "Livro de Manutenção",
+  subtitulo: "Relatório Mensal",
+  edicao: "Janeiro 2026",
   pages: [
     {
       id: 1,
       type: "cover",
       content: {
-        titulo: "Residencial Jardins",
-        subtitulo: "Informativo Mensal",
-        edicao: "Dezembro 2024",
+        titulo: "Livro de Manutenção",
+        subtitulo: "Relatório Mensal",
+        edicao: "Janeiro 2026",
         imagem: null,
-        logoUrl: null, // URL do logo do condomínio
-        capaUrl: null, // URL da imagem de capa/fundo
+        logoUrl: null,
+        capaUrl: null,
       },
     },
     {
       id: 2,
-      type: "mensagem_sindico",
+      type: "resumo_periodo",
       content: {
-        nome: "João Silva",
-        cargo: "Síndico",
-        foto: null,
-        titulo: "Mensagem do Síndico",
-        mensagem:
-          "Prezados moradores, é com grande satisfação que apresentamos mais uma edição da nossa revista digital. Neste mês, temos muitas novidades e melhorias para compartilhar com vocês. Agradeço a todos pela colaboração e desejo um excelente final de ano!",
+        titulo: "Resumo do Período",
+        periodo: "Janeiro 2026",
+        estatisticas: {
+          manutencoes: { total: 12, concluidas: 8 },
+          vistorias: { total: 15, aprovadas: 12 },
+          ocorrencias: { total: 7, abertas: 2 },
+          checklists: { total: 20, concluidos: 18 },
+          antesDepois: { total: 5 },
+        },
       },
     },
     {
       id: 3,
-      type: "avisos",
+      type: "manutencoes",
       content: {
-        titulo: "Avisos Importantes",
-        avisos: [
+        titulo: "Manutenções Realizadas",
+        manutencoes: [
           {
-            titulo: "Manutenção da Piscina",
-            descricao: "A piscina estará fechada para manutenção nos dias 26 e 27 de dezembro.",
-            tipo: "importante",
+            protocolo: "MAN-2026-001",
+            titulo: "Revisão do Sistema Elétrico",
+            local: "Quadro Geral - Bloco A",
+            status: "concluida",
+            data: "05/01/2026",
+            tipo: "preventiva",
           },
           {
-            titulo: "Horário de Funcionamento",
-            descricao: "Durante o feriado, a portaria funcionará em horário reduzido.",
-            tipo: "informativo",
+            protocolo: "MAN-2026-002",
+            titulo: "Troca de Rolamentos",
+            local: "Motor da Bomba D'Água",
+            status: "concluida",
+            data: "08/01/2026",
+            tipo: "corretiva",
           },
           {
-            titulo: "Coleta de Lixo",
-            descricao: "Não haverá coleta de lixo no dia 25 de dezembro.",
-            tipo: "urgente",
+            protocolo: "MAN-2026-003",
+            titulo: "Lubrificação de Equipamentos",
+            local: "Casa de Máquinas",
+            status: "em_andamento",
+            data: "12/01/2026",
+            tipo: "preventiva",
           },
         ],
       },
     },
     {
       id: 4,
-      type: "eventos",
+      type: "vistorias",
       content: {
-        titulo: "Agenda de Eventos",
-        eventos: [
+        titulo: "Vistorias Realizadas",
+        vistorias: [
           {
-            titulo: "Festa de Natal",
-            data: "24/12/2024",
-            horario: "20:00",
-            local: "Salão de Festas",
+            protocolo: "VIS-2026-001",
+            titulo: "Vistoria Técnica Mensal",
+            local: "Elevadores 1 e 2",
+            status: "aprovada",
+            data: "03/01/2026",
           },
           {
-            titulo: "Réveillon",
-            data: "31/12/2024",
-            horario: "22:00",
-            local: "Área de Lazer",
+            protocolo: "VIS-2026-002",
+            titulo: "Inspeção de Segurança",
+            local: "Sistema de Incêndio",
+            status: "aprovada",
+            data: "07/01/2026",
           },
           {
-            titulo: "Assembleia Geral",
-            data: "15/01/2025",
-            horario: "19:00",
-            local: "Salão de Festas",
+            protocolo: "VIS-2026-003",
+            titulo: "Vistoria Estrutural",
+            local: "Cobertura e Laje",
+            status: "pendente",
+            data: "15/01/2026",
           },
         ],
       },
     },
     {
       id: 5,
-      type: "funcionarios",
+      type: "ocorrencias",
       content: {
-        titulo: "Nossa Equipe",
-        funcionarios: [
-          { nome: "Carlos Santos", cargo: "Porteiro", turno: "Diurno" },
-          { nome: "Maria Oliveira", cargo: "Zeladora", turno: "Integral" },
-          { nome: "Pedro Lima", cargo: "Porteiro", turno: "Noturno" },
+        titulo: "Ocorrências Registradas",
+        ocorrencias: [
+          {
+            protocolo: "OCO-2026-001",
+            titulo: "Vazamento na Tubulação",
+            local: "Banheiro - 3º Andar",
+            status: "resolvida",
+            data: "02/01/2026",
+            prioridade: "alta",
+          },
+          {
+            protocolo: "OCO-2026-002",
+            titulo: "Lâmpada Queimada",
+            local: "Corredor - Térreo",
+            status: "resolvida",
+            data: "04/01/2026",
+            prioridade: "baixa",
+          },
+          {
+            protocolo: "OCO-2026-003",
+            titulo: "Ruído no Ar Condicionado",
+            local: "Sala de Reuniões",
+            status: "em_analise",
+            data: "10/01/2026",
+            prioridade: "media",
+          },
         ],
       },
     },
     {
       id: 6,
-      type: "votacao",
+      type: "checklists",
       content: {
-        titulo: "Funcionário do Mês",
-        descricao: "Vote no funcionário que mais se destacou este mês!",
-        opcoes: [
-          { nome: "Carlos Santos", votos: 45 },
-          { nome: "Maria Oliveira", votos: 38 },
-          { nome: "Pedro Lima", votos: 22 },
+        titulo: "Checklists Completados",
+        checklists: [
+          {
+            titulo: "Checklist Diário - Portaria",
+            itensTotal: 15,
+            itensConcluidos: 15,
+            data: "13/01/2026",
+            responsavel: "Carlos Silva",
+          },
+          {
+            titulo: "Checklist Semanal - Limpeza",
+            itensTotal: 25,
+            itensConcluidos: 23,
+            data: "12/01/2026",
+            responsavel: "Maria Santos",
+          },
+          {
+            titulo: "Checklist Mensal - Equipamentos",
+            itensTotal: 40,
+            itensConcluidos: 38,
+            data: "10/01/2026",
+            responsavel: "João Oliveira",
+          },
         ],
       },
     },
     {
       id: 7,
-      type: "telefones",
+      type: "antes_depois",
       content: {
-        titulo: "Telefones Úteis",
-        telefones: [
-          { nome: "Portaria", numero: "(11) 1234-5678" },
-          { nome: "Síndico", numero: "(11) 98765-4321" },
-          { nome: "Administradora", numero: "(11) 2345-6789" },
-          { nome: "Emergência", numero: "190" },
-          { nome: "Bombeiros", numero: "193" },
+        titulo: "Antes e Depois",
+        itens: [
+          {
+            titulo: "Pintura da Fachada",
+            descricao: "Revitalização completa da fachada principal.",
+            fotoAntesUrl: null,
+            fotoDepoisUrl: null,
+          },
+          {
+            titulo: "Reforma do Hall de Entrada",
+            descricao: "Modernização com novo piso e iluminação LED.",
+            fotoAntesUrl: null,
+            fotoDepoisUrl: null,
+          },
         ],
       },
     },
@@ -174,24 +237,18 @@ const demoMagazine = {
       id: 8,
       type: "realizacoes",
       content: {
-        titulo: "Realizações da Gestão",
+        titulo: "Realizações do Período",
         realizacoes: [
           {
-            titulo: "Reforma da Portaria",
-            descricao: "Modernização completa da portaria com novo sistema de segurança.",
-            data: "Novembro 2024",
+            titulo: "Modernização do Sistema de Iluminação",
+            descricao: "Substituição de todas as lâmpadas por LED, gerando economia de 40%.",
+            data: "Janeiro 2026",
             status: "concluido",
           },
           {
-            titulo: "Instalação de Energia Solar",
-            descricao: "Paineis solares instalados para redução de custos nas áreas comuns.",
-            data: "Outubro 2024",
-            status: "concluido",
-          },
-          {
-            titulo: "Paisagismo do Jardim",
-            descricao: "Novo projeto paisagístico com plantas nativas e sistema de irrigação.",
-            data: "Setembro 2024",
+            titulo: "Instalação de Sensores de Presença",
+            descricao: "Automação da iluminação em áreas comuns.",
+            data: "Janeiro 2026",
             status: "concluido",
           },
         ],
@@ -199,163 +256,71 @@ const demoMagazine = {
     },
     {
       id: 9,
-      type: "antes_depois",
+      type: "melhorias",
       content: {
-        titulo: "Antes e Depois",
-        itens: [
+        titulo: "Melhorias Implementadas",
+        melhorias: [
           {
-            titulo: "Fachada do Prédio",
-            descricao: "Pintura e revitalização completa da fachada.",
-            fotoAntesUrl: null,
-            fotoDepoisUrl: null,
+            titulo: "Sistema de Monitoramento",
+            descricao: "Instalação de 12 novas câmeras de segurança.",
+            status: "concluido",
+            previsao: null,
           },
           {
-            titulo: "Salão de Festas",
-            descricao: "Reforma completa com novo mobiliário e iluminação.",
-            fotoAntesUrl: null,
-            fotoDepoisUrl: null,
+            titulo: "Impermeabilização da Cobertura",
+            descricao: "Tratamento preventivo contra infiltrações.",
+            status: "em_andamento",
+            previsao: "Fevereiro 2026",
           },
         ],
       },
     },
     {
       id: 10,
-      type: "melhorias",
+      type: "aquisicoes",
       content: {
-        titulo: "Melhorias e Manutenções",
-        melhorias: [
+        titulo: "Aquisições Realizadas",
+        aquisicoes: [
           {
-            titulo: "Troca dos Elevadores",
-            descricao: "Substituição dos elevadores por modelos mais modernos e eficientes.",
-            status: "em_andamento",
-            previsao: "Janeiro 2025",
+            titulo: "Ferramentas de Manutenção",
+            descricao: "Kit completo de ferramentas para a equipe técnica.",
+            valor: "R$ 3.500,00",
+            data: "Janeiro 2026",
           },
           {
-            titulo: "Impermeabilização da Laje",
-            descricao: "Serviço preventivo de impermeabilização da cobertura.",
-            status: "planejado",
-            previsao: "Fevereiro 2025",
-          },
-          {
-            titulo: "Manutenção da Bomba d'Água",
-            descricao: "Revisão e manutenção preventiva do sistema de bombeamento.",
-            status: "concluido",
-            previsao: null,
+            titulo: "EPIs - Equipamentos de Proteção",
+            descricao: "Capacetes, luvas e óculos de segurança.",
+            valor: "R$ 1.200,00",
+            data: "Janeiro 2026",
           },
         ],
       },
     },
     {
       id: 11,
-      type: "aquisicoes",
+      type: "galeria",
       content: {
-        titulo: "Aquisições do Condomínio",
-        aquisicoes: [
+        titulo: "Galeria de Fotos",
+        albuns: [
           {
-            titulo: "Equipamentos de Academia",
-            descricao: "Novos equipamentos para a academia do condomínio.",
-            valor: "R$ 15.000,00",
-            data: "Dezembro 2024",
+            titulo: "Manutenções Realizadas",
+            categoria: "manutencao",
+            fotos: [],
           },
           {
-            titulo: "Mobiliário do Salão",
-            descricao: "Mesas e cadeiras novas para o salão de festas.",
-            valor: "R$ 8.500,00",
-            data: "Novembro 2024",
-          },
-          {
-            titulo: "Sistema de Câmeras",
-            descricao: "Ampliação do sistema de monitoramento com 8 novas câmeras.",
-            valor: "R$ 12.000,00",
-            data: "Outubro 2024",
+            titulo: "Vistorias Técnicas",
+            categoria: "vistoria",
+            fotos: [],
           },
         ],
       },
     },
     {
       id: 12,
-      type: "galeria",
-      content: {
-        titulo: "Galeria de Fotos",
-        albuns: [
-          {
-            titulo: "Festa Junina 2024",
-            categoria: "eventos",
-            fotos: [
-              { url: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=400", legenda: "Decoração do salão" },
-              { url: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400", legenda: "Apresentação de quadrilha" },
-              { url: "https://images.unsplash.com/photo-1496024840928-4c417adf211d?w=400", legenda: "Barraca de comidas" },
-            ],
-          },
-          {
-            titulo: "Reforma da Piscina",
-            categoria: "obras",
-            fotos: [
-              { url: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=400", legenda: "Antes da reforma" },
-              { url: "https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=400", legenda: "Depois da reforma" },
-            ],
-          },
-        ],
-      },
-    },
-    {
-      id: 13,
-      type: "publicidade",
-      content: {
-        titulo: "Parceiros do Condomínio",
-        anunciantes: [
-          {
-            nome: "Pizzaria Bella Napoli",
-            descricao: "A melhor pizza da região! Delivery para moradores com 10% de desconto.",
-            categoria: "alimentacao",
-            telefone: "(11) 3456-7890",
-            whatsapp: "(11) 99876-5432",
-            logoUrl: null,
-          },
-          {
-            nome: "Dr. Carlos Mendes",
-            descricao: "Clínico Geral - Atendimento domiciliar para moradores.",
-            categoria: "saude",
-            telefone: "(11) 2345-6789",
-            logoUrl: null,
-          },
-          {
-            nome: "Pet Shop Amigo Fiel",
-            descricao: "Banho, tosa e rações. Buscamos e entregamos seu pet!",
-            categoria: "servicos",
-            telefone: "(11) 3456-1234",
-            whatsapp: "(11) 98765-1234",
-            logoUrl: null,
-          },
-          {
-            nome: "Eletricista João",
-            descricao: "Serviços elétricos em geral. Morador do bloco B.",
-            categoria: "profissionais",
-            telefone: "(11) 99999-8888",
-            logoUrl: null,
-          },
-        ],
-      },
-    },
-    {
-      id: 14,
-      type: "personalizado",
-      content: {
-        titulo: "100% Personalizado",
-        subtitulo: "Conteúdo exclusivo do seu condomínio",
-        descricao: "Esta página pode ser totalmente personalizada pelo síndico com título, subtítulo, descrição, galeria de imagens, links externos, vídeos do YouTube e arquivos para download.",
-        imagens: [],
-        link: null,
-        videoUrl: null,
-        arquivoUrl: null,
-      },
-    },
-    {
-      id: 15,
       type: "back_cover",
       content: {
-        titulo: "Obrigado pela leitura!",
-        mensagem: "Acompanhe nossas próximas edições",
+        titulo: "Livro de Manutenção",
+        mensagem: "Documentação técnica completa do período",
       },
     },
   ],
@@ -1012,8 +977,18 @@ function getPageTitle(page: any): string {
   switch (page.type) {
     case "cover":
       return "Capa";
+    case "resumo_periodo":
+      return "Resumo do Período";
+    case "manutencoes":
+      return "Manutenções";
+    case "vistorias":
+      return "Vistorias";
+    case "ocorrencias":
+      return "Ocorrências";
+    case "checklists":
+      return "Checklists";
     case "mensagem_sindico":
-      return "Mensagem do Síndico";
+      return "Mensagem do Gestor";
     case "avisos":
       return "Avisos";
     case "eventos":
@@ -1049,6 +1024,16 @@ function PageContent({ page }: { page: any }) {
   switch (page.type) {
     case "cover":
       return <CoverPage content={page.content} />;
+    case "resumo_periodo":
+      return <ResumoPeriodoPage content={page.content} />;
+    case "manutencoes":
+      return <ManutencoesPage content={page.content} />;
+    case "vistorias":
+      return <VistoriasPage content={page.content} />;
+    case "ocorrencias":
+      return <OcorrenciasPage content={page.content} />;
+    case "checklists":
+      return <ChecklistsPage content={page.content} />;
     case "mensagem_sindico":
       return <MensagemSindicoPage content={page.content} />;
     case "avisos":
@@ -2157,6 +2142,197 @@ function PersonalizadoPage({ content }: { content: any }) {
           <p className="text-sm">Adicione título, descrição, imagens, links e muito mais!</p>
         </div>
       )}
+    </div>
+  );
+}
+
+
+// ========== PÁGINAS DE MANUTENÇÃO ==========
+
+function ResumoPeriodoPage({ content }: { content: any }) {
+  const stats = content.estatisticas || {};
+  
+  return (
+    <div className="h-full flex flex-col p-6 overflow-auto">
+      <div className="text-center mb-6">
+        <h2 className="text-2xl font-bold text-foreground mb-2">{content.titulo}</h2>
+        <p className="text-muted-foreground">{content.periodo}</p>
+        <div className="w-16 h-1 bg-primary mx-auto mt-3" />
+      </div>
+
+      <div className="grid grid-cols-2 gap-4 flex-1">
+        <div className="bg-slate-100 dark:bg-slate-800 rounded-xl p-4 text-center">
+          <Wrench className="w-8 h-8 mx-auto mb-2 text-slate-600" />
+          <div className="text-3xl font-bold text-foreground">{stats.manutencoes?.total || 0}</div>
+          <div className="text-sm text-muted-foreground">Manutenções</div>
+          <div className="text-xs text-green-600 mt-1">{stats.manutencoes?.concluidas || 0} concluídas</div>
+        </div>
+        
+        <div className="bg-emerald-100 dark:bg-emerald-900/30 rounded-xl p-4 text-center">
+          <Search className="w-8 h-8 mx-auto mb-2 text-emerald-600" />
+          <div className="text-3xl font-bold text-foreground">{stats.vistorias?.total || 0}</div>
+          <div className="text-sm text-muted-foreground">Vistorias</div>
+          <div className="text-xs text-green-600 mt-1">{stats.vistorias?.aprovadas || 0} aprovadas</div>
+        </div>
+        
+        <div className="bg-yellow-100 dark:bg-yellow-900/30 rounded-xl p-4 text-center">
+          <AlertTriangle className="w-8 h-8 mx-auto mb-2 text-yellow-600" />
+          <div className="text-3xl font-bold text-foreground">{stats.ocorrencias?.total || 0}</div>
+          <div className="text-sm text-muted-foreground">Ocorrências</div>
+          <div className="text-xs text-orange-600 mt-1">{stats.ocorrencias?.abertas || 0} abertas</div>
+        </div>
+        
+        <div className="bg-teal-100 dark:bg-teal-900/30 rounded-xl p-4 text-center">
+          <ClipboardCheck className="w-8 h-8 mx-auto mb-2 text-teal-600" />
+          <div className="text-3xl font-bold text-foreground">{stats.checklists?.total || 0}</div>
+          <div className="text-sm text-muted-foreground">Checklists</div>
+          <div className="text-xs text-green-600 mt-1">{stats.checklists?.concluidos || 0} concluídos</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ManutencoesPage({ content }: { content: any }) {
+  return (
+    <div className="h-full flex flex-col p-6 overflow-auto">
+      <div className="text-center mb-6">
+        <Wrench className="w-10 h-10 mx-auto mb-2 text-slate-600" />
+        <h2 className="text-2xl font-bold text-foreground">{content.titulo}</h2>
+        <div className="w-16 h-1 bg-slate-600 mx-auto mt-3" />
+      </div>
+
+      <div className="space-y-3 flex-1">
+        {content.manutencoes?.map((item: any, index: number) => (
+          <div key={index} className="bg-slate-50 dark:bg-slate-800 rounded-lg p-3 border-l-4 border-slate-600">
+            <div className="flex justify-between items-start mb-1">
+              <span className="text-xs font-mono text-muted-foreground">{item.protocolo}</span>
+              <span className={cn(
+                "text-xs px-2 py-0.5 rounded-full",
+                item.status === "concluida" ? "bg-green-100 text-green-700" :
+                item.status === "em_andamento" ? "bg-yellow-100 text-yellow-700" :
+                "bg-gray-100 text-gray-700"
+              )}>
+                {item.status === "concluida" ? "Concluída" : item.status === "em_andamento" ? "Em Andamento" : item.status}
+              </span>
+            </div>
+            <h3 className="font-semibold text-foreground">{item.titulo}</h3>
+            <p className="text-sm text-muted-foreground">{item.local}</p>
+            <div className="flex justify-between mt-2 text-xs text-muted-foreground">
+              <span>{item.tipo === "preventiva" ? "Preventiva" : "Corretiva"}</span>
+              <span>{item.data}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function VistoriasPage({ content }: { content: any }) {
+  return (
+    <div className="h-full flex flex-col p-6 overflow-auto">
+      <div className="text-center mb-6">
+        <Search className="w-10 h-10 mx-auto mb-2 text-emerald-600" />
+        <h2 className="text-2xl font-bold text-foreground">{content.titulo}</h2>
+        <div className="w-16 h-1 bg-emerald-600 mx-auto mt-3" />
+      </div>
+
+      <div className="space-y-3 flex-1">
+        {content.vistorias?.map((item: any, index: number) => (
+          <div key={index} className="bg-emerald-50 dark:bg-emerald-900/20 rounded-lg p-3 border-l-4 border-emerald-600">
+            <div className="flex justify-between items-start mb-1">
+              <span className="text-xs font-mono text-muted-foreground">{item.protocolo}</span>
+              <span className={cn(
+                "text-xs px-2 py-0.5 rounded-full",
+                item.status === "aprovada" ? "bg-green-100 text-green-700" :
+                item.status === "pendente" ? "bg-yellow-100 text-yellow-700" :
+                "bg-red-100 text-red-700"
+              )}>
+                {item.status === "aprovada" ? "Aprovada" : item.status === "pendente" ? "Pendente" : item.status}
+              </span>
+            </div>
+            <h3 className="font-semibold text-foreground">{item.titulo}</h3>
+            <p className="text-sm text-muted-foreground">{item.local}</p>
+            <div className="text-right mt-2 text-xs text-muted-foreground">{item.data}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function OcorrenciasPage({ content }: { content: any }) {
+  return (
+    <div className="h-full flex flex-col p-6 overflow-auto">
+      <div className="text-center mb-6">
+        <AlertTriangle className="w-10 h-10 mx-auto mb-2 text-yellow-600" />
+        <h2 className="text-2xl font-bold text-foreground">{content.titulo}</h2>
+        <div className="w-16 h-1 bg-yellow-600 mx-auto mt-3" />
+      </div>
+
+      <div className="space-y-3 flex-1">
+        {content.ocorrencias?.map((item: any, index: number) => (
+          <div key={index} className={cn(
+            "rounded-lg p-3 border-l-4",
+            item.prioridade === "alta" ? "bg-red-50 dark:bg-red-900/20 border-red-600" :
+            item.prioridade === "media" ? "bg-yellow-50 dark:bg-yellow-900/20 border-yellow-600" :
+            "bg-blue-50 dark:bg-blue-900/20 border-blue-600"
+          )}>
+            <div className="flex justify-between items-start mb-1">
+              <span className="text-xs font-mono text-muted-foreground">{item.protocolo}</span>
+              <span className={cn(
+                "text-xs px-2 py-0.5 rounded-full",
+                item.status === "resolvida" ? "bg-green-100 text-green-700" :
+                item.status === "em_analise" ? "bg-yellow-100 text-yellow-700" :
+                "bg-red-100 text-red-700"
+              )}>
+                {item.status === "resolvida" ? "Resolvida" : item.status === "em_analise" ? "Em Análise" : item.status}
+              </span>
+            </div>
+            <h3 className="font-semibold text-foreground">{item.titulo}</h3>
+            <p className="text-sm text-muted-foreground">{item.local}</p>
+            <div className="text-right mt-2 text-xs text-muted-foreground">{item.data}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ChecklistsPage({ content }: { content: any }) {
+  return (
+    <div className="h-full flex flex-col p-6 overflow-auto">
+      <div className="text-center mb-6">
+        <ClipboardCheck className="w-10 h-10 mx-auto mb-2 text-teal-600" />
+        <h2 className="text-2xl font-bold text-foreground">{content.titulo}</h2>
+        <div className="w-16 h-1 bg-teal-600 mx-auto mt-3" />
+      </div>
+
+      <div className="space-y-3 flex-1">
+        {content.checklists?.map((item: any, index: number) => {
+          const percentual = Math.round((item.itensConcluidos / item.itensTotal) * 100);
+          return (
+            <div key={index} className="bg-teal-50 dark:bg-teal-900/20 rounded-lg p-3 border-l-4 border-teal-600">
+              <h3 className="font-semibold text-foreground">{item.titulo}</h3>
+              <p className="text-sm text-muted-foreground">Responsável: {item.responsavel}</p>
+              <div className="mt-2">
+                <div className="flex justify-between text-xs mb-1">
+                  <span>{item.itensConcluidos}/{item.itensTotal} itens</span>
+                  <span>{percentual}%</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div 
+                    className="bg-teal-600 h-2 rounded-full transition-all"
+                    style={{ width: `${percentual}%` }}
+                  />
+                </div>
+              </div>
+              <div className="text-right mt-2 text-xs text-muted-foreground">{item.data}</div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

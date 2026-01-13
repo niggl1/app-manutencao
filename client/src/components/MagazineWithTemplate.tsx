@@ -2,20 +2,16 @@ import { cn } from "@/lib/utils";
 import { TemplateConfig, getTemplateById } from "@/lib/templates";
 import { motion, AnimatePresence } from "framer-motion";
 import {
+  AlertTriangle,
+  ArrowLeftRight,
   BookOpen,
   Calendar,
-  Car,
   ChevronLeft,
   ChevronRight,
-  Heart,
-  Link as LinkIcon,
-  Megaphone,
-  MessageSquare,
-  Package,
-  Phone,
-  Star,
-  Users,
-  Vote,
+  ClipboardCheck,
+  Search,
+  TrendingUp,
+  Wrench,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -27,13 +23,22 @@ interface MagazineWithTemplateProps {
     condominioNome?: string;
   };
   conteudo?: {
-    mensagemSindico?: { nome: string; mensagem: string };
-    avisos?: Array<{ titulo: string; tipo: string }>;
-    eventos?: Array<{ titulo: string; data: string }>;
-    funcionarios?: Array<{ nome: string; cargo: string }>;
-    votacoes?: Array<{ titulo: string }>;
-    telefones?: Array<{ nome: string; telefone: string }>;
-    links?: Array<{ titulo: string; url: string }>;
+    estatisticas?: {
+      totalManutencoes: number;
+      manutencoesConcluidas: number;
+      totalVistorias: number;
+      vistoriasAprovadas: number;
+      totalOcorrencias: number;
+      ocorrenciasResolvidas: number;
+      totalChecklists: number;
+      checklistsConcluidos: number;
+      totalAntesDepois: number;
+    };
+    manutencoes?: Array<{ protocolo: string; titulo: string; status: string; data?: string }>;
+    vistorias?: Array<{ protocolo: string; titulo: string; status: string; data?: string }>;
+    ocorrencias?: Array<{ protocolo: string; titulo: string; status: string; data?: string }>;
+    checklists?: Array<{ protocolo: string; titulo: string; status: string; data?: string }>;
+    antesDepois?: Array<{ titulo: string; fotoAntesUrl?: string; fotoDepoisUrl?: string }>;
   };
   className?: string;
 }
@@ -51,12 +56,12 @@ export default function MagazineWithTemplate({
 
   const pages = [
     { id: "capa", title: "Capa" },
-    { id: "sindico", title: "Mensagem do Gestor" },
-    { id: "avisos", title: "Avisos" },
-    { id: "eventos", title: "Eventos" },
-    { id: "funcionarios", title: "Funcionários" },
-    { id: "votacoes", title: "Votações" },
-    { id: "contatos", title: "Contatos" },
+    { id: "resumo", title: "Resumo do Período" },
+    { id: "manutencoes", title: "Manutenções" },
+    { id: "vistorias", title: "Vistorias" },
+    { id: "ocorrencias", title: "Ocorrências" },
+    { id: "checklists", title: "Checklists" },
+    { id: "antes_depois", title: "Antes e Depois" },
   ];
 
   const goToPage = (direction: "next" | "prev") => {
@@ -110,26 +115,22 @@ export default function MagazineWithTemplate({
               <CoverPage template={template} revista={revista} />
             )}
             {currentPage === 1 && (
-              <SindicoPage template={template} conteudo={conteudo.mensagemSindico} />
+              <ResumoPage template={template} estatisticas={conteudo.estatisticas} />
             )}
             {currentPage === 2 && (
-              <AvisosPage template={template} avisos={conteudo.avisos} />
+              <ManutencoesPage template={template} manutencoes={conteudo.manutencoes} />
             )}
             {currentPage === 3 && (
-              <EventosPage template={template} eventos={conteudo.eventos} />
+              <VistoriasPage template={template} vistorias={conteudo.vistorias} />
             )}
             {currentPage === 4 && (
-              <FuncionariosPage template={template} funcionarios={conteudo.funcionarios} />
+              <OcorrenciasPage template={template} ocorrencias={conteudo.ocorrencias} />
             )}
             {currentPage === 5 && (
-              <VotacoesPage template={template} votacoes={conteudo.votacoes} />
+              <ChecklistsPage template={template} checklists={conteudo.checklists} />
             )}
             {currentPage === 6 && (
-              <ContatosPage 
-                template={template} 
-                telefones={conteudo.telefones}
-                links={conteudo.links}
-              />
+              <AntesDepoisPage template={template} antesDepois={conteudo.antesDepois} />
             )}
           </motion.div>
         </AnimatePresence>
@@ -214,18 +215,18 @@ function CoverPage({ template, revista }: { template: TemplateConfig; revista: a
         </div>
       </div>
       
-      {/* Conteúdo da capa */}
+      {/* Conteúdo da capa - Seções de Manutenção */}
       <div
         className="flex-1 p-6 space-y-4"
         style={{ background: template.colors.card }}
       >
-        {/* Grid de seções */}
+        {/* Grid de seções de manutenção */}
         <div className="grid grid-cols-2 gap-3">
           {[
-            { icon: MessageSquare, name: "Mensagem", color: template.colors.primary },
-            { icon: Megaphone, name: "Avisos", color: template.colors.accent },
-            { icon: Calendar, name: "Eventos", color: template.colors.primary },
-            { icon: Vote, name: "Votações", color: template.colors.accent },
+            { icon: Wrench, name: "Manutenções", color: template.colors.primary },
+            { icon: Search, name: "Vistorias", color: template.colors.accent },
+            { icon: AlertTriangle, name: "Ocorrências", color: "#EAB308" },
+            { icon: ClipboardCheck, name: "Checklists", color: "#14B8A6" },
           ].map((section, i) => (
             <div
               key={i}
@@ -258,7 +259,7 @@ function CoverPage({ template, revista }: { template: TemplateConfig; revista: a
             className="text-sm"
             style={{ color: template.colors.mutedForeground }}
           >
-            App Manutenção
+            Livro de Manutenção
           </span>
         </div>
       </div>
@@ -266,8 +267,20 @@ function CoverPage({ template, revista }: { template: TemplateConfig; revista: a
   );
 }
 
-// Página do Gestor
-function SindicoPage({ template, conteudo }: { template: TemplateConfig; conteudo?: any }) {
+// Página de Resumo do Período
+function ResumoPage({ template, estatisticas }: { template: TemplateConfig; estatisticas?: any }) {
+  const stats = estatisticas || {
+    totalManutencoes: 0,
+    manutencoesConcluidas: 0,
+    totalVistorias: 0,
+    vistoriasAprovadas: 0,
+    totalOcorrencias: 0,
+    ocorrenciasResolvidas: 0,
+    totalChecklists: 0,
+    checklistsConcluidos: 0,
+    totalAntesDepois: 0,
+  };
+
   return (
     <div
       className="h-full p-6 flex flex-col"
@@ -277,7 +290,7 @@ function SindicoPage({ template, conteudo }: { template: TemplateConfig; conteud
         className="text-center mb-6 pb-4"
         style={{ borderBottom: template.effects.sectionDivider }}
       >
-        <MessageSquare
+        <TrendingUp
           className="w-8 h-8 mx-auto mb-2"
           style={{ color: template.colors.primary }}
         />
@@ -288,285 +301,75 @@ function SindicoPage({ template, conteudo }: { template: TemplateConfig; conteud
             fontFamily: template.typography.headingFont,
           }}
         >
-          Mensagem do Gestor
+          Resumo do Período
         </h2>
       </div>
       
-      <div
-        className="flex-1 p-5 rounded-xl"
-        style={{
-          background: template.colors.secondary,
-          borderRadius: template.components.borderRadius,
-        }}
-      >
-        <div className="flex items-center gap-4 mb-4">
-          <div
-            className="w-14 h-14 rounded-full flex items-center justify-center text-lg font-bold"
-            style={{
-              background: template.colors.gradient,
-              color: template.colors.primaryForeground,
-            }}
-          >
-            {conteudo?.nome?.charAt(0) || "S"}
-          </div>
-          <div>
-            <p
-              className="font-semibold"
-              style={{ color: template.colors.foreground }}
-            >
-              {conteudo?.nome || "Síndico"}
-            </p>
-            <p
-              className="text-sm"
-              style={{ color: template.colors.mutedForeground }}
-            >
-              Síndico do Condomínio
-            </p>
-          </div>
-        </div>
-        
-        <p
-          className="text-sm leading-relaxed"
-          style={{ color: template.colors.foreground }}
-        >
-          {conteudo?.mensagem || "Prezada equipa, é com grande satisfação que apresentamos mais uma edição da nossa revista digital. Nesta edição, trazemos informações importantes sobre as melhorias realizadas e os próximos eventos do nossa organização."}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// Página de Avisos
-function AvisosPage({ template, avisos }: { template: TemplateConfig; avisos?: any[] }) {
-  const defaultAvisos = [
-    { titulo: "Manutenção do elevador", tipo: "importante" },
-    { titulo: "Limpeza da caixa d'água", tipo: "informativo" },
-    { titulo: "Reunião de condomínio", tipo: "urgente" },
-  ];
-  
-  const items = avisos?.length ? avisos : defaultAvisos;
-  
-  return (
-    <div
-      className="h-full p-6 flex flex-col"
-      style={{ background: template.colors.background }}
-    >
-      <div
-        className="text-center mb-6 pb-4"
-        style={{ borderBottom: template.effects.sectionDivider }}
-      >
-        <Megaphone
-          className="w-8 h-8 mx-auto mb-2"
-          style={{ color: template.colors.accent }}
-        />
-        <h2
-          className="text-xl font-bold"
-          style={{
-            color: template.colors.foreground,
-            fontFamily: template.typography.headingFont,
-          }}
-        >
-          Avisos
-        </h2>
-      </div>
-      
-      <div className="flex-1 space-y-3 overflow-auto">
-        {items.map((aviso, i) => (
+      <div className="flex-1 grid grid-cols-2 gap-3">
+        {[
+          { label: "Manutenções", value: stats.totalManutencoes, sub: `${stats.manutencoesConcluidas} concluídas`, icon: Wrench, color: "#64748B" },
+          { label: "Vistorias", value: stats.totalVistorias, sub: `${stats.vistoriasAprovadas} aprovadas`, icon: Search, color: "#10B981" },
+          { label: "Ocorrências", value: stats.totalOcorrencias, sub: `${stats.ocorrenciasResolvidas} resolvidas`, icon: AlertTriangle, color: "#EAB308" },
+          { label: "Checklists", value: stats.totalChecklists, sub: `${stats.checklistsConcluidos} concluídos`, icon: ClipboardCheck, color: "#14B8A6" },
+        ].map((stat, i) => (
           <div
             key={i}
-            className="p-4 rounded-lg border-l-4"
-            style={{
-              background: template.colors.card,
-              borderLeftColor: aviso.tipo === "urgente" 
-                ? "#EF4444" 
-                : aviso.tipo === "importante" 
-                ? template.colors.accent 
-                : template.colors.primary,
-              boxShadow: template.components.cardShadow,
-              borderRadius: template.components.borderRadius,
-            }}
-          >
-            <p
-              className="font-medium"
-              style={{ color: template.colors.foreground }}
-            >
-              {aviso.titulo}
-            </p>
-            <span
-              className="text-xs uppercase mt-1 inline-block"
-              style={{ color: template.colors.mutedForeground }}
-            >
-              {aviso.tipo}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// Página de Eventos
-function EventosPage({ template, eventos }: { template: TemplateConfig; eventos?: any[] }) {
-  const defaultEventos = [
-    { titulo: "Festa de Natal", data: "25/12/2024" },
-    { titulo: "Assembleia Geral", data: "15/01/2025" },
-  ];
-  
-  const items = eventos?.length ? eventos : defaultEventos;
-  
-  return (
-    <div
-      className="h-full p-6 flex flex-col"
-      style={{ background: template.colors.background }}
-    >
-      <div
-        className="text-center mb-6 pb-4"
-        style={{ borderBottom: template.effects.sectionDivider }}
-      >
-        <Calendar
-          className="w-8 h-8 mx-auto mb-2"
-          style={{ color: template.colors.primary }}
-        />
-        <h2
-          className="text-xl font-bold"
-          style={{
-            color: template.colors.foreground,
-            fontFamily: template.typography.headingFont,
-          }}
-        >
-          Eventos
-        </h2>
-      </div>
-      
-      <div className="flex-1 space-y-3 overflow-auto">
-        {items.map((evento, i) => (
-          <div
-            key={i}
-            className="p-4 rounded-lg flex items-center gap-4"
+            className="p-4 rounded-xl text-center"
             style={{
               background: template.colors.secondary,
               borderRadius: template.components.borderRadius,
             }}
           >
+            <stat.icon className="w-6 h-6 mx-auto mb-2" style={{ color: stat.color }} />
             <div
-              className="w-12 h-12 rounded-lg flex flex-col items-center justify-center"
-              style={{ background: template.colors.primary }}
-            >
-              <span
-                className="text-xs"
-                style={{ color: template.colors.primaryForeground }}
-              >
-                {evento.data?.split("/")[1] || "DEZ"}
-              </span>
-              <span
-                className="text-lg font-bold"
-                style={{ color: template.colors.primaryForeground }}
-              >
-                {evento.data?.split("/")[0] || "25"}
-              </span>
-            </div>
-            <div>
-              <p
-                className="font-medium"
-                style={{ color: template.colors.foreground }}
-              >
-                {evento.titulo}
-              </p>
-              <p
-                className="text-sm"
-                style={{ color: template.colors.mutedForeground }}
-              >
-                {evento.data}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// Página de Funcionários
-function FuncionariosPage({ template, funcionarios }: { template: TemplateConfig; funcionarios?: any[] }) {
-  const defaultFuncionarios = [
-    { nome: "Carlos Silva", cargo: "Porteiro" },
-    { nome: "Maria Santos", cargo: "Zeladora" },
-    { nome: "João Oliveira", cargo: "Segurança" },
-  ];
-  
-  const items = funcionarios?.length ? funcionarios : defaultFuncionarios;
-  
-  return (
-    <div
-      className="h-full p-6 flex flex-col"
-      style={{ background: template.colors.background }}
-    >
-      <div
-        className="text-center mb-6 pb-4"
-        style={{ borderBottom: template.effects.sectionDivider }}
-      >
-        <Users
-          className="w-8 h-8 mx-auto mb-2"
-          style={{ color: template.colors.accent }}
-        />
-        <h2
-          className="text-xl font-bold"
-          style={{
-            color: template.colors.foreground,
-            fontFamily: template.typography.headingFont,
-          }}
-        >
-          Nossa Equipe
-        </h2>
-      </div>
-      
-      <div className="flex-1 grid grid-cols-2 gap-3 overflow-auto">
-        {items.map((func, i) => (
-          <div
-            key={i}
-            className="p-4 rounded-lg text-center"
-            style={{
-              background: template.colors.muted,
-              borderRadius: template.components.borderRadius,
-            }}
-          >
-            <div
-              className="w-12 h-12 rounded-full mx-auto mb-2 flex items-center justify-center text-lg font-bold"
-              style={{
-                background: template.colors.gradient,
-                color: template.colors.primaryForeground,
-              }}
-            >
-              {func.nome?.charAt(0) || "F"}
-            </div>
-            <p
-              className="font-medium text-sm"
+              className="text-2xl font-bold"
               style={{ color: template.colors.foreground }}
             >
-              {func.nome}
-            </p>
-            <p
-              className="text-xs"
+              {stat.value}
+            </div>
+            <div
+              className="text-sm font-medium"
+              style={{ color: template.colors.foreground }}
+            >
+              {stat.label}
+            </div>
+            <div
+              className="text-xs mt-1"
               style={{ color: template.colors.mutedForeground }}
             >
-              {func.cargo}
-            </p>
+              {stat.sub}
+            </div>
           </div>
         ))}
+      </div>
+
+      <div
+        className="mt-4 p-3 rounded-xl text-center"
+        style={{
+          background: `linear-gradient(135deg, ${template.colors.primary}15, ${template.colors.accent}15)`,
+          borderRadius: template.components.borderRadius,
+        }}
+      >
+        <ArrowLeftRight className="w-5 h-5 mx-auto mb-1" style={{ color: template.colors.primary }} />
+        <div className="text-lg font-bold" style={{ color: template.colors.foreground }}>
+          {stats.totalAntesDepois}
+        </div>
+        <div className="text-xs" style={{ color: template.colors.mutedForeground }}>
+          Comparativos Antes/Depois
+        </div>
       </div>
     </div>
   );
 }
 
-// Página de Votações
-function VotacoesPage({ template, votacoes }: { template: TemplateConfig; votacoes?: any[] }) {
-  const defaultVotacoes = [
-    { titulo: "Funcionário do Mês" },
-    { titulo: "Nova cor do hall" },
+// Página de Manutenções
+function ManutencoesPage({ template, manutencoes }: { template: TemplateConfig; manutencoes?: any[] }) {
+  const items = manutencoes || [
+    { protocolo: "MAN-001", titulo: "Manutenção preventiva", status: "realizada" },
+    { protocolo: "MAN-002", titulo: "Troca de filtros", status: "pendente" },
+    { protocolo: "MAN-003", titulo: "Revisão elétrica", status: "realizada" },
   ];
-  
-  const items = votacoes?.length ? votacoes : defaultVotacoes;
-  
+
   return (
     <div
       className="h-full p-6 flex flex-col"
@@ -576,9 +379,9 @@ function VotacoesPage({ template, votacoes }: { template: TemplateConfig; votaco
         className="text-center mb-6 pb-4"
         style={{ borderBottom: template.effects.sectionDivider }}
       >
-        <Vote
+        <Wrench
           className="w-8 h-8 mx-auto mb-2"
-          style={{ color: template.colors.primary }}
+          style={{ color: "#64748B" }}
         />
         <h2
           className="text-xl font-bold"
@@ -587,37 +390,58 @@ function VotacoesPage({ template, votacoes }: { template: TemplateConfig; votaco
             fontFamily: template.typography.headingFont,
           }}
         >
-          Votações
+          Manutenções
         </h2>
       </div>
       
       <div className="flex-1 space-y-3 overflow-auto">
-        {items.map((votacao, i) => (
+        {items.slice(0, 5).map((item, i) => (
           <div
             key={i}
-            className="p-4 rounded-lg"
+            className="p-3 rounded-lg border-l-4"
             style={{
-              background: `linear-gradient(135deg, ${template.colors.primary}15, ${template.colors.accent}15)`,
-              border: `1px solid ${template.colors.border}`,
+              background: template.colors.card,
+              borderLeftColor: item.status === "realizada" || item.status === "finalizada" 
+                ? "#10B981" 
+                : item.status === "pendente" 
+                ? "#EAB308" 
+                : template.colors.primary,
+              boxShadow: template.components.cardShadow,
               borderRadius: template.components.borderRadius,
             }}
           >
-            <div className="flex items-center justify-between">
+            <div className="flex justify-between items-start">
               <div>
-                <p
-                  className="font-medium"
-                  style={{ color: template.colors.foreground }}
-                >
-                  {votacao.titulo}
-                </p>
-                <p
-                  className="text-sm"
+                <span
+                  className="text-xs font-mono"
                   style={{ color: template.colors.mutedForeground }}
                 >
-                  Votação em andamento
-                </p>
+                  {item.protocolo}
+                </span>
+                <h4
+                  className="font-medium text-sm"
+                  style={{ color: template.colors.foreground }}
+                >
+                  {item.titulo}
+                </h4>
               </div>
-              <Star className="w-5 h-5" style={{ color: template.colors.accent }} />
+              <span
+                className="text-xs px-2 py-1 rounded-full capitalize"
+                style={{
+                  background: item.status === "realizada" || item.status === "finalizada"
+                    ? "#10B98120"
+                    : item.status === "pendente"
+                    ? "#EAB30820"
+                    : `${template.colors.primary}20`,
+                  color: item.status === "realizada" || item.status === "finalizada"
+                    ? "#10B981"
+                    : item.status === "pendente"
+                    ? "#EAB308"
+                    : template.colors.primary,
+                }}
+              >
+                {item.status}
+              </span>
             </div>
           </div>
         ))}
@@ -626,29 +450,13 @@ function VotacoesPage({ template, votacoes }: { template: TemplateConfig; votaco
   );
 }
 
-// Página de Contatos
-function ContatosPage({ 
-  template, 
-  telefones, 
-  links 
-}: { 
-  template: TemplateConfig; 
-  telefones?: any[];
-  links?: any[];
-}) {
-  const defaultTelefones = [
-    { nome: "Portaria", telefone: "(11) 1234-5678" },
-    { nome: "Síndico", telefone: "(11) 9876-5432" },
+// Página de Vistorias
+function VistoriasPage({ template, vistorias }: { template: TemplateConfig; vistorias?: any[] }) {
+  const items = vistorias || [
+    { protocolo: "VIS-001", titulo: "Vistoria técnica", status: "realizada" },
+    { protocolo: "VIS-002", titulo: "Inspeção de segurança", status: "pendente" },
   ];
-  
-  const defaultLinks = [
-    { titulo: "Site do Condomínio", url: "#" },
-    { titulo: "Regulamento", url: "#" },
-  ];
-  
-  const telItems = telefones?.length ? telefones : defaultTelefones;
-  const linkItems = links?.length ? links : defaultLinks;
-  
+
   return (
     <div
       className="h-full p-6 flex flex-col"
@@ -658,9 +466,9 @@ function ContatosPage({
         className="text-center mb-6 pb-4"
         style={{ borderBottom: template.effects.sectionDivider }}
       >
-        <Phone
+        <Search
           className="w-8 h-8 mx-auto mb-2"
-          style={{ color: template.colors.accent }}
+          style={{ color: "#10B981" }}
         />
         <h2
           className="text-xl font-bold"
@@ -669,64 +477,293 @@ function ContatosPage({
             fontFamily: template.typography.headingFont,
           }}
         >
-          Contatos
+          Vistorias
+        </h2>
+      </div>
+      
+      <div className="flex-1 space-y-3 overflow-auto">
+        {items.slice(0, 5).map((item, i) => (
+          <div
+            key={i}
+            className="p-3 rounded-lg border-l-4"
+            style={{
+              background: template.colors.card,
+              borderLeftColor: item.status === "realizada" || item.status === "finalizada" 
+                ? "#10B981" 
+                : "#EAB308",
+              boxShadow: template.components.cardShadow,
+              borderRadius: template.components.borderRadius,
+            }}
+          >
+            <div className="flex justify-between items-start">
+              <div>
+                <span
+                  className="text-xs font-mono"
+                  style={{ color: template.colors.mutedForeground }}
+                >
+                  {item.protocolo}
+                </span>
+                <h4
+                  className="font-medium text-sm"
+                  style={{ color: template.colors.foreground }}
+                >
+                  {item.titulo}
+                </h4>
+              </div>
+              <span
+                className="text-xs px-2 py-1 rounded-full capitalize"
+                style={{
+                  background: item.status === "realizada" || item.status === "finalizada"
+                    ? "#10B98120"
+                    : "#EAB30820",
+                  color: item.status === "realizada" || item.status === "finalizada"
+                    ? "#10B981"
+                    : "#EAB308",
+                }}
+              >
+                {item.status}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Página de Ocorrências
+function OcorrenciasPage({ template, ocorrencias }: { template: TemplateConfig; ocorrencias?: any[] }) {
+  const items = ocorrencias || [
+    { protocolo: "OCO-001", titulo: "Vazamento identificado", status: "finalizada" },
+    { protocolo: "OCO-002", titulo: "Ruído excessivo", status: "pendente" },
+  ];
+
+  return (
+    <div
+      className="h-full p-6 flex flex-col"
+      style={{ background: template.colors.background }}
+    >
+      <div
+        className="text-center mb-6 pb-4"
+        style={{ borderBottom: template.effects.sectionDivider }}
+      >
+        <AlertTriangle
+          className="w-8 h-8 mx-auto mb-2"
+          style={{ color: "#EAB308" }}
+        />
+        <h2
+          className="text-xl font-bold"
+          style={{
+            color: template.colors.foreground,
+            fontFamily: template.typography.headingFont,
+          }}
+        >
+          Ocorrências
+        </h2>
+      </div>
+      
+      <div className="flex-1 space-y-3 overflow-auto">
+        {items.slice(0, 5).map((item, i) => (
+          <div
+            key={i}
+            className="p-3 rounded-lg border-l-4"
+            style={{
+              background: template.colors.card,
+              borderLeftColor: item.status === "finalizada" || item.status === "realizada"
+                ? "#10B981" 
+                : "#EAB308",
+              boxShadow: template.components.cardShadow,
+              borderRadius: template.components.borderRadius,
+            }}
+          >
+            <div className="flex justify-between items-start">
+              <div>
+                <span
+                  className="text-xs font-mono"
+                  style={{ color: template.colors.mutedForeground }}
+                >
+                  {item.protocolo}
+                </span>
+                <h4
+                  className="font-medium text-sm"
+                  style={{ color: template.colors.foreground }}
+                >
+                  {item.titulo}
+                </h4>
+              </div>
+              <span
+                className="text-xs px-2 py-1 rounded-full capitalize"
+                style={{
+                  background: item.status === "finalizada" || item.status === "realizada"
+                    ? "#10B98120"
+                    : "#EAB30820",
+                  color: item.status === "finalizada" || item.status === "realizada"
+                    ? "#10B981"
+                    : "#EAB308",
+                }}
+              >
+                {item.status}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Página de Checklists
+function ChecklistsPage({ template, checklists }: { template: TemplateConfig; checklists?: any[] }) {
+  const items = checklists || [
+    { protocolo: "CHK-001", titulo: "Checklist diário", status: "realizada" },
+    { protocolo: "CHK-002", titulo: "Verificação semanal", status: "pendente" },
+  ];
+
+  return (
+    <div
+      className="h-full p-6 flex flex-col"
+      style={{ background: template.colors.background }}
+    >
+      <div
+        className="text-center mb-6 pb-4"
+        style={{ borderBottom: template.effects.sectionDivider }}
+      >
+        <ClipboardCheck
+          className="w-8 h-8 mx-auto mb-2"
+          style={{ color: "#14B8A6" }}
+        />
+        <h2
+          className="text-xl font-bold"
+          style={{
+            color: template.colors.foreground,
+            fontFamily: template.typography.headingFont,
+          }}
+        >
+          Checklists
+        </h2>
+      </div>
+      
+      <div className="flex-1 space-y-3 overflow-auto">
+        {items.slice(0, 5).map((item, i) => (
+          <div
+            key={i}
+            className="p-3 rounded-lg border-l-4"
+            style={{
+              background: template.colors.card,
+              borderLeftColor: item.status === "realizada" || item.status === "finalizada"
+                ? "#14B8A6" 
+                : "#EAB308",
+              boxShadow: template.components.cardShadow,
+              borderRadius: template.components.borderRadius,
+            }}
+          >
+            <div className="flex justify-between items-start">
+              <div>
+                <span
+                  className="text-xs font-mono"
+                  style={{ color: template.colors.mutedForeground }}
+                >
+                  {item.protocolo}
+                </span>
+                <h4
+                  className="font-medium text-sm"
+                  style={{ color: template.colors.foreground }}
+                >
+                  {item.titulo}
+                </h4>
+              </div>
+              <span
+                className="text-xs px-2 py-1 rounded-full capitalize"
+                style={{
+                  background: item.status === "realizada" || item.status === "finalizada"
+                    ? "#14B8A620"
+                    : "#EAB30820",
+                  color: item.status === "realizada" || item.status === "finalizada"
+                    ? "#14B8A6"
+                    : "#EAB308",
+                }}
+              >
+                {item.status}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Página de Antes e Depois
+function AntesDepoisPage({ template, antesDepois }: { template: TemplateConfig; antesDepois?: any[] }) {
+  const items = antesDepois || [
+    { titulo: "Reforma do hall", fotoAntesUrl: null, fotoDepoisUrl: null },
+    { titulo: "Pintura externa", fotoAntesUrl: null, fotoDepoisUrl: null },
+  ];
+
+  return (
+    <div
+      className="h-full p-6 flex flex-col"
+      style={{ background: template.colors.background }}
+    >
+      <div
+        className="text-center mb-6 pb-4"
+        style={{ borderBottom: template.effects.sectionDivider }}
+      >
+        <ArrowLeftRight
+          className="w-8 h-8 mx-auto mb-2"
+          style={{ color: "#8B5CF6" }}
+        />
+        <h2
+          className="text-xl font-bold"
+          style={{
+            color: template.colors.foreground,
+            fontFamily: template.typography.headingFont,
+          }}
+        >
+          Antes e Depois
         </h2>
       </div>
       
       <div className="flex-1 space-y-4 overflow-auto">
-        {/* Telefones */}
-        <div>
-          <h3
-            className="text-sm font-semibold mb-2 flex items-center gap-2"
-            style={{ color: template.colors.foreground }}
+        {items.slice(0, 3).map((item, i) => (
+          <div
+            key={i}
+            className="p-3 rounded-xl"
+            style={{
+              background: template.colors.secondary,
+              borderRadius: template.components.borderRadius,
+            }}
           >
-            <Phone className="w-4 h-4" />
-            Telefones Úteis
-          </h3>
-          <div className="space-y-2">
-            {telItems.map((tel, i) => (
+            <h4
+              className="font-medium text-sm mb-2 text-center"
+              style={{ color: template.colors.foreground }}
+            >
+              {item.titulo}
+            </h4>
+            <div className="grid grid-cols-2 gap-2">
               <div
-                key={i}
-                className="flex justify-between p-3 rounded-lg"
-                style={{
-                  background: template.colors.secondary,
-                  borderRadius: template.components.borderRadius,
-                }}
+                className="aspect-video rounded-lg flex items-center justify-center"
+                style={{ background: template.colors.muted }}
               >
-                <span style={{ color: template.colors.foreground }}>{tel.nome}</span>
-                <span style={{ color: template.colors.primary }}>{tel.telefone}</span>
+                {item.fotoAntesUrl ? (
+                  <img src={item.fotoAntesUrl} alt="Antes" className="w-full h-full object-cover rounded-lg" />
+                ) : (
+                  <span className="text-xs" style={{ color: template.colors.mutedForeground }}>Antes</span>
+                )}
               </div>
-            ))}
-          </div>
-        </div>
-        
-        {/* Links */}
-        <div>
-          <h3
-            className="text-sm font-semibold mb-2 flex items-center gap-2"
-            style={{ color: template.colors.foreground }}
-          >
-            <LinkIcon className="w-4 h-4" />
-            Links Úteis
-          </h3>
-          <div className="space-y-2">
-            {linkItems.map((link, i) => (
-              <a
-                key={i}
-                href={link.url}
-                className="flex items-center gap-2 p-3 rounded-lg transition-colors"
-                style={{
-                  background: template.colors.muted,
-                  borderRadius: template.components.borderRadius,
-                  color: template.colors.primary,
-                }}
+              <div
+                className="aspect-video rounded-lg flex items-center justify-center"
+                style={{ background: template.colors.muted }}
               >
-                <LinkIcon className="w-4 h-4" />
-                {link.titulo}
-              </a>
-            ))}
+                {item.fotoDepoisUrl ? (
+                  <img src={item.fotoDepoisUrl} alt="Depois" className="w-full h-full object-cover rounded-lg" />
+                ) : (
+                  <span className="text-xs" style={{ color: template.colors.mutedForeground }}>Depois</span>
+                )}
+              </div>
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );

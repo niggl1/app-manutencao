@@ -22,10 +22,10 @@ interface RevistaFormProps {
 }
 
 const templates = [
-  { id: "default", name: "Padrão", description: "Layout clássico e elegante" },
-  { id: "modern", name: "Moderno", description: "Design contemporâneo e minimalista" },
-  { id: "colorful", name: "Colorido", description: "Vibrante e cheio de vida" },
-  { id: "corporate", name: "Corporativo", description: "Profissional e formal" },
+  { id: "default", name: "Padrão", description: "Layout clássico para relatórios de manutenção" },
+  { id: "modern", name: "Moderno", description: "Design limpo para documentação técnica" },
+  { id: "colorful", name: "Colorido", description: "Visual dinâmico para apresentações" },
+  { id: "corporate", name: "Corporativo", description: "Profissional para clientes e gestão" },
 ];
 
 export default function RevistaForm({ condominioId, onSuccess, initialData }: RevistaFormProps) {

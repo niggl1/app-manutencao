@@ -108,15 +108,17 @@ function TemplateCard({
             className="h-2/3 p-3 space-y-2"
             style={{ background: template.colors.card }}
           >
-            {/* Seção Síndico */}
+            {/* Seção Resumo */}
             <div
               className="flex items-center gap-2 p-2 rounded"
               style={{ background: template.colors.secondary }}
             >
               <div
-                className="w-6 h-6 rounded-full"
+                className="w-6 h-6 rounded-lg flex items-center justify-center"
                 style={{ background: template.colors.primary }}
-              />
+              >
+                <div className="w-3 h-3 rounded-sm" style={{ background: template.colors.primaryForeground, opacity: 0.8 }} />
+              </div>
               <div className="flex-1">
                 <div
                   className="h-1.5 rounded w-3/4"
@@ -129,9 +131,14 @@ function TemplateCard({
               </div>
             </div>
             
-            {/* Cards de seções */}
+            {/* Cards de seções de manutenção */}
             <div className="grid grid-cols-2 gap-1.5">
-              {[1, 2, 3, 4].map((i) => (
+              {[
+                { color: "#64748B", label: "Manutenções" },
+                { color: "#10B981", label: "Vistorias" },
+                { color: "#EAB308", label: "Ocorrências" },
+                { color: "#14B8A6", label: "Checklists" },
+              ].map((section, i) => (
                 <div
                   key={i}
                   className="aspect-square rounded p-1.5"
@@ -143,11 +150,8 @@ function TemplateCard({
                   <div
                     className="w-3 h-3 rounded mb-1"
                     style={{
-                      background: i === 1 ? template.colors.primary : 
-                                 i === 2 ? template.colors.accent :
-                                 i === 3 ? template.colors.primary :
-                                 template.colors.accent,
-                      opacity: 0.7,
+                      background: section.color,
+                      opacity: 0.8,
                     }}
                   />
                   <div

@@ -444,3 +444,17 @@
 - [x] RevistaEditor.tsx - Completamente reescrito com 10 seções de manutenção
 - [x] Testar a função Livro de Manutenção
 - [x] Salvar checkpoint (versão 19ef2c19)
+
+
+## Fase 45: Atualizar Modelo do Livro de Manutenção
+
+### Tarefas:
+- [x] Analisar os modelos/templates existentes
+- [x] Atualizar MagazineWithTemplate.tsx - Páginas de manutenção (Resumo, Manutenções, Vistorias, Ocorrências, Checklists, Antes/Depois)
+- [x] Atualizar TemplateSelector.tsx - Preview com seções de manutenção
+- [x] Atualizar RevistaForm.tsx - Descrições dos templates
+- [x] Atualizar MagazineViewer.tsx - demoMagazine com dados de manutenção
+- [x] Adicionar função getPageTitle para novos tipos de página
+- [x] Criar componentes ResumoPeriodoPage, ManutencoesPage, VistoriasPage, OcorrenciasPage, ChecklistsPage
+- [x] Testar as alterações
+- [ ] Salvar checkpoint
