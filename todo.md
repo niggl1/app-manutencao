@@ -362,3 +362,9 @@
 - [x] Ocorrência Simples → Ocorrência Rápida
 - [x] Manutenção Simples → Manutenção Rápida
 - [x] Antes e Depois Simples → Antes e Depois Rápido
+
+
+## Fase 41: Atalho Funções Rápidas no Menu
+- [x] Adicionar seção "REGISTRO RÁPIDO" no menu lateral acima de "ATALHOS"
+- [x] Incluir botões: Vistoria, Manutenção, Ocorrência, Antes/Depois
+- [x] Botões abrem modais de Registro Rápido

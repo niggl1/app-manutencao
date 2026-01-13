@@ -241,6 +241,12 @@ export default function Dashboard() {
   // Estado do drawer mobile
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Estados para modais de Registro Rápido
+  const [showVistoriaRapida, setShowVistoriaRapida] = useState(false);
+  const [showManutencaoRapida, setShowManutencaoRapida] = useState(false);
+  const [showOcorrenciaRapida, setShowOcorrenciaRapida] = useState(false);
+  const [showAntesDepoisRapido, setShowAntesDepoisRapido] = useState(false);
+
   // Estado das funções rápidas personalizáveis (agora usa dados da base de dados)
   const refreshQuickFunctions = () => {
     refetchFuncoesRapidas();
@@ -449,10 +455,50 @@ export default function Dashboard() {
 
         {/* Navigation com Seções Colapsáveis */}
         <ScrollArea className="flex-1 py-4">
-          {/* Funções Rápidas - Agora usa dados da base de dados */}
+          {/* Botões de Registro Rápido */}
+          <div className="px-3 mb-4">
+            <p className="text-xs font-semibold text-sidebar-foreground/50 uppercase tracking-wider mb-2 px-3">Registro Rápido</p>
+            <div className="grid grid-cols-2 gap-2">
+              <button 
+                onClick={() => setShowVistoriaRapida(true)}
+                className="flex flex-col items-center gap-1.5 p-2.5 rounded-xl shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-200 bg-green-500"
+              >
+                <ClipboardCheck className="w-4 h-4 text-white" />
+                <span className="text-[10px] font-semibold text-white">Vistoria</span>
+              </button>
+              <button 
+                onClick={() => setShowManutencaoRapida(true)}
+                className="flex flex-col items-center gap-1.5 p-2.5 rounded-xl shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-200 bg-orange-500"
+              >
+                <Wrench className="w-4 h-4 text-white" />
+                <span className="text-[10px] font-semibold text-white">Manutenção</span>
+              </button>
+              <button 
+                onClick={() => setShowOcorrenciaRapida(true)}
+                className="flex flex-col items-center gap-1.5 p-2.5 rounded-xl shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-200 bg-red-500"
+              >
+                <AlertTriangle className="w-4 h-4 text-white" />
+                <span className="text-[10px] font-semibold text-white">Ocorrência</span>
+              </button>
+              <button 
+                onClick={() => setShowAntesDepoisRapido(true)}
+                className="flex flex-col items-center gap-1.5 p-2.5 rounded-xl shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-200 bg-purple-500"
+              >
+                <Image className="w-4 h-4 text-white" />
+                <span className="text-[10px] font-semibold text-white">Antes/Depois</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Separador */}
+          <div className="px-6 mb-3">
+            <Separator className="bg-sidebar-border/50" />
+          </div>
+
+          {/* Funções Rápidas - Atalhos personalizados */}
           <div className="px-3 mb-4">
             <div className="flex items-center justify-between mb-2 px-3">
-              <p className="text-xs font-semibold text-sidebar-foreground/50 uppercase tracking-wider">Funções Rápidas</p>
+              <p className="text-xs font-semibold text-sidebar-foreground/50 uppercase tracking-wider">Atalhos</p>
               <QuickFunctionsEditor onSave={refreshQuickFunctions} condominioId={condominioId} />
             </div>
             <div className="grid grid-cols-2 gap-2">
@@ -996,6 +1042,44 @@ export default function Dashboard() {
         </div>
       )}
     </div>
+
+      {/* Modais de Registro Rápido */}
+      <TarefasSimplesModal
+        open={showVistoriaRapida}
+        onOpenChange={setShowVistoriaRapida}
+        condominioId={condominios?.[0]?.id || 0}
+        tipoInicial="vistoria"
+        onSuccess={() => {
+          toast.success("Vistoria registrada com sucesso!");
+        }}
+      />
+      <TarefasSimplesModal
+        open={showManutencaoRapida}
+        onOpenChange={setShowManutencaoRapida}
+        condominioId={condominios?.[0]?.id || 0}
+        tipoInicial="manutencao"
+        onSuccess={() => {
+          toast.success("Manutenção registrada com sucesso!");
+        }}
+      />
+      <TarefasSimplesModal
+        open={showOcorrenciaRapida}
+        onOpenChange={setShowOcorrenciaRapida}
+        condominioId={condominios?.[0]?.id || 0}
+        tipoInicial="ocorrencia"
+        onSuccess={() => {
+          toast.success("Ocorrência registrada com sucesso!");
+        }}
+      />
+      <TarefasSimplesModal
+        open={showAntesDepoisRapido}
+        onOpenChange={setShowAntesDepoisRapido}
+        condominioId={condominios?.[0]?.id || 0}
+        tipoInicial="antes_depois"
+        onSuccess={() => {
+          toast.success("Antes/Depois registrado com sucesso!");
+        }}
+      />
     </>
   );
 }
@@ -7430,7 +7514,6 @@ function AntesDepoisSection() {
   });
 
   const [showDialog, setShowDialog] = useState(false);
-  const [showAntesDepoisRapido, setShowAntesDepoisRapido] = useState(false);
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
   const [fotoAntesUrl, setFotoAntesUrl] = useState("");
@@ -7548,13 +7631,6 @@ function AntesDepoisSection() {
           <p className="text-muted-foreground">Mostre a transformação de melhorias realizadas</p>
         </div>
         <div className="flex items-center gap-2">
-          <Button
-            size="sm"
-            className="bg-orange-500 text-white hover:bg-orange-600 border-orange-500"
-            onClick={() => setShowAntesDepoisRapido(true)}
-          >
-            ⚡ Antes/Depois Rápido
-          </Button>
           <Dialog open={showDialog} onOpenChange={setShowDialog}>
             <DialogTrigger asChild>
               <Button className="gap-2">
@@ -7654,17 +7730,6 @@ function AntesDepoisSection() {
           </Dialog>
         </div>
       </div>
-
-      {/* Modal de Antes/Depois Rápido */}
-      <TarefasSimplesModal
-        open={showAntesDepoisRapido}
-        onOpenChange={setShowAntesDepoisRapido}
-        condominioId={condominios?.[0]?.id || 0}
-        tipoInicial="antes_depois"
-        onSuccess={() => {
-          refetch();
-        }}
-      />
 
       {obras?.length === 0 ? (
         <Card>

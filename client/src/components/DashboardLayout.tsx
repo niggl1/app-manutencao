@@ -95,6 +95,7 @@ import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
+import { TarefasSimplesModal } from "@/components/TarefasSimplesModal";
 
 // Mapeamento de ícones por nome
 export const iconMap: Record<string, any> = {
@@ -290,6 +291,10 @@ function DashboardLayoutContent({
     const saved = localStorage.getItem(EXPANDED_SECTIONS_KEY);
     return saved ? JSON.parse(saved) : ["visao-geral"];
   });
+
+  // Estado para o modal de Funções Rápidas
+  const [funcaoRapidaModalOpen, setFuncaoRapidaModalOpen] = useState(false);
+  const [funcaoRapidaTipo, setFuncaoRapidaTipo] = useState<"vistoria" | "manutencao" | "ocorrencia" | "antes_depois">("vistoria");
 
   // Estado para o diálogo de confirmação de função rápida
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -526,47 +531,66 @@ function DashboardLayoutContent({
           </SidebarHeader>
 
           <SidebarContent className="gap-0 overflow-y-auto">
-            {/* BOTÃO DE TESTE - REMOVER DEPOIS */}
-            <div className="px-4 py-4 bg-red-500">
-              <button className="w-full py-3 bg-yellow-400 text-black font-bold text-lg rounded-lg">
-                🚨 BOTÃO TESTE 🚨
-              </button>
-            </div>
-
-            {/* Seção de Manutenção Rápida */}
-            <div className="px-4 py-3 border-b border-border/50">
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Manutenção Rápida</p>
-              <div className="space-y-1">
-                <Link href="/dashboard/funcoes-simples?tipo=vistoria">
-                  <button className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-primary/10 transition-colors text-left">
-                    <Zap className="h-4 w-4 text-primary" />
-                    <span>Teste 1</span>
-                  </button>
-                </Link>
-                <Link href="/dashboard/funcoes-simples?tipo=manutencao">
-                  <button className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-primary/10 transition-colors text-left">
-                    <Zap className="h-4 w-4 text-primary" />
-                    <span>Teste 2</span>
-                  </button>
-                </Link>
-                <Link href="/dashboard/funcoes-simples?tipo=ocorrencia">
-                  <button className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-primary/10 transition-colors text-left">
-                    <Zap className="h-4 w-4 text-primary" />
-                    <span>Teste 3</span>
-                  </button>
-                </Link>
-                <Link href="/dashboard/funcoes-simples?tipo=antes_depois">
-                  <button className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-primary/10 transition-colors text-left">
-                    <Zap className="h-4 w-4 text-primary" />
-                    <span>Teste 4</span>
-                  </button>
-                </Link>
-                <Link href="/dashboard/funcoes-simples">
-                  <button className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-primary/10 transition-colors text-left">
-                    <Zap className="h-4 w-4 text-primary" />
-                    <span>Teste 5</span>
-                  </button>
-                </Link>
+            {/* Seção de Funções Rápidas */}
+            <div className="px-3 py-3 border-b border-border/50">
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 px-1">Funções Rápidas</p>
+              <div className="grid grid-cols-2 gap-2">
+                <button 
+                  onClick={() => {
+                    if (!condominioAtivo?.id) {
+                      toast.error("Selecione uma organização primeiro");
+                      return;
+                    }
+                    setFuncaoRapidaTipo("vistoria");
+                    setFuncaoRapidaModalOpen(true);
+                  }}
+                  className="flex flex-col items-center gap-1 p-3 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-md"
+                >
+                  <ClipboardCheck className="h-5 w-5" />
+                  <span className="text-xs font-medium">Vistoria</span>
+                </button>
+                <button 
+                  onClick={() => {
+                    if (!condominioAtivo?.id) {
+                      toast.error("Selecione uma organização primeiro");
+                      return;
+                    }
+                    setFuncaoRapidaTipo("manutencao");
+                    setFuncaoRapidaModalOpen(true);
+                  }}
+                  className="flex flex-col items-center gap-1 p-3 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-md"
+                >
+                  <Wrench className="h-5 w-5" />
+                  <span className="text-xs font-medium">Manutenção</span>
+                </button>
+                <button 
+                  onClick={() => {
+                    if (!condominioAtivo?.id) {
+                      toast.error("Selecione uma organização primeiro");
+                      return;
+                    }
+                    setFuncaoRapidaTipo("ocorrencia");
+                    setFuncaoRapidaModalOpen(true);
+                  }}
+                  className="flex flex-col items-center gap-1 p-3 rounded-xl bg-gradient-to-br from-yellow-500 to-yellow-600 text-white shadow-md"
+                >
+                  <AlertTriangle className="h-5 w-5" />
+                  <span className="text-xs font-medium">Ocorrência</span>
+                </button>
+                <button 
+                  onClick={() => {
+                    if (!condominioAtivo?.id) {
+                      toast.error("Selecione uma organização primeiro");
+                      return;
+                    }
+                    setFuncaoRapidaTipo("antes_depois");
+                    setFuncaoRapidaModalOpen(true);
+                  }}
+                  className="flex flex-col items-center gap-1 p-3 rounded-xl bg-gradient-to-br from-green-500 to-green-600 text-white shadow-md"
+                >
+                  <ArrowLeftRight className="h-5 w-5" />
+                  <span className="text-xs font-medium">Antes/Depois</span>
+                </button>
               </div>
             </div>
 
@@ -778,6 +802,19 @@ function DashboardLayoutContent({
         )}
         <main className="flex-1 p-4">{children}</main>
       </SidebarInset>
+
+      {/* Modal de Funções Rápidas */}
+      {condominioAtivo?.id && (
+        <TarefasSimplesModal
+          open={funcaoRapidaModalOpen}
+          onOpenChange={setFuncaoRapidaModalOpen}
+          condominioId={condominioAtivo.id}
+          tipoInicial={funcaoRapidaTipo}
+          onSuccess={() => {
+            toast.success("Registro criado com sucesso!");
+          }}
+        />
+      )}
     </>
   );
 }
