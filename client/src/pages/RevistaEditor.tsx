@@ -5,58 +5,57 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { trpc } from "@/lib/trpc";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
   BookOpen,
-  Calendar,
-  Car,
   ChevronRight,
   Eye,
   EyeOff,
   FileText,
-  Heart,
-  Link as LinkIcon,
   Loader2,
-  Megaphone,
-  MessageSquare,
-  Package,
-  Phone,
-  Plus,
   Save,
   Settings,
   Share2,
-  Star,
   Trash2,
-  Users,
-  Vote,
-  Image,
-  Building2,
   Send,
+  Wrench,
+  Search,
+  AlertTriangle,
+  ClipboardCheck,
+  Camera,
+  FileCheck,
+  CalendarClock,
+  Award,
+  TrendingUp,
+  Package,
+  BarChart3,
+  Calendar,
+  CheckCircle,
+  XCircle,
+  Clock,
+  ArrowLeftRight,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link, useParams, useLocation } from "wouter";
 import { toast } from "sonner";
-import AvisoForm from "@/components/forms/AvisoForm";
-import FuncionarioForm from "@/components/forms/FuncionarioForm";
-import VotacaoForm from "@/components/forms/VotacaoForm";
-import ImageUpload from "@/components/ImageUpload";
 
+// Tipos de seções disponíveis para o Livro de Manutenção
 const sectionTypes = [
-  { id: "mensagem_sindico", name: "Mensagem do Síndico", icon: MessageSquare, color: "text-blue-500" },
-  { id: "avisos", name: "Avisos", icon: Megaphone, color: "text-amber-500" },
-  { id: "eventos", name: "Eventos", icon: Calendar, color: "text-emerald-500" },
-  { id: "funcionarios", name: "Funcionários", icon: Users, color: "text-purple-500" },
-  { id: "votacao", name: "Votações", icon: Vote, color: "text-pink-500" },
-  { id: "telefones", name: "Telefones Úteis", icon: Phone, color: "text-cyan-500" },
-  { id: "links", name: "Links Úteis", icon: LinkIcon, color: "text-indigo-500" },
-  { id: "classificados", name: "Classificados", icon: Package, color: "text-orange-500" },
-  { id: "caronas", name: "Caronas", icon: Car, color: "text-teal-500" },
-  { id: "achados", name: "Achados e Perdidos", icon: Heart, color: "text-red-500" },
+  { id: "resumo", name: "Resumo do Período", icon: BarChart3, color: "text-blue-500", bgGradient: "from-blue-50 via-indigo-50 to-violet-50", borderColor: "border-blue-100", barGradient: "from-blue-400 via-indigo-500 to-violet-500" },
+  { id: "manutencoes", name: "Manutenções", icon: Wrench, color: "text-slate-600", bgGradient: "from-slate-50 via-gray-50 to-zinc-50", borderColor: "border-slate-200", barGradient: "from-slate-400 via-gray-500 to-zinc-500" },
+  { id: "vistorias", name: "Vistorias", icon: Search, color: "text-emerald-500", bgGradient: "from-emerald-50 via-green-50 to-teal-50", borderColor: "border-emerald-100", barGradient: "from-emerald-400 via-green-500 to-teal-500" },
+  { id: "ocorrencias", name: "Ocorrências", icon: AlertTriangle, color: "text-yellow-500", bgGradient: "from-yellow-50 via-amber-50 to-orange-50", borderColor: "border-yellow-100", barGradient: "from-yellow-400 via-amber-500 to-orange-500" },
+  { id: "checklists", name: "Checklists", icon: ClipboardCheck, color: "text-teal-500", bgGradient: "from-teal-50 via-cyan-50 to-sky-50", borderColor: "border-teal-100", barGradient: "from-teal-400 via-cyan-500 to-sky-500" },
+  { id: "antes_depois", name: "Antes e Depois", icon: ArrowLeftRight, color: "text-violet-500", bgGradient: "from-violet-50 via-purple-50 to-fuchsia-50", borderColor: "border-violet-100", barGradient: "from-violet-400 via-purple-500 to-fuchsia-500" },
+  { id: "vencimentos", name: "Agenda de Vencimentos", icon: CalendarClock, color: "text-fuchsia-500", bgGradient: "from-fuchsia-50 via-pink-50 to-rose-50", borderColor: "border-fuchsia-100", barGradient: "from-fuchsia-400 via-pink-500 to-rose-500" },
+  { id: "realizacoes", name: "Realizações", icon: Award, color: "text-yellow-600", bgGradient: "from-yellow-50 via-amber-50 to-orange-50", borderColor: "border-yellow-200", barGradient: "from-yellow-500 via-amber-500 to-orange-500" },
+  { id: "melhorias", name: "Melhorias", icon: TrendingUp, color: "text-amber-500", bgGradient: "from-amber-50 via-yellow-50 to-lime-50", borderColor: "border-amber-100", barGradient: "from-amber-400 via-yellow-500 to-lime-500" },
+  { id: "aquisicoes", name: "Aquisições", icon: Package, color: "text-green-500", bgGradient: "from-green-50 via-emerald-50 to-teal-50", borderColor: "border-green-100", barGradient: "from-green-400 via-emerald-500 to-teal-500" },
 ];
 
 export default function RevistaEditor() {
@@ -66,9 +65,6 @@ export default function RevistaEditor() {
   const { user, loading: authLoading } = useAuth();
   
   const [activeTab, setActiveTab] = useState("conteudo");
-  const [showAvisoForm, setShowAvisoForm] = useState(false);
-  const [showFuncionarioForm, setShowFuncionarioForm] = useState(false);
-  const [showVotacaoForm, setShowVotacaoForm] = useState(false);
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
   
   // Estado para secções ocultas
@@ -83,51 +79,54 @@ export default function RevistaEditor() {
         toast.success("Secção reativada");
       } else {
         newSet.add(sectionId);
-        toast.info("Secção ocultada da revista");
+        toast.info("Secção ocultada do livro");
       }
       return newSet;
     });
   };
-  
-  // Mensagem do síndico state
-  const [mensagemSindico, setMensagemSindico] = useState({
-    titulo: "Mensagem do Síndico",
-    nomeSindico: "",
-    fotoSindicoUrl: "",
-    mensagem: "",
-    assinatura: "",
-  });
 
+  // Query para dados da revista
   const { data: revista, isLoading: revistaLoading } = trpc.revista.get.useQuery(
     { id: revistaId },
     { enabled: revistaId > 0 }
   );
 
-  const { data: avisos, isLoading: avisosLoading } = trpc.aviso.list.useQuery(
-    { revistaId },
-    { enabled: revistaId > 0 }
+  // Query para organização (condomínio)
+  const { data: condominios } = trpc.condominio.list.useQuery();
+  const selectedCondominio = condominios?.[0];
+  const condominioId = selectedCondominio?.id || 0;
+
+  // Queries para dados de manutenção
+  const { data: manutencoes, isLoading: manutencoesLoading } = trpc.manutencao.listWithDetails.useQuery(
+    { condominioId },
+    { enabled: !!selectedCondominio }
   );
 
-  const { data: votacoes } = trpc.votacao.list.useQuery(
-    { revistaId },
-    { enabled: revistaId > 0 }
+  const { data: vistorias, isLoading: vistoriasLoading } = trpc.vistoria.listWithDetails.useQuery(
+    { condominioId },
+    { enabled: !!selectedCondominio }
   );
 
-  const { data: telefones } = trpc.telefone.list.useQuery(
-    { revistaId },
-    { enabled: revistaId > 0 }
+  const { data: ocorrencias, isLoading: ocorrenciasLoading } = trpc.ocorrencia.listWithDetails.useQuery(
+    { condominioId },
+    { enabled: !!selectedCondominio }
   );
 
-  const { data: links } = trpc.link.list.useQuery(
-    { revistaId },
-    { enabled: revistaId > 0 }
+  const { data: checklists, isLoading: checklistsLoading } = trpc.checklist.listWithDetails.useQuery(
+    { condominioId },
+    { enabled: !!selectedCondominio }
+  );
+
+  const { data: antesDepois, isLoading: antesDepoisLoading } = trpc.antesDepois.list.useQuery(
+    { revistaId: condominioId },
+    { enabled: !!selectedCondominio }
   );
 
   const utils = trpc.useUtils();
 
   const publishMutation = trpc.revista.update.useMutation({
     onSuccess: () => {
-      toast.success("Revista publicada com sucesso!");
+      toast.success("Livro de Manutenção publicado com sucesso!");
       utils.revista.get.invalidate({ id: revistaId });
     },
     onError: (error) => {
@@ -135,26 +134,22 @@ export default function RevistaEditor() {
     },
   });
 
-  const deleteAvisoMutation = trpc.aviso.delete.useMutation({
-    onSuccess: () => {
-      toast.success("Aviso removido!");
-      utils.aviso.list.invalidate({ revistaId });
-    },
-  });
-
-  const createTelefoneMutation = trpc.telefone.create.useMutation({
-    onSuccess: () => {
-      toast.success("Telefone adicionado!");
-      utils.telefone.list.invalidate({ revistaId });
-    },
-  });
-
-  const createLinkMutation = trpc.link.create.useMutation({
-    onSuccess: () => {
-      toast.success("Link adicionado!");
-      utils.link.list.invalidate({ revistaId });
-    },
-  });
+  // Calcular estatísticas
+  // Status disponíveis: pendente, realizada, acao_necessaria, finalizada, reaberta
+  const estatisticas = useMemo(() => {
+    return {
+      totalManutencoes: manutencoes?.length || 0,
+      manutencoesAtivas: manutencoes?.filter(m => m.status === "pendente" || m.status === "acao_necessaria" || m.status === "reaberta").length || 0,
+      manutencoesConcluidas: manutencoes?.filter(m => m.status === "realizada" || m.status === "finalizada").length || 0,
+      totalVistorias: vistorias?.length || 0,
+      vistoriasAprovadas: vistorias?.filter(v => v.status === "realizada" || v.status === "finalizada").length || 0,
+      totalOcorrencias: ocorrencias?.length || 0,
+      ocorrenciasAbertas: ocorrencias?.filter(o => o.status === "pendente" || o.status === "acao_necessaria" || o.status === "reaberta").length || 0,
+      totalChecklists: checklists?.length || 0,
+      checklistsConcluidos: checklists?.filter(c => c.status === "realizada" || c.status === "finalizada").length || 0,
+      totalAntesDepois: antesDepois?.length || 0,
+    };
+  }, [manutencoes, vistorias, ocorrencias, checklists, antesDepois]);
 
   if (authLoading || revistaLoading) {
     return (
@@ -172,7 +167,7 @@ export default function RevistaEditor() {
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
           <BookOpen className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-          <h2 className="text-xl font-semibold mb-2">Revista não encontrada</h2>
+          <h2 className="text-xl font-semibold mb-2">Livro não encontrado</h2>
           <Link href="/dashboard">
             <Button variant="outline">
               <ArrowLeft className="w-4 h-4 mr-2" />
@@ -195,6 +190,43 @@ export default function RevistaEditor() {
     toast.success("Link copiado!");
   };
 
+  // Função para formatar data
+  const formatDate = (date: Date | string | null) => {
+    if (!date) return "-";
+    return new Date(date).toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  };
+
+  // Função para obter cor do status
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "concluida":
+      case "concluido":
+      case "aprovada":
+      case "resolvida":
+        return "bg-emerald-100 text-emerald-700";
+      case "em_andamento":
+      case "em_analise":
+        return "bg-blue-100 text-blue-700";
+      case "pendente":
+      case "aberta":
+        return "bg-amber-100 text-amber-700";
+      case "cancelada":
+      case "rejeitada":
+        return "bg-red-100 text-red-700";
+      default:
+        return "bg-gray-100 text-gray-700";
+    }
+  };
+
+  // Função para formatar status
+  const formatStatus = (status: string) => {
+    return status.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -208,7 +240,10 @@ export default function RevistaEditor() {
                 </Button>
               </Link>
               <div>
-                <h1 className="font-serif text-lg font-bold">{revista.titulo}</h1>
+                <h1 className="font-serif text-lg font-bold flex items-center gap-2">
+                  <Wrench className="w-5 h-5 text-orange-500" />
+                  Livro de Manutenção
+                </h1>
                 <p className="text-sm text-muted-foreground">{revista.edicao}</p>
               </div>
             </div>
@@ -225,7 +260,7 @@ export default function RevistaEditor() {
               </Button>
               <Button
                 size="sm"
-                className="btn-magazine"
+                className="bg-orange-500 hover:bg-orange-600 text-white"
                 onClick={handlePublish}
                 disabled={publishMutation.isPending || revista.status === "publicada"}
               >
@@ -234,7 +269,7 @@ export default function RevistaEditor() {
                 ) : (
                   <Send className="w-4 h-4 mr-2" />
                 )}
-                {revista.status === "publicada" ? "Publicada" : "Publicar"}
+                {revista.status === "publicada" ? "Publicado" : "Publicar"}
               </Button>
             </div>
           </div>
@@ -270,11 +305,7 @@ export default function RevistaEditor() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {Array.from(hiddenSections).map((sectionId) => {
-                    const sectionNames: Record<string, string> = {
-                      mensagem_sindico: "Mensagem do Síndico",
-                      avisos: "Avisos",
-                      votacoes: "Votações",
-                    };
+                    const section = sectionTypes.find(s => s.id === sectionId);
                     return (
                       <Button
                         key={sectionId}
@@ -284,7 +315,7 @@ export default function RevistaEditor() {
                         className="bg-white hover:bg-green-50 hover:border-green-300 hover:text-green-700"
                       >
                         <Eye className="w-3.5 h-3.5 mr-1.5" />
-                        Mostrar {sectionNames[sectionId] || sectionId}
+                        Mostrar {section?.name || sectionId}
                       </Button>
                     );
                   })}
@@ -292,480 +323,272 @@ export default function RevistaEditor() {
               </div>
             )}
             
-            {/* Mensagem do Síndico - Premium */}
-            {!hiddenSections.has("mensagem_sindico") && (
-            <div id="mensagem-sindico-section" className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 rounded-2xl border border-blue-100 shadow-sm hover:shadow-lg transition-all duration-300">
-              {/* Barra decorativa superior */}
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-400 via-indigo-500 to-violet-500" />
-              
-              {/* Elemento decorativo */}
-              <div className="absolute -right-12 -top-12 w-40 h-40 bg-blue-200/20 rounded-full blur-3xl" />
-              <div className="absolute -left-8 -bottom-8 w-32 h-32 bg-indigo-200/20 rounded-full blur-2xl" />
-              
-              <div className="relative p-6">
-                {/* Header da secção */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl shadow-lg shadow-blue-500/30">
-                      <MessageSquare className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-slate-800">Mensagem do Síndico</h3>
-                      <p className="text-sm text-slate-500">Escreva uma mensagem personalizada para os moradores</p>
-                    </div>
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => toggleSectionVisibility("mensagem_sindico")}
-                    className="text-slate-500 hover:text-red-500 hover:bg-red-50"
-                    title="Ocultar esta secção da revista"
-                  >
-                    <EyeOff className="w-4 h-4 mr-1" />
-                    Ocultar
-                  </Button>
+            {/* Resumo do Período */}
+            {!hiddenSections.has("resumo") && (
+              <SectionCard
+                section={sectionTypes[0]}
+                onToggleVisibility={() => toggleSectionVisibility("resumo")}
+              >
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                  <StatCard
+                    icon={Wrench}
+                    label="Manutenções"
+                    value={estatisticas.totalManutencoes}
+                    subValue={`${estatisticas.manutencoesConcluidas} concluídas`}
+                    color="text-slate-600"
+                    bgColor="bg-slate-100"
+                  />
+                  <StatCard
+                    icon={Search}
+                    label="Vistorias"
+                    value={estatisticas.totalVistorias}
+                    subValue={`${estatisticas.vistoriasAprovadas} aprovadas`}
+                    color="text-emerald-600"
+                    bgColor="bg-emerald-100"
+                  />
+                  <StatCard
+                    icon={AlertTriangle}
+                    label="Ocorrências"
+                    value={estatisticas.totalOcorrencias}
+                    subValue={`${estatisticas.ocorrenciasAbertas} abertas`}
+                    color="text-yellow-600"
+                    bgColor="bg-yellow-100"
+                  />
+                  <StatCard
+                    icon={ClipboardCheck}
+                    label="Checklists"
+                    value={estatisticas.totalChecklists}
+                    subValue={`${estatisticas.checklistsConcluidos} concluídos`}
+                    color="text-teal-600"
+                    bgColor="bg-teal-100"
+                  />
+                  <StatCard
+                    icon={ArrowLeftRight}
+                    label="Antes/Depois"
+                    value={estatisticas.totalAntesDepois}
+                    subValue="comparativos"
+                    color="text-violet-600"
+                    bgColor="bg-violet-100"
+                  />
                 </div>
-                
-                <div className="space-y-5">
-                  {/* Foto e Nome do Síndico */}
-                  <div className="flex gap-6 items-start">
-                    <div className="space-y-3 min-w-[180px]">
-                      <div className="flex items-center justify-between">
-                        <Label className="text-slate-700 font-medium">Foto do Síndico</Label>
-                        {mensagemSindico.fotoSindicoUrl && (
-                          <Button
-                            type="button"
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => setMensagemSindico({ ...mensagemSindico, fotoSindicoUrl: "" })}
-                            className="h-7 px-2 text-red-500 hover:text-red-600 hover:bg-red-50"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
-                        )}
-                      </div>
-                      <div className="relative group">
-                        <ImageUpload
-                          value={mensagemSindico.fotoSindicoUrl || undefined}
-                          onChange={(url) => setMensagemSindico({ ...mensagemSindico, fotoSindicoUrl: url || "" })}
-                          folder="revistas/sindicos"
-                          aspectRatio="square"
-                          placeholder="Carregar foto"
-                          className="w-40 h-40 rounded-xl border-2 border-dashed border-blue-200 hover:border-blue-400 transition-colors bg-white/50"
-                          compact={true}
-                        />
-                        <div className="absolute -bottom-1 -right-1 p-1.5 bg-blue-500 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
-                          <Plus className="w-3.5 h-3.5 text-white" />
-                        </div>
-                      </div>
-                      <div className="text-center space-y-1">
-                        <p className="text-xs text-slate-500">JPEG, PNG, GIF ou WebP</p>
-                        <p className="text-xs text-slate-400">(máx. 10MB)</p>
-                      </div>
-                    </div>
-                    <div className="flex-1 space-y-4">
-                      <div className="space-y-2">
-                        <Label className="text-slate-700 font-medium">Nome do Síndico</Label>
-                        <Input
-                          value={mensagemSindico.nomeSindico}
-                          onChange={(e) => setMensagemSindico({ ...mensagemSindico, nomeSindico: e.target.value })}
-                          placeholder="Ex: João Silva"
-                          className="bg-white/70 border-slate-200 focus:border-blue-400 focus:ring-blue-400/20 rounded-xl h-11"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label className="text-slate-700 font-medium">Título da Mensagem</Label>
-                        <Input
-                          value={mensagemSindico.titulo}
-                          onChange={(e) => setMensagemSindico({ ...mensagemSindico, titulo: e.target.value })}
-                          placeholder="Mensagem do Síndico"
-                          className="bg-white/70 border-slate-200 focus:border-blue-400 focus:ring-blue-400/20 rounded-xl h-11"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Mensagem */}
-                  <div className="space-y-2">
-                    <Label className="text-slate-700 font-medium">Mensagem</Label>
-                    <Textarea
-                      value={mensagemSindico.mensagem}
-                      onChange={(e) => setMensagemSindico({ ...mensagemSindico, mensagem: e.target.value })}
-                      placeholder="Prezados moradores, é com grande satisfação que apresento mais uma edição da nossa revista digital..."
-                      rows={6}
-                      className="bg-white/70 border-slate-200 focus:border-blue-400 focus:ring-blue-400/20 rounded-xl resize-none"
-                    />
-                  </div>
-                  
-                  {/* Assinatura */}
-                  <div className="space-y-2">
-                    <Label className="text-slate-700 font-medium">Assinatura</Label>
-                    <Input
-                      value={mensagemSindico.assinatura}
-                      onChange={(e) => setMensagemSindico({ ...mensagemSindico, assinatura: e.target.value })}
-                      placeholder="Ex: Síndico do Residencial Jardins"
-                      className="bg-white/70 border-slate-200 focus:border-blue-400 focus:ring-blue-400/20 rounded-xl h-11"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+              </SectionCard>
             )}
 
-            {/* Avisos - Premium */}
-            {!hiddenSections.has("avisos") && (
-            <div id="avisos-section" className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 rounded-2xl border border-amber-100 shadow-sm hover:shadow-lg transition-all duration-300">
-              {/* Barra decorativa superior */}
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-500" />
-              
-              {/* Elementos decorativos */}
-              <div className="absolute -right-12 -top-12 w-40 h-40 bg-amber-200/20 rounded-full blur-3xl" />
-              <div className="absolute -left-8 -bottom-8 w-32 h-32 bg-orange-200/20 rounded-full blur-2xl" />
-              
-              <div className="relative p-6">
-                {/* Header da secção */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl shadow-lg shadow-amber-500/30">
-                      <Megaphone className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-slate-800">Avisos</h3>
-                      <p className="text-sm text-slate-500">Gerencie os avisos desta edição</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => toggleSectionVisibility("avisos")}
-                      className="text-slate-500 hover:text-red-500 hover:bg-red-50"
-                      title="Ocultar esta secção da revista"
-                    >
-                      <EyeOff className="w-4 h-4 mr-1" />
-                      Ocultar
-                    </Button>
-                    <Dialog open={showAvisoForm} onOpenChange={setShowAvisoForm}>
-                      <DialogTrigger asChild>
-                        <Button size="sm" className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white shadow-md shadow-amber-500/25">
-                          <Plus className="w-4 h-4 mr-2" />
-                          Novo Aviso
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="w-[95vw] max-w-lg">
-                        <AvisoForm
-                          revistaId={revistaId}
-                          onSuccess={() => setShowAvisoForm(false)}
-                          onCancel={() => setShowAvisoForm(false)}
-                        />
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                </div>
-                
-                {/* Conteúdo */}
-                {avisosLoading ? (
-                  <div className="flex items-center justify-center py-12">
-                    <div className="text-center">
-                      <Loader2 className="w-8 h-8 animate-spin text-amber-500 mx-auto mb-2" />
-                      <p className="text-sm text-slate-500">Carregando avisos...</p>
-                    </div>
-                  </div>
-                ) : avisos && avisos.length > 0 ? (
+            {/* Manutenções */}
+            {!hiddenSections.has("manutencoes") && (
+              <SectionCard
+                section={sectionTypes[1]}
+                onToggleVisibility={() => toggleSectionVisibility("manutencoes")}
+              >
+                {manutencoesLoading ? (
+                  <LoadingState />
+                ) : manutencoes && manutencoes.length > 0 ? (
                   <div className="space-y-3">
-                    {avisos.map((aviso) => (
-                      <div
-                        key={aviso.id}
-                        className={cn(
-                          "group relative p-4 rounded-xl border-l-4 flex items-start justify-between bg-white/60 backdrop-blur-sm hover:bg-white/80 transition-all duration-200",
-                          aviso.tipo === "urgente"
-                            ? "border-red-500 hover:shadow-red-100"
-                            : aviso.tipo === "importante"
-                            ? "border-amber-500 hover:shadow-amber-100"
-                            : "border-blue-500 hover:shadow-blue-100"
-                        )}
-                      >
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-1">
-                            <h4 className="font-semibold text-slate-800">{aviso.titulo}</h4>
-                            <span className={cn(
-                              "px-2 py-0.5 text-xs font-medium rounded-full",
-                              aviso.tipo === "urgente"
-                                ? "bg-red-100 text-red-700"
-                                : aviso.tipo === "importante"
-                                ? "bg-amber-100 text-amber-700"
-                                : "bg-blue-100 text-blue-700"
-                            )}>
-                              {aviso.tipo}
-                            </span>
-                          </div>
-                          {aviso.conteudo && (
-                            <p className="text-sm text-slate-600 line-clamp-2">{aviso.conteudo}</p>
+                    {manutencoes.slice(0, 10).map((item) => (
+                      <ItemCard
+                        key={item.id}
+                        protocolo={item.protocolo}
+                        titulo={item.titulo}
+                        status={item.status}
+                        data={formatDate(item.dataAgendada || item.dataRealizada || item.createdAt)}
+                        getStatusColor={getStatusColor}
+                        formatStatus={formatStatus}
+                      />
+                    ))}
+                    {manutencoes.length > 10 && (
+                      <p className="text-sm text-center text-muted-foreground py-2">
+                        E mais {manutencoes.length - 10} manutenções...
+                      </p>
+                    )}
+                  </div>
+                ) : (
+                  <EmptyState icon={Wrench} message="Nenhuma manutenção registrada" />
+                )}
+              </SectionCard>
+            )}
+
+            {/* Vistorias */}
+            {!hiddenSections.has("vistorias") && (
+              <SectionCard
+                section={sectionTypes[2]}
+                onToggleVisibility={() => toggleSectionVisibility("vistorias")}
+              >
+                {vistoriasLoading ? (
+                  <LoadingState />
+                ) : vistorias && vistorias.length > 0 ? (
+                  <div className="space-y-3">
+                    {vistorias.slice(0, 10).map((item) => (
+                      <ItemCard
+                        key={item.id}
+                        protocolo={item.protocolo}
+                        titulo={item.titulo || item.localizacao}
+                        status={item.status}
+                        data={formatDate(item.dataAgendada || item.dataRealizada || item.createdAt)}
+                        getStatusColor={getStatusColor}
+                        formatStatus={formatStatus}
+                      />
+                    ))}
+                    {vistorias.length > 10 && (
+                      <p className="text-sm text-center text-muted-foreground py-2">
+                        E mais {vistorias.length - 10} vistorias...
+                      </p>
+                    )}
+                  </div>
+                ) : (
+                  <EmptyState icon={Search} message="Nenhuma vistoria registrada" />
+                )}
+              </SectionCard>
+            )}
+
+            {/* Ocorrências */}
+            {!hiddenSections.has("ocorrencias") && (
+              <SectionCard
+                section={sectionTypes[3]}
+                onToggleVisibility={() => toggleSectionVisibility("ocorrencias")}
+              >
+                {ocorrenciasLoading ? (
+                  <LoadingState />
+                ) : ocorrencias && ocorrencias.length > 0 ? (
+                  <div className="space-y-3">
+                    {ocorrencias.slice(0, 10).map((item) => (
+                      <ItemCard
+                        key={item.id}
+                        protocolo={item.protocolo}
+                        titulo={item.titulo || item.categoria}
+                        status={item.status}
+                        data={formatDate(item.dataOcorrencia)}
+                        getStatusColor={getStatusColor}
+                        formatStatus={formatStatus}
+                      />
+                    ))}
+                    {ocorrencias.length > 10 && (
+                      <p className="text-sm text-center text-muted-foreground py-2">
+                        E mais {ocorrencias.length - 10} ocorrências...
+                      </p>
+                    )}
+                  </div>
+                ) : (
+                  <EmptyState icon={AlertTriangle} message="Nenhuma ocorrência registrada" />
+                )}
+              </SectionCard>
+            )}
+
+            {/* Checklists */}
+            {!hiddenSections.has("checklists") && (
+              <SectionCard
+                section={sectionTypes[4]}
+                onToggleVisibility={() => toggleSectionVisibility("checklists")}
+              >
+                {checklistsLoading ? (
+                  <LoadingState />
+                ) : checklists && checklists.length > 0 ? (
+                  <div className="space-y-3">
+                    {checklists.slice(0, 10).map((item) => (
+                      <ItemCard
+                        key={item.id}
+                        protocolo={item.protocolo}
+                        titulo={item.titulo}
+                        status={item.status}
+                        data={formatDate(item.dataAgendada || item.dataRealizada || item.createdAt)}
+                        getStatusColor={getStatusColor}
+                        formatStatus={formatStatus}
+                      />
+                    ))}
+                    {checklists.length > 10 && (
+                      <p className="text-sm text-center text-muted-foreground py-2">
+                        E mais {checklists.length - 10} checklists...
+                      </p>
+                    )}
+                  </div>
+                ) : (
+                  <EmptyState icon={ClipboardCheck} message="Nenhum checklist registrado" />
+                )}
+              </SectionCard>
+            )}
+
+            {/* Antes e Depois */}
+            {!hiddenSections.has("antes_depois") && (
+              <SectionCard
+                section={sectionTypes[5]}
+                onToggleVisibility={() => toggleSectionVisibility("antes_depois")}
+              >
+                {antesDepoisLoading ? (
+                  <LoadingState />
+                ) : antesDepois && antesDepois.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {antesDepois.slice(0, 6).map((item) => (
+                      <div key={item.id} className="bg-white/60 rounded-xl p-4 border border-violet-100">
+                        <h4 className="font-medium text-slate-800 mb-2">{item.titulo}</h4>
+                        <div className="grid grid-cols-2 gap-2">
+                          {item.fotoAntesUrl && (
+                            <div className="aspect-video bg-slate-100 rounded-lg overflow-hidden">
+                              <img src={item.fotoAntesUrl} alt="Antes" className="w-full h-full object-cover" />
+                              <span className="text-xs text-slate-500">Antes</span>
+                            </div>
+                          )}
+                          {item.fotoDepoisUrl && (
+                            <div className="aspect-video bg-slate-100 rounded-lg overflow-hidden">
+                              <img src={item.fotoDepoisUrl} alt="Depois" className="w-full h-full object-cover" />
+                              <span className="text-xs text-slate-500">Depois</span>
+                            </div>
                           )}
                         </div>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="opacity-0 group-hover:opacity-100 transition-opacity text-red-500 hover:text-red-600 hover:bg-red-50"
-                          onClick={() => deleteAvisoMutation.mutate({ id: aviso.id })}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-12 bg-white/40 rounded-xl border border-dashed border-amber-200">
-                    <div className="p-3 bg-amber-100 rounded-full w-fit mx-auto mb-3">
-                      <Megaphone className="w-6 h-6 text-amber-500" />
-                    </div>
-                    <p className="font-medium text-slate-700">Nenhum aviso adicionado</p>
-                    <p className="text-sm text-slate-500 mt-1">Clique em "Novo Aviso" para começar</p>
-                  </div>
+                  <EmptyState icon={ArrowLeftRight} message="Nenhum comparativo registrado" />
                 )}
-              </div>
-            </div>
-            )}
-
-            {/* Votações - Premium */}
-            {!hiddenSections.has("votacoes") && (
-            <div id="votacoes-section" className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-50 rounded-2xl border border-pink-100 shadow-sm hover:shadow-lg transition-all duration-300">
-              {/* Barra decorativa superior */}
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-pink-400 via-rose-500 to-fuchsia-500" />
-              
-              {/* Elementos decorativos */}
-              <div className="absolute -right-12 -top-12 w-40 h-40 bg-pink-200/20 rounded-full blur-3xl" />
-              <div className="absolute -left-8 -bottom-8 w-32 h-32 bg-rose-200/20 rounded-full blur-2xl" />
-              
-              <div className="relative p-6">
-                {/* Header da secção */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl shadow-lg shadow-pink-500/30">
-                      <Vote className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-slate-800">Votações</h3>
-                      <p className="text-sm text-slate-500">Crie enquetes e votações interativas</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => toggleSectionVisibility("votacoes")}
-                      className="text-slate-500 hover:text-red-500 hover:bg-red-50"
-                      title="Ocultar esta secção da revista"
-                    >
-                      <EyeOff className="w-4 h-4 mr-1" />
-                      Ocultar
-                    </Button>
-                    <Dialog open={showVotacaoForm} onOpenChange={setShowVotacaoForm}>
-                      <DialogTrigger asChild>
-                        <Button size="sm" className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white shadow-md shadow-pink-500/25">
-                          <Plus className="w-4 h-4 mr-2" />
-                          Nova Votação
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="w-[95vw] max-w-lg">
-                        <VotacaoForm
-                          revistaId={revistaId}
-                          onSuccess={() => setShowVotacaoForm(false)}
-                          onCancel={() => setShowVotacaoForm(false)}
-                        />
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                </div>
-                
-                {/* Conteúdo */}
-                {votacoes && votacoes.length > 0 ? (
-                  <div className="space-y-3">
-                    {votacoes.map((votacao) => (
-                      <div
-                        key={votacao.id}
-                        className="group relative p-4 rounded-xl bg-white/60 backdrop-blur-sm border border-pink-100 hover:bg-white/80 hover:shadow-md transition-all duration-200"
-                      >
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <h4 className="font-semibold text-slate-800">{votacao.titulo}</h4>
-                              <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-pink-100 text-pink-700">
-                                {votacao.tipo?.replace("_", " ")}
-                              </span>
-                            </div>
-                            {votacao.descricao && (
-                              <p className="text-sm text-slate-600 line-clamp-2">{votacao.descricao}</p>
-                            )}
-                          </div>
-                          <div className="p-2 bg-gradient-to-br from-amber-100 to-yellow-100 rounded-lg">
-                            <Star className="w-4 h-4 text-amber-500" />
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-12 bg-white/40 rounded-xl border border-dashed border-pink-200">
-                    <div className="p-3 bg-pink-100 rounded-full w-fit mx-auto mb-3">
-                      <Vote className="w-6 h-6 text-pink-500" />
-                    </div>
-                    <p className="font-medium text-slate-700">Nenhuma votação criada</p>
-                    <p className="text-sm text-slate-500 mt-1">Crie enquetes para engajar os moradores</p>
-                  </div>
-                )}
-              </div>
-            </div>
+              </SectionCard>
             )}
           </TabsContent>
 
           {/* Secções Tab */}
           <TabsContent value="secoes" className="space-y-6">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {sectionTypes.map((section) => {
-                const Icon = section.icon;
-                const isSelected = selectedSection === section.id;
-                return (
-                  <button
-                    key={section.id}
-                    onClick={() => {
-                      setSelectedSection(section.id);
-                      // Navegar para a aba Conteúdo e abrir o formulário correspondente
-                      setActiveTab("conteudo");
-                      // Abrir formulários específicos
-                      if (section.id === "avisos") {
-                        setShowAvisoForm(true);
-                      } else if (section.id === "funcionarios") {
-                        setShowFuncionarioForm(true);
-                      } else if (section.id === "votacao") {
-                        setShowVotacaoForm(true);
-                      }
-                      // Scroll para a secção correspondente
-                      setTimeout(() => {
-                        const sectionMap: Record<string, string> = {
-                          mensagem_sindico: "mensagem-sindico-section",
-                          avisos: "avisos-section",
-                          eventos: "eventos-section",
-                          funcionarios: "funcionarios-section",
-                          votacao: "votacoes-section",
-                          telefones: "telefones-section",
-                          links: "links-section",
-                          classificados: "classificados-section",
-                          caronas: "caronas-section",
-                          achados: "achados-section",
-                        };
-                        const elementId = sectionMap[section.id];
-                        if (elementId) {
-                          const element = document.getElementById(elementId);
-                          if (element) {
-                            element.scrollIntoView({ behavior: "smooth", block: "start" });
-                          }
-                        }
-                      }, 100);
-                      toast.success(`Secção "${section.name}" selecionada`);
-                    }}
-                    className={cn(
-                      "p-4 rounded-xl border transition-all text-center group",
-                      isSelected 
-                        ? "border-primary bg-primary/10 ring-2 ring-primary" 
-                        : "border-border hover:border-primary/50 hover:bg-primary/5"
-                    )}
-                  >
-                    <div className={cn("w-10 h-10 rounded-lg mx-auto mb-3 flex items-center justify-center bg-secondary", section.color)}>
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <span className="text-sm font-medium">{section.name}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Quick Add Sections */}
             <Card>
               <CardHeader>
-                <CardTitle className="font-serif">Adicionar Conteúdo Rápido</CardTitle>
+                <CardTitle className="font-serif">Secções Disponíveis</CardTitle>
                 <CardDescription>
-                  Selecione uma secção acima para adicionar conteúdo
+                  Selecione as secções que deseja incluir no Livro de Manutenção
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-4">
-                  {/* Telefones */}
-                  <div id="telefones-section" className="p-4 rounded-xl border border-border">
-                    <h4 className="font-medium flex items-center gap-2 mb-3">
-                      <Phone className="w-4 h-4 text-cyan-500" />
-                      Telefones Úteis
-                    </h4>
-                    <div className="space-y-2">
-                      <Input placeholder="Nome (ex: Portaria)" id="tel-nome" />
-                      <Input placeholder="Telefone" id="tel-numero" />
-                      <Button
-                        size="sm"
-                        className="w-full"
-                        onClick={() => {
-                          const nome = (document.getElementById("tel-nome") as HTMLInputElement).value;
-                          const telefone = (document.getElementById("tel-numero") as HTMLInputElement).value;
-                          if (nome && telefone) {
-                            createTelefoneMutation.mutate({ revistaId, nome, telefone });
-                            (document.getElementById("tel-nome") as HTMLInputElement).value = "";
-                            (document.getElementById("tel-numero") as HTMLInputElement).value = "";
-                          }
-                        }}
+                  {sectionTypes.map((section) => {
+                    const Icon = section.icon;
+                    const isHidden = hiddenSections.has(section.id);
+                    return (
+                      <div
+                        key={section.id}
+                        className={cn(
+                          "p-4 rounded-xl border-2 transition-all cursor-pointer",
+                          isHidden
+                            ? "border-dashed border-slate-200 bg-slate-50 opacity-60"
+                            : "border-solid border-slate-200 bg-white hover:border-orange-300 hover:shadow-md"
+                        )}
+                        onClick={() => toggleSectionVisibility(section.id)}
                       >
-                        <Plus className="w-4 h-4 mr-2" />
-                        Adicionar
-                      </Button>
-                    </div>
-                    {telefones && telefones.length > 0 && (
-                      <div className="mt-3 space-y-1">
-                        {telefones.map((tel) => (
-                          <div key={tel.id} className="text-sm flex justify-between">
-                            <span>{tel.nome}</span>
-                            <span className="text-muted-foreground">{tel.telefone}</span>
+                        <div className="flex items-center gap-3">
+                          <div className={cn("p-2 rounded-lg", isHidden ? "bg-slate-200" : "bg-orange-100")}>
+                            <Icon className={cn("w-5 h-5", isHidden ? "text-slate-400" : "text-orange-600")} />
                           </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Links */}
-                  <div id="links-section" className="p-4 rounded-xl border border-border">
-                    <h4 className="font-medium flex items-center gap-2 mb-3">
-                      <LinkIcon className="w-4 h-4 text-indigo-500" />
-                      Links Úteis
-                    </h4>
-                    <div className="space-y-2">
-                      <Input placeholder="Título" id="link-titulo" />
-                      <Input placeholder="URL (https://...)" id="link-url" />
-                      <Button
-                        size="sm"
-                        className="w-full"
-                        onClick={() => {
-                          const titulo = (document.getElementById("link-titulo") as HTMLInputElement).value;
-                          const url = (document.getElementById("link-url") as HTMLInputElement).value;
-                          if (titulo && url) {
-                            createLinkMutation.mutate({ revistaId, titulo, url });
-                            (document.getElementById("link-titulo") as HTMLInputElement).value = "";
-                            (document.getElementById("link-url") as HTMLInputElement).value = "";
-                          }
-                        }}
-                      >
-                        <Plus className="w-4 h-4 mr-2" />
-                        Adicionar
-                      </Button>
-                    </div>
-                    {links && links.length > 0 && (
-                      <div className="mt-3 space-y-1">
-                        {links.map((link) => (
-                          <div key={link.id} className="text-sm">
-                            <a href={link.url || "#"} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                              {link.titulo}
-                            </a>
+                          <div className="flex-1">
+                            <h4 className={cn("font-medium", isHidden ? "text-slate-400" : "text-slate-800")}>
+                              {section.name}
+                            </h4>
+                            <p className="text-xs text-slate-500">
+                              {isHidden ? "Clique para mostrar" : "Clique para ocultar"}
+                            </p>
                           </div>
-                        ))}
+                          {isHidden ? (
+                            <EyeOff className="w-5 h-5 text-slate-400" />
+                          ) : (
+                            <Eye className="w-5 h-5 text-emerald-500" />
+                          )}
+                        </div>
                       </div>
-                    )}
-                  </div>
+                    );
+                  })}
                 </div>
               </CardContent>
             </Card>
@@ -775,7 +598,7 @@ export default function RevistaEditor() {
           <TabsContent value="config" className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="font-serif">Informações da Revista</CardTitle>
+                <CardTitle className="font-serif">Informações do Livro</CardTitle>
                 <CardDescription>
                   Configure os detalhes desta edição
                 </CardDescription>
@@ -808,8 +631,8 @@ export default function RevistaEditor() {
                     revista.status === "rascunho" ? "bg-amber-100 text-amber-700" :
                     "bg-gray-100 text-gray-700"
                   )}>
-                    {revista.status === "publicada" ? "Publicada" :
-                     revista.status === "rascunho" ? "Rascunho" : "Arquivada"}
+                    {revista.status === "publicada" ? "Publicado" :
+                     revista.status === "rascunho" ? "Rascunho" : "Arquivado"}
                   </div>
                 </div>
               </CardContent>
@@ -817,6 +640,133 @@ export default function RevistaEditor() {
           </TabsContent>
         </Tabs>
       </main>
+    </div>
+  );
+}
+
+// Componentes auxiliares
+
+interface SectionCardProps {
+  section: typeof sectionTypes[0];
+  onToggleVisibility: () => void;
+  children: React.ReactNode;
+}
+
+function SectionCard({ section, onToggleVisibility, children }: SectionCardProps) {
+  const Icon = section.icon;
+  return (
+    <div className={cn(
+      "relative overflow-hidden rounded-2xl border shadow-sm hover:shadow-lg transition-all duration-300",
+      `bg-gradient-to-br ${section.bgGradient}`,
+      section.borderColor
+    )}>
+      {/* Barra decorativa superior */}
+      <div className={cn("absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r", section.barGradient)} />
+      
+      {/* Elementos decorativos */}
+      <div className="absolute -right-12 -top-12 w-40 h-40 bg-white/10 rounded-full blur-3xl" />
+      <div className="absolute -left-8 -bottom-8 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
+      
+      <div className="relative p-6">
+        {/* Header da secção */}
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <div className={cn("p-2.5 rounded-xl shadow-lg", `bg-gradient-to-br ${section.barGradient}`)}>
+              <Icon className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-slate-800">{section.name}</h3>
+            </div>
+          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onToggleVisibility}
+            className="text-slate-500 hover:text-red-500 hover:bg-red-50"
+            title="Ocultar esta secção"
+          >
+            <EyeOff className="w-4 h-4 mr-1" />
+            Ocultar
+          </Button>
+        </div>
+        
+        {children}
+      </div>
+    </div>
+  );
+}
+
+interface StatCardProps {
+  icon: React.ElementType;
+  label: string;
+  value: number;
+  subValue: string;
+  color: string;
+  bgColor: string;
+}
+
+function StatCard({ icon: Icon, label, value, subValue, color, bgColor }: StatCardProps) {
+  return (
+    <div className="bg-white/60 rounded-xl p-4 text-center">
+      <div className={cn("w-10 h-10 rounded-full mx-auto mb-2 flex items-center justify-center", bgColor)}>
+        <Icon className={cn("w-5 h-5", color)} />
+      </div>
+      <p className="text-2xl font-bold text-slate-800">{value}</p>
+      <p className="text-sm font-medium text-slate-600">{label}</p>
+      <p className="text-xs text-slate-500">{subValue}</p>
+    </div>
+  );
+}
+
+interface ItemCardProps {
+  protocolo: string | null;
+  titulo: string | null;
+  status: string | null;
+  data: string;
+  getStatusColor: (status: string) => string;
+  formatStatus: (status: string) => string;
+}
+
+function ItemCard({ protocolo, titulo, status, data, getStatusColor, formatStatus }: ItemCardProps) {
+  return (
+    <div className="group relative p-4 rounded-xl bg-white/60 backdrop-blur-sm border border-slate-100 hover:bg-white/80 hover:shadow-md transition-all duration-200">
+      <div className="flex items-start justify-between">
+        <div className="flex-1">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-xs font-mono text-slate-500">{protocolo || "-"}</span>
+            {status && (
+              <span className={cn("px-2 py-0.5 text-xs font-medium rounded-full", getStatusColor(status))}>
+                {formatStatus(status)}
+              </span>
+            )}
+          </div>
+          <h4 className="font-medium text-slate-800">{titulo || "-"}</h4>
+          <p className="text-xs text-slate-500 mt-1">{data}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LoadingState() {
+  return (
+    <div className="flex items-center justify-center py-12">
+      <div className="text-center">
+        <Loader2 className="w-8 h-8 animate-spin text-orange-500 mx-auto mb-2" />
+        <p className="text-sm text-slate-500">Carregando dados...</p>
+      </div>
+    </div>
+  );
+}
+
+function EmptyState({ icon: Icon, message }: { icon: React.ElementType; message: string }) {
+  return (
+    <div className="text-center py-12 bg-white/40 rounded-xl border border-dashed border-slate-200">
+      <div className="p-3 bg-slate-100 rounded-full w-fit mx-auto mb-3">
+        <Icon className="w-6 h-6 text-slate-400" />
+      </div>
+      <p className="font-medium text-slate-600">{message}</p>
+      <p className="text-sm text-slate-500 mt-1">Os dados aparecerão aqui quando disponíveis</p>
     </div>
   );
 }

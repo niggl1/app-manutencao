@@ -411,4 +411,36 @@
 ### Arquivos a Modificar:
 - [x] RelatorioBuilder.tsx - Remover seções não relacionadas (de 21 para 16 seções, de 5 para 3 categorias)
 - [x] Testar geração de relatórios
+- [x] Salvar checkpoint
+
+
+## Fase 44: Limpeza da Revista/Livro de Manutenção - Foco em Manutenção
+
+### Seções antigas REMOVIDAS:
+- [x] Mensagem do Síndico
+- [x] Avisos
+- [x] Eventos
+- [x] Funcionários
+- [x] Votações
+- [x] Telefones Úteis
+- [x] Links Úteis
+- [x] Classificados
+- [x] Caronas
+- [x] Achados e Perdidos
+
+### Seções ADICIONADAS (relacionadas a manutenção):
+- [x] Resumo do Período (estatísticas gerais)
+- [x] Manutenções
+- [x] Vistorias
+- [x] Ocorrências
+- [x] Checklists
+- [x] Antes e Depois
+- [x] Agenda de Vencimentos
+- [x] Realizações
+- [x] Melhorias
+- [x] Aquisições
+
+### Arquivos Modificados:
+- [x] RevistaEditor.tsx - Completamente reescrito com 10 seções de manutenção
+- [x] Testar a função Livro de Manutenção
 - [ ] Salvar checkpoint
