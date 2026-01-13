@@ -98,52 +98,22 @@ interface AppModule {
   order: number;
 }
 
-// Módulos disponíveis - Lista completa de todos os módulos do sistema
+// Módulos disponíveis - Apenas módulos relacionados a manutenção
 // Estilo funções rápidas: fundo colorido sólido com ícones brancos
 // Ordenados alfabeticamente por título
 const availableModules: Omit<AppModule, "enabled" | "order">[] = [
-  { id: "personalizado", key: "personalizado", title: "100% Personalizado", icon: Zap, color: "text-white", bgColor: "bg-yellow-500" },
-  { id: "achados_perdidos", key: "achados_perdidos", title: "Achados e Perdidos", icon: HelpCircle, color: "text-white", bgColor: "bg-orange-600" },
+  // Operacional / Manutenção
   { id: "vencimentos", key: "vencimentos", title: "Agenda Vencimentos", icon: CalendarClock, color: "text-white", bgColor: "bg-fuchsia-500" },
-  { id: "albuns", key: "albuns", title: "Álbuns de Fotos", icon: Camera, color: "text-white", bgColor: "bg-purple-600" },
   { id: "antes_depois", key: "antes_depois", title: "Antes e Depois", icon: Camera, color: "text-white", bgColor: "bg-violet-500" },
   { id: "aquisicoes", key: "aquisicoes", title: "Aquisições", icon: Package, color: "text-white", bgColor: "bg-green-500" },
-  { id: "assembleia", key: "assembleia", title: "Assembleia Online", icon: Video, color: "text-white", bgColor: "bg-rose-500" },
-  { id: "avisos", key: "avisos", title: "Avisos", icon: Megaphone, color: "text-white", bgColor: "bg-orange-500" },
-  { id: "caronas", key: "caronas", title: "Caronas", icon: Truck, color: "text-white", bgColor: "bg-blue-600" },
   { id: "checklists", key: "checklists", title: "Checklists", icon: ClipboardCheck, color: "text-white", bgColor: "bg-teal-500" },
-  { id: "classificados", key: "classificados", title: "Classificados", icon: ShoppingBag, color: "text-white", bgColor: "bg-green-600" },
-  { id: "comunicados", key: "comunicados", title: "Comunicados", icon: MessageSquare, color: "text-white", bgColor: "bg-cyan-500" },
-  { id: "contatos", key: "contatos", title: "Contatos Úteis", icon: Phone, color: "text-white", bgColor: "bg-lime-600" },
-  { id: "destaques", key: "destaques", title: "Destaques", icon: Lightbulb, color: "text-white", bgColor: "bg-amber-500" },
-  { id: "dicas_seguranca", key: "dicas_seguranca", title: "Dicas de Segurança", icon: Shield, color: "text-white", bgColor: "bg-green-600" },
-  { id: "documentos", key: "documentos", title: "Documentos", icon: FileText, color: "text-white", bgColor: "bg-gray-500" },
-  { id: "enquetes", key: "enquetes", title: "Enquetes", icon: ClipboardList, color: "text-white", bgColor: "bg-indigo-500" },
-  { id: "estacionamento", key: "estacionamento", title: "Estacionamento", icon: ParkingCircle, color: "text-white", bgColor: "bg-blue-600" },
-  { id: "eventos", key: "eventos", title: "Eventos", icon: Calendar, color: "text-white", bgColor: "bg-blue-500" },
-  { id: "funcionarios", key: "funcionarios", title: "Funcionários", icon: Briefcase, color: "text-white", bgColor: "bg-gray-600" },
-  { id: "galeria", key: "galeria", title: "Galeria", icon: Image, color: "text-white", bgColor: "bg-pink-500" },
-  { id: "localizacao", key: "localizacao", title: "Localização", icon: MapPin, color: "text-white", bgColor: "bg-sky-500" },
+  { id: "galeria", key: "galeria", title: "Galeria de Fotos", icon: Image, color: "text-white", bgColor: "bg-pink-500" },
   { id: "manutencoes", key: "manutencoes", title: "Manutenções", icon: Wrench, color: "text-white", bgColor: "bg-slate-600" },
   { id: "melhorias", key: "melhorias", title: "Melhorias", icon: Hammer, color: "text-white", bgColor: "bg-amber-500" },
-  { id: "mensagem_sindico", key: "mensagem_sindico", title: "Mensagem do Gestor", icon: MessageSquare, color: "text-white", bgColor: "bg-blue-700" },
-  { id: "moradores", key: "moradores", title: "Moradores", icon: Users, color: "text-white", bgColor: "bg-indigo-600" },
-  { id: "notificacoes", key: "notificacoes", title: "Notificações", icon: Bell, color: "text-white", bgColor: "bg-red-500" },
-  { id: "notificar_morador", key: "notificar_morador", title: "Notificar Morador", icon: Bell, color: "text-white", bgColor: "bg-rose-600" },
-  { id: "novidades", key: "novidades", title: "Novidades", icon: Newspaper, color: "text-white", bgColor: "bg-cyan-600" },
   { id: "ocorrencias", key: "ocorrencias", title: "Ocorrências", icon: AlertTriangle, color: "text-white", bgColor: "bg-yellow-500" },
-  { id: "ordem_servico", key: "ordem_servico", title: "Ordem de Serviço", icon: ClipboardPen, color: "text-white", bgColor: "bg-teal-600" },
-  { id: "parceiros", key: "parceiros", title: "Parceiros", icon: HeartHandshake, color: "text-white", bgColor: "bg-red-600" },
-  { id: "portaria", key: "portaria", title: "Portaria", icon: BadgeCheck, color: "text-white", bgColor: "bg-green-500" },
-  { id: "publicidade", key: "publicidade", title: "Publicidade", icon: Sparkles, color: "text-white", bgColor: "bg-pink-600" },
+  { id: "ordem_servico", key: "ordem_servico", title: "Ordens de Serviço", icon: ClipboardPen, color: "text-white", bgColor: "bg-teal-600" },
   { id: "realizacoes", key: "realizacoes", title: "Realizações", icon: Award, color: "text-white", bgColor: "bg-yellow-600" },
-  { id: "regimento", key: "regimento", title: "Regimento", icon: BookOpen, color: "text-white", bgColor: "bg-rose-500" },
-  { id: "regras_normas", key: "regras_normas", title: "Regras e Normas", icon: FileCheck, color: "text-white", bgColor: "bg-blue-500" },
-  { id: "sobre", key: "sobre", title: "Sobre o Condomínio", icon: Building2, color: "text-white", bgColor: "bg-violet-600" },
-  { id: "vagas", key: "vagas", title: "Vagas/Garagem", icon: Car, color: "text-white", bgColor: "bg-amber-600" },
   { id: "vistorias", key: "vistorias", title: "Vistorias", icon: Search, color: "text-white", bgColor: "bg-emerald-500" },
-  { id: "votacoes", key: "votacoes", title: "Votações", icon: Vote, color: "text-white", bgColor: "bg-purple-500" },
-  { id: "wifi", key: "wifi", title: "Wi-Fi", icon: Wifi, color: "text-white", bgColor: "bg-blue-500" },
 ];
 
 // Componente de módulo arrastável

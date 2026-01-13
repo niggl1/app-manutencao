@@ -50,35 +50,27 @@ export const CORES_FUNCOES_RAPIDAS = [
   "#64748B", // Slate
 ];
 
-// Todas as funções disponíveis para escolha
+// Todas as funções disponíveis para escolha (apenas relacionadas a manutenção)
 export const allQuickFunctions = [
+  // Funções Operacionais
   { id: "checklists", label: "Checklists", icon: ListChecks, gradient: "from-amber-400 to-orange-500", path: "/dashboard/checklists" },
   { id: "manutencoes", label: "Manutenções", icon: Wrench, gradient: "from-blue-400 to-blue-600", path: "/dashboard/manutencoes" },
   { id: "ocorrencias", label: "Ocorrências", icon: AlertTriangle, gradient: "from-red-400 to-rose-600", path: "/dashboard/ocorrencias" },
   { id: "vistorias", label: "Vistorias", icon: ClipboardCheck, gradient: "from-green-400 to-emerald-600", path: "/dashboard/vistorias" },
-
-  { id: "moradores", label: "Moradores", icon: Users, gradient: "from-teal-400 to-teal-600", path: "/dashboard/moradores" },
-  { id: "funcionarios", label: "Funcionários", icon: Users, gradient: "from-slate-400 to-slate-600", path: "/dashboard/funcionarios" },
-  { id: "vagas", label: "Vagas", icon: Car, gradient: "from-yellow-400 to-yellow-600", path: "/dashboard/vagas" },
-  { id: "classificados", label: "Classificados", icon: ShoppingBag, gradient: "from-orange-400 to-orange-600", path: "/dashboard/classificados" },
-  { id: "achados", label: "Achados", icon: Search, gradient: "from-lime-400 to-lime-600", path: "/dashboard/achados" },
+  { id: "ordens-servico", label: "Ordens de Serviço", icon: ClipboardList, gradient: "from-yellow-500 to-amber-600", path: "/dashboard/ordens-servico" },
+  // Galeria e Mídia
   { id: "galeria", label: "Galeria", icon: Camera, gradient: "from-fuchsia-400 to-fuchsia-600", path: "/dashboard/galeria" },
-  { id: "comunicados", label: "Comunicados", icon: FileText, gradient: "from-sky-400 to-sky-600", path: "/dashboard/comunicados" },
-  { id: "seguranca", label: "Segurança", icon: Shield, gradient: "from-red-500 to-red-700", path: "/dashboard/seguranca" },
-  { id: "regras", label: "Regras", icon: BookOpen, gradient: "from-amber-500 to-amber-700", path: "/dashboard/regras" },
+  { id: "antes-depois", label: "Antes e Depois", icon: Camera, gradient: "from-emerald-500 to-teal-600", path: "/dashboard/antes-depois" },
   { id: "realizacoes", label: "Realizações", icon: TrendingUp, gradient: "from-emerald-400 to-emerald-600", path: "/dashboard/realizacoes" },
   { id: "aquisicoes", label: "Aquisições", icon: Package, gradient: "from-violet-400 to-violet-600", path: "/dashboard/aquisicoes" },
+  // Agenda e Prazos
   { id: "vencimentos", label: "Vencimentos", icon: CalendarClock, gradient: "from-rose-400 to-rose-600", path: "/dashboard/vencimentos" },
-  { id: "assembleia", label: "Assembleia", icon: Video, gradient: "from-blue-500 to-blue-700", path: "/dashboard/assembleia" },
-  { id: "notificar-morador", label: "Notificar", icon: BellRing, gradient: "from-orange-500 to-red-500", path: "/dashboard/notificar-morador" },
-  { id: "ordens-servico", label: "Ordens de Serviço", icon: ClipboardList, gradient: "from-yellow-500 to-amber-600", path: "/dashboard/ordens-servico" },
-  { id: "antes-depois", label: "Antes e Depois", icon: Camera, gradient: "from-emerald-500 to-teal-600", path: "/dashboard/antes-depois" },
-  // Funções Simples
-  { id: "funcoes-simples", label: "Funções Simples", icon: Zap, gradient: "from-orange-500 to-amber-600", path: "/dashboard/funcoes-simples" },
-  { id: "vistoria-simples", label: "Vistoria Simples", icon: ClipboardCheck, gradient: "from-blue-500 to-cyan-600", path: "/dashboard/funcoes-simples?tipo=vistoria" },
-  { id: "manutencao-simples", label: "Manutenção Simples", icon: Wrench, gradient: "from-orange-500 to-red-600", path: "/dashboard/funcoes-simples?tipo=manutencao" },
-  { id: "ocorrencia-simples", label: "Ocorrência Simples", icon: AlertTriangle, gradient: "from-red-500 to-rose-600", path: "/dashboard/funcoes-simples?tipo=ocorrencia" },
-  { id: "antes-depois-simples", label: "Antes/Depois Simples", icon: ArrowLeftRight, gradient: "from-green-500 to-emerald-600", path: "/dashboard/funcoes-simples?tipo=antes_depois" },
+  // Funções Rápidas
+  { id: "funcoes-simples", label: "Funções Rápidas", icon: Zap, gradient: "from-orange-500 to-amber-600", path: "/dashboard/funcoes-simples" },
+  { id: "vistoria-rapida", label: "Vistoria Rápida", icon: ClipboardCheck, gradient: "from-blue-500 to-cyan-600", path: "/dashboard/funcoes-simples?tipo=vistoria" },
+  { id: "manutencao-rapida", label: "Manutenção Rápida", icon: Wrench, gradient: "from-orange-500 to-red-600", path: "/dashboard/funcoes-simples?tipo=manutencao" },
+  { id: "ocorrencia-rapida", label: "Ocorrência Rápida", icon: AlertTriangle, gradient: "from-red-500 to-rose-600", path: "/dashboard/funcoes-simples?tipo=ocorrencia" },
+  { id: "antes-depois-rapido", label: "Antes/Depois Rápido", icon: ArrowLeftRight, gradient: "from-green-500 to-emerald-600", path: "/dashboard/funcoes-simples?tipo=antes_depois" },
 ];
 
 // Mapa de ícones para uso externo

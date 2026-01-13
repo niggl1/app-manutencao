@@ -368,3 +368,29 @@
 - [x] Adicionar seção "REGISTRO RÁPIDO" no menu lateral acima de "ATALHOS"
 - [x] Incluir botões: Vistoria, Manutenção, Ocorrência, Antes/Depois
 - [x] Botões abrem modais de Registro Rápido
+
+
+## Fase 42: Limpeza do Construtor de App - Foco em Manutenção
+
+### Categorias a MANTER:
+- [x] Operacional (Manutenções, Vistorias, Ocorrências, Checklists, Melhorias, Aquisições)
+- [x] Eventos e Agenda (apenas Agenda de Vencimentos)
+- [x] Galeria e Mídia (Galeria de Fotos, Antes e Depois, Vídeos)
+- [x] Estatísticas (Painel de Controlo, Relatórios Gráficos, Métricas)
+
+### Categorias a REMOVER:
+- [x] Comunicação (Avisos, Comunicados, Notificações, Mensagem do Gestor)
+- [x] Votações e Decisões (Votações, Enquetes, Funcionário do Mês)
+- [x] Comunidade (Classificados, Achados e Perdidos, Caronas, Pets)
+- [x] Moradores e Funcionários (Moradores, Funcionários, Equipe de Gestão)
+- [x] Áreas e Espaços (Vagas, Reservas, Piscina, Academia, Salão, Churrasqueira, Playground, Quadra)
+- [x] Documentação (Regras e Normas, Dicas de Segurança, Documentos, Atas)
+- [x] Informações (Telefones Úteis, Links Úteis, Sobre a Organização)
+- [x] Publicidade e Parceiros (Anúncios, Parceiros, Promoções)
+
+### Arquivos a Modificar:
+- [x] AssistenteCriacao.tsx - Remover categorias e módulos não relacionados
+- [x] QuickFunctionsEditor.tsx - Remover funções não relacionadas
+- [x] AppBuilder.tsx - Remover módulos não relacionados (de 42 para 11)
+- [x] Testar Construtor de App no navegador
+- [ ] Salvar checkpoint

@@ -113,36 +113,8 @@ const tiposProjeto = [
   }
 ];
 
-// Módulos disponíveis por categoria
+// Módulos disponíveis por categoria (apenas relacionados a manutenção)
 const modulosDisponiveis = {
-  comunicacao: {
-    nome: "Comunicação",
-    icon: Megaphone,
-    modulos: [
-      { id: "avisos", nome: "Avisos", icon: Megaphone, descricao: "Avisos importantes da organização" },
-      { id: "comunicados", nome: "Comunicados", icon: FileText, descricao: "Comunicados oficiais" },
-      { id: "notificacoes", nome: "Notificações", icon: Bell, descricao: "Sistema de notificações" },
-      { id: "mensagem-sindico", nome: "Mensagem do Gestor", icon: MessageSquare, descricao: "Mensagem personalizada do gestor" },
-    ]
-  },
-  eventos: {
-    nome: "Eventos e Agenda",
-    icon: CalendarDays,
-    modulos: [
-      { id: "eventos", nome: "Eventos", icon: CalendarDays, descricao: "Calendário de eventos" },
-      { id: "agenda-vencimentos", nome: "Agenda de Vencimentos", icon: Calendar, descricao: "Controle de vencimentos" },
-      { id: "assembleia", nome: "Assembleia Online", icon: Users, descricao: "Assembleias virtuais" },
-    ]
-  },
-  votacoes: {
-    nome: "Votações e Decisões",
-    icon: Vote,
-    modulos: [
-      { id: "votacoes", nome: "Votações", icon: Vote, descricao: "Sistema de votação" },
-      { id: "enquetes", nome: "Enquetes", icon: BarChart3, descricao: "Enquetes rápidas" },
-      { id: "funcionario-mes", nome: "Funcionário do Mês", icon: Award, descricao: "Votação de destaque" },
-    ]
-  },
   operacional: {
     nome: "Operacional",
     icon: Wrench,
@@ -151,51 +123,16 @@ const modulosDisponiveis = {
       { id: "vistorias", nome: "Vistorias", icon: ClipboardCheck, descricao: "Registro de vistorias" },
       { id: "ocorrencias", nome: "Ocorrências", icon: AlertTriangle, descricao: "Registro de ocorrências" },
       { id: "checklists", nome: "Checklists", icon: ListChecks, descricao: "Listas de verificação" },
+      { id: "ordens-servico", nome: "Ordens de Serviço", icon: FileText, descricao: "Gestão de OS" },
       { id: "melhorias", nome: "Melhorias", icon: TrendingUp, descricao: "Melhorias realizadas" },
       { id: "aquisicoes", nome: "Aquisições", icon: Package, descricao: "Compras da organização" },
     ]
   },
-  comunidade: {
-    nome: "Comunidade",
-    icon: Users,
+  agenda: {
+    nome: "Agenda e Prazos",
+    icon: CalendarDays,
     modulos: [
-      { id: "classificados", nome: "Classificados", icon: ShoppingBag, descricao: "Anúncios da equipa" },
-      { id: "achados-perdidos", nome: "Achados e Perdidos", icon: MapPin, descricao: "Itens encontrados" },
-      { id: "caronas", nome: "Caronas", icon: Car, descricao: "Compartilhamento de caronas" },
-      { id: "pets", nome: "Pets", icon: Dog, descricao: "Animais da organização" },
-    ]
-  },
-  moradores: {
-    nome: "Moradores e Funcionários",
-    icon: Users,
-    modulos: [
-      { id: "moradores", nome: "Moradores", icon: Users, descricao: "Cadastro de moradores" },
-      { id: "funcionarios", nome: "Funcionários", icon: Briefcase, descricao: "Equipe da organização" },
-      { id: "equipe-gestao", nome: "Equipe de Gestão", icon: Star, descricao: "Síndico e conselho" },
-    ]
-  },
-  areas: {
-    nome: "Áreas e Espaços",
-    icon: Home,
-    modulos: [
-      { id: "vagas", nome: "Vagas de Estacionamento", icon: Car, descricao: "Gestão de vagas" },
-      { id: "reservas", nome: "Reservas de Espaços", icon: Calendar, descricao: "Agendamento de áreas" },
-      { id: "piscina", nome: "Piscina", icon: Waves, descricao: "Informações da piscina" },
-      { id: "academia", nome: "Academia", icon: Dumbbell, descricao: "Horários e regras" },
-      { id: "salao-festas", nome: "Salão de Festas", icon: Gift, descricao: "Reservas e regras" },
-      { id: "churrasqueira", nome: "Churrasqueira", icon: Flame, descricao: "Área de churrasqueira" },
-      { id: "playground", nome: "Playground", icon: Baby, descricao: "Área infantil" },
-      { id: "quadra", nome: "Quadra Esportiva", icon: Award, descricao: "Quadras e esportes" },
-    ]
-  },
-  documentacao: {
-    nome: "Documentação",
-    icon: FileText,
-    modulos: [
-      { id: "regras-normas", nome: "Regras e Normas", icon: FileText, descricao: "Regulamento interno" },
-      { id: "dicas-seguranca", nome: "Dicas de Segurança", icon: Shield, descricao: "Orientações de segurança" },
-      { id: "documentos", nome: "Documentos", icon: FileText, descricao: "Documentos oficiais" },
-      { id: "atas", nome: "Atas de Assembleia", icon: FileText, descricao: "Histórico de atas" },
+      { id: "agenda-vencimentos", nome: "Agenda de Vencimentos", icon: Calendar, descricao: "Controle de vencimentos e prazos" },
     ]
   },
   galeria: {
@@ -204,25 +141,7 @@ const modulosDisponiveis = {
     modulos: [
       { id: "galeria", nome: "Galeria de Fotos", icon: Image, descricao: "Álbuns de fotos" },
       { id: "antes-depois", nome: "Antes e Depois", icon: Camera, descricao: "Comparativos visuais" },
-      { id: "videos", nome: "Vídeos", icon: Video, descricao: "Vídeos da organização" },
-    ]
-  },
-  informacoes: {
-    nome: "Informações",
-    icon: Phone,
-    modulos: [
-      { id: "telefones-uteis", nome: "Telefones Úteis", icon: Phone, descricao: "Contatos importantes" },
-      { id: "links-uteis", nome: "Links Úteis", icon: Link, descricao: "Links relevantes" },
-      { id: "sobre-condominio", nome: "Sobre a Organização", icon: Building2, descricao: "Informações gerais" },
-    ]
-  },
-  publicidade: {
-    nome: "Publicidade e Parceiros",
-    icon: Newspaper,
-    modulos: [
-      { id: "anuncios", nome: "Anúncios", icon: Newspaper, descricao: "Espaço publicitário" },
-      { id: "parceiros", nome: "Parceiros", icon: Heart, descricao: "Empresas parceiras" },
-      { id: "promocoes", nome: "Promoções", icon: Gift, descricao: "Ofertas especiais" },
+      { id: "videos", nome: "Vídeos", icon: Video, descricao: "Vídeos de manutenções" },
     ]
   },
   estatisticas: {
