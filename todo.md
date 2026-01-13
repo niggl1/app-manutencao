@@ -355,3 +355,10 @@
 - [x] Ajustar modais de Nova Vistoria, Nova Manutenção, Nova Ocorrência
 - [x] Ajustar outros modais do sistema (adicionado w-[95vw] a todos)
 - [x] Testar todos os modais no navegador
+
+
+## Fase 40: Renomear botões de "Simples" para "Rápida/Rápido"
+- [x] Vistoria Simples → Vistoria Rápida
+- [x] Ocorrência Simples → Ocorrência Rápida
+- [x] Manutenção Simples → Manutenção Rápida
+- [x] Antes e Depois Simples → Antes e Depois Rápido

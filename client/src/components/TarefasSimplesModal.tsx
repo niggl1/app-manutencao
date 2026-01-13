@@ -42,25 +42,25 @@ interface TarefasSimplesModalProps {
 
 const tipoConfig = {
   vistoria: {
-    label: "Vistoria Simples",
+    label: "Vistoria Rápida",
     icon: ClipboardList,
     cor: "#F97316",
     corClara: "#FFF7ED",
   },
   manutencao: {
-    label: "Manutenção Simples",
+    label: "Manutenção Rápida",
     icon: Wrench,
     cor: "#F97316",
     corClara: "#FFF7ED",
   },
   ocorrencia: {
-    label: "Ocorrência Simples",
+    label: "Ocorrência Rápida",
     icon: AlertTriangle,
     cor: "#F97316",
     corClara: "#FFF7ED",
   },
   antes_depois: {
-    label: "Antes e Depois Simples",
+    label: "Antes e Depois Rápido",
     icon: ArrowLeftRight,
     cor: "#F97316",
     corClara: "#FFF7ED",
