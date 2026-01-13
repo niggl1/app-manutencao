@@ -393,4 +393,22 @@
 - [x] QuickFunctionsEditor.tsx - Remover funções não relacionadas
 - [x] AppBuilder.tsx - Remover módulos não relacionados (de 42 para 11)
 - [x] Testar Construtor de App no navegador
+- [x] Salvar checkpoint
+
+
+## Fase 43: Limpeza do Sistema de Relatórios - Foco em Manutenção
+
+### Seções a MANTER:
+- [x] Operacional (Manutenções, Vistorias, Ocorrências, Checklists, Antes e Depois, Ordens de Serviço, Agenda de Vencimentos)
+- [x] Funções Rápidas (Vistorias, Manutenções, Ocorrências, Antes/Depois)
+- [x] Galeria e Mídia (Álbuns de Fotos, Realizações, Melhorias, Aquisições)
+
+### Seções a REMOVER:
+- [x] Gestão (Moradores, Funcionários, Organização)
+- [x] Comunicação (Comunicados, Mensagens do Gestor)
+- [x] Destaques
+
+### Arquivos a Modificar:
+- [x] RelatorioBuilder.tsx - Remover seções não relacionadas (de 21 para 16 seções, de 5 para 3 categorias)
+- [x] Testar geração de relatórios
 - [ ] Salvar checkpoint

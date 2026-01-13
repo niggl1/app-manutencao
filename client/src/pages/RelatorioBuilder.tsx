@@ -130,21 +130,10 @@ interface ReportSection {
   category: string;
 }
 
-// Seções disponíveis para relatórios - APENAS FUNÇÕES EXISTENTES NO MENU DO SISTEMA
+// Seções disponíveis para relatórios - APENAS FUNÇÕES DE MANUTENÇÃO
 const availableSections: Omit<ReportSection, "enabled">[] = [
-  // GESTÃO
-  { id: "moradores", key: "moradores", title: "Moradores", description: "Lista e estatísticas de moradores", icon: Users, category: "gestao" },
-  { id: "funcionarios", key: "funcionarios", title: "Funcionários", description: "Equipe da organização", icon: UsersRound, category: "gestao" },
-  { id: "condominios", key: "condominios", title: "Organização", description: "Informações da organização", icon: Building2, category: "gestao" },
-  
-  // COMUNICAÇÃO
-  { id: "comunicados", key: "comunicados", title: "Comunicados", description: "Comunicados oficiais com anexos", icon: Megaphone, category: "comunicacao" },
-  { id: "mensagens_sindico", key: "mensagens_sindico", title: "Mensagens do Gestor", description: "Mensagens do gestor", icon: MessageSquare, category: "comunicacao" },
-  
   // OPERACIONAL E MANUTENÇÃO
-  { id: "vencimentos", key: "vencimentos", title: "Agenda de Vencimentos", description: "Agenda de vencimentos", icon: CalendarClock, category: "operacional" },
-  
-  // OPERACIONAL E MANUTENÇÃO
+  { id: "vencimentos", key: "vencimentos", title: "Agenda de Vencimentos", description: "Agenda de vencimentos e prazos", icon: CalendarClock, category: "operacional" },
   { id: "manutencoes", key: "manutencoes", title: "Manutenções", description: "Histórico de manutenções", icon: Wrench, category: "operacional" },
   { id: "ocorrencias", key: "ocorrencias", title: "Ocorrências", description: "Registro de ocorrências", icon: AlertTriangle, category: "operacional" },
   { id: "vistorias", key: "vistorias", title: "Vistorias", description: "Vistorias realizadas", icon: ClipboardCheck, category: "operacional" },
@@ -152,28 +141,24 @@ const availableSections: Omit<ReportSection, "enabled">[] = [
   { id: "antes_depois", key: "antes_depois", title: "Antes e Depois", description: "Comparativos visuais", icon: Image, category: "operacional" },
   { id: "ordens_servico", key: "ordens_servico", title: "Ordens de Serviço", description: "Ordens de serviço emitidas", icon: FileCheck, category: "operacional" },
   
-  // FUNÇÕES SIMPLES
-  { id: "funcoes_simples", key: "funcoes_simples", title: "Funções Simples", description: "Registros rápidos de vistorias, manutenções, ocorrências e antes/depois", icon: Zap, category: "funcoes_simples" },
-  { id: "vistorias_simples", key: "vistorias_simples", title: "Vistorias Simples", description: "Vistorias rápidas registradas", icon: ClipboardCheck, category: "funcoes_simples" },
-  { id: "manutencoes_simples", key: "manutencoes_simples", title: "Manutenções Simples", description: "Manutenções rápidas registradas", icon: Wrench, category: "funcoes_simples" },
-  { id: "ocorrencias_simples", key: "ocorrencias_simples", title: "Ocorrências Simples", description: "Ocorrências rápidas registradas", icon: AlertTriangle, category: "funcoes_simples" },
-  { id: "antes_depois_simples", key: "antes_depois_simples", title: "Antes/Depois Simples", description: "Comparações rápidas registradas", icon: ArrowLeftRight, category: "funcoes_simples" },
+  // FUNÇÕES RÁPIDAS
+  { id: "funcoes_rapidas", key: "funcoes_rapidas", title: "Funções Rápidas", description: "Todos os registros rápidos", icon: Zap, category: "funcoes_rapidas" },
+  { id: "vistorias_rapidas", key: "vistorias_rapidas", title: "Vistorias Rápidas", description: "Vistorias rápidas registradas", icon: ClipboardCheck, category: "funcoes_rapidas" },
+  { id: "manutencoes_rapidas", key: "manutencoes_rapidas", title: "Manutenções Rápidas", description: "Manutenções rápidas registradas", icon: Wrench, category: "funcoes_rapidas" },
+  { id: "ocorrencias_rapidas", key: "ocorrencias_rapidas", title: "Ocorrências Rápidas", description: "Ocorrências rápidas registradas", icon: AlertTriangle, category: "funcoes_rapidas" },
+  { id: "antes_depois_rapido", key: "antes_depois_rapido", title: "Antes/Depois Rápido", description: "Comparações rápidas registradas", icon: ArrowLeftRight, category: "funcoes_rapidas" },
   
   // GALERIA E MÍDIA
   { id: "albuns", key: "albuns", title: "Álbuns de Fotos", description: "Galeria de imagens", icon: Image, category: "galeria" },
   { id: "realizacoes", key: "realizacoes", title: "Realizações", description: "Conquistas da organização", icon: Award, category: "galeria" },
   { id: "melhorias", key: "melhorias", title: "Melhorias", description: "Melhorias implementadas", icon: TrendingUp, category: "galeria" },
   { id: "aquisicoes", key: "aquisicoes", title: "Aquisições", description: "Aquisições da organização", icon: Package, category: "galeria" },
-  
-  { id: "destaques", key: "destaques", title: "Destaques", description: "Destaques da organização", icon: Star, category: "galeria" },
 ];
 
-// Categorias (apenas as que têm funções existentes no menu)
+// Categorias (apenas funções de manutenção)
 const categories = [
-  { id: "gestao", title: "Gestão da Organização", icon: Building2 },
-  { id: "comunicacao", title: "Comunicação", icon: MessageSquare },
   { id: "operacional", title: "Operacional / Manutenção", icon: Wrench },
-  { id: "funcoes_simples", title: "Funções Simples", icon: Zap },
+  { id: "funcoes_rapidas", title: "Funções Rápidas", icon: Zap },
   { id: "galeria", title: "Galeria e Mídia", icon: Image },
 ];
 
@@ -186,7 +171,7 @@ export default function RelatorioBuilder() {
   const [includeCharts, setIncludeCharts] = useState(true);
   const [includeStats, setIncludeStats] = useState(true);
   const [selectedSections, setSelectedSections] = useState<string[]>([
-    "moradores", "manutencoes", "ocorrencias", "vistorias", "checklists"
+    "manutencoes", "ocorrencias", "vistorias", "checklists", "ordens_servico"
   ]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [tipoRelatorio, setTipoRelatorio] = useState<"completo" | "simplificado">("completo");
@@ -206,18 +191,13 @@ export default function RelatorioBuilder() {
   const { data: condominios, refetch: refetchCondominios } = trpc.condominio.list.useQuery();
   const selectedCondominio = condominios?.[0];
 
-  // Queries para buscar dados das seções (usando condominio ID quando disponível)
+  // Queries para buscar dados das seções de manutenção (usando condominio ID quando disponível)
   const condominioId = selectedCondominio?.id || 0;
-  const moradoresQuery = trpc.morador.list.useQuery({ condominioId }, { enabled: !!selectedCondominio && selectedSections.includes("moradores") });
-  const funcionariosQuery = trpc.funcionario.list.useQuery({ condominioId }, { enabled: !!selectedCondominio && selectedSections.includes("funcionarios") });
   const manutencoesQuery = trpc.manutencao.listWithDetails.useQuery({ condominioId }, { enabled: !!selectedCondominio && selectedSections.includes("manutencoes") });
   const ocorrenciasQuery = trpc.ocorrencia.listWithDetails.useQuery({ condominioId }, { enabled: !!selectedCondominio && selectedSections.includes("ocorrencias") });
   const vistoriasQuery = trpc.vistoria.listWithDetails.useQuery({ condominioId }, { enabled: !!selectedCondominio && selectedSections.includes("vistorias") });
   const checklistsQuery = trpc.checklist.listWithDetails.useQuery({ condominioId }, { enabled: !!selectedCondominio && selectedSections.includes("checklists") });
-  const votacoesQuery = trpc.votacao.list.useQuery({ revistaId: condominioId }, { enabled: !!selectedCondominio && selectedSections.includes("votacoes") });
-  const avisosQuery = trpc.aviso.list.useQuery({ revistaId: condominioId }, { enabled: !!selectedCondominio && selectedSections.includes("avisos") });
-  const eventosQuery = trpc.evento.list.useQuery({ revistaId: condominioId }, { enabled: !!selectedCondominio && selectedSections.includes("eventos") });
-  const antesDepoisQuery = trpc.antesDepois.list.useQuery({ revistaId: condominioId }, { enabled: !!selectedCondominio && selectedSections.includes("antesDepois") });
+  const antesDepoisQuery = trpc.antesDepois.list.useQuery({ revistaId: condominioId }, { enabled: !!selectedCondominio && selectedSections.includes("antes_depois") });
   
   const updateCondominio = trpc.condominio.update.useMutation({
     onSuccess: () => {
@@ -329,20 +309,6 @@ export default function RelatorioBuilder() {
       const dadosSecoes: Record<string, any[]> = {};
       const totais: Record<string, number> = {};
 
-      // Buscar dados de moradores se selecionado
-      if (selectedSections.includes("moradores")) {
-        const moradores = moradoresQuery.data || [];
-        dadosSecoes.moradores = moradores;
-        totais.moradores = moradores.length;
-      }
-
-      // Buscar dados de funcionários se selecionado
-      if (selectedSections.includes("funcionarios")) {
-        const funcionarios = funcionariosQuery.data || [];
-        dadosSecoes.funcionarios = funcionarios;
-        totais.funcionarios = funcionarios.length;
-      }
-
       // Buscar dados de manutenções se selecionado (com filtro de protocolo)
       if (selectedSections.includes("manutencoes")) {
         const manutencoes = filtrarPorProtocolo(manutencoesQuery.data || []);
@@ -371,29 +337,8 @@ export default function RelatorioBuilder() {
         totais.checklists = checklists.length;
       }
 
-      // Buscar dados de votações se selecionado
-      if (selectedSections.includes("votacoes")) {
-        const votacoes = votacoesQuery.data || [];
-        dadosSecoes.votacoes = votacoes;
-        totais.votacoes = votacoes.length;
-      }
-
-      // Buscar dados de avisos se selecionado
-      if (selectedSections.includes("avisos")) {
-        const avisos = avisosQuery.data || [];
-        dadosSecoes.avisos = avisos;
-        totais.avisos = avisos.length;
-      }
-
-      // Buscar dados de eventos se selecionado
-      if (selectedSections.includes("eventos")) {
-        const eventos = eventosQuery.data || [];
-        dadosSecoes.eventos = eventos;
-        totais.eventos = eventos.length;
-      }
-
       // Buscar dados de antes/depois se selecionado
-      if (selectedSections.includes("antesDepois")) {
+      if (selectedSections.includes("antes_depois")) {
         const antesDepois = antesDepoisQuery.data || [];
         dadosSecoes.antesDepois = antesDepois;
         totais.antesDepois = antesDepois.length;
