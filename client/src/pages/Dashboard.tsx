@@ -144,25 +144,12 @@ const menuSections = [
     isSpecial: true // Marcação especial para renderização diferenciada
   },
   {
-    id: "gestao-condominio",
+    id: "gestao-organizacao",
     label: "Gestão da Organização",
     icon: Building2,
     items: [
       { id: "condominio", label: "Cadastro da Organização", icon: Building2 },
-      { id: "moradores", label: "Moradores (Exclusivo p/ organizações residenciais)", icon: Users, funcaoId: "moradores" },
-      { id: "funcionarios", label: "Funcionários", icon: UserCog, funcaoId: "funcionarios" },
       { id: "equipe", label: "Equipe de Gestão", icon: UsersRound, funcaoId: "equipe" },
-    ]
-  },
-  {
-    id: "comunicacao",
-    label: "Comunicação",
-    icon: Megaphone,
-    items: [
-      { id: "avisos", label: "Avisos", icon: Bell, funcaoId: "avisos" },
-      { id: "comunicados", label: "Comunicados", icon: FileText, funcaoId: "comunicados" },
-      { id: "gestao-notificacoes", label: "Notificações", icon: BellRing, funcaoId: "notificacoes" },
-      { id: "notificar-morador", label: "Notificar Morador", icon: Send, funcaoId: "notificar-morador" },
     ]
   },
   {
@@ -199,23 +186,7 @@ const menuSections = [
       { id: "aquisicoes", label: "Aquisições", icon: Package, funcaoId: "aquisicoes" },
     ]
   },
-  {
-    id: "revista-digital",
-    label: "Livro de Manutenções",
-    icon: BookMarked,
-    items: [
-      { id: "revistas", label: "Minhas Revistas", icon: BookMarked, funcaoId: "revistas" },
-    ]
-  },
-  {
-    id: "relatorios",
-    label: "Relatórios e Painel",
-    icon: BarChart3,
-    items: [
-      { id: "painel-controlo", label: "Painel de Controlo", icon: BarChart3, funcaoId: "painel-controlo" },
-      { id: "relatorios", label: "Relatórios", icon: PieChart, funcaoId: "relatorios" },
-    ]
-  },
+
 ];
 
 // Item de admin para gestão de funções (só aparece para admin)
@@ -562,19 +533,7 @@ export default function Dashboard() {
                           <LayoutDashboard className="h-4 w-4 mr-2" />
                           Visão Geral
                         </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={() => setLocation("/dashboard/apps/novo")} className="cursor-pointer">
-                          <Smartphone className="h-4 w-4 mr-2" />
-                          Criar App
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setLocation("/dashboard/revistas")} className="cursor-pointer">
-                          <BookOpen className="h-4 w-4 mr-2" />
-                          Criar Livro de Manutenções
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setLocation("/dashboard/relatorios/novo")} className="cursor-pointer">
-                          <FileBarChart className="h-4 w-4 mr-2" />
-                          Criar Relatório
-                        </DropdownMenuItem>
+
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </div>
@@ -1122,13 +1081,10 @@ function OverviewSection({ user }: { user: any }) {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-serif font-bold text-foreground">
-          Bem-vindo, {user?.name?.split(" ")[0] || (user?.tipoConta === "administradora" ? "Administrador" : "Síndico")}!
+          Bem-vindo, {user?.name?.split(" ")[0] || "Gestor"}!
         </h1>
         <p className="text-muted-foreground">
-          {user?.tipoConta === "administradora" 
-            ? "Gerencie apps, projetos digitais e relatórios para suas organizações."
-            : "Crie apps, projetos digitais e relatórios para sua organização."
-          }
+          Sistema de Gestão de Manutenções Universal - Gerencie vistorias, manutenções e ocorrências.
         </p>
       </div>
 
@@ -1219,67 +1175,67 @@ function OverviewSection({ user }: { user: any }) {
       )}
 
 
-      {/* Quick stats - Cards com botões de ação */}
+      {/* Quick stats - Cards focados em manutenções */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Card Apps */}
-        <Card className="group hover:shadow-lg transition-all duration-300 border-0 bg-gradient-to-br from-white to-blue-50/50 dark:from-gray-900 dark:to-blue-950/30">
+        {/* Card Vistorias */}
+        <Card className="group hover:shadow-lg transition-all duration-300 border-0 bg-gradient-to-br from-white to-orange-50/50 dark:from-gray-900 dark:to-orange-950/30">
           <CardContent className="p-6">
             <div className="flex items-start justify-between mb-4">
-              <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg shadow-blue-500/25">
-                <Smartphone className="w-6 h-6 text-white" />
+              <div className="p-3 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 shadow-lg shadow-orange-500/25">
+                <ClipboardCheck className="w-6 h-6 text-white" />
               </div>
-              <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">{appsData?.length || 0}</span>
+              <span className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-orange-400 bg-clip-text text-transparent">0</span>
             </div>
-            <h3 className="text-lg font-semibold text-foreground mb-1">App de Manutenção</h3>
-            <p className="text-sm text-muted-foreground mb-4">Crie seu app de manutenção personalizado</p>
+            <h3 className="text-lg font-semibold text-foreground mb-1">Vistorias</h3>
+            <p className="text-sm text-muted-foreground mb-4">Registre e acompanhe vistorias técnicas</p>
             <button
-              onClick={() => window.location.href = '/dashboard/apps/novo'}
-              className="w-full py-2.5 px-4 rounded-xl font-medium text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-md shadow-blue-500/25 hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300 flex items-center justify-center gap-2"
+              onClick={() => window.location.href = '/dashboard/vistorias'}
+              className="w-full py-2.5 px-4 rounded-xl font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-md shadow-orange-500/25 hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-300 flex items-center justify-center gap-2"
             >
               <Plus className="w-4 h-4" />
-              Criar App
+              Nova Vistoria
             </button>
           </CardContent>
         </Card>
 
-        {/* Card Relatórios */}
+        {/* Card Manutenções */}
         <Card className="group hover:shadow-lg transition-all duration-300 border-0 bg-gradient-to-br from-white to-emerald-50/50 dark:from-gray-900 dark:to-emerald-950/30">
           <CardContent className="p-6">
             <div className="flex items-start justify-between mb-4">
               <div className="p-3 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-lg shadow-emerald-500/25">
-                <FileText className="w-6 h-6 text-white" />
+                <Wrench className="w-6 h-6 text-white" />
               </div>
               <span className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">0</span>
             </div>
-            <h3 className="text-lg font-semibold text-foreground mb-1">Relatórios Criados</h3>
-            <p className="text-sm text-muted-foreground mb-4">Gere relatórios detalhados com sua marca</p>
+            <h3 className="text-lg font-semibold text-foreground mb-1">Manutenções</h3>
+            <p className="text-sm text-muted-foreground mb-4">Gerencie manutenções preventivas e corretivas</p>
             <button
-              onClick={() => window.location.href = '/dashboard/relatorios/novo'}
+              onClick={() => window.location.href = '/dashboard/manutencoes'}
               className="w-full py-2.5 px-4 rounded-xl font-medium text-white bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 shadow-md shadow-emerald-500/25 hover:shadow-lg hover:shadow-emerald-500/30 transition-all duration-300 flex items-center justify-center gap-2"
             >
               <Plus className="w-4 h-4" />
-              Criar Relatório
+              Nova Manutenção
             </button>
           </CardContent>
         </Card>
 
-        {/* Card Revistas */}
-        <Card className="group hover:shadow-lg transition-all duration-300 border-0 bg-gradient-to-br from-white to-purple-50/50 dark:from-gray-900 dark:to-purple-950/30">
+        {/* Card Ocorrências */}
+        <Card className="group hover:shadow-lg transition-all duration-300 border-0 bg-gradient-to-br from-white to-red-50/50 dark:from-gray-900 dark:to-red-950/30">
           <CardContent className="p-6">
             <div className="flex items-start justify-between mb-4">
-              <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg shadow-purple-500/25">
-                <BookOpen className="w-6 h-6 text-white" />
+              <div className="p-3 rounded-xl bg-gradient-to-br from-red-500 to-red-600 shadow-lg shadow-red-500/25">
+                <AlertTriangle className="w-6 h-6 text-white" />
               </div>
-              <span className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent">0</span>
+              <span className="text-3xl font-bold bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent">0</span>
             </div>
-            <h3 className="text-lg font-semibold text-foreground mb-1">Livro de Manutenções</h3>
-            <p className="text-sm text-muted-foreground mb-4">Registre todas as manutenções para apresentar aos seus clientes e gestores</p>
+            <h3 className="text-lg font-semibold text-foreground mb-1">Ocorrências</h3>
+            <p className="text-sm text-muted-foreground mb-4">Registre e resolva ocorrências rapidamente</p>
             <button
-              onClick={() => window.location.href = '/dashboard/revistas'}
-              className="w-full py-2.5 px-4 rounded-xl font-medium text-white bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 shadow-md shadow-purple-500/25 hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300 flex items-center justify-center gap-2"
+              onClick={() => window.location.href = '/dashboard/ocorrencias'}
+              className="w-full py-2.5 px-4 rounded-xl font-medium text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 shadow-md shadow-red-500/25 hover:shadow-lg hover:shadow-red-500/30 transition-all duration-300 flex items-center justify-center gap-2"
             >
               <Plus className="w-4 h-4" />
-              Criar Livro de Manutenções
+              Nova Ocorrência
             </button>
           </CardContent>
         </Card>
@@ -1417,9 +1373,9 @@ function OverviewSection({ user }: { user: any }) {
           <div className="space-y-4">
             {[
               { step: 1, title: "Cadastre sua Organização", description: "Adicione nome, endereço e logo", done: false, path: "/dashboard/condominio" },
-              { step: 2, title: "Adicione Funcionários", description: "Cadastre a equipe da organização", done: false, path: "/dashboard/funcionarios" },
-              { step: 3, title: "Crie seu Primeiro Projeto", description: "App, livro ou relatório", done: false, path: "/dashboard/criar-projeto" },
-              { step: 4, title: "Compartilhe com a Equipa", description: "Gere o link e divulgue", done: false, path: "/dashboard/moradores" },
+              { step: 2, title: "Adicione sua Equipe", description: "Cadastre os membros da equipe de gestão", done: false, path: "/dashboard/equipe" },
+              { step: 3, title: "Crie sua Primeira Vistoria", description: "Registre uma vistoria técnica", done: false, path: "/dashboard/vistorias" },
+              { step: 4, title: "Registre Manutenções", description: "Adicione manutenções preventivas ou corretivas", done: false, path: "/dashboard/manutencoes" },
             ].map((item) => (
               <Link key={item.step} href={item.path}>
                 <div className="flex items-start gap-4 p-3 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer group">

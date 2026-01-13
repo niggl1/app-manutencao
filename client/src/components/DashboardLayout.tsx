@@ -123,39 +123,32 @@ export const CORES_FUNCOES_RAPIDAS = [
   "#64748B", // Slate
 ];
 
-// Estrutura do menu com seções otimizadas para gestão de manutenção
+// Estrutura do menu - Sistema de Manutenções Universal
 const menuSections = [
   {
     id: "visao-geral",
-    label: "VISÃO GERAL/CRIAR PROJETO",
+    label: "VISÃO GERAL / CRIAR",
     icon: LayoutDashboard,
     iconName: "LayoutDashboard",
     path: "/dashboard",
     items: []
   },
   {
-    id: "gestao-condominio",
+    id: "meus-projetos",
+    label: "MEUS PROJETOS",
+    icon: Building2,
+    iconName: "Building2",
+    path: "/dashboard/projetos",
+    items: []
+  },
+  {
+    id: "gestao-organizacao",
     label: "Gestão da Organização",
     icon: Building2,
     iconName: "Building2",
     items: [
       { icon: Building2, iconName: "Building2", label: "Cadastro da Organização", path: "/dashboard/condominio", funcaoId: "cadastro-condominio" },
-      { icon: Users, iconName: "Users", label: "Moradores (Exclusivo p/ organizações residenciais)", path: "/dashboard/moradores", funcaoId: "moradores" },
-      { icon: UserCog, iconName: "UserCog", label: "Funcionários", path: "/dashboard/funcionarios", funcaoId: "funcionarios" },
       { icon: UsersRound, iconName: "UsersRound", label: "Equipe de Gestão", path: "/dashboard/equipe", funcaoId: "equipe" },
-    ]
-  },
-  {
-    id: "comunicacao",
-    label: "Comunicação",
-    icon: Megaphone,
-    iconName: "Megaphone",
-    items: [
-      { icon: Bell, iconName: "Bell", label: "Avisos", path: "/dashboard/avisos", funcaoId: "avisos" },
-      { icon: FileText, iconName: "FileText", label: "Comunicados", path: "/dashboard/comunicados", funcaoId: "comunicados" },
-      { icon: BellRing, iconName: "BellRing", label: "Notificações", path: "/dashboard/notificacoes", funcaoId: "notificacoes" },
-      { icon: Clock, iconName: "Clock", label: "Lembretes Agendados", path: "/dashboard/notificacoes?tab=lembretes", funcaoId: "lembretes" },
-      { icon: Send, iconName: "Send", label: "Notificar Morador", path: "/dashboard/notificacoes?tab=enviar", funcaoId: "notificar-morador" },
     ]
   },
   {
@@ -196,28 +189,12 @@ const menuSections = [
     ]
   },
   {
-    id: "revista",
-    label: "Livro de Manutenções",
-    icon: BookMarked,
-    iconName: "BookMarked",
-    items: [
-      { icon: BookMarked, iconName: "BookMarked", label: "Minhas Revistas", path: "/dashboard/revistas", funcaoId: "revistas" },
-      { icon: Palette, iconName: "Palette", label: "Templates Visuais", path: "/dashboard/templates", funcaoId: "templates" },
-      { icon: Sparkles, iconName: "Sparkles", label: "Efeitos de Transição", path: "/dashboard/efeitos", funcaoId: "efeitos" },
-      { icon: FileDown, iconName: "FileDown", label: "Exportar PDF", path: "/dashboard/exportar-pdf", funcaoId: "exportar-pdf" },
-    ]
-  },
-  {
-    id: "relatorios",
-    label: "Relatórios e Painel",
-    icon: BarChart3,
-    iconName: "BarChart3",
-    items: [
-      { icon: BarChart3, iconName: "BarChart3", label: "Painel de Controlo", path: "/dashboard/painel-controlo", funcaoId: "painel-controlo" },
-      { icon: PieChart, iconName: "PieChart", label: "Estatísticas Gerais", path: "/dashboard/estatisticas", funcaoId: "estatisticas" },
-      { icon: History, iconName: "History", label: "Histórico de Atividades", path: "/dashboard/historico", funcaoId: "historico" },
-      { icon: Download, iconName: "Download", label: "Exportar Relatórios", path: "/dashboard/exportar-relatorios", funcaoId: "exportar-relatorios" },
-    ]
+    id: "gestao-funcoes",
+    label: "Gestão de Funções",
+    icon: Sliders,
+    iconName: "Sliders",
+    path: "/dashboard/gestao-funcoes",
+    items: []
   },
 ];
 

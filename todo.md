@@ -317,3 +317,33 @@
 
 ## Bug: Botões "+" ocultos no modal de Funções Rápidas
 - [x] Ajustar layout do modal para que os botões "+" fiquem visíveis ao lado dos campos - Corrigido: botões movidos para a linha do label
+
+## Fase 36: Repositório GitHub
+- [x] Criar repositório no GitHub para o sistema App Manutenção - https://github.com/niggl1/app-manutencao
+
+## Fase 37: GitHub Actions CI/CD
+- [ ] Criar workflow de CI (testes automatizados)
+- [ ] Criar workflow de lint e type-check
+- [ ] Fazer push dos workflows para o GitHub
+## Fase 38: Limpeza - Sistema de Manutenções Universal
+
+### Alterações Realizadas:
+- [x] Remover seções Comunicação, Livro de Manutenções e Relatórios do menu
+- [x] Remover botões Criar App, Criar Relatório e Criar Livro do dropdown
+- [x] Atualizar cards da página inicial para Vistorias, Manutenções e Ocorrências
+- [x] Atualizar mensagem de boas vindas para focar em manutenções
+- [x] Atualizar Primeiros Passos para focar em manutenções
+- [x] Limpar menu lateral no DashboardLayout
+- [x] Limpar menuSections no Dashboard.tsx
+
+### Funções Mantidas:
+- Vistorias
+- Manutenções
+- Ocorrências
+- Checklists
+- Antes e Depois
+- Ordens de Serviço
+- Agenda de Vencimentos
+- Funções Rápidas
+- Galeria e Mídia (Realizações, Melhorias, Aquisições)
+- Gestão da Organização (Cadastro, Equipe)
